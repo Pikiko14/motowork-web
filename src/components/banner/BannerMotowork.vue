@@ -1,0 +1,156 @@
+<template>
+  <section class="motowor-banner">
+    <figure>
+      <img class="motowor-banner__image" :src="imgBanner.path" :alt="banner.name">
+      <figcaption>
+        <div class="container">
+          <div class="row">
+           <div class="col-12" v-if="title">
+              <h1>{{ title }}</h1>
+           </div>
+            <div class="col-12" v-if="bannerComplement">
+              <p>
+                {{ bannerComplement }}
+              </p>
+            </div>
+            <div class="col-12 q-mt-xl">
+              <q-btn :to="banner.link || ''" no-cap square outline color="white" :label="btnLabel"></q-btn>
+            </div>
+          </div>
+        </div>
+      </figcaption>
+    </figure>
+  </section>
+</template>
+
+<script setup>
+// import
+import { useQuasar } from 'quasar'
+import { computed, defineProps } from 'vue'
+
+// references
+const q = useQuasar()
+
+// props
+const props = defineProps({
+  banner: {
+    type: Object,
+    default: () => {
+      return {}
+    }
+  },
+  title: {
+    type: String,
+    default: () => ''
+  },
+  bannerComplement: {
+    type: String,
+    default: () => ''
+  },
+  btnLabel: {
+    type: String,
+    default: () => ''
+  }
+})
+
+// computed
+const imgBanner = computed(() => {
+  if (props.banner && props.banner.images) {
+    if (q.screen.lt.md) {
+      return props.banner.images.find((item) => item.type === 'mobile')
+    }
+
+    if (q.screen.lt.lg) {
+      return props.banner.images.find((item) => item.type === 'tablet')
+    }
+    return props.banner.images.find((item) => item.type === 'desktop')
+  }
+  return {
+    path: ''
+  }
+})
+</script>
+
+<style scoped lang="scss">
+.motowor-banner {
+  height: 560px;
+  max-width: 1920px;
+  margin: 0px auto !important;
+
+  figure {
+    width: 100%;
+    height: 560px;
+    position: relative;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    figcaption {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding: 10px;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      /* Linear gradient */
+      background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.25) 25%, rgba(0, 0, 0, 1) 100%);
+
+      h1 {
+        color: #FFF;
+        /* Desktop/Headings/H1 */
+        font-family: Play;
+        font-size: 48px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 125%; /* 60px */
+        text-transform: uppercase;
+
+        @media(max-width: 767px) {
+          font-size: 36px;
+        }
+      }
+
+      p {
+        color: #fff;
+        /* Desktop/Body/Text/Large */
+        font-family: Ubuntu;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 125%; /* 30px */
+        margin-top: 24px;
+        max-width: 70%;
+
+        @media(max-width: 991px) {
+          max-width: 90%;
+        }
+
+        @media(max-width: 767px) {
+          max-width: 100%;
+          margin-top: 16px;
+        }
+      }
+
+      .q-btn {
+        height: 48px;
+        color: #FFF;
+        /* Desktop/Body/Title/Medium */
+        font-family: Play;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 125%; /* 20px */
+        text-transform: uppercase;
+      }
+    }
+  }
+}
+</style>
