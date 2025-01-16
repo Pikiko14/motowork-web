@@ -67,6 +67,78 @@
       </div>
     </section>
     <!--News letter-->
+
+     <!--porque elegirnos-->
+     <section class="container-motowork bg-gray-motowork">
+      <!--top section-->
+      <div class="motowork-por-elegirnos">
+        <div class="motowork-por-elegirnos__title">
+          <h2>¿PORQUE ELEGIRNOS?</h2>
+        </div>
+        <div class="motowork-por-elegirnos__subtitle">
+          <h3>Precioes motowork</h3>
+        </div>
+      </div>
+      <!--End top section-->
+
+      <!--card section-->
+      <div class="motowork-por-elegirnos__grid">
+        <!--card one-->
+        <article class="motowork-por-elegirnos__grid--item">
+          <div class="motowork-por-elegirnos__grid--item__icon">
+            <figure>
+              <img src="/images/personalizacion.png" alt="Icono de la carta de calidad">
+            </figure>
+          </div>
+          <div class="motowork-por-elegirnos__grid--item__text">
+            <h4>Calidad</h4>
+            <p class="ellipsis-2-lines">Lorem ipsum dolor sit amet consectetur. Augue tortor amet</p>
+          </div>
+        </article>
+        <!--End card one-->
+        <!--card two-->
+        <article class="motowork-por-elegirnos__grid--item">
+          <div class="motowork-por-elegirnos__grid--item__icon">
+            <figure>
+              <img src="/images/Confianza.png" alt="Icono de la carta de confianza">
+            </figure>
+          </div>
+          <div class="motowork-por-elegirnos__grid--item__text">
+            <h4>Confianza</h4>
+            <p class="ellipsis-2-lines">Lorem ipsum dolor sit amet consectetur. Augue tortor amet</p>
+          </div>
+        </article>
+        <!--End card two-->
+        <!--card three-->
+        <article class="motowork-por-elegirnos__grid--item">
+          <div class="motowork-por-elegirnos__grid--item__icon">
+            <figure>
+              <img src="/images/reconocimiento.png" alt="Icono de la carta de reconocimiento">
+            </figure>
+          </div>
+          <div class="motowork-por-elegirnos__grid--item__text">
+            <h4 class="ellipsis reconocimiento">Reconocimiento</h4>
+            <p class="ellipsis-2-lines">Lorem ipsum dolor sit amet consectetur. Augue tortor amet</p>
+          </div>
+        </article>
+        <!--End card three-->
+        <!--card four-->
+        <article class="motowork-por-elegirnos__grid--item">
+          <div class="motowork-por-elegirnos__grid--item__icon">
+            <figure>
+              <img src="/images/servicio.png" alt="Icono de la carta de reconocimiento">
+            </figure>
+          </div>
+          <div class="motowork-por-elegirnos__grid--item__text">
+            <h4>Servicio</h4>
+            <p class="ellipsis-2-lines">Lorem ipsum dolor sit amet consectetur. Augue tortor amet</p>
+          </div>
+        </article>
+        <!--End card four-->
+      </div>
+      <!--End card section-->
+     </section>
+     <!--End porque elejirnos-->
   </q-page>
 </template>
 
