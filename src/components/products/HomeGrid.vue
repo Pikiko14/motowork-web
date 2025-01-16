@@ -13,10 +13,13 @@
       v-for="(product, idx) in products"
       :key="idx"
       @dragstart="handleDragStart"
-      @click="filterByCategory(product.name)"
+      @click="addProductToCart(product)"
     >
       <figure>
         <img :src="getBannerUrl(idx)" :alt="`Imagen del producto ${product.name}`" :title="`Imagen del producto ${product.name}`" loading="lazy">
+        <div class="motowork-product-accesories__grid--item__overflow">
+          <q-btn no-cap square outline color="white" label="Agregar al carrito"></q-btn>
+        </div>
         <figcaption>
           <h3>{{ product.name }}</h3>
           <p class="reference">{{ product.sku }}</p>
@@ -107,8 +110,8 @@ const handleDragStart = (e) => {
   e.preventDefault()
 }
 
-const filterByCategory = (category) => {
-  emit('handle-filter', { category, type: 'product' })
+const addProductToCart = (product) => {
+  alert(product.name)
 }
 
 const getBannerUrl = (idx) => {
