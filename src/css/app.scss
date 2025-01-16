@@ -247,10 +247,18 @@ ul {
         @media(max-width: 767px) {
           height: 192px;
         }
+
+        @media(min-width: 1700px) {
+          height: 380px;
+        }
       }
 
       @media(max-width: 767px) {
         height: 192px;
+      }
+
+      @media(min-width: 1700px) {
+        height: 380px;
       }
     }
 

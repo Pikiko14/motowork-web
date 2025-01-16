@@ -492,9 +492,13 @@ const openAllProducts = () => {
     height: 335px;
     position: absolute;
     background: #fff;
+    max-width: 1920px;
     width: 100%;
-    left: 0;
+    left: 50%;
+    transform: translate(-50%);
     top: 72px;
+    box-shadow: #000;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, .2);
 
     &--show {
       display: flex;
