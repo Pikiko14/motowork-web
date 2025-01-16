@@ -49,17 +49,19 @@
     <section class="container-motowork bg-gray-motowork">
       <div class="motowork-newsletter">
         <div class="motowork-newsletter__item">
-          <img src="/images/newsletter-img.webp"/>
+          <figure>
+            <img src="/images/newsletter-img.webp"/>
+          </figure>
         </div>
         <div class="motowork-newsletter__item">
           <div class="motowork-newsletter__item--content">
             <h2>Comunidad motowork</h2>
             <h3>QUE ESPERAS PARA RODAR CON NOSOTROS</h3>
             <p>Únete a nuestra comunidad y disfruta de las mejores rodadas y del mejor contenido para moteros aficionados.</p>
-          </div>
 
-          <div class="motowork-newsletter__item--form">
-            <FormFields />
+            <div class="motowork-newsletter__item--form">
+              <FormFields />
+            </div>
           </div>
         </div>
       </div>
@@ -73,12 +75,12 @@ import { getResolutionWidth } from 'src/utils/utils'
 import { onBeforeMount, onUnmounted, ref } from 'vue'
 import HomeGrid from 'src/components/products/HomeGrid.vue'
 import GridHome from 'src/components/categories/GridHome.vue'
+import FormFields from 'src/components/newsletter/FormFields.vue'
 import { useBannersContent } from 'src/composables/useBannerContent'
 import GridVehicles from 'src/components/categories/GridVehicles.vue'
 import BannerMotowork from 'src/components/banner/BannerMotowork.vue'
 import { useProductsContent } from 'src/composables/useProductContent'
 import { useCategoriesContent } from 'src/composables/useCategoriesContent'
-import FormFields from 'src/components/newsletter/FormFields.vue'
 
 // References
 const { banner, getBanner } = useBannersContent()

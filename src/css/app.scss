@@ -445,7 +445,7 @@ ul {
     }
 
     @media(max-width: 991px) {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
     }
 
     @media(max-width: 767px) {
@@ -473,8 +473,26 @@ ul {
     text-align: center;
     flex: 1;
 
-    img {
+    figure {
+      margin: 0px;
+      aspect-ratio: 2/1;
       max-width: 600px;
+      max-height: 430px;
+
+      img {
+        max-width: 600px;
+        max-height: 430px;
+
+        @media(max-width: 767px) {
+          max-width: 100%;
+          width: 100%;
+        }
+      }
+
+      @media(max-width: 767px) {
+        max-width: 100%;
+        width: 100%;
+      }
     }
 
     &--content {
@@ -483,9 +501,6 @@ ul {
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      
-      padding-right: 150px;
-      padding-left: 150px;
 
       h2 {
         color: $secondary;
@@ -499,6 +514,10 @@ ul {
         line-height: 125%; /* 20px */
         letter-spacing: 3.84px;
         text-transform: uppercase;
+
+        @media(max-width: 767px) {
+          font-size: 12pt;
+        }
       }
 
       h3 {
@@ -513,6 +532,11 @@ ul {
         font-weight: 700;
         line-height: 125%; /* 40px */
         text-transform: uppercase;
+
+        @media(max-width: 767px) {
+          font-size: 20pt;
+          margin-top: 12px;
+        }
       }
 
       p {
@@ -526,6 +550,45 @@ ul {
         font-style: normal;
         font-weight: 400;
         line-height: 125%; /* 20px */
+
+        @media(max-width: 767px) {
+          margin-top: 24px;
+          font-size: 12pt;
+        }
+      }
+
+      @media(min-width: 1750px) {
+        padding-right: 150px;
+        padding-left: 150px;
+      }
+      
+      @media(max-width: 1749px) {
+        padding-right: 100px;
+        padding-left: 100px;
+      }
+
+      @media(max-width: 1559px) {
+        padding-right: 70px;
+        padding-left: 70px;
+      }
+
+      @media(max-width: 1440px) {
+        padding-right: 20px;
+        padding-left: 20px;
+      }
+
+      @media(max-width: 1260) {
+        padding-right: 0px;
+        padding-left: 0px;
+      }
+    }
+
+    &--form {
+      width: 100%;
+      margin-top: 32px;
+
+      @media(max-width: 767px) {
+        margin-top: 24px;
       }
     }
 
@@ -536,5 +599,23 @@ ul {
 
   @media(max-width: 767px) {
     flex-direction: column;
+  }
+}
+
+.cns-fields-section {
+  display: flex;
+
+  .q-input {
+    width: 95%;
+
+    .q-field__control {
+      height: 48px;
+    }
+  }
+
+  .q-btn {
+    width: 107px;
+    height: 48px;
+    margin-left: -10px;
   }
 }
