@@ -19,7 +19,7 @@
         <img :src="getBannerUrl(idx)" :alt="`Imagen del producto ${product.name}`" :title="`Imagen del producto ${product.name}`" loading="lazy">
         <figcaption>
           <h3>{{ product.name }}</h3>
-          <span class="reference">{{ product.sku }}</span>
+          <p class="reference">{{ product.sku }}</p>
           <div class="price">
             <span class="amount">
               {{ formatPrice(product.price) }}

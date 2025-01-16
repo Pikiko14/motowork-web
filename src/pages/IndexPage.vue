@@ -57,6 +57,10 @@
             <h3>QUE ESPERAS PARA RODAR CON NOSOTROS</h3>
             <p>Únete a nuestra comunidad y disfruta de las mejores rodadas y del mejor contenido para moteros aficionados.</p>
           </div>
+
+          <div class="motowork-newsletter__item--form">
+            <FormFields />
+          </div>
         </div>
       </div>
     </section>
@@ -74,6 +78,7 @@ import GridVehicles from 'src/components/categories/GridVehicles.vue'
 import BannerMotowork from 'src/components/banner/BannerMotowork.vue'
 import { useProductsContent } from 'src/composables/useProductContent'
 import { useCategoriesContent } from 'src/composables/useCategoriesContent'
+import FormFields from 'src/components/newsletter/FormFields.vue'
 
 // References
 const { banner, getBanner } = useBannersContent()

@@ -243,6 +243,14 @@ ul {
             }
           }
         }
+
+        @media(max-width: 767px) {
+          height: 192px;
+        }
+      }
+
+      @media(max-width: 767px) {
+        height: 192px;
       }
     }
 
@@ -334,11 +342,17 @@ ul {
           width: 100%;
           height: 296px;
           object-fit: cover;
+
+          @media(max-width: 767px) {
+            height: 128px;
+          }
         }
 
         figcaption {
           padding: 12px;
-          width: 100%;
+          max-width: 100%; /* Asegúrate de que no exceda el contenedor */
+          word-wrap: break-word !important; /* Permite que las palabras se dividan y ajusten */
+          overflow-wrap: break-word !important; /* Compatibilidad adicional */
 
           h3 {
             color: $secondary;
@@ -347,6 +361,10 @@ ul {
             font-style: normal;
             font-weight: 400;
             line-height: 125%; /* 15px */
+
+            @media(max-width: 991px) {
+              font-size: 10pt !important;
+            }
           }
 
           .reference {
@@ -360,6 +378,18 @@ ul {
             font-weight: 700;
             line-height: 125%; /* 20px */
             text-transform: uppercase;
+            word-wrap: break-word; /* Permite que el texto largo se divida en varias líneas */
+            overflow: hidden;      /* Asegura que el contenido que se desborda no se muestre */
+            text-overflow: ellipsis; /* Agrega "..." al final del texto si se desborda */
+            width: 100%; 
+
+            @media(max-width: 991px) {
+              font-size: 12pt !important;
+            }
+
+            @media(max-width: 767px) {
+              font-size: 12pt !important;
+            }
           }
 
           .price {
@@ -377,6 +407,10 @@ ul {
               font-weight: 700;
               line-height: 125%; /* 20px */
               text-transform: uppercase;
+
+              @media(max-width: 991px) {
+                font-size: 12pt !important;
+              }
             }
 
             .rate {
@@ -394,6 +428,9 @@ ul {
                 font-style: normal;
                 font-weight: 400;
                 line-height: 125%; /* 20px */
+                @media(max-width: 991px) {
+                  font-size: 12pt !important;
+                }
               }
             }
           }
@@ -402,8 +439,8 @@ ul {
 
       @media(max-width: 767px) {
         flex: 1 1 calc(50% - 16px); /* Ocupa el 50% del ancho menos el espaciado */
-  box-sizing: border-box; /* Asegurar que padding y border no afecten el ancho total */
-  max-width: calc(50% - 16px); /* Limitar el ancho máximo al 50% */
+        box-sizing: border-box; /* Asegurar que padding y border no afecten el ancho total */
+        max-width: calc(50% - 10px); /* Limitar el ancho máximo al 50% */
       }
     }
 
