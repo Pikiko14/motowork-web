@@ -68,8 +68,8 @@
     </section>
     <!--News letter-->
 
-     <!--porque elegirnos-->
-     <section class="container-motowork bg-gray-motowork">
+    <!--porque elegirnos-->
+    <section class="container-motowork bg-gray-motowork">
       <!--top section-->
       <div class="motowork-por-elegirnos">
         <div class="motowork-por-elegirnos__title">
@@ -137,8 +137,12 @@
         <!--End card four-->
       </div>
       <!--End card section-->
-     </section>
-     <!--End porque elejirnos-->
+    </section>
+    <!--End porque elejirnos-->
+
+    <!--Instagram feed-->
+    asd
+    <!--End instagram feed-->
   </q-page>
 </template>
 
