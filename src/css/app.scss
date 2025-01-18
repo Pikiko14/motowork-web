@@ -12,7 +12,7 @@ p {
 }
 
 body {
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
 }
 
 figure {
@@ -75,7 +75,7 @@ ul {
   padding: 48px 24px;
   margin: 0px auto !important;
 
-  @media(max-width: 767px) {
+  @media (max-width: 767px) {
     padding: 32px 24px;
   }
 }
@@ -164,11 +164,11 @@ ul {
       }
     }
 
-    @media(max-width: 991px) {
+    @media (max-width: 991px) {
       grid-template-columns: repeat(3, 1fr);
     }
 
-    @media(max-width: 767px) {
+    @media (max-width: 767px) {
       grid-template-columns: repeat(2, 1fr);
     }
   }
@@ -212,7 +212,7 @@ ul {
           padding: 24px;
 
           h3 {
-            color: #FFF;
+            color: #fff;
 
             /* Desktop/Headings/H4 */
             font-family: Play;
@@ -249,29 +249,29 @@ ul {
           }
         }
 
-        @media(max-width: 767px) {
+        @media (max-width: 767px) {
           height: 192px;
         }
 
-        @media(min-width: 1700px) {
+        @media (min-width: 1700px) {
           height: 380px;
         }
       }
 
-      @media(max-width: 767px) {
+      @media (max-width: 767px) {
         height: 192px;
       }
 
-      @media(min-width: 1700px) {
+      @media (min-width: 1700px) {
         height: 380px;
       }
     }
 
-    @media(max-width: 991px) {
+    @media (max-width: 991px) {
       grid-template-columns: repeat(2, 1fr);
     }
 
-    @media(max-width: 767px) {
+    @media (max-width: 767px) {
       grid-template-columns: repeat(1, 1fr);
     }
   }
@@ -318,11 +318,11 @@ ul {
       }
     }
 
-    @media(max-width: 991px) {
+    @media (max-width: 991px) {
       grid-template-columns: repeat(3, 1fr);
     }
 
-    @media(max-width: 767px) {
+    @media (max-width: 767px) {
       grid-template-columns: repeat(2, 1fr);
     }
   }
@@ -357,7 +357,7 @@ ul {
           height: 100%;
           object-fit: cover;
 
-          @media(max-width: 767px) {
+          @media (max-width: 767px) {
             height: 128px;
           }
         }
@@ -376,7 +376,7 @@ ul {
             font-weight: 400;
             line-height: 125%; /* 15px */
 
-            @media(max-width: 991px) {
+            @media (max-width: 991px) {
               font-size: 10pt !important;
             }
           }
@@ -393,15 +393,15 @@ ul {
             line-height: 125%; /* 20px */
             text-transform: uppercase;
             word-wrap: break-word; /* Permite que el texto largo se divida en varias líneas */
-            overflow: hidden;      /* Asegura que el contenido que se desborda no se muestre */
+            overflow: hidden; /* Asegura que el contenido que se desborda no se muestre */
             text-overflow: ellipsis; /* Agrega "..." al final del texto si se desborda */
-            width: 100%; 
+            width: 100%;
 
-            @media(max-width: 991px) {
+            @media (max-width: 991px) {
               font-size: 12pt !important;
             }
 
-            @media(max-width: 767px) {
+            @media (max-width: 767px) {
               font-size: 12pt !important;
             }
           }
@@ -422,7 +422,7 @@ ul {
               line-height: 125%; /* 20px */
               text-transform: uppercase;
 
-              @media(max-width: 991px) {
+              @media (max-width: 991px) {
                 font-size: 12pt !important;
               }
             }
@@ -442,7 +442,7 @@ ul {
                 font-style: normal;
                 font-weight: 400;
                 line-height: 125%; /* 20px */
-                @media(max-width: 991px) {
+                @media (max-width: 991px) {
                   font-size: 12pt !important;
                 }
               }
@@ -451,7 +451,7 @@ ul {
         }
       }
 
-      @media(max-width: 767px) {
+      @media (max-width: 767px) {
         flex: 1 1 calc(50% - 16px); /* Ocupa el 50% del ancho menos el espaciado */
         box-sizing: border-box; /* Asegurar que padding y border no afecten el ancho total */
         max-width: calc(50% - 10px); /* Limitar el ancho máximo al 50% */
@@ -465,7 +465,7 @@ ul {
         .motowork-product-accesories__grid--item__overflow {
           width: 100%;
           height: 100%;
-          background: rgba(237, 28, 36, 0.80);
+          background: rgba(237, 28, 36, 0.8);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -475,18 +475,18 @@ ul {
       }
     }
 
-    @media(max-width: 991px) {
+    @media (max-width: 991px) {
       grid-template-columns: repeat(2, 1fr);
     }
 
-    @media(max-width: 767px) {
+    @media (max-width: 767px) {
       display: flex;
     }
   }
 }
 
 .bg-gray-motowork {
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
 }
 
 .motowork-newsletter {
@@ -514,13 +514,13 @@ ul {
         max-width: 600px;
         max-height: 430px;
 
-        @media(max-width: 767px) {
+        @media (max-width: 767px) {
           max-width: 100%;
           width: 100%;
         }
       }
 
-      @media(max-width: 767px) {
+      @media (max-width: 767px) {
         max-width: 100%;
         width: 100%;
       }
@@ -546,7 +546,7 @@ ul {
         letter-spacing: 3.84px;
         text-transform: uppercase;
 
-        @media(max-width: 767px) {
+        @media (max-width: 767px) {
           font-size: 12pt;
         }
       }
@@ -564,7 +564,7 @@ ul {
         line-height: 125%; /* 40px */
         text-transform: uppercase;
 
-        @media(max-width: 767px) {
+        @media (max-width: 767px) {
           font-size: 20pt;
           margin-top: 12px;
         }
@@ -582,33 +582,33 @@ ul {
         font-weight: 400;
         line-height: 125%; /* 20px */
 
-        @media(max-width: 767px) {
+        @media (max-width: 767px) {
           margin-top: 24px;
           font-size: 12pt;
         }
       }
 
-      @media(min-width: 1750px) {
+      @media (min-width: 1750px) {
         padding-right: 150px;
         padding-left: 150px;
       }
-      
-      @media(max-width: 1749px) {
+
+      @media (max-width: 1749px) {
         padding-right: 100px;
         padding-left: 100px;
       }
 
-      @media(max-width: 1559px) {
+      @media (max-width: 1559px) {
         padding-right: 70px;
         padding-left: 70px;
       }
 
-      @media(max-width: 1440px) {
+      @media (max-width: 1440px) {
         padding-right: 20px;
         padding-left: 20px;
       }
 
-      @media(max-width: 1260) {
+      @media (max-width: 1260px) {
         padding-right: 0px;
         padding-left: 0px;
       }
@@ -618,17 +618,17 @@ ul {
       width: 100%;
       margin-top: 32px;
 
-      @media(max-width: 767px) {
+      @media (max-width: 767px) {
         margin-top: 24px;
       }
     }
 
-    @media(max-width: 767px) {
+    @media (max-width: 767px) {
       width: 100%;
     }
   }
 
-  @media(max-width: 767px) {
+  @media (max-width: 767px) {
     flex-direction: column;
   }
 
@@ -677,13 +677,13 @@ ul {
       line-height: 125%; /* 40px */
       text-transform: uppercase;
       flex: 1;
-      border-right: 1px solid #CCCBCB;
+      border-right: 1px solid #cccbcb;
       padding: 12px 32px;
 
-      @media(max-width: 767px) {
+      @media (max-width: 767px) {
         text-align: left;
         font-size: 20px;
-        border-right: 0px solid #CCCBCB;
+        border-right: 0px solid #cccbcb;
         padding: 9px 0px;
       }
     }
@@ -692,7 +692,7 @@ ul {
   &__subtitle {
     h3 {
       padding-left: 32px;
-      color: #ED1C24;
+      color: #ed1c24;
       /* Desktop/Body/Section/Medium */
       font-family: Play;
       font-size: 16px;
@@ -703,7 +703,7 @@ ul {
       text-transform: uppercase;
       flex: 1;
 
-      @media(max-width: 767px) {
+      @media (max-width: 767px) {
         text-align: left;
         font-size: 12px;
         padding: 0;
@@ -727,7 +727,7 @@ ul {
       flex-direction: column;
       gap: 32px;
 
-      &__icon{
+      &__icon {
         figure {
           width: 50px;
           height: 53px;
@@ -749,7 +749,7 @@ ul {
           overflow: hidden;
           color: #000;
           text-overflow: ellipsis;
-          
+
           /* Desktop/Headings/H4 */
           font-family: Play;
           font-size: 24pt;
@@ -758,11 +758,11 @@ ul {
           line-height: 125%; /* 30px */
           text-transform: uppercase;
 
-          @media(max-width: 991px) {
+          @media (max-width: 991px) {
             font-size: 18px;
           }
 
-          @media(max-width: 767px) {
+          @media (max-width: 767px) {
             font-size: 18px;
           }
         }
@@ -781,18 +781,18 @@ ul {
         }
       }
 
-      @media(max-width: 991px) {
+      @media (max-width: 991px) {
         padding-left: 16px;
         padding-right: 16px;
       }
     }
 
-    @media(max-width: 991px) {
+    @media (max-width: 991px) {
       grid-template-columns: repeat(4, 1fr) !important;
       gap: 16px;
     }
 
-    @media(max-width: 767px) {
+    @media (max-width: 767px) {
       grid-template-columns: repeat(1, 1fr) !important;
       gap: 16px;
       padding-left: 18px !important;
@@ -800,7 +800,7 @@ ul {
     }
   }
 
-  @media(max-width: 767px) {
+  @media (max-width: 767px) {
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
@@ -808,15 +808,131 @@ ul {
 }
 
 .reconocimiento {
-  @media(max-width: 1199px) {
+  @media (max-width: 1199px) {
     width: 190px;
   }
 
-  @media(max-width: 991px) {
+  @media (max-width: 991px) {
     width: 140px;
   }
 
-  @media(max-width: 767px) {
+  @media (max-width: 767px) {
     width: 100%;
+  }
+}
+
+.instagram-feeds {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+
+  &__item {
+    width: 100%;
+
+    figure {
+      aspect-ratio: 1/1;
+      position: relative;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+
+      figcaption {
+        display: none;
+        align-items: center;
+        top: 0px;
+        width: 100%;
+        height: 98%;
+
+        svg {
+          width: 40px;
+          height: 40px;
+        }
+
+        @media (max-width: 991px) {
+          display: flex;
+          position: absolute !important;
+          display: flex !important;
+          position: absolute !important;
+          justify-content: center !important;
+          background: rgba(0, 0, 0, 0.6);
+          flex-direction: column;
+
+          h2 {
+            margin-top: 4px;
+            color: #fff;
+            font-family: Play;
+            font-size: 12pt;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 125%;
+            text-transform: uppercase;
+          }
+
+          p {
+            color: #fff;
+            text-align: center;
+            margin-top: 12px;
+            font-family: Ubuntu;
+            font-size: 12pt;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 125%;
+          }
+        }
+      }
+
+      &:hover {
+        figcaption {
+          display: flex !important;
+          position: absolute !important;
+          justify-content: center !important;
+          background: rgba(0, 0, 0, 0.6);
+          flex-direction: column;
+          cursor: zoom-in;
+
+          h2 {
+            margin-top: 4px;
+            color: #fff;
+            font-family: Play;
+            font-size: 12pt;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 125%;
+            text-transform: uppercase;
+          }
+
+          p {
+            color: #fff;
+            text-align: center;
+            margin-top: 12px;
+            font-family: Ubuntu;
+            font-size: 12pt;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 125%;
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 991px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 767px) {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+
+    .instagram-feeds__item {
+      flex: 0 0 auto;
+      scroll-snap-align: start;
+      width: 100vw;
+    }
   }
 }

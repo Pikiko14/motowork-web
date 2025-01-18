@@ -50,7 +50,7 @@
       <div class="motowork-newsletter">
         <div class="motowork-newsletter__item">
           <figure>
-            <img src="/images/newsletter-img.webp"/>
+            <img src="/images/newsletter-img.webp" alt="Newsletter imagen, utilizada por Motowork" title="Newsletter imagen, utilizada por Motowork" />
           </figure>
         </div>
         <div class="motowork-newsletter__item">
@@ -87,7 +87,7 @@
         <article class="motowork-por-elegirnos__grid--item">
           <div class="motowork-por-elegirnos__grid--item__icon">
             <figure>
-              <img src="/images/personalizacion.png" alt="Icono de la carta de calidad">
+              <img src="/images/personalizacion.png" alt="Icono de la carta de calidad" title="Icono de la carta de calidad">
             </figure>
           </div>
           <div class="motowork-por-elegirnos__grid--item__text">
@@ -100,7 +100,7 @@
         <article class="motowork-por-elegirnos__grid--item">
           <div class="motowork-por-elegirnos__grid--item__icon">
             <figure>
-              <img src="/images/Confianza.png" alt="Icono de la carta de confianza">
+              <img src="/images/Confianza.png" alt="Icono de la carta de confianza" title="Icono de la carta de confianza">
             </figure>
           </div>
           <div class="motowork-por-elegirnos__grid--item__text">
@@ -113,7 +113,7 @@
         <article class="motowork-por-elegirnos__grid--item">
           <div class="motowork-por-elegirnos__grid--item__icon">
             <figure>
-              <img src="/images/reconocimiento.png" alt="Icono de la carta de reconocimiento">
+              <img src="/images/reconocimiento.png" alt="Icono de la carta de reconocimiento" title="Icono de la carta de reconocimiento">
             </figure>
           </div>
           <div class="motowork-por-elegirnos__grid--item__text">
@@ -126,7 +126,7 @@
         <article class="motowork-por-elegirnos__grid--item">
           <div class="motowork-por-elegirnos__grid--item__icon">
             <figure>
-              <img src="/images/servicio.png" alt="Icono de la carta de reconocimiento">
+              <img src="/images/servicio.png" alt="Icono de la carta de reconocimiento" title="Icono de la carta de reconocimiento">
             </figure>
           </div>
           <div class="motowork-por-elegirnos__grid--item__text">
@@ -141,14 +141,31 @@
     <!--End porque elejirnos-->
 
     <!--Instagram feed-->
-    asd
+    <section v-if="feedsHistories.length > 0" class="container-motowork bg-white">
+      <div class="instagram-feeds">
+        <div class="instagram-feeds__item" v-for="(item, idx) in feedsHistories" :key="idx">
+          <figure>
+            <img draggable="false" :src="item.media_url" alt="Imagen de feed de instagram" title="Imagen de feed de instagram">
+            <figcaption v-if="item.caption">
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                <circle cx="20" cy="20" r="20" fill="#ED1C24" fill-opacity="0.8"/>
+              </svg>
+              <h2>
+                @Motowork
+              </h2>
+              <p>{{ item.caption || '' }}</p>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
     <!--End instagram feed-->
   </q-page>
 </template>
 
 <script setup>
 import { getResolutionWidth } from 'src/utils/utils'
-import { onBeforeMount, onUnmounted, ref } from 'vue'
+import { onBeforeMount, onMounted, onUnmounted, ref } from 'vue'
 import HomeGrid from 'src/components/products/HomeGrid.vue'
 import GridHome from 'src/components/categories/GridHome.vue'
 import FormFields from 'src/components/newsletter/FormFields.vue'
@@ -156,6 +173,7 @@ import { useBannersContent } from 'src/composables/useBannerContent'
 import GridVehicles from 'src/components/categories/GridVehicles.vue'
 import BannerMotowork from 'src/components/banner/BannerMotowork.vue'
 import { useProductsContent } from 'src/composables/useProductContent'
+import { useInstangramContent } from 'src/composables/useInstagramContent'
 import { useCategoriesContent } from 'src/composables/useCategoriesContent'
 
 // References
@@ -173,6 +191,8 @@ const {
 } = useCategoriesContent()
 
 const { products, getProducts, totalPagesProduct, pageProduct, addOnePageProduct, removeOnePageProduct } = useProductsContent()
+
+const { getfeed, feedsHistories } = useInstangramContent()
 
 // State to track current resolution range
 const currentResolutionRange = ref(null)
@@ -287,6 +307,10 @@ getCategories('?page=1&perPage=6&type=vehicle')
 onBeforeMount(() => {
   // Add resize event listener
   window.addEventListener('resize', handleResize)
+})
+
+onMounted(async () => {
+  await getfeed()
 })
 
 onUnmounted(() => {
