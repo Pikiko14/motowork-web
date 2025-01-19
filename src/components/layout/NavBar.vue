@@ -67,7 +67,7 @@
 
       <!--menu button-->
       <section class="motowork-navbar__right-section--menu">
-        <q-btn @click="openHamburguerMenu('vehicle')" square unelevated color="primary" icon="menu"></q-btn>
+        <q-btn @click="openHamburguerMenu('vehicle')" square unelevated color="primary" name="Boton del menu hamburguesa" icon="menu"></q-btn>
       </section>
       <!--End menu buttons-->
     </div>
