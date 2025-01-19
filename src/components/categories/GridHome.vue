@@ -96,3 +96,13 @@ const filterByCategory = (category) => {
 
 // watch
 </script>
+
+<style scoped lang="scss">
+.motowork-accesories-categories__grid--item {
+  transition: transform 0.3s ease;
+}
+
+.motowork-accesories-categories__grid--item:hover {
+  transform: scale(1.1);
+}
+</style>

@@ -311,6 +311,7 @@ const openAllProducts = () => {
           .q-btn {
             padding: 0px !important;
             min-height: auto;
+            transition: all .3s ease;
           }
 
           a {
@@ -325,6 +326,14 @@ const openAllProducts = () => {
 
             @media(max-width: 1399px) {
               font-size: 10pt;
+            }
+          }
+
+          &:hover {
+            .q-btn {
+              color: $secondary;
+              background: transparent !important;
+              transform: translateY(-4px);
             }
           }
         }
@@ -381,6 +390,7 @@ const openAllProducts = () => {
         cursor: pointer;
         gap: 12px;
         align-items: center;
+        padding: 4px;
 
         &--icon {
           width: 24px;
@@ -438,6 +448,10 @@ const openAllProducts = () => {
           padding-top: 16px;
           width: 100%;
           justify-content: space-between;
+        }
+
+        &:hover {
+          background: #ed1c233a;
         }
       }
 
