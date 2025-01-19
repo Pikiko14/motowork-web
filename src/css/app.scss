@@ -250,20 +250,28 @@ ul {
         }
 
         @media (max-width: 767px) {
-          height: 192px;
+          height: 350px;
+        }
+
+        @media (max-width: 500px) {
+          height: 250px;
         }
 
         @media (min-width: 1700px) {
-          height: 380px;
+          height: 420px;
         }
       }
 
       @media (max-width: 767px) {
-        height: 192px;
+        height: 350px;
+      }
+
+      @media (max-width: 500px) {
+        height: 250px;
       }
 
       @media (min-width: 1700px) {
-        height: 380px;
+        height: 420px;
       }
     }
 
@@ -358,7 +366,11 @@ ul {
           object-fit: cover;
 
           @media (max-width: 767px) {
-            height: 128px;
+            height: 280px;
+          }
+
+          @media (max-width: 500px) {
+            height: 220px;
           }
         }
 
