@@ -47,7 +47,7 @@
 
     <!--newsletter-->
     <section class="container-motowork bg-gray-motowork">
-      <div class="motowork-newsletter">
+      <div class="motowork-newsletter" ref="newsletterSection">
         <div class="motowork-newsletter__item">
           <figure>
             <img src="/images/newsletter-img.webp" alt="Newsletter imagen, utilizada por Motowork" title="Newsletter imagen, utilizada por Motowork" />
@@ -69,7 +69,7 @@
     <!--News letter-->
 
     <!--porque elegirnos-->
-    <section class="container-motowork bg-gray-motowork">
+    <section class="container-motowork bg-gray-motowork wySelectus-section" ref="wySelectus">
       <!--top section-->
       <div class="motowork-por-elegirnos">
         <div class="motowork-por-elegirnos__title">
@@ -142,7 +142,7 @@
 
     <!--Instagram feed-->
     <section v-if="feedsHistories.length > 0" class="container-motowork bg-white">
-      <div class="instagram-feeds">
+      <div class="instagram-feeds instagramFeed-section" ref="instagramFeed">
         <div class="instagram-feeds__item" v-for="(item, idx) in feedsHistories" :key="idx">
           <figure>
             <img draggable="false" :src="item.media_url" alt="Imagen de feed de instagram" title="Imagen de feed de instagram">
@@ -194,7 +194,11 @@ const { products, getProducts, totalPagesProduct, pageProduct, addOnePageProduct
 
 const { getfeed, feedsHistories } = useInstangramContent()
 
+const newsletterSection = ref(null)
+
 // State to track current resolution range
+const wySelectus = ref(null)
+const instagramFeed = ref(null)
 const currentResolutionRange = ref(null)
 
 // Methods
@@ -311,6 +315,23 @@ onBeforeMount(() => {
 
 onMounted(async () => {
   await getfeed()
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible')
+        }
+      })
+    },
+    { threshold: 0.2 }
+  )
+
+  if (newsletterSection.value) {
+    observer.observe(wySelectus.value)
+    observer.observe(instagramFeed.value)
+    observer.observe(newsletterSection.value)
+  }
 })
 
 onUnmounted(() => {

@@ -178,10 +178,15 @@ const currentYear = ref(new Date().getFullYear())
         a {
           width: 32px;
           height: 32px;
+          transition: all .1s ease-out;
 
           @media(max-width: 991px) {
             width: 18px;
             height: 18px;
+          }
+
+          &:hover {
+            transform: translateY(-10px);
           }
         }
 
@@ -234,9 +239,14 @@ const currentYear = ref(new Date().getFullYear())
           line-height: 125%;
           /* 15px */
           text-decoration: none;
+          transition: all .1s ease-out;
 
           @media(max-width: 991px) {
             font-size: 12pt;
+          }
+
+          &:hover {
+            transform: translateX(10px);
           }
         }
       }
