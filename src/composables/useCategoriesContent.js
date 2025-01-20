@@ -39,6 +39,7 @@ export const useCategoriesContent = () => {
       const { data } = await api.get(`${path}/list/from-web${query}`)
       if (data.success) {
         categories.value = data.data.categories
+        totalPages.value = data.data.totalPages
       }
     } catch (error) {
       throw new Error(error.message)

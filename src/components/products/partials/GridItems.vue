@@ -26,24 +26,22 @@
     </div>
     <!--end items grid-->
 
+    <!--filter section-->
     <aside class="motowork-item-page__grid--filters" v-if="showFilter">
-      <h3>Categoría</h3>
-      <ul>
-        <li><input type="checkbox" /> Super deportivas</li>
-        <li><input type="checkbox" /> Sport Touring</li>
-        <li><input type="checkbox" /> Urban</li>
-      </ul>
-      <h3>Precio</h3>
-      <input type="range" />
-      <h3>Potencia / Cilindraje</h3>
-      <input type="range" />
-      <h3>Licencia</h3>
-      <ul>
-        <li><input type="checkbox" /> A</li>
-        <li><input type="checkbox" /> A1</li>
-        <li><input type="checkbox" /> A2</li>
-      </ul>
+      <div class="motowork-item-page__grid--filters__section">
+        <h3>Categoría</h3>
+        <ul>
+          <li v-for="(category, idx) in categories" :key="idx">
+            <q-btn unelevated dense :to="`/vehiculos?page=1&perPage=9&type=${type}&category=${category.name}`"
+              :label="category.name"></q-btn>
+          </li>
+          <li class="q-mt-sm show-more cursor-pointer">
+            Mostar mas <q-icon name="img:/images/dropdown.svg"></q-icon>
+          </li>
+        </ul>
+      </div>
     </aside>
+    <!--end filter section-->
   </section>
 </template>
 
@@ -61,6 +59,14 @@ const props = defineProps({
   products: {
     type: Array,
     default: () => []
+  },
+  categories: {
+    type: Array,
+    default: () => []
+  },
+  type: {
+    type: String,
+    default: () => ''
   }
 })
 
@@ -80,3 +86,13 @@ const getBannerUrl = (idx) => {
   return url
 }
 </script>
+
+<style lang="scss" scoped>
+.show-more {
+  font-size: 12pt;
+
+  &:hover {
+    color: $secondary;
+  }
+}
+</style>

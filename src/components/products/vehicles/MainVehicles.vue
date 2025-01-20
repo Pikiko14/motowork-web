@@ -5,15 +5,17 @@
     <!--End header item-->
 
     <!--pagination data-->
-    <section class="motowork-item-page__paginator-label">
+    <section class="motowork-item-page__paginator-label" v-if="totalPagesProduct > 0">
       <h2>MOSTRANDO {{ pageProduct }}-{{ query.perPage }} DE {{ totalPagesProduct }} RESULTADOS</h2>
     </section>
     <!--end pagination data-->
 
     <!--grid items-->
     <GridItems
+      :type="query.type"
       :products="products"
       :showFilter="showFilter"
+      :categories="categories"
     />
   </div>
 </template>
@@ -25,6 +27,7 @@ import { useRoute } from 'vue-router'
 import GridItems from '../partials/GridItems.vue'
 import HeaderItems from '../partials/HeaderItems.vue'
 import { useProductsContent } from 'src/composables/useProductContent'
+import { useCategoriesContent } from 'src/composables/useCategoriesContent'
 
 // references
 const route = useRoute()
@@ -78,6 +81,11 @@ const orderMenu = ref([
 ])
 const showFilter = ref(true)
 const { getProducts, products, pageProduct, totalPagesProduct } = useProductsContent()
+const {
+  page,
+  getCategories,
+  categories
+} = useCategoriesContent()
 
 // methods
 const openFilter = () => {
@@ -91,8 +99,13 @@ const getQueryString = (filters) => {
   return `?${new URLSearchParams(filteredFilters).toString()}`
 }
 
+const loadCategoriesAccesories = () => {
+  const queryString = `?page=${page.value}&perPage=5&type=${query.type}`
+  getCategories(queryString)
+}
+
 // hooks
 const queryString = getQueryString(query)
-console.log(queryString)
 getProducts(queryString)
+loadCategoriesAccesories()
 </script>

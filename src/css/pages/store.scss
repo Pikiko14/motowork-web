@@ -37,7 +37,7 @@
     display: flex;
     width: 100%;
     margin-top: 32px;
-    gap: 20px;
+    gap: 16px;
 
     &--items {
       flex: 3;
@@ -180,10 +180,52 @@
 
     &--filters {
       flex: 1;
-      max-width: 300px;
-      background-color: #f4f4f4;
-      padding: 15px;
-      border-radius: 8px;
+      max-width: 296px;
+      display: flex;
+      flex-direction: column;
+
+      &__section {
+        padding-top: 24px;
+        padding-bottom: 24px;
+        border-bottom: 1px solid #E3E3E3;
+
+        h3 {
+          color: #000;
+
+          /* Desktop/Body/Title/Medium */
+          font-family: Play;
+          font-size: 16pt;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 125%; /* 20px */
+          text-transform: uppercase;
+        }
+
+        ul {
+          list-style: none;
+          margin: 0px;
+          margin-top: 12px;
+
+          li {
+            .q-btn {
+              color: #000;
+
+              /* Desktop/Body/Text/Medium */
+              font-family: Ubuntu;
+              font-size: 14pt;
+              font-style: normal;
+              font-weight: 400;
+              line-height: 125%; /* 20px */
+              margin: 0px;
+              padding: 0px;
+            }
+
+            :hover {
+              color: #ED1C24;
+            }
+          }
+        }
+      }
     }
   }
 
