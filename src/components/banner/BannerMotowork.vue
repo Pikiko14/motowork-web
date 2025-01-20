@@ -1,7 +1,7 @@
 <template>
   <section class="motowor-banner">
     <figure>
-      <img class="motowor-banner__image" :src="imgBanner.path" :alt="banner.name">
+      <img class="motowor-banner__image" :src="imgBanner.path || 'https://res.cloudinary.com/dg14xloef/image/upload/v1737399147/banners/u0ouwhxrqv0v05mfyc2s.webp'" :alt="banner.name">
       <figcaption>
         <div class="container">
           <div class="row">
