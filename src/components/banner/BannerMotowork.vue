@@ -1,8 +1,8 @@
 <template>
   <section class="motowor-banner">
     <figure>
-      <img class="motowor-banner__image" :src="imgBanner.path || 'https://res.cloudinary.com/dg14xloef/image/upload/v1737399147/banners/u0ouwhxrqv0v05mfyc2s.webp'" :alt="banner.name">
-      <figcaption>
+      <img class="motowor-banner__image" :src="imgBanner.path || defaultImg" :alt="banner.name">
+      <figcaption :class="{ 'no-overflow': noOverflow }">
         <div class="container">
           <div class="row">
            <div class="col-12" v-if="title">
@@ -13,7 +13,7 @@
                 {{ bannerComplement }}
               </p>
             </div>
-            <div class="col-12 q-mt-xl">
+            <div class="col-12 q-mt-xl" v-if="banner.link">
               <q-btn :to="banner.link || ''" no-cap square outline color="white" :label="btnLabel"></q-btn>
             </div>
           </div>
@@ -50,6 +50,14 @@ const props = defineProps({
   btnLabel: {
     type: String,
     default: () => ''
+  },
+  defaultImg: {
+    type: String,
+    default: () => 'https://res.cloudinary.com/dg14xloef/image/upload/v1737399147/banners/u0ouwhxrqv0v05mfyc2s.webp'
+  },
+  noOverflow: {
+    type: Boolean,
+    default: () => false
   }
 })
 
@@ -152,5 +160,9 @@ const imgBanner = computed(() => {
       }
     }
   }
+}
+
+.no-overflow {
+  background: transparent !important;
 }
 </style>
