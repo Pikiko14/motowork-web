@@ -1,7 +1,7 @@
 <template>
   <section class="motowor-banner">
     <figure>
-      <img class="motowor-banner__image" :src="imgBanner.path || defaultImg" :alt="banner.name">
+      <img class="motowor-banner__image"  :src="imgBanner.path || defaultImg" :alt="banner.name" :title="banner.name">
       <figcaption :class="{ 'no-overflow': noOverflow }">
         <div class="container">
           <div class="row">
@@ -13,8 +13,8 @@
                 {{ bannerComplement }}
               </p>
             </div>
-            <div class="col-12 q-mt-xl" v-if="banner.link">
-              <q-btn :to="banner.link || ''" no-cap square outline color="white" :label="btnLabel"></q-btn>
+            <div class="col-12 q-mt-xl" v-if="banner.link && !noOverflow">
+              <q-btn type="a" :href="banner.link || ''" no-cap square outline color="white" :label="btnLabel"></q-btn>
             </div>
           </div>
         </div>

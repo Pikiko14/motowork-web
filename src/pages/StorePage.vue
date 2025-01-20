@@ -4,10 +4,15 @@
     <BannerMotowork
       :title="''"
       :banner="banner"
-      :default-img="type === 'vehicle' ? 'https://ress.cloudinary.com/dg14xloef/image/upload/v1737398094/banners/boxfnfyssqzw809kxhsc.webp' : ''"
+      :default-img="type === 'vehicle' ? 'https://res.cloudinary.com/dg14xloef/image/upload/v1737398094/banners/boxfnfyssqzw809kxhsc.webp' : ''"
       :btnLabel="''" noOverflow :bannerComplement="''" />
     <!--End banner-->
-    <br><br><br><br>
+
+    <!--Item component-->
+    <section class="container-motowork bg-white">
+      <MainVehicles v-if="type === 'vehicle'" />
+    </section>
+    <!--End item component-->
   </q-page>
 </template>
 
@@ -17,6 +22,7 @@ import { useMeta } from 'quasar'
 import { useRoute } from 'vue-router'
 import { useBannersContent } from 'src/composables/useBannerContent'
 import BannerMotowork from 'src/components/banner/BannerMotowork.vue'
+import MainVehicles from 'src/components/products/vehicles/MainVehicles.vue'
 
 // references
 const route = useRoute()
@@ -105,5 +111,9 @@ const metaData = {
 useMeta(metaData)
 
 // Hooks
-getBanner('?page=1&perPage=1&type=vehicles')
+if (type === 'vehicle') {
+  getBanner('?page=1&perPage=1&type=vehicles')
+} else {
+  getBanner('?page=1&perPage=1&type=accesories')
+}
 </script>

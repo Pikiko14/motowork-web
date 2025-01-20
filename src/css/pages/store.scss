@@ -1,0 +1,35 @@
+.motowork-item-page {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+
+    h3 {
+      color: #000;
+
+      /* Desktop/Headings/H3 */
+      font-family: Play;
+      font-size: 32px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 125%; /* 40px */
+      text-transform: uppercase;
+    }
+
+    &--search-and-filter {
+      display: flex;
+      gap: 12px;
+
+      .q-field {
+        min-width: 400px;
+  
+        @media(max-width: 991px) {
+          min-width: 260px;
+        }
+  
+        @media(max-width: 767px) {
+          display: none;
+        }
+      }
+    }
+  }
+}
