@@ -3,7 +3,7 @@
     <!--left section-->
     <div class="motowork-navbar__left-section">
       <!--icon sections-->
-      <section class="motowork-navbar__left-section--icon">
+      <section class="motowork-navbar__left-section--icon" @click="$router.push({ path: '/' })">
         <figure>
           <img class="motowork-navbar__left-section--icon__first" src="/images/yamaha_mobile.svg"
             alt="Logo de la marca Yamaha, utilizado en la landing de Motowork" loading="lazy" />
@@ -18,9 +18,9 @@
       <!--Link Section-->
       <section class="motowork-navbar__left-section--links">
         <ul>
-          <li @click="openHamburguerMenu('vehicle')"><q-btn to="#" flat
+          <li @click="openHamburguerMenu('vehicle')"><q-btn flat
               class="text-uppercase">Motos</q-btn></li>
-          <li @click="openHamburguerMenu('product')"><q-btn to="#" flat
+          <li @click="openHamburguerMenu('product')"><q-btn flat
               class="text-uppercase">Accesorios</q-btn></li>
           <li><q-btn flat to="/services" class="text-uppercase">Servicio técnico</q-btn></li>
           <li><q-btn flat to="/experiences" class="text-uppercase">Experiencias</q-btn></li>
@@ -206,9 +206,11 @@ const openHamburguerMenu = async (e) => {
 }
 
 const pushRoute = (name) => {
+  showMenu.value = false
   router.push({
     path: itemToShow.value === 'vehicle' ? 'vehiculos' : 'productos',
     query: {
+      type: itemToShow.value,
       category: name
     }
   })
@@ -258,6 +260,7 @@ const openAllProducts = () => {
 
     &--icon {
       display: flex;
+      cursor: pointer;
       align-items: center;
 
       figure {
@@ -314,7 +317,7 @@ const openAllProducts = () => {
             transition: all .3s ease;
           }
 
-          a {
+          a, .q-btn {
             color: #000;
             font-family: Play;
             font-size: 12pt;
