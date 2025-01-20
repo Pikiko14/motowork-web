@@ -91,7 +91,7 @@ const handleDragStart = (e) => {
 }
 
 const filterByCategory = (category) => {
-  emit('handle-filter', { category, type: 'product' })
+  emit('handle-filter', { type: 'product', category })
 }
 
 // watch

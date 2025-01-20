@@ -164,6 +164,7 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router'
 import { getResolutionWidth } from 'src/utils/utils'
 import { onBeforeMount, onMounted, onUnmounted, ref } from 'vue'
 import HomeGrid from 'src/components/products/HomeGrid.vue'
@@ -200,6 +201,7 @@ const newsletterSection = ref(null)
 const wySelectus = ref(null)
 const instagramFeed = ref(null)
 const currentResolutionRange = ref(null)
+const router = useRouter()
 
 // Methods
 const loadCategoriesAccesories = () => {
@@ -265,7 +267,10 @@ const goNextInCategories = async () => {
 }
 
 const doFilterByCategory = (data) => {
-  console.log(data)
+  router.push({
+    path: '/productos',
+    query: data
+  })
 }
 
 const loadProduct = () => {
