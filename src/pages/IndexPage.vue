@@ -345,11 +345,7 @@ const metaData = {
     },
     ogUrl: {
       property: 'og:url',
-      content: 'https://www.motowork.com'
-    },
-    ogImage: {
-      property: 'og:image',
-      content: 'https://www.motowork.com/images/og-image.jpg'
+      content: 'https://www.motowork.co'
     },
     twitterCard: {
       name: 'twitter:card',
@@ -362,10 +358,6 @@ const metaData = {
     twitterDescription: {
       name: 'twitter:description',
       content: 'Explora las mejores motocicletas Yamaha: diseño, innovación y aventura en cada modelo.'
-    },
-    twitterImage: {
-      name: 'twitter:image',
-      content: 'https://www.motowork.com/images/twitter-card.jpg'
     },
     robots: {
       name: 'robots',
@@ -385,7 +377,7 @@ const metaData = {
     },
     canonical: {
       rel: 'canonical',
-      href: 'https://www.motowork.com'
+      href: 'https://www.motowork.co'
     }
   },
 
