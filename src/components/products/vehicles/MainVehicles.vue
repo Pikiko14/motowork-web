@@ -4,12 +4,17 @@
     <HeaderItems @do-open-filter="openFilter" :orderMenu="orderMenu" :title="'Motos Yamaha'" />
     <!--End header item-->
 
+    <!--pagination data-->
+    <section class="motowork-item-page__paginator-label">
+      <h2>MOSTRANDO {{ pageProduct }}-{{ query.perPage }} DE {{ totalPagesProduct }} RESULTADOS</h2>
+    </section>
+    <!--end pagination data-->
+
     <!--grid items-->
     <GridItems
       :products="products"
+      :showFilter="showFilter"
     />
-    <!--End grid items-->
-    {{ pageProduct }} {{ totalPagesProduct }} {{ products.length }}
   </div>
 </template>
 
@@ -71,7 +76,7 @@ const orderMenu = ref([
     ]
   }
 ])
-const showFilter = ref(false)
+const showFilter = ref(true)
 const { getProducts, products, pageProduct, totalPagesProduct } = useProductsContent()
 
 // methods

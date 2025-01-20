@@ -1,7 +1,7 @@
 <template>
-  <div class="motowork-item-page__grid">
+  <section class="motowork-item-page__grid">
     <!--items grid-->
-    <section class="motowork-item-page__grid--items">
+    <div class="motowork-item-page__grid--items">
       <!--item product-->
       <article class="motowork-item-page__grid--items__product" v-for="(product, idx) in products" :key="idx">
         <figure>
@@ -23,10 +23,10 @@
         </div>
       </article>
       <!--end item product-->
-    </section>
+    </div>
     <!--end items grid-->
 
-    <aside class="motowork-item-page__grid--filters">
+    <aside class="motowork-item-page__grid--filters" v-if="showFilter">
       <h3>Categoría</h3>
       <ul>
         <li><input type="checkbox" /> Super deportivas</li>
@@ -44,7 +44,7 @@
         <li><input type="checkbox" /> A2</li>
       </ul>
     </aside>
-  </div>
+  </section>
 </template>
 
 <script setup>

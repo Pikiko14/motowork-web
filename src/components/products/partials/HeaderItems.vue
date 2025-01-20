@@ -1,8 +1,8 @@
 <template>
-  <div class="motowork-item-page__header">
-    <h3>
+  <section class="motowork-item-page__header">
+    <h2>
       {{ title }}
-    </h3>
+    </h2>
 
     <div class="motowork-item-page__header--search-and-filter">
       <q-input v-model="search" square outlined placeholder="Buscar por nombre"></q-input>
@@ -29,10 +29,17 @@
             </q-item>
           </q-list>
         </q-menu>
+        <q-tooltip class="bg-secondary">
+          Ordenar
+        </q-tooltip>
       </q-btn>
-      <q-btn @click="openFilterSection" color="primary" unelevated icon="filter_alt"></q-btn>
+      <q-btn @click="openFilterSection" color="primary" unelevated icon="filter_alt">
+        <q-tooltip class="bg-primary">
+          Filtrar
+        </q-tooltip>
+      </q-btn>
     </div>
-  </div>
+  </section>
 </template>
 
 <script setup>
