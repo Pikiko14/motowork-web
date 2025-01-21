@@ -226,7 +226,9 @@ const openAllProducts = () => {
     query: {
       page: 1,
       perPage: 9,
-      type: itemToShow.value === 'vehicle' ? 'vehicle' : 'product'
+      type: itemToShow.value === 'vehicle' ? 'vehicle' : 'product',
+      sortBy: 'createdAt',
+      order: '-1'
     }
   })
 }

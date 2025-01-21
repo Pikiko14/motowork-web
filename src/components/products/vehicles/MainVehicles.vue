@@ -1,7 +1,9 @@
 <template>
   <div class="motowork-item-page">
     <!--Header item-->
-    <HeaderItems @do-open-filter="openFilter" :orderMenu="orderMenu" :title="'Motos Yamaha'" />
+    <HeaderItems @do-search="handleSearch" @do-open-filter="openFilter" :orderMenu="orderMenu"
+      @do-order="handleOrder"
+      :title="'Motos Yamaha'" />
     <!--End header item-->
 
     <!--pagination data-->
@@ -11,22 +13,16 @@
     <!--end pagination data-->
 
     <!--grid items-->
-    <GridItems
-      :type="query.type"
-      :products="products"
-      :showFilter="showFilter"
-      :categories="categoriesList.length > 0 ? categoriesList : categories"
-      :pageCategory="page"
-      :totalPageCategory="totalPages"
-      @handle-load-categories="loadMoreCategories"
-    />
+    <GridItems :type="query.type" :products="products" :showFilter="showFilter"
+      :categories="categoriesList.length > 0 ? categoriesList : categories" :pageCategory="page"
+      :totalPageCategory="totalPages" @handle-load-categories="loadMoreCategories" />
   </div>
 </template>
 
 <script setup>
 // imports
 import { ref } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import GridItems from '../partials/GridItems.vue'
 import HeaderItems from '../partials/HeaderItems.vue'
 import { useStoreContent } from 'src/stores/storeContent-store'
@@ -35,6 +31,7 @@ import { useCategoriesContent } from 'src/composables/useCategoriesContent'
 
 // references
 const route = useRoute()
+const router = useRouter()
 const { query } = route
 const orderMenu = ref([
   {
@@ -115,6 +112,45 @@ const loadCategories = (append = false) => {
 const loadMoreCategories = () => {
   addOnePage()
   loadCategories(true)
+}
+
+const handleSearch = (e) => {
+  const queryParams = {
+    page: 1,
+    perPage: query.perPage,
+    type: query.type,
+    sortBy: 'createdAt',
+    order: '-1',
+    search: e,
+    category: query.category || ''
+  }
+  router.push({
+    path: query.type ? 'vehiculos' : 'productos',
+    query: queryParams
+  })
+}
+
+const handleOrder = (item) => {
+  const page = 1
+  const perPage = route.query.perPage || 9
+  const search = route.query.search || ''
+  const type = route.query.type || 'vehicle'
+  const sortBy = item.by
+  const order = item.value
+  const filter = route.query.filter || ''
+  router.push({
+    path: query.type ? 'vehiculos' : 'productos',
+    query: {
+      page,
+      perPage,
+      search,
+      type,
+      sortBy,
+      order,
+      filter,
+      category: query.category || ''
+    }
+  })
 }
 
 // hooks

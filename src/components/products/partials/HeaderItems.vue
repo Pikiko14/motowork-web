@@ -5,7 +5,8 @@
     </h2>
 
     <div class="motowork-item-page__header--search-and-filter">
-      <q-input v-model="search" square outlined placeholder="Buscar por nombre"></q-input>
+      <q-input clearable debounce="1500" @update:model-value="handleSearch" v-model="search" square outlined
+        placeholder="Buscar por nombre"></q-input>
       <q-btn color="secondary" unelevated icon="img:/images/order_icon.svg">
         <q-menu>
           <q-list class="menu-list">
@@ -44,13 +45,15 @@
 
 <script setup>
 // imports
-import { defineProps, ref } from 'vue'
+import { useRoute } from 'vue-router'
+import { defineProps, onBeforeMount, ref } from 'vue'
 
 // references
 const search = ref('')
+const route = useRoute()
 
 // emits
-const emit = defineEmits(['do-order', 'do-open-filter'])
+const emit = defineEmits(['do-order', 'do-open-filter', 'do-search'])
 
 // props
 defineProps({
@@ -72,6 +75,16 @@ const handleDoOrder = (item) => {
 const openFilterSection = () => {
   emit('do-open-filter')
 }
+
+const handleSearch = (e) => {
+  emit('do-search', e)
+}
+
+onBeforeMount(() => {
+  if (route.query.search) {
+    search.value = route.query.search
+  }
+})
 </script>
 
 <style scoped lang="scss">
