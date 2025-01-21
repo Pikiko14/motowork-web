@@ -141,9 +141,9 @@
     <!--End porque elejirnos-->
 
     <!--Instagram feed-->
-    <section v-if="feedsHistories.length > 0" class="container-motowork bg-white">
+    <section v-if="feedsHistories.length > 0 || instagramsFeeds.length > 0" class="container-motowork bg-white">
       <div class="instagram-feeds instagramFeed-section" ref="instagramFeed">
-        <div class="instagram-feeds__item" v-for="(item, idx) in feedsHistories" :key="idx">
+        <div class="instagram-feeds__item" v-for="(item, idx) in feeds" :key="idx">
           <figure>
             <img draggable="false" :src="item.media_url" alt="Imagen de feed de instagram" title="Imagen de feed de instagram">
             <figcaption v-if="item.caption">
@@ -170,7 +170,7 @@ import { getResolutionWidth } from 'src/utils/utils'
 import HomeGrid from 'src/components/products/HomeGrid.vue'
 import GridHome from 'src/components/categories/GridHome.vue'
 import { useStoreContent } from 'src/stores/storeContent-store'
-import { onBeforeMount, onMounted, onUnmounted, ref } from 'vue'
+import { computed, onBeforeMount, onMounted, onUnmounted, ref } from 'vue'
 import FormFields from 'src/components/newsletter/FormFields.vue'
 import { useBannersContent } from 'src/composables/useBannerContent'
 import GridVehicles from 'src/components/categories/GridVehicles.vue'
@@ -201,12 +201,18 @@ const store = useStoreContent()
 const newsletterSection = ref(null)
 
 const storeBenner = store.filterBanner('home')
+const instagramsFeeds = store.instagramsFeeds
 
 // State to track current resolution range
 const wySelectus = ref(null)
 const instagramFeed = ref(null)
 const currentResolutionRange = ref(null)
 const router = useRouter()
+
+// computed
+const feeds = computed(() => {
+  return instagramsFeeds.length > 0 ? instagramsFeeds : feedsHistories
+})
 
 // Methods
 const loadCategoriesAccesories = () => {
@@ -405,7 +411,9 @@ onBeforeMount(() => {
 })
 
 onMounted(async () => {
-  await getfeed()
+  if (instagramsFeeds.length === 0) {
+    await getfeed()
+  }
 
   const observer = new IntersectionObserver(
     (entries) => {

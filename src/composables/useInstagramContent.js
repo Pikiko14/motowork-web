@@ -1,10 +1,12 @@
-import { api } from 'src/boot/axios'
 import { ref } from 'vue'
+import { api } from 'src/boot/axios'
+import { useStoreContent } from 'src/stores/storeContent-store'
 
 export const useInstangramContent = () => {
   // references
   const path = 'instagrams'
   const feedsHistories = ref([])
+  const store = useStoreContent()
 
   // methods
   const getfeed = async () => {
@@ -13,6 +15,7 @@ export const useInstangramContent = () => {
 
       if (data.success) {
         feedsHistories.value = data.data
+        store.setInstagramsFeeds(feedsHistories.value)
       }
     } catch (error) {
       throw new Error(error.message)
