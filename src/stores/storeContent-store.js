@@ -4,6 +4,7 @@ import { getUrlParams } from 'src/utils/utils'
 
 export const useStoreContent = defineStore('storeContent', () => {
   const banners = ref({})
+  const categoriesList = ref([])
 
   const setBanner = (payload) => {
     banners.value[getUrlParams(payload.query, 'type')] = payload.banner
@@ -15,9 +16,15 @@ export const useStoreContent = defineStore('storeContent', () => {
     }
   }
 
+  const setCategories = (payload) => {
+    categoriesList.value = payload
+  }
+
   return {
     banners,
     setBanner,
-    filterBanner
+    categoriesList,
+    filterBanner,
+    setCategories
   }
 })

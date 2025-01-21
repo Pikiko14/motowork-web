@@ -29,9 +29,9 @@ import MainVehicles from 'src/components/products/vehicles/MainVehicles.vue'
 const route = useRoute()
 const store = useStoreContent()
 const { banner, getBanner } = useBannersContent()
-const storeBenner = store.filterBanner('vehicles')
 
 const { type } = route.query
+const storeBenner = store.filterBanner(type === 'vehicle' ? 'vehicles' : 'accesories')
 
 // metadata
 const metaData = {

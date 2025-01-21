@@ -15,7 +15,7 @@
       :type="query.type"
       :products="products"
       :showFilter="showFilter"
-      :categories="categories"
+      :categories="categoriesList.length > 0 ? categoriesList : categories"
       :pageCategory="page"
       :totalPageCategory="totalPages"
       @handle-load-categories="loadMoreCategories"
@@ -29,6 +29,7 @@ import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 import GridItems from '../partials/GridItems.vue'
 import HeaderItems from '../partials/HeaderItems.vue'
+import { useStoreContent } from 'src/stores/storeContent-store'
 import { useProductsContent } from 'src/composables/useProductContent'
 import { useCategoriesContent } from 'src/composables/useCategoriesContent'
 
@@ -91,6 +92,8 @@ const {
   getCategories,
   totalPages
 } = useCategoriesContent()
+const store = useStoreContent()
+const { categoriesList } = store
 
 // methods
 const openFilter = () => {
@@ -104,18 +107,20 @@ const getQueryString = (filters) => {
   return `?${new URLSearchParams(filteredFilters).toString()}`
 }
 
-const loadCategoriesAccesories = (append = false) => {
+const loadCategories = (append = false) => {
   const queryString = `?page=${page.value}&perPage=5&type=${query.type}`
   getCategories(queryString, append)
 }
 
 const loadMoreCategories = () => {
   addOnePage()
-  loadCategoriesAccesories(true)
+  loadCategories(true)
 }
 
 // hooks
 const queryString = getQueryString(query)
 getProducts(queryString)
-loadCategoriesAccesories()
+if (categoriesList && categoriesList.length === 0) {
+  loadCategories()
+}
 </script>
