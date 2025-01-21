@@ -79,28 +79,28 @@
         <div class="col-12 col-sm-3 mobile-full-width">
           <div class="menu-item">
             <q-list class="items-desktop">
-              <q-item v-if="itemToShow === 'vehicle'" class="q-pa-none" clickable v-ripple to="/vehiculos?page=1&perPage=9&type=vehicle&state=Nueva">
+              <q-item v-if="itemToShow === 'vehicle'" class="q-pa-none" clickable v-ripple to="/vehiculos?page=1&perPage=9&sortBy=createdAt&order=-1&type=vehicle&state=Nueva">
                 <q-item-section>
                   <q-item-label>
                     Motos nuevas
                   </q-item-label>
                 </q-item-section>
               </q-item>
-              <q-item v-if="itemToShow === 'vehicle'" class="q-pa-none" clickable v-ripple to="/vehiculos?page=1&perPage=9&type=vehicle&state=Usada">
+              <q-item v-if="itemToShow === 'vehicle'" class="q-pa-none" clickable v-ripple to="/vehiculos?page=1&perPage=9&sortBy=createdAt&order=-1&type=vehicle&state=Usada">
                 <q-item-section>
                   <q-item-label>
                     Motos usadas
                   </q-item-label>
                 </q-item-section>
               </q-item>
-              <q-item v-if="itemToShow === 'product'" class="q-pa-none" clickable v-ripple to="/productos?page=1&perPage=9&type=product&state=Nueva">
+              <q-item v-if="itemToShow === 'product'" class="q-pa-none" clickable v-ripple to="/productos?page=1&perPage=9&sortBy=createdAt&order=-1&type=product&state=Nueva">
                 <q-item-section>
                   <q-item-label>
                     Accesorios nuevos
                   </q-item-label>
                 </q-item-section>
               </q-item>
-              <q-item v-if="itemToShow === 'product'" class="q-pa-none" clickable v-ripple to="/productos?page=1&perPage=9&type=product&state=Usada">
+              <q-item v-if="itemToShow === 'product'" class="q-pa-none" clickable v-ripple to="/productos?page=1&perPage=9&sortBy=createdAt&order=-1&type=product&state=Usada">
                 <q-item-section>
                   <q-item-label>
                     Accesorios usados
@@ -212,6 +212,8 @@ const pushRoute = (name) => {
     query: {
       page: 1,
       perPage: 9,
+      sortBy: 'createdAt',
+      order: '-1',
       type: itemToShow.value,
       category: name
     }

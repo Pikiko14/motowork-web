@@ -1,22 +1,11 @@
 <template>
-  <div
-    class="motowork-accesories-categories__grid"
-    ref="gridContainer"
-    @touchstart="handleTouchStart"
-    @touchend="handleTouchEnd"
-    @dragstart="handleDragStart"
-    @mousedown="handleMouseDown"
-    @mouseup="handleMouseUp"
-  >
-    <article
-      class="motowork-accesories-categories__grid--item"
-      v-for="(cat, idx) in categories"
-      :key="idx"
-      @dragstart="handleDragStart"
-      @click="filterByCategory(cat.name)"
-    >
+  <div class="motowork-accesories-categories__grid" ref="gridContainer" @touchstart="handleTouchStart"
+    @touchend="handleTouchEnd" @dragstart="handleDragStart" @mousedown="handleMouseDown" @mouseup="handleMouseUp">
+    <article class="motowork-accesories-categories__grid--item" v-for="(cat, idx) in categories" :key="idx"
+      @dragstart="handleDragStart" @click="filterByCategory(cat.name)">
       <figure>
-        <img :src="cat.icon" :alt="`Imagen de la categoría ${cat.name}`" :title="`Imagen de la categoría ${cat.name}`" loading="lazy">
+        <img :src="cat.icon" :alt="`Imagen de la categoría ${cat.name}`" :title="`Imagen de la categoría ${cat.name}`"
+          loading="lazy">
         <figcaption>
           <h3>{{ cat.name }}</h3>
         </figcaption>
@@ -91,7 +80,7 @@ const handleDragStart = (e) => {
 }
 
 const filterByCategory = (category) => {
-  emit('handle-filter', { type: 'product', category })
+  emit('handle-filter', { type: 'product', category, page: 1, perPage: 9, sortBy: 'createdAt', order: '-1' })
 }
 
 // watch

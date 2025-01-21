@@ -12,7 +12,7 @@
         </figcaption>
         <figcaption class="back-content">
           <h3>{{ cat.name }}</h3>
-          <q-btn :to="`/vehiculos?type=vehicle&category=${cat.name}`" no-cap square outline color="white" label="Comprar Ahora"></q-btn>
+          <q-btn :to="`/vehiculos?page=1&perPage=9&sortBy=createdAt&order=-1&type=vehicle&category=${cat.name}`" no-cap square outline color="white" label="Comprar Ahora"></q-btn>
         </figcaption>
       </figure>
     </article>
