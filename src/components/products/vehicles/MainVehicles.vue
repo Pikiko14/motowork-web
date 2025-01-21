@@ -16,6 +16,9 @@
       :products="products"
       :showFilter="showFilter"
       :categories="categories"
+      :pageCategory="page"
+      :totalPageCategory="totalPages"
+      @handle-load-categories="loadMoreCategories"
     />
   </div>
 </template>
@@ -83,8 +86,10 @@ const showFilter = ref(true)
 const { getProducts, products, pageProduct, totalPagesProduct } = useProductsContent()
 const {
   page,
+  addOnePage,
+  categories,
   getCategories,
-  categories
+  totalPages
 } = useCategoriesContent()
 
 // methods
@@ -99,9 +104,14 @@ const getQueryString = (filters) => {
   return `?${new URLSearchParams(filteredFilters).toString()}`
 }
 
-const loadCategoriesAccesories = () => {
+const loadCategoriesAccesories = (append = false) => {
   const queryString = `?page=${page.value}&perPage=5&type=${query.type}`
-  getCategories(queryString)
+  getCategories(queryString, append)
+}
+
+const loadMoreCategories = () => {
+  addOnePage()
+  loadCategoriesAccesories(true)
 }
 
 // hooks

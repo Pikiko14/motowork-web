@@ -23,3 +23,9 @@ export const formatPrice = (price) => {
   // Agregar el símbolo de moneda
   return `$ ${formattedNumber}`
 }
+
+export const getUrlParams = (query, param) => {
+  const params = new URLSearchParams(query)
+  const paramGetter = params.get(param)
+  return paramGetter
+}

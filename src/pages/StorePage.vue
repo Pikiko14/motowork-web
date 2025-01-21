@@ -20,13 +20,16 @@
 // imports
 import { useMeta } from 'quasar'
 import { useRoute } from 'vue-router'
+import { useStoreContent } from 'src/stores/storeContent-store'
 import { useBannersContent } from 'src/composables/useBannerContent'
 import BannerMotowork from 'src/components/banner/BannerMotowork.vue'
 import MainVehicles from 'src/components/products/vehicles/MainVehicles.vue'
 
 // references
 const route = useRoute()
+const store = useStoreContent()
 const { banner, getBanner } = useBannersContent()
+const storeBenner = store.filterBanner('vehicles')
 
 const { type } = route.query
 
@@ -111,9 +114,11 @@ const metaData = {
 useMeta(metaData)
 
 // Hooks
-if (type === 'vehicle') {
-  getBanner('?page=1&perPage=1&type=vehicles')
-} else {
-  getBanner('?page=1&perPage=1&type=accesories')
+if (!storeBenner) {
+  if (type === 'vehicle') {
+    getBanner('?page=1&perPage=1&type=vehicles')
+  } else {
+    getBanner('?page=1&perPage=1&type=accesories')
+  }
 }
 </script>

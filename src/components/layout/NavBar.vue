@@ -225,7 +225,8 @@ const openAllProducts = () => {
     path: itemToShow.value === 'vehicle' ? 'vehiculos' : 'productos',
     query: {
       page: 1,
-      perPage: 9
+      perPage: 9,
+      type: itemToShow.value === 'vehicle' ? 'vehicle' : 'product'
     }
   })
 }

@@ -34,11 +34,13 @@ export const useCategoriesContent = () => {
     page.value = 1
   }
 
-  const getCategories = async (query) => {
+  const getCategories = async (query, append = false) => {
     try {
       const { data } = await api.get(`${path}/list/from-web${query}`)
       if (data.success) {
-        categories.value = data.data.categories
+        if (!append) categories.value = data.data.categories
+        else categories.value.push(...data.data.categories)
+
         totalPages.value = data.data.totalPages
       }
     } catch (error) {

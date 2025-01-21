@@ -167,9 +167,10 @@
 import { useMeta } from 'quasar'
 import { useRouter } from 'vue-router'
 import { getResolutionWidth } from 'src/utils/utils'
-import { onBeforeMount, onMounted, onUnmounted, ref } from 'vue'
 import HomeGrid from 'src/components/products/HomeGrid.vue'
 import GridHome from 'src/components/categories/GridHome.vue'
+import { useStoreContent } from 'src/stores/storeContent-store'
+import { onBeforeMount, onMounted, onUnmounted, ref } from 'vue'
 import FormFields from 'src/components/newsletter/FormFields.vue'
 import { useBannersContent } from 'src/composables/useBannerContent'
 import GridVehicles from 'src/components/categories/GridVehicles.vue'
@@ -196,7 +197,10 @@ const { products, getProducts, totalPagesProduct, pageProduct, addOnePageProduct
 
 const { getfeed, feedsHistories } = useInstangramContent()
 
+const store = useStoreContent()
 const newsletterSection = ref(null)
+
+const storeBenner = store.filterBanner('home')
 
 // State to track current resolution range
 const wySelectus = ref(null)
@@ -389,7 +393,9 @@ const metaData = {
 useMeta(metaData)
 
 // Hooks
-getBanner('?page=1&perPage=1&type=home')
+if (!storeBenner) {
+  getBanner('?page=1&perPage=1&type=home')
+}
 handleResize()
 getCategories('?page=1&perPage=6&type=vehicle')
 

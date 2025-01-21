@@ -32,10 +32,11 @@
         <h3>Categoría</h3>
         <ul>
           <li v-for="(category, idx) in categories" :key="idx">
-            <q-btn unelevated dense :to="`/vehiculos?page=1&perPage=9&type=${type}&category=${category.name}`"
+            <q-btn :class="{ 'text-secondary': $route.query.category && $route.query.category === category.name }"
+              unelevated dense :to="`/vehiculos?page=1&perPage=9&type=${type}&category=${category.name}`"
               :label="category.name"></q-btn>
           </li>
-          <li class="q-mt-sm show-more cursor-pointer">
+          <li v-if="pageCategory < totalPageCategory" class="q-mt-sm show-more cursor-pointer" @click="showMoreCategories">
             Mostar mas <q-icon name="img:/images/dropdown.svg"></q-icon>
           </li>
         </ul>
@@ -47,8 +48,13 @@
 
 <script setup>
 // imports
-import { defineProps } from 'vue'
 import { formatPrice } from 'src/utils/utils'
+import { defineProps, defineEmits } from 'vue'
+
+// emit
+const emit = defineEmits([
+  'handle-load-categories'
+])
 
 // props
 const props = defineProps({
@@ -67,6 +73,14 @@ const props = defineProps({
   type: {
     type: String,
     default: () => ''
+  },
+  pageCategory: {
+    type: Number,
+    default: 1
+  },
+  totalPageCategory: {
+    type: Number,
+    defualt: 1
   }
 })
 
@@ -84,6 +98,10 @@ const getBannerUrl = (idx) => {
     }
   }
   return url
+}
+
+const showMoreCategories = () => {
+  emit('handle-load-categories')
 }
 </script>
 

@@ -3,7 +3,7 @@ import { api } from 'src/boot/axios'
 
 export const useProductsContent = () => {
   // references
-  const products = ref({})
+  const products = ref([])
   const path = 'products'
   const pageProduct = ref(1)
   const totalPagesProduct = ref(0)
