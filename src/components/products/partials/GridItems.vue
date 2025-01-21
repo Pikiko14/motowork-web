@@ -41,6 +41,16 @@
           </li>
         </ul>
       </div>
+
+      <div class="motowork-item-page__grid--filters__section">
+        <h3>Precio</h3>
+        <input type="range" min="1" max="999999999999999">
+      </div>
+
+      <div class="motowork-item-page__grid--filters__section">
+        <h3>Potencia / Cilindraje</h3>
+        <input type="range" min="1" max="999999999999999">
+      </div>
     </aside>
     <!--end filter section-->
   </section>

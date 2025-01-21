@@ -1,8 +1,7 @@
 <template>
   <div class="motowork-item-page">
     <!--Header item-->
-    <HeaderItems @do-search="handleSearch" @do-open-filter="openFilter" :orderMenu="orderMenu"
-      @do-order="handleOrder"
+    <HeaderItems @do-search="handleSearch" @do-open-filter="openFilter" :orderMenu="orderMenu" @do-order="handleOrder"
       :title="'Motos Yamaha'" />
     <!--End header item-->
 
@@ -16,12 +15,21 @@
     <GridItems :type="query.type" :products="products" :showFilter="showFilter"
       :categories="categoriesList.length > 0 ? categoriesList : categories" :pageCategory="page"
       :totalPageCategory="totalPages" @handle-load-categories="loadMoreCategories" />
+    <!--end grid items-->
+
+    <!--Paginator-->
+    <section class="motowork-item-page__paginator">
+      <q-pagination active-design="unelevated" flat active-color="secondary"
+        unelevated @update:model-value="doPagination" color="secondary" v-model="pageNumber"
+        :max="totalPagesProduct" />
+    </section>
+    <!--End paginator-->
   </div>
 </template>
 
 <script setup>
 // imports
-import { ref } from 'vue'
+import { onBeforeMount, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import GridItems from '../partials/GridItems.vue'
 import HeaderItems from '../partials/HeaderItems.vue'
@@ -30,6 +38,7 @@ import { useProductsContent } from 'src/composables/useProductContent'
 import { useCategoriesContent } from 'src/composables/useCategoriesContent'
 
 // references
+const pageNumber = ref(1)
 const route = useRoute()
 const router = useRouter()
 const { query } = route
@@ -153,10 +162,36 @@ const handleOrder = (item) => {
   })
 }
 
+const doPagination = (page) => {
+  const perPage = route.query.perPage || 9
+  const search = route.query.search || ''
+  const type = route.query.type || 'vehicle'
+  const sortBy = route.query.sortBy || 'createdAt'
+  const order = route.query.order || '-1'
+  const filter = route.query.filter || ''
+  router.push({
+    path: query.type ? 'vehiculos' : 'productos',
+    query: {
+      page,
+      perPage,
+      search,
+      type,
+      sortBy,
+      order,
+      filter,
+      category: query.category || ''
+    }
+  })
+}
+
 // hooks
 const queryString = getQueryString(query)
 getProducts(queryString)
 if (categoriesList && categoriesList.length === 0) {
   loadCategories()
 }
+
+onBeforeMount(() => {
+  pageNumber.value = route.query.page
+})
 </script>

@@ -411,7 +411,7 @@ onBeforeMount(() => {
 })
 
 onMounted(async () => {
-  if (instagramsFeeds.length === 0) {
+  if (instagramsFeeds.length === 10) {
     await getfeed()
   }
 
@@ -428,8 +428,8 @@ onMounted(async () => {
 
   if (newsletterSection.value) {
     observer.observe(wySelectus.value)
-    observer.observe(instagramFeed.value)
     observer.observe(newsletterSection.value)
+    observer.observe(instagramFeed.value)
   }
 })
 

@@ -201,7 +201,7 @@
           text-transform: uppercase;
         }
 
-        ul {
+        ul, input {
           list-style: none;
           margin: 0px;
           margin-top: 12px;
@@ -242,6 +242,21 @@
       font-weight: 400;
       line-height: 125%; /* 20px */
       text-transform: uppercase;
+    }
+  }
+
+  &__paginator {
+    margin-top: 32px;
+
+    .q-pagination {
+      display: flex !important;
+      gap: 8px !important;
+      button {
+        min-width: 40px !important;
+        height: 40px;
+        margin-left: 0px;
+        border-radius: 0px;
+      }
     }
   }
 }

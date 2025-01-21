@@ -29,7 +29,12 @@ export const useProductsContent = () => {
     pageProduct.value--
   }
 
+  const setPage = (page) => {
+    pageProduct.value = page
+  }
+
   return {
+    setPage,
     products,
     getProducts,
     pageProduct,
