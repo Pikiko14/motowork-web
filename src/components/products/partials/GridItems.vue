@@ -62,7 +62,7 @@
           :max="1500"
           color="secondary"
           label
-          @change="doFilterByPrice"
+          @change="doFilterByPower"
         />
       </div>
     </aside>
@@ -78,7 +78,8 @@ import { defineProps, defineEmits, ref } from 'vue'
 // emit
 const emit = defineEmits([
   'do-filter-by-price',
-  'handle-load-categories'
+  'handle-load-categories',
+  'do-filter-by-power'
 ])
 
 // reference
@@ -142,6 +143,10 @@ const showMoreCategories = () => {
 
 const doFilterByPrice = (e) => {
   emit('do-filter-by-price', e)
+}
+
+const doFilterByPower = (e) => {
+  emit('do-filter-by-power', e)
 }
 </script>
 

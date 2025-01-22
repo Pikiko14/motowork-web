@@ -14,14 +14,15 @@
     <!--grid items-->
     <GridItems :type="query.type" :products="products" :showFilter="showFilter"
       :categories="categoriesList.length > 0 ? categoriesList : categories" :pageCategory="page"
-      :totalPageCategory="totalPages" @handle-load-categories="loadMoreCategories" @do-filter-by-price="filterByPriceRange" />
+      :totalPageCategory="totalPages" @handle-load-categories="loadMoreCategories"
+      @do-filter-by-price="filterByPriceRange"
+      @do-filter-by-power="filterByPowerRange" />
     <!--end grid items-->
 
     <!--Paginator-->
     <section class="motowork-item-page__paginator">
-      <q-pagination active-design="unelevated" flat active-color="secondary"
-        unelevated @update:model-value="doPagination" color="secondary" v-model="pageNumber"
-        :max="totalPagesProduct" />
+      <q-pagination active-design="unelevated" flat active-color="secondary" unelevated
+        @update:model-value="doPagination" color="secondary" v-model="pageNumber" :max="totalPagesProduct" />
     </section>
     <!--End paginator-->
   </div>
@@ -187,6 +188,31 @@ const doPagination = (page) => {
 const filterByPriceRange = (e) => {
   const obj = {
     price: e
+  }
+  const perPage = route.query.perPage || 9
+  const search = route.query.search || ''
+  const type = route.query.type || 'vehicle'
+  const sortBy = route.query.sortBy || 'createdAt'
+  const order = route.query.order || '-1'
+  const filter = JSON.stringify(obj)
+  router.push({
+    path: query.type ? 'vehiculos' : 'productos',
+    query: {
+      page: 1,
+      perPage,
+      search,
+      type,
+      sortBy,
+      order,
+      category: query.category || '',
+      filter
+    }
+  })
+}
+
+const filterByPowerRange = (e) => {
+  const obj = {
+    power: e
   }
   const perPage = route.query.perPage || 9
   const search = route.query.search || ''
