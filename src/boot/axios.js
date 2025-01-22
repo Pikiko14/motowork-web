@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { boot } from 'quasar/wrappers'
-import { notification } from './notification'
+/// import { notification } from './notification'
 
 // Be careful when using SSR for cross-request state pollution
 // due to creating a Singleton instance here;
@@ -21,25 +21,25 @@ export default boot(({ app }) => {
     if (error.response) {
       if (error.response.status === 422) {
         if (error) {
-          const { data } = error.response.data
-          const { msg } = data.shift()
-          notification('red', msg, 'red')
+          // const { data } = error.response.data
+          // const { msg } = data.shift()
+          // notification('red', msg, 'red')
         }
       } else {
-        error.response.data.message
-          ? notification('red', error.response.data.message, 'red')
-          : error.response.data.error
-            ? notification('red', error.response.data.error, 'red')
-            : notification('red', error.response.statusText, 'red')
+        // error.response.data.message
+        //   ? notification('red', error.response.data.message, 'red')
+        //   : error.response.data.error
+        //     ? notification('red', error.response.data.error, 'red')
+        //     : notification('red', error.response.statusText, 'red')
       }
     } else {
-      notification(
-        'negative',
-        error.message
-          ? error.message
-          : 'Algo ha ocurrio al intentar procesar esta solicitud',
-        'red'
-      )
+      // notification(
+      //   'negative',
+      //   error.message
+      //     ? error.message
+      //     : 'Algo ha ocurrio al intentar procesar esta solicitud',
+      //   'red'
+      // )
     }
 
     // return promise

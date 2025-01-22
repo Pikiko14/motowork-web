@@ -18,7 +18,7 @@ export const useInstangramContent = () => {
         store.setInstagramsFeeds(feedsHistories.value)
       }
     } catch (error) {
-      throw new Error(error.message)
+      console.log(error)
     }
   }
 
