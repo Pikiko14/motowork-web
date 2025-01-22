@@ -6,6 +6,7 @@ export const useProductsContent = () => {
   const products = ref([])
   const path = 'products'
   const pageProduct = ref(1)
+  const totalProducts = ref(1)
   const totalPagesProduct = ref(0)
 
   // methods
@@ -15,6 +16,7 @@ export const useProductsContent = () => {
       if (data.success && data.data) {
         products.value = data.data.brands
         totalPagesProduct.value = data.data.totalPages
+        totalProducts.value = data.data.totalItems
       }
     } catch (error) {
       throw new Error(error.message)
@@ -40,6 +42,7 @@ export const useProductsContent = () => {
     pageProduct,
     totalPagesProduct,
     addOnePageProduct,
+    totalProducts,
     removeOnePageProduct
   }
 }

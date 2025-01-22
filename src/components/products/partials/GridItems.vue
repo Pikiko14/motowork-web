@@ -44,12 +44,26 @@
 
       <div class="motowork-item-page__grid--filters__section">
         <h3>Precio</h3>
-        <input type="range" min="1" max="999999999999999">
+        <q-range
+          v-model="priceRange"
+          :min="1000000"
+          :max="10000000000"
+          color="secondary"
+          label
+          @change="doFilterByPrice"
+        />
       </div>
 
-      <div class="motowork-item-page__grid--filters__section">
+      <div class="motowork-item-page__grid--filters__section" v-if="type === 'vehicle'">
         <h3>Potencia / Cilindraje</h3>
-        <input type="range" min="1" max="999999999999999">
+        <q-range
+          v-model="powerRange"
+          :min="75"
+          :max="1500"
+          color="secondary"
+          label
+          @change="doFilterByPrice"
+        />
       </div>
     </aside>
     <!--end filter section-->
@@ -57,14 +71,26 @@
 </template>
 
 <script setup>
-// imports
+// imports, ref
 import { formatPrice } from 'src/utils/utils'
-import { defineProps, defineEmits } from 'vue'
+import { defineProps, defineEmits, ref } from 'vue'
 
 // emit
 const emit = defineEmits([
+  'do-filter-by-price',
   'handle-load-categories'
 ])
+
+// reference
+const priceRange = ref({
+  min: 1000000,
+  max: 10000000000
+})
+
+const powerRange = ref({
+  min: 75,
+  max: 1500
+})
 
 // props
 const props = defineProps({
@@ -112,6 +138,10 @@ const getBannerUrl = (idx) => {
 
 const showMoreCategories = () => {
   emit('handle-load-categories')
+}
+
+const doFilterByPrice = (e) => {
+  emit('do-filter-by-price', e)
 }
 </script>
 

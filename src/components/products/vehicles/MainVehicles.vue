@@ -7,14 +7,14 @@
 
     <!--pagination data-->
     <section class="motowork-item-page__paginator-label" v-if="totalPagesProduct > 0">
-      <h2>MOSTRANDO {{ pageProduct }}-{{ query.perPage }} DE {{ totalPagesProduct }} RESULTADOS</h2>
+      <h2>MOSTRANDO {{ pageProduct }}-{{ query.perPage }} DE {{ totalProducts }} RESULTADOS</h2>
     </section>
     <!--end pagination data-->
 
     <!--grid items-->
     <GridItems :type="query.type" :products="products" :showFilter="showFilter"
       :categories="categoriesList.length > 0 ? categoriesList : categories" :pageCategory="page"
-      :totalPageCategory="totalPages" @handle-load-categories="loadMoreCategories" />
+      :totalPageCategory="totalPages" @handle-load-categories="loadMoreCategories" @do-filter-by-price="filterByPriceRange" />
     <!--end grid items-->
 
     <!--Paginator-->
@@ -90,7 +90,7 @@ const orderMenu = ref([
   }
 ])
 const showFilter = ref(true)
-const { getProducts, products, pageProduct, totalPagesProduct } = useProductsContent()
+const { getProducts, products, pageProduct, totalPagesProduct, totalProducts } = useProductsContent()
 const {
   page,
   addOnePage,
@@ -180,6 +180,31 @@ const doPagination = (page) => {
       order,
       filter,
       category: query.category || ''
+    }
+  })
+}
+
+const filterByPriceRange = (e) => {
+  const obj = {
+    price: e
+  }
+  const perPage = route.query.perPage || 9
+  const search = route.query.search || ''
+  const type = route.query.type || 'vehicle'
+  const sortBy = route.query.sortBy || 'createdAt'
+  const order = route.query.order || '-1'
+  const filter = JSON.stringify(obj)
+  router.push({
+    path: query.type ? 'vehiculos' : 'productos',
+    query: {
+      page: 1,
+      perPage,
+      search,
+      type,
+      sortBy,
+      order,
+      category: query.category || '',
+      filter
     }
   })
 }
