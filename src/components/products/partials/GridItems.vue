@@ -46,8 +46,8 @@
         <h3>Precio</h3>
         <q-range
           v-model="priceRange"
-          :min="1000000"
-          :max="10000000000"
+          :min="minPrice"
+          :max="maxPrice"
           color="secondary"
           label
           @change="doFilterByPrice"
@@ -73,7 +73,8 @@
 <script setup>
 // imports, ref
 import { formatPrice } from 'src/utils/utils'
-import { defineProps, defineEmits, ref } from 'vue'
+import { defineProps, defineEmits, ref, onBeforeMount } from 'vue'
+import { useRoute } from 'vue-router'
 
 // emit
 const emit = defineEmits([
@@ -83,9 +84,12 @@ const emit = defineEmits([
 ])
 
 // reference
+const route = useRoute()
+const minPrice = ref(1)
+const maxPrice = ref(100000000)
 const priceRange = ref({
   min: 1000000,
-  max: 10000000000
+  max: 100000000
 })
 
 const powerRange = ref({
@@ -148,6 +152,23 @@ const doFilterByPrice = (e) => {
 const doFilterByPower = (e) => {
   emit('do-filter-by-power', e)
 }
+
+// hook
+onBeforeMount(() => {
+  if (route.query.filter) {
+    const filter = JSON.parse(route.query.filter)
+    if (filter.price) {
+      const { min, max } = filter.price
+      priceRange.value.min = min || priceRange.value.min
+      priceRange.value.max = max || priceRange.value.max
+    }
+    if (filter.power) {
+      const { min, max } = filter.power
+      powerRange.value.min = min || powerRange.value.min
+      powerRange.value.max = max || powerRange.value.max
+    }
+  }
+})
 </script>
 
 <style lang="scss" scoped>

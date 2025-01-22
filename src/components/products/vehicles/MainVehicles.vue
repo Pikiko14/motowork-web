@@ -132,7 +132,8 @@ const handleSearch = (e) => {
     sortBy: 'createdAt',
     order: '-1',
     search: e,
-    category: query.category || ''
+    category: query.category || '',
+    state: query.state || ''
   }
   router.push({
     path: query.type ? 'vehiculos' : 'productos',
@@ -158,7 +159,8 @@ const handleOrder = (item) => {
       sortBy,
       order,
       filter,
-      category: query.category || ''
+      category: query.category || '',
+      state: query.state || ''
     }
   })
 }
@@ -180,21 +182,28 @@ const doPagination = (page) => {
       sortBy,
       order,
       filter,
-      category: query.category || ''
+      category: query.category || '',
+      state: query.state || ''
     }
   })
 }
 
 const filterByPriceRange = (e) => {
-  const obj = {
-    price: e
-  }
+  const priceFilter = { price: e }
+
+  const existingFilter = route.query.filter ? JSON.parse(route.query.filter) : {}
+
+  const filter = JSON.stringify({
+    ...existingFilter,
+    ...priceFilter
+  })
+
   const perPage = route.query.perPage || 9
   const search = route.query.search || ''
   const type = route.query.type || 'vehicle'
   const sortBy = route.query.sortBy || 'createdAt'
   const order = route.query.order || '-1'
-  const filter = JSON.stringify(obj)
+
   router.push({
     path: query.type ? 'vehiculos' : 'productos',
     query: {
@@ -205,21 +214,28 @@ const filterByPriceRange = (e) => {
       sortBy,
       order,
       category: query.category || '',
-      filter
+      filter,
+      state: query.state || ''
     }
   })
 }
 
 const filterByPowerRange = (e) => {
-  const obj = {
-    power: e
-  }
+  const powerFilter = { power: e }
+
+  const existingFilter = route.query.filter ? JSON.parse(route.query.filter) : {}
+
+  const filter = JSON.stringify({
+    ...existingFilter,
+    ...powerFilter
+  })
+
   const perPage = route.query.perPage || 9
   const search = route.query.search || ''
   const type = route.query.type || 'vehicle'
   const sortBy = route.query.sortBy || 'createdAt'
   const order = route.query.order || '-1'
-  const filter = JSON.stringify(obj)
+
   router.push({
     path: query.type ? 'vehiculos' : 'productos',
     query: {
@@ -230,7 +246,8 @@ const filterByPowerRange = (e) => {
       sortBy,
       order,
       category: query.category || '',
-      filter
+      filter,
+      state: query.state || ''
     }
   })
 }
