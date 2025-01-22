@@ -2,7 +2,7 @@
   <div class="motowork-item-page">
     <!--Header item-->
     <HeaderItems @do-search="handleSearch" @do-open-filter="openFilter" :orderMenu="orderMenu" @do-order="handleOrder"
-      :title="`${query.type === 'vehicle' ? 'Motos' : ''} ${query.category ? query.category : 'Yamaha'}`" />
+      :title="`${query.type === 'vehicle' ? 'Motos' : ''} ${query.category ? query.category : 'Accesorios Motowork'}`" />
     <!--End header item-->
 
     <!--pagination data-->

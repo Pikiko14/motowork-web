@@ -110,9 +110,9 @@
             </q-list>
 
             <ul class="items-mobile">
-              <li><q-btn to="/vehiculos" flat
+              <li><q-btn to="/vehiculos?page=1&perPage=9&sortBy=createdAt&order=-1&type=vehicle" flat
                   class="text-uppercase">Motos</q-btn></li>
-              <li><q-btn to="/productos" flat
+              <li><q-btn to="/productos?page=1&perPage=9&sortBy=createdAt&order=-1&type=product&state=Nueva" flat
                   class="text-uppercase">Accesorios</q-btn></li>
               <li><q-btn flat to="/services" class="text-uppercase text-left">Servicio técnico</q-btn></li>
               <li><q-btn flat to="/experiences" class="text-uppercase">Experiencias</q-btn></li>

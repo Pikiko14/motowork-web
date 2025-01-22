@@ -15,6 +15,7 @@
     <!--Item component-->
     <section class="container-motowork bg-white">
       <MainVehicles v-if="type === 'vehicle'" />
+      <MainAccesories v-if="type === 'product'" />
     </section>
     <!--End item component-->
   </q-page>
@@ -29,6 +30,7 @@ import { useStoreContent } from 'src/stores/storeContent-store'
 import { useBannersContent } from 'src/composables/useBannerContent'
 import BannerMotowork from 'src/components/banner/BannerMotowork.vue'
 import MainVehicles from 'src/components/products/vehicles/MainVehicles.vue'
+import MainAccesories from 'src/components/products/accesories/MainAccesories.vue'
 
 // references
 const route = useRoute()

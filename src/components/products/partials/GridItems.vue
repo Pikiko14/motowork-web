@@ -7,7 +7,8 @@
         <figure>
           <img :src="getBannerUrl(idx)" :alt="`Imagen de la motocicleta ${product.name}`" title="product.name" />
           <div class="overflow">
-            <q-btn square outline color="white" label="Agendar test drive"></q-btn>
+            <q-btn v-if="route.query.type !== 'product'" square outline color="white" label="Agendar test drive"></q-btn>
+            <q-btn v-else square outline color="white" label="Agendar al carrito"></q-btn>
           </div>
         </figure>
 
@@ -50,6 +51,7 @@
           :max="maxPrice"
           color="secondary"
           label
+          style="width: 90%"
           @change="doFilterByPrice"
         />
       </div>
@@ -60,6 +62,7 @@
           v-model="powerRange"
           :min="75"
           :max="1500"
+          style="width: 90%"
           color="secondary"
           label
           @change="doFilterByPower"
@@ -88,7 +91,7 @@ const route = useRoute()
 const minPrice = ref(1)
 const maxPrice = ref(100000000)
 const priceRange = ref({
-  min: 1000000,
+  min: 10000,
   max: 100000000
 })
 
