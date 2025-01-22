@@ -192,6 +192,6 @@ if (categoriesList && categoriesList.length === 0) {
 }
 
 onBeforeMount(() => {
-  pageNumber.value = route.query.page
+  pageNumber.value = parseInt(route.query.page)
 })
 </script>

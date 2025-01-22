@@ -1,9 +1,13 @@
 <template>
   <q-page>
+    <!--breadcrumb-->
+    <BreadCrumb />
+    <!--End breadcrumb-->
+
     <!--Banner-->
     <BannerMotowork
       :title="''"
-      :banner="banner"
+      :banner="storeBenner && storeBenner._id ? storeBenner : banner"
       :default-img="type === 'vehicle' ? 'https://res.cloudinary.com/dg14xloef/image/upload/v1737398094/banners/boxfnfyssqzw809kxhsc.webp' : ''"
       :btnLabel="''" noOverflow :bannerComplement="''" />
     <!--End banner-->
@@ -20,6 +24,7 @@
 // imports
 import { useMeta } from 'quasar'
 import { useRoute } from 'vue-router'
+import BreadCrumb from 'src/components/layout/BreadCrumb.vue'
 import { useStoreContent } from 'src/stores/storeContent-store'
 import { useBannersContent } from 'src/composables/useBannerContent'
 import BannerMotowork from 'src/components/banner/BannerMotowork.vue'
