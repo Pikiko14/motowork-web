@@ -211,7 +211,7 @@ const router = useRouter()
 
 // computed
 const feeds = computed(() => {
-  return instagramsFeeds.length > 0 ? instagramsFeeds : feedsHistories
+  return instagramsFeeds.length > 0 ? instagramsFeeds : feedsHistories.value
 })
 
 // Methods
@@ -411,7 +411,7 @@ onBeforeMount(() => {
 })
 
 onMounted(async () => {
-  if (instagramsFeeds.length === 10) {
+  if (instagramsFeeds.length === 0) {
     await getfeed()
   }
 
