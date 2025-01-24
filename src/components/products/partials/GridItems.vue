@@ -7,7 +7,8 @@
         <figure>
           <img :src="getBannerUrl(idx)" :alt="`Imagen de la motocicleta ${product.name}`" title="product.name" />
           <div class="overflow">
-            <q-btn v-if="route.query.type !== 'product'" square outline color="white" label="Agendar test drive"></q-btn>
+            <q-btn v-if="route.query.type !== 'product'" square outline color="white"
+              label="Agendar test drive"></q-btn>
             <q-btn v-else square outline color="white" label="Agendar al carrito"></q-btn>
           </div>
         </figure>
@@ -33,8 +34,9 @@
         <h3>Marcas</h3>
         <ul>
           <li v-for="(brand, idx) in brands" :key="idx">
-            <q-btn :class="{ 'text-secondary': $route.query.brand && $route.query.brand === brand.name }"
-              unelevated dense :to="`/vehiculos?page=1&perPage=9&type=${type}&brand=${brand.name}`"
+            <q-btn :class="{ 'text-secondary': $route.query.brand && $route.query.brand === brand.name }" unelevated
+              dense
+              :to="`/vehiculos?page=1&perPage=9&type=${type}&brand=${brand.name}&category=${route.query.category || ''}`"
               :label="brand.name"></q-btn>
           </li>
           <li v-if="pageBrand < totalPageBrand" class="q-mt-sm show-more cursor-pointer" @click="showMoreBrands">
@@ -48,10 +50,11 @@
         <ul>
           <li v-for="(category, idx) in categories" :key="idx">
             <q-btn :class="{ 'text-secondary': $route.query.category && $route.query.category === category.name }"
-              unelevated dense :to="`/vehiculos?page=1&perPage=9&type=${type}&category=${category.name}`"
+              unelevated dense :to="`/vehiculos?page=1&perPage=9&type=${type}&category=${category.name}&brand=${route.query.brand || ''}`"
               :label="category.name"></q-btn>
           </li>
-          <li v-if="pageCategory < totalPageCategory" class="q-mt-sm show-more cursor-pointer" @click="showMoreCategories">
+          <li v-if="pageCategory < totalPageCategory" class="q-mt-sm show-more cursor-pointer"
+            @click="showMoreCategories">
             Mostar mas <q-icon name="img:/images/dropdown.svg"></q-icon>
           </li>
         </ul>
@@ -59,31 +62,18 @@
 
       <div class="motowork-item-page__grid--filters__section">
         <h3>Precio</h3>
-        <q-range
-          v-model="priceRange"
-          :min="minPrice"
-          :max="maxPrice"
-          color="secondary"
-          label
-          style="width: 90%"
-          @change="doFilterByPrice"
-        />
+        <q-range v-model="priceRange" :min="minPrice" :max="maxPrice" color="secondary" label style="width: 90%"
+          @change="doFilterByPrice" />
       </div>
 
       <div class="motowork-item-page__grid--filters__section" v-if="type === 'vehicle'">
         <h3>Potencia / Cilindraje</h3>
-        <q-range
-          v-model="powerRange"
-          :min="75"
-          :max="1500"
-          style="width: 90%"
-          color="secondary"
-          label
-          @change="doFilterByPower"
-        />
+        <q-range v-model="powerRange" :min="75" :max="1500" style="width: 90%" color="secondary" label
+          @change="doFilterByPower" />
       </div>
 
-      <div class="motowork-item-page__grid--filters__section text-center" v-if="route.query.category || route.query.filter">
+      <div class="motowork-item-page__grid--filters__section text-center"
+        v-if="route.query.category || route.query.filter">
         <q-btn @click="resetFilter" color="secondary" unelevated square label="Reiniciar"></q-btn>
       </div>
     </aside>
