@@ -62,6 +62,7 @@
       &__product {
         flex: 1 1 calc(33.333% - 20px);
         max-width: calc(33.333% - 20px);
+        transition: all .1s ease-out;
 
         figure {
           aspect-ratio: 1/1;
@@ -216,6 +217,10 @@
         @media (max-width: 991px) {
           flex: 1 1 calc(50% - 20px);
           max-width: calc(50% - 20px);
+        }
+        
+        &:hover {
+          transform: scale(1.03);
         }
       }
     }
