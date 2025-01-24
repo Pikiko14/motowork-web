@@ -208,7 +208,7 @@ const openHamburguerMenu = async (e) => {
 const pushRoute = (name) => {
   showMenu.value = false
   router.push({
-    path: itemToShow.value === 'vehicle' ? 'vehiculos' : 'productos',
+    path: `/${itemToShow.value === 'vehicle' ? 'vehiculos' : 'productos'}`,
     query: {
       page: 1,
       perPage: 9,
@@ -222,7 +222,7 @@ const pushRoute = (name) => {
 
 const openAllProducts = () => {
   router.push({
-    path: itemToShow.value === 'vehicle' ? 'vehiculos' : 'productos',
+    path: `/${itemToShow.value === 'vehicle' ? 'vehiculos' : 'productos'}`,
     query: {
       page: 1,
       perPage: 9,

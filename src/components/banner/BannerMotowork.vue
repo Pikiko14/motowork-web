@@ -1,7 +1,8 @@
 <template>
   <section class="motowor-banner">
     <figure>
-      <img class="motowor-banner__image"  :src="imgBanner.path || defaultImg" :alt="banner.name" :title="banner.name">
+      <img class="motowor-banner__image"  v-if="!banner.path" :src="imgBanner.path || defaultImg" :alt="banner.name" :title="banner.name">
+      <img class="motowor-banner__image"  v-else :src="banner.path || defaultImg" :alt="bannerAlt" :title="bannerAlt">
       <figcaption :class="{ 'no-overflow': noOverflow }">
         <div class="container">
           <div class="row">
@@ -58,6 +59,10 @@ const props = defineProps({
   noOverflow: {
     type: Boolean,
     default: () => false
+  },
+  bannerAlt: {
+    type: String,
+    default: () => 'Un banner de motowork utilizado en las distintas landings'
   }
 })
 

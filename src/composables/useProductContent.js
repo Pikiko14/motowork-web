@@ -3,6 +3,7 @@ import { api } from 'src/boot/axios'
 
 export const useProductsContent = () => {
   // references
+  const product = ref({})
   const products = ref([])
   const path = 'products'
   const pageProduct = ref(1)
@@ -35,14 +36,27 @@ export const useProductsContent = () => {
     pageProduct.value = page
   }
 
+  const showProduct = async (id) => {
+    try {
+      const { data } = await api.get(`${path}/show/from-web/${id}`)
+      if (data.success && data.data) {
+        product.value = data.data.product
+      }
+    } catch (error) {
+      throw new Error(error.message)
+    }
+  }
+
   return {
     setPage,
+    product,
     products,
     getProducts,
     pageProduct,
+    showProduct,
+    totalProducts,
     totalPagesProduct,
     addOnePageProduct,
-    totalProducts,
     removeOnePageProduct
   }
 }
