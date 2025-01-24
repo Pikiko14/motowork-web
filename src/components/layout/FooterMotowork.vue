@@ -11,19 +11,19 @@
           <div class="rrss" aria-label="Redes sociales de Motowork">
             <a href="https://facebook.com/motowork" target="_blank" rel="noopener noreferrer"
               title="Visita nuestro Facebook de Motowork" aria-label="Ir a la página de Facebook de Motowork">
-              <img src="images/facebook.png" alt="Ícono de Facebook de Motowork" />
+              <img src="/images/facebook.png" alt="Ícono de Facebook de Motowork" />
             </a>
             <a href="https://instagram.com/motowork" target="_blank" rel="noopener noreferrer"
               title="Visita nuestro Instagram de Motowork" aria-label="Ir a la página de Instagram de Motowork">
-              <img src="images/instagrams.png" alt="Ícono de Instagram de Motowork" />
+              <img src="/images/instagrams.png" alt="Ícono de Instagram de Motowork" />
             </a>
             <a href="https://tiktok.com/motowork" target="_blank" rel="noopener noreferrer"
               title="Visita nuestro TikTok de Motowork" aria-label="Ir a la página de TikTok de Motowork">
-              <img src="images/tiktok.png" alt="Ícono de TikTok de Motowork" />
+              <img src="/images/tiktok.png" alt="Ícono de TikTok de Motowork" />
             </a>
             <a href="https://youtube.com/motowork" target="_blank" rel="noopener noreferrer"
               title="Visita nuestro canal de YouTube de Motowork" aria-label="Ir al canal de YouTube de Motowork">
-              <img src="images/youtube.png" alt="Ícono de YouTube de Motowork" />
+              <img src="/images/youtube.png" alt="Ícono de YouTube de Motowork" />
             </a>
           </div>
         </div>
@@ -90,19 +90,19 @@
     <div class="rrss-mobile" aria-label="Redes sociales de Motowork">
       <a href="https://facebook.com/motowork" target="_blank" rel="noopener noreferrer"
         title="Visita nuestro Facebook de Motowork" aria-label="Ir a la página de Facebook de Motowork">
-        <img src="images/facebook.png" alt="Ícono de Facebook de Motowork" />
+        <img src="/images/facebook.png" alt="Ícono de Facebook de Motowork" />
       </a>
       <a href="https://instagram.com/motowork" target="_blank" rel="noopener noreferrer"
         title="Visita nuestro Instagram de Motowork" aria-label="Ir a la página de Instagram de Motowork">
-        <img src="images/instagrams.png" alt="Ícono de Instagram de Motowork" />
+        <img src="/images/instagrams.png" alt="Ícono de Instagram de Motowork" />
       </a>
       <a href="https://tiktok.com/motowork" target="_blank" rel="noopener noreferrer"
         title="Visita nuestro TikTok de Motowork" aria-label="Ir a la página de TikTok de Motowork">
-        <img src="images/tiktok.png" alt="Ícono de TikTok de Motowork" />
+        <img src="/images/tiktok.png" alt="Ícono de TikTok de Motowork" />
       </a>
       <a href="https://youtube.com/motowork" target="_blank" rel="noopener noreferrer"
         title="Visita nuestro canal de YouTube de Motowork" aria-label="Ir al canal de YouTube de Motowork">
-        <img src="images/youtube.png" alt="Ícono de YouTube de Motowork" />
+        <img src="/images/youtube.png" alt="Ícono de YouTube de Motowork" />
       </a>
     </div>
     <!--End rrss mobile-->
