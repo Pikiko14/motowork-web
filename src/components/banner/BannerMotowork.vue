@@ -127,7 +127,7 @@ const imgBanner = computed(() => {
         text-transform: uppercase;
 
         @media(max-width: 767px) {
-          font-size: 36px;
+          font-size: 32px;
         }
       }
 
@@ -149,6 +149,7 @@ const imgBanner = computed(() => {
         @media(max-width: 767px) {
           max-width: 100%;
           margin-top: 16px;
+          font-size: 20px;
         }
       }
 
@@ -164,6 +165,14 @@ const imgBanner = computed(() => {
         text-transform: uppercase;
       }
     }
+
+    @media(max-width: 767px) {
+      height: 320px;
+    }
+  }
+
+  @media(max-width: 767px) {
+    height: 320px;
   }
 }
 

@@ -6,12 +6,11 @@
 
     <!--Banner-->
     <BannerMotowork
-      :title="''"
+      :title="`${product.type === 'vehicle' ? 'Yamaha' : ''} ${product.name}`"
       :banner="productBanner || {}"
       default-img=""
       :btnLabel="''"
-      noOverflow
-      :bannerComplement="''"
+      :bannerComplement="product.type === 'vehicle' ? 'Conquista cada camino con Yamaha: potencia, estilo y tecnología en una moto hecha para ti. Siente la libertad sobre dos ruedas con la fiabilidad y el rendimiento que solo Yamaha te puede ofrecer.' : product.description"
       :bannerAlt="`Banner de la pagina de la motocicleta ${product.name}, utilizado por Motowork en su Pagina Web`"
     />
     <!--End banner-->

@@ -8,9 +8,6 @@ export const getResolutionWidth = () => {
 export const formatPrice = (price) => {
   // Convertir el valor en un número si es necesario
   const number = Number(price)
-  if (isNaN(number)) {
-    throw new Error('El valor proporcionado no es un número válido.')
-  }
 
   // Formatear el número con separadores de miles (')
   const formatter = new Intl.NumberFormat('es-CO', {

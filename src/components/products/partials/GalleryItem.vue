@@ -5,8 +5,9 @@
         :src="imageInView || firstProductImage"
         zoom-type="drag"
         trigger="click"
-        :alt="`Imagen en la galería para el producto ${product.name}, utilizada por Motowork en su Pagina Web`"
+        :alt="`Imagen principal del producto ${product.name}, utilizada por Motowork en su página web`"
         :zoom-scale="2"
+        loading="lazy"
       />
     </div>
 
@@ -14,10 +15,14 @@
       <q-carousel ref="galleryCarousel" infinite v-model="slide" transition-prev="slide-right" transition-next="slide-left" swipeable animated
         control-color="secondary" padding arrows>
         <q-carousel-slide class="column no-wrap" v-for="(imgArr, idx) in galleryImages" :key="idx" :name="idx">
-          <div class="gallery-grid  no-wrap">
+          <div class="gallery-grid no-wrap">
             <figure v-for="(image, idxImg) in imgArr" :key="idxImg" @click="imageInView = image.path">
-              <img :src="image.path" :alt="`Imagen ${idx + 1} del producto ${product.name}`"
-                :title="`Imagen ${idx + 1} del producto ${product.name}`" />
+              <img
+                :src="image.path"
+                :alt="`Imagen ${idx + 1} del producto ${product.name}`"
+                :title="`Imagen ${idx + 1} del producto ${product.name}`"
+                loading="lazy"
+              />
             </figure>
           </div>
         </q-carousel-slide>
@@ -35,22 +40,20 @@ import { defineProps, ref, computed } from 'vue'
 const props = defineProps({
   product: {
     type: Object,
-    default: () => {
-      return {}
-    }
+    default: () => ({})
   }
 })
 
 // computed
 const firstProductImage = computed(() => {
-  if (props.product && props.product.images) {
+  if (props.product?.images) {
     return props.product.images[0]?.path || ''
   }
   return ''
 })
 
 const galleryImages = computed(() => {
-  if (props.product && props.product.images) {
+  if (props.product?.images) {
     return chunkArray(props.product.images, 3)
   }
   return chunkArray([], 3)
@@ -83,7 +86,7 @@ const chunkArray = (arr, tamano) => {
     justify-content: center;
 
     .vz-zoomimg-container {
-      aspect-ratio: 1/1;
+      aspect-ratio: 1;
       max-width: 600px;
       max-height: 600px;
     }
@@ -96,7 +99,7 @@ const chunkArray = (arr, tamano) => {
       background: #f5f5f5;
 
       figure {
-        aspect-ratio: 1/1;
+        aspect-ratio: 1;
         max-width: 33.33%;
         max-height: 192px;
         cursor: pointer;
@@ -105,12 +108,18 @@ const chunkArray = (arr, tamano) => {
           width: 100%;
           height: 100%;
           border-radius: 4px;
-
           transition: transform 0.3s ease;
 
           &:hover {
             transform: scale(1.05);
           }
+        }
+
+        figcaption {
+          text-align: center;
+          font-size: 12px;
+          color: #777;
+          margin-top: 8px;
         }
       }
     }
