@@ -17,7 +17,9 @@
     <!--End banner-->
 
     <!--Item data-->
-
+    <section class="container-motowork bg-white">
+      <ShowProductData :product="product" />
+    </section>
     <!--End items data-->
   </q-page>
 </template>
@@ -31,6 +33,7 @@ import { notification } from 'src/boot/notification'
 import BreadCrumb from 'src/components/layout/BreadCrumb.vue'
 import BannerMotowork from 'src/components/banner/BannerMotowork.vue'
 import { useProductsContent } from 'src/composables/useProductContent'
+import ShowProductData from 'src/components/products/partials/ShowProductData.vue'
 
 // references
 const route = useRoute()
