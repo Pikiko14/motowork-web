@@ -29,6 +29,20 @@
 
     <!--filter section-->
     <aside class="motowork-item-page__grid--filters" v-if="showFilter">
+      <div class="motowork-item-page__grid--filters__section" v-if="type !== 'vehicle'">
+        <h3>Marcas</h3>
+        <ul>
+          <li v-for="(brand, idx) in brands" :key="idx">
+            <q-btn :class="{ 'text-secondary': $route.query.brand && $route.query.brand === brand.name }"
+              unelevated dense :to="`/vehiculos?page=1&perPage=9&type=${type}&brand=${brand.name}`"
+              :label="brand.name"></q-btn>
+          </li>
+          <li v-if="pageBrand < totalPageBrand" class="q-mt-sm show-more cursor-pointer" @click="showMoreBrands">
+            Mostar mas <q-icon name="img:/images/dropdown.svg"></q-icon>
+          </li>
+        </ul>
+      </div>
+
       <div class="motowork-item-page__grid--filters__section">
         <h3>Categoría</h3>
         <ul>
@@ -68,6 +82,10 @@
           @change="doFilterByPower"
         />
       </div>
+
+      <div class="motowork-item-page__grid--filters__section text-center" v-if="route.query.category || route.query.filter">
+        <q-btn @click="resetFilter" color="secondary" unelevated square label="Reiniciar"></q-btn>
+      </div>
     </aside>
     <!--end filter section-->
   </section>
@@ -76,19 +94,21 @@
 <script setup>
 // imports, ref
 import { formatPrice } from 'src/utils/utils'
+import { useRoute, useRouter } from 'vue-router'
 import { defineProps, defineEmits, ref, onBeforeMount } from 'vue'
-import { useRoute } from 'vue-router'
 
 // emit
 const emit = defineEmits([
   'do-filter-by-price',
   'handle-load-categories',
-  'do-filter-by-power'
+  'do-filter-by-power',
+  'handle-load-brands'
 ])
 
 // reference
-const route = useRoute()
 const minPrice = ref(1)
+const route = useRoute()
+const router = useRouter()
 const maxPrice = ref(100000000)
 const priceRange = ref({
   min: 10000,
@@ -125,6 +145,18 @@ const props = defineProps({
   totalPageCategory: {
     type: Number,
     defualt: 1
+  },
+  brands: {
+    type: Array,
+    default: () => []
+  },
+  pageBrand: {
+    type: Number,
+    default: 1
+  },
+  totalPageBrand: {
+    type: Number,
+    defualt: 1
   }
 })
 
@@ -154,6 +186,23 @@ const doFilterByPrice = (e) => {
 
 const doFilterByPower = (e) => {
   emit('do-filter-by-power', e)
+}
+
+const resetFilter = () => {
+  router.push({
+    path: route.path,
+    query: {
+      page: 1,
+      perPage: 9,
+      sortBy: 'createdAt',
+      order: '-1',
+      type: route.query.type
+    }
+  })
+}
+
+const showMoreBrands = () => {
+  emit('handle-load-brands')
 }
 
 // hook

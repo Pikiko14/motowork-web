@@ -12,11 +12,11 @@
     <!--end pagination data-->
 
     <!--grid items-->
-    <GridItems :type="query.type" :products="products" :showFilter="showFilter"
+    <GridItems :type="query.type" :brands="brandsList.length > 0 ? brandsList : brands" :products="products" :showFilter="showFilter"
       :categories="categoriesList.length > 0 ? categoriesList : categories" :pageCategory="page"
-      :totalPageCategory="totalPages" @handle-load-categories="loadMoreCategories"
-      @do-filter-by-price="filterByPriceRange"
-      @do-filter-by-power="filterByPowerRange" />
+      :totalPageCategory="totalPages" :total-page-brand="totalPagesBrand" :page-brand="pageBrands"
+      @handle-load-categories="loadMoreCategories" @do-filter-by-price="filterByPriceRange"
+      @do-filter-by-power="filterByPowerRange" @handle-load-brands="loadMoreBrands" />
     <!--end grid items-->
 
     <!--Paginator-->
@@ -35,6 +35,7 @@ import { useRoute, useRouter } from 'vue-router'
 import GridItems from '../partials/GridItems.vue'
 import HeaderItems from '../partials/HeaderItems.vue'
 import { useStoreContent } from 'src/stores/storeContent-store'
+import { useBrandsContent } from 'src/composables/useBrandsContent'
 import { useProductsContent } from 'src/composables/useProductContent'
 import { useCategoriesContent } from 'src/composables/useCategoriesContent'
 
@@ -100,7 +101,8 @@ const {
   totalPages
 } = useCategoriesContent()
 const store = useStoreContent()
-const { categoriesList } = store
+const { categoriesList, brandsList } = store
+const { getBrandsList, brands, pageBrands, totalPagesBrand, addOnePageBrands } = useBrandsContent()
 
 // methods
 const openFilter = () => {
@@ -122,6 +124,11 @@ const loadCategories = (append = false) => {
 const loadMoreCategories = () => {
   addOnePage()
   loadCategories(true)
+}
+
+const loadMoreBrands = () => {
+  addOnePageBrands()
+  loadBrands(true)
 }
 
 const handleSearch = (e) => {
@@ -252,11 +259,20 @@ const filterByPowerRange = (e) => {
   })
 }
 
+const loadBrands = (append = false) => {
+  const queryString = `?page=${pageBrands.value}&perPage=1&type=${query.type}`
+  getBrandsList(queryString, append)
+}
+
 // hooks
 const queryString = getQueryString(query)
 getProducts(queryString)
 if (categoriesList && categoriesList.length === 0) {
   loadCategories()
+}
+
+if (query.type === 'product' && brandsList && brandsList.length === 0) {
+  loadBrands()
 }
 
 onBeforeMount(() => {
