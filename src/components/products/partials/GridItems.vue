@@ -15,7 +15,7 @@
 
         <div class="motowork-item-page__grid--items__product--content">
           <h2>{{ product.name }}</h2>
-          <h3>ref: {{ product.name }}</h3>
+          <h3>ref: {{ product.model }}</h3>
           <div class="motowork-item-page__grid--items__product--content__price">
             <span class="motowork-item-page__grid--items__product--content__price--label">Desde</span>
             <span class="motowork-item-page__grid--items__product--content__price--amount">
