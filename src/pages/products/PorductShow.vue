@@ -5,14 +5,12 @@
     <!--End breadcrumb-->
 
     <!--Banner-->
-    <BannerMotowork
-      :title="`${product.type === 'vehicle' ? 'Yamaha' : ''} ${product.name}`"
+    <BannerMotowork :title="`${product.type === 'vehicle' ? 'Yamaha' : ''} ${product.name}`"
       :banner="productBanner || {}"
       :default-img="product.type === 'vehicle' ? 'https://res.cloudinary.com/dg14xloef/image/upload/v1737398094/banners/boxfnfyssqzw809kxhsc.webp' : ''"
       :btnLabel="''"
       :bannerComplement="product.type === 'vehicle' ? 'Conquista cada camino con Yamaha: potencia, estilo y tecnología en una moto hecha para ti. Siente la libertad sobre dos ruedas con la fiabilidad y el rendimiento que solo Yamaha te puede ofrecer.' : product.description"
-      :bannerAlt="`Banner de la pagina de la motocicleta ${product.name}, utilizado por Motowork en su Pagina Web`"
-    />
+      :bannerAlt="`Banner de la pagina de la motocicleta ${product.name}, utilizado por Motowork en su Pagina Web`" />
     <!--End banner-->
 
     <!--Item data-->
@@ -23,7 +21,7 @@
 
     <!--Similar products-->
     <section class="container-motowork bg-white">
-      <SimilarProducts />
+      <SimilarProducts :similarsProducts="similarProducts" />
     </section>
     <!--End similar products-->
   </q-page>
@@ -45,7 +43,7 @@ import ShowProductData from 'src/components/products/partials/ShowProductData.vu
 const route = useRoute()
 const router = useRouter()
 const q = useQuasar()
-const { showProduct, product } = useProductsContent()
+const { showProduct, product, similarProducts } = useProductsContent()
 
 // computed
 const productBanner = computed(() => {

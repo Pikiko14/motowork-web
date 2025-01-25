@@ -8,6 +8,7 @@ export const useProductsContent = () => {
   const path = 'products'
   const pageProduct = ref(1)
   const totalProducts = ref(1)
+  const similarProducts = ref([])
   const totalPagesProduct = ref(0)
 
   // methods
@@ -41,6 +42,7 @@ export const useProductsContent = () => {
       const { data } = await api.get(`${path}/show/from-web/${id}`)
       if (data.success && data.data) {
         product.value = data.data.product
+        similarProducts.value = data.data.similarProduct
       }
     } catch (error) {
       throw new Error(error.message)
@@ -55,6 +57,7 @@ export const useProductsContent = () => {
     pageProduct,
     showProduct,
     totalProducts,
+    similarProducts,
     totalPagesProduct,
     addOnePageProduct,
     removeOnePageProduct
