@@ -7,9 +7,10 @@
         <figure>
           <img :src="getBannerUrl(idx)" :alt="`Imagen de la motocicleta ${product.name}`" title="product.name" />
           <div class="overflow">
-            <q-btn :to="`/vehiculos/${product.name}?reference=${product._id}`" v-if="route.query.type !== 'product'" square outline color="white"
-              label="Agendar test drive"></q-btn>
-            <q-btn :to="`/productos/${product.name}?reference=${product._id}`" v-else square outline color="white" label="Agendar al carrito"></q-btn>
+            <q-btn :to="`/vehiculos/${product.name}?reference=${product._id}`" v-if="route.query.type !== 'product'"
+              square outline color="white" label="Agendar test drive"></q-btn>
+            <q-btn :to="`/productos/${product.name}?reference=${product._id}`" v-else square outline color="white"
+              label="Agregar al carrito"></q-btn>
           </div>
         </figure>
 
@@ -50,7 +51,8 @@
         <ul>
           <li v-for="(category, idx) in categories" :key="idx">
             <q-btn :class="{ 'text-secondary': $route.query.category && $route.query.category === category.name }"
-              unelevated dense :to="`/vehiculos?page=1&perPage=9&type=${type}&category=${category.name}&brand=${route.query.brand || ''}`"
+              unelevated dense
+              :to="`/vehiculos?page=1&perPage=9&type=${type}&category=${category.name}&brand=${route.query.brand || ''}`"
               :label="category.name"></q-btn>
           </li>
           <li v-if="pageCategory < totalPageCategory" class="q-mt-sm show-more cursor-pointer"
