@@ -6,8 +6,7 @@
           alt="Logo Yamaha utilizado por Motowork en su página web" loading="lazy" role="img"
           aria-label="Logo de Yamaha" />
       </figure>
-
-      <h1>{{ product.name }} {{ product.model }}</h1>
+      <h2>{{ product.name }} {{ product.model }}</h2>
     </header>
 
     <section class="motowork-item-data__price">
@@ -15,10 +14,11 @@
       <span class="motowork-item-data__price--amount">{{ formatPrice(product.discount || product.price) }}</span>
     </section>
 
-    <section class="motowork-item-data__rating" v-if="product.type === 'product'">
+    <section class="motowork-item-data__rating" v-if="product.type === 'product'"
+      aria-label="Calificación del producto">
       <span>1/5</span>
       <q-rating :no-reset="true" v-model="productRating" size="24pt" color="grey-5" icon="star_border"
-        icon-selected="star" disable />
+        icon-selected="star" disable aria-hidden="true" />
     </section>
 
     <p class="motowork-item-data__description" v-if="product.description">
@@ -26,36 +26,27 @@
     </p>
 
     <section class="motowork-item-data__variants" v-if="product.type === 'product'">
-      <article
-        class="motowork-item-data__variants--item"
-        v-for="(variant, idx) in product.variants"
-        :key="idx"
-        @click="selectedVariant = variant"
-        :class="{ 'active': selectedVariant._id === variant._id }"
-      >
-        <span>
-          {{ variant.attribute }}
-        </span>
-        <p>
-          {{ variant.description || 'Sin descripción.' }}
-        </p>
+      <article class="motowork-item-data__variants--item" v-for="(variant, idx) in product.variants" :key="idx"
+        @click="selectedVariant = variant" :class="{ active: selectedVariant._id === variant._id }" role="button"
+        :aria-label="'Seleccionar variante: ' + variant.attribute" tabindex="0">
+        <span>{{ variant.attribute }}</span>
+        <p>{{ variant.description || 'Sin descripción.' }}</p>
       </article>
     </section>
 
     <section class="motowork-item-data__colors" v-if="product.type === 'vehicle'">
       <div class="motowork-item-data__colors--color" v-for="(color, idx) in product.details.colors" :key="idx"
-        :style="`background-color: ${color.hex}`" @click="setImageFromColor(color)" role="presentation"
-        aria-label="Color disponible" tabindex="0">
-      </div>
+        :style="`background-color: ${color.hex}`" @click="setImageFromColor(color)" role="button"
+        :aria-label="'Seleccionar color: ' + color.name" tabindex="0"></div>
     </section>
 
     <section class="motowork-item-data__action">
       <q-btn v-if="product.type === 'vehicle'" square unelevated color="secondary" label="Agendar test drive"
-        aria-label="Agendar test drive"></q-btn>
+        aria-label="Agendar test drive para el vehículo"></q-btn>
 
       <div class="motowork-item-data__action--product" v-if="product.type === 'product'">
-        <q-btn :disable="product.variants.length > 0 && !selectedVariant._id" square unelevated color="secondary" label="Agregar al carrito"
-        aria-label="Agregar al carrito"></q-btn>
+        <q-btn :disable="product.variants.length > 0 && !selectedVariant._id" square unelevated color="secondary"
+          label="Agregar al carrito" aria-label="Agregar este producto al carrito"></q-btn>
 
         <div class="motowork-item-data__action--product__quantity">
           <q-btn @click="removeQuantity" icon="arrow_back_ios" unelevated dense></q-btn>
@@ -66,22 +57,22 @@
     </section>
 
     <section class="motowork-item-data__tabs">
-      <span v-if="product.type === 'vehicle'" :class="{ 'active': activeTab === 1 }" @click="activateTab(1)" role="tab"
+      <span v-if="product.type === 'vehicle'" :class="{ active: activeTab === 1 }" @click="activateTab(1)" role="tab"
         :aria-selected="activeTab === 1 ? 'true' : 'false'" :aria-controls="'tab1'">
         Detalles
       </span>
-      <span :class="{ 'active': activeTab === 2 }" @click="activateTab(2)" role="tab"
+      <span :class="{ active: activeTab === 2 }" @click="activateTab(2)" role="tab"
         :aria-selected="activeTab === 2 ? 'true' : 'false'" :aria-controls="'tab2'">
         Información adicional
       </span>
-      <span v-if="product.type !== 'vehicle'" :class="{ 'active': activeTab === 3 }" @click="activateTab(3)" role="tab"
-        :aria-selected="activeTab === 3 ? 'true' : 'false'" :aria-controls="'tab2'">
+      <span v-if="product.type !== 'vehicle'" :class="{ active: activeTab === 3 }" @click="activateTab(3)" role="tab"
+        :aria-selected="activeTab === 3 ? 'true' : 'false'" :aria-controls="'tab3'">
         Calificaciones
       </span>
     </section>
 
     <section class="motowork-item-data__tabs-content">
-      <q-scroll-area style="width: 100%; height: 190px; padding-right: 20px">
+      <q-scroll-area style="width: 100%; height: 200px; padding-right: 20px">
         <div id="tab1" class="motowork-item-data__tabs-content--item" v-show="activeTab === 1"
           :class="{ 'slide-in': activeTab === 1, 'slide-out': activeTab !== 1 }" role="tabpanel" aria-labelledby="tab1">
           <!--detail information-->
@@ -109,9 +100,11 @@
           </div>
           <!--End detail information-->
         </div>
+
         <div id="tab2" class="motowork-item-data__tabs-content--item" v-show="activeTab === 2"
           :class="{ 'slide-in': activeTab === 2, 'slide-out': activeTab !== 2 }" role="tabpanel" aria-labelledby="tab2">
-          <div class="motowork-item-data__tabs-content--item__container-tab" v-if="product.type === 'vehicle'">
+          <div class="motowork-item-data__tabs-content--item__container-tab"
+            v-if="product.type === 'vehicle' || product.type === 'product'">
             <!--Vehicles aditional information-->
             <div class="full-width" v-for="(content, idx) in product.additionalInfo" :key="idx">
               <div class="motowork-item-data__tabs-content--item__container-tab--content"
@@ -123,15 +116,65 @@
             <!--End vehicles aditional information-->
           </div>
         </div>
+
+        <div id="tab3" class="motowork-item-data__tabs-content--item" v-show="activeTab === 3"
+          :class="{ 'slide-in': activeTab === 3, 'slide-out': activeTab !== 3 }" role="tabpanel" aria-labelledby="tab3">
+          <div class="motowork-item-data__tabs-content--item__container-tab" v-if="product.type === 'product'">
+            <!--Vehicles aditional information-->
+            <div class="motowork-review">
+              <div class="motowork-review__list"></div>
+              <div class="motowork-review__form">
+                <q-btn label="Agregar calificación" @click="modalReview = true" unelevated color="secondary"
+                  square></q-btn>
+              </div>
+            </div>
+            <!--End vehicles aditional information-->
+          </div>
+        </div>
       </q-scroll-area>
     </section>
+
+    <!--Modal review-->
+    <q-dialog v-model="modalReview">
+      <q-card>
+        <q-card-section>
+          <h2 class="modal-title">Agregar calificación</h2>
+          <q-btn color="secondary" v-close-popup class="absolute-top-right" style="right: 10px; top: 20px" rounded flat
+            dense icon="close"></q-btn>
+        </q-card-section>
+        <q-card-section>
+          <q-form class="row">
+            <div class="col-12 col-md-6" :class="{ 'q-pr-md': $q.screen.gt.sm }">
+              <q-input :rules="[(val) => val && val.length > 0 || 'Ingresa tu nombre']" outlined v-model="review.name"
+                label="Ingresa tu nombre"></q-input>
+            </div>
+            <div class="col-12 col-md-6" :class="{ 'q-pl-md': $q.screen.gt.sm }">
+              <q-rating :no-reset="true" v-model="review.quantity" size="3rem" color="grey-5" icon="star_border"
+                icon-selected="star" aria-hidden="true" />
+            </div>
+            <div class="col-12 q-mt-md">
+              <q-input type="textarea" label="Comentario" v-model="review.description" square outlined></q-input>
+            </div>
+          </q-form>
+        </q-card-section>
+        <q-card-section class="row">
+          <div class="col-12 text-center">
+            <q-btn @click="sendReview" :disable="!review.name || !review.quantity" type="submit"
+              label="Calificar producto" unelevated color="secondary" square></q-btn>
+          </div>
+        </q-card-section>
+      </q-card>
+    </q-dialog>
+    <!--End modal review-->
   </article>
 </template>
 
 <script setup>
 // Importar
 import { formatPrice } from 'src/utils/utils'
-import { defineProps, ref, defineEmits } from 'vue'
+import { defineProps, ref, defineEmits, onBeforeMount } from 'vue'
+import { useProductsContent } from 'src/composables/useProductContent'
+import { notification } from 'src/boot/notification'
 
 // Props
 const props = defineProps({
@@ -145,10 +188,18 @@ const props = defineProps({
 const emit = defineEmits(['set-image-color', 'add-review'])
 
 // references
+const review = ref({
+  name: '',
+  description: '',
+  quantity: 0
+})
 const quantity = ref(1)
+const activeTab = ref(1)
+const loading = ref(false)
 const productRating = ref(2)
+const modalReview = ref(false)
 const selectedVariant = ref({})
-const activeTab = ref(props.product.type === 'vehicle' ? 1 : 2)
+const { addReview } = useProductsContent()
 
 // methods
 const activateTab = (index) => {
@@ -171,6 +222,31 @@ const removeQuantity = () => {
     quantity.value--
   }
 }
+
+const sendReview = async () => {
+  try {
+    const response = await addReview(props.product._id, review.value)
+    if (response.success) {
+      notification('pos', response.message)
+      modalReview.value = false
+      review.value = {
+        name: '',
+        description: '',
+        quantity: 0
+      }
+    }
+  } catch (error) {
+  } finally {
+    loading.value = false
+  }
+}
+
+// hook
+onBeforeMount(() => {
+  if (props.product.type === 'product') {
+    activeTab.value = 2
+  }
+})
 </script>
 
 <style scoped lang="scss">
@@ -201,7 +277,7 @@ const removeQuantity = () => {
       }
     }
 
-    h1 {
+    h2 {
       color: #000;
       font-family: Play;
       font-size: 32px;
@@ -314,6 +390,12 @@ const removeQuantity = () => {
       display: flex;
       gap: 16px;
 
+      .q-btn {
+        @media(max-width: 500px) {
+          width: 200px;
+        }
+      }
+
       &__quantity {
         background: #F5F5F5;
         width: 163px;
@@ -329,7 +411,8 @@ const removeQuantity = () => {
           font-size: 14pt;
           font-style: normal;
           font-weight: 700;
-          line-height: 125%; /* 20px */
+          line-height: 125%;
+          /* 20px */
           text-transform: uppercase;
         }
 
@@ -455,7 +538,8 @@ const removeQuantity = () => {
         font-size: 14pt;
         font-style: normal;
         font-weight: 500;
-        line-height: 125%; /* 20px */
+        line-height: 125%;
+        /* 20px */
       }
 
       p {
@@ -466,7 +550,8 @@ const removeQuantity = () => {
         font-size: 12pt;
         font-style: normal;
         font-weight: 400;
-        line-height: 125%; /* 15px */
+        line-height: 125%;
+        /* 15px */
       }
 
       &:hover {
@@ -494,8 +579,34 @@ const removeQuantity = () => {
   }
 }
 
+.motowork-review {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  &__form {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.modal-title {
+  color: #000;
+  /* Desktop/Headings/H3 */
+  font-family: Play;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 125%;
+  /* 40px */
+  text-transform: uppercase;
+
+  @media(max-width: 767px) {
+    font-size: 24px;
+  }
+}
+
 .active {
   color: $secondary !important;
 }
-
 </style>

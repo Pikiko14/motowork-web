@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { boot } from 'quasar/wrappers'
-/// import { notification } from './notification'
+import { notification } from './notification'
 
 // Be careful when using SSR for cross-request state pollution
 // due to creating a Singleton instance here;
@@ -21,9 +21,9 @@ export default boot(({ app }) => {
     if (error.response) {
       if (error.response.status === 422) {
         if (error) {
-          // const { data } = error.response.data
-          // const { msg } = data.shift()
-          // notification('red', msg, 'red')
+          const { data } = error.response.data
+          const { msg } = data.shift()
+          notification('red', msg, 'red')
         }
       } else {
         // error.response.data.message

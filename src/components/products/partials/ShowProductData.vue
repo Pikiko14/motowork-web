@@ -5,7 +5,7 @@
     </div>
 
     <div class="col-12 col-md-6">
-      <DataItem @set-image-color="setImageColor" :product="product" />
+      <DataItem v-if="product._id" @set-image-color="setImageColor" :product="product" />
     </div>
   </div>
 </template>

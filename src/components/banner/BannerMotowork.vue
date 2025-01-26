@@ -10,7 +10,7 @@
               <h1>{{ title }}</h1>
            </div>
             <div class="col-12" v-if="bannerComplement">
-              <p>
+              <p :class="{ 'ellipsis-3-lines': $q.screen.lt.md, 'ellipsis-5-lines': $q.screen.gt.sm }">
                 {{ bannerComplement }}
               </p>
             </div>

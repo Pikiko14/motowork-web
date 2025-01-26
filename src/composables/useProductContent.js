@@ -49,10 +49,30 @@ export const useProductsContent = () => {
     }
   }
 
+  const addReview = async (id, review) => {
+    try {
+      const { data } = await api.post(
+        `${path}/${id}/review`,
+        review,
+        {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+      )
+      if (data.success && data.data) {
+        return data
+      }
+    } catch (error) {
+      throw new Error(error.message)
+    }
+  }
+
   return {
     setPage,
     product,
     products,
+    addReview,
     getProducts,
     pageProduct,
     showProduct,
