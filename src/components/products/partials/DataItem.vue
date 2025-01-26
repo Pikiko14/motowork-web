@@ -21,7 +21,7 @@
 
     <section class="motowork-item-data__colors" v-if="product.type === 'vehicle'">
       <div class="motowork-item-data__colors--color" v-for="(color, idx) in product.details.colors" :key="idx"
-        :style="`background-color: ${color.hex}`" role="presentation" aria-label="Color disponible" tabindex="0">
+        :style="`background-color: ${color.hex}`" @click="setImageFromColor(color)" role="presentation" aria-label="Color disponible" tabindex="0">
       </div>
     </section>
 
@@ -90,8 +90,8 @@
 
 <script setup>
 // Importar
-import { defineProps, ref } from 'vue'
 import { formatPrice } from 'src/utils/utils'
+import { defineProps, ref, defineEmits } from 'vue'
 
 // Props
 defineProps({
@@ -101,12 +101,22 @@ defineProps({
   }
 })
 
+// emits
+const emit = defineEmits(['set-image-color'])
+
 // references
 const activeTab = ref(1)
 
 // methods
 const activateTab = (index) => {
   activeTab.value = index
+}
+
+const setImageFromColor = (color) => {
+  if (!color.image) {
+    return false
+  }
+  emit('set-image-color', color.image)
 }
 </script>
 

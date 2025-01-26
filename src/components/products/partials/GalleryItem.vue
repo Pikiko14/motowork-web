@@ -34,15 +34,27 @@
 <script setup>
 // imports
 import { ZoomImg } from 'vue3-zoomer'
-import { defineProps, ref, computed } from 'vue'
+import { defineProps, ref, computed, watch } from 'vue'
 
 // props
 const props = defineProps({
   product: {
     type: Object,
     default: () => ({})
+  },
+  colorImage: {
+    type: String,
+    default: () => ''
   }
 })
+
+// Watchers
+watch(
+  () => props.colorImage,
+  (newVal) => {
+    imageInView.value = newVal
+  }
+)
 
 // computed
 const firstProductImage = computed(() => {
