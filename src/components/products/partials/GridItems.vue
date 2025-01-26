@@ -7,9 +7,9 @@
         <figure>
           <img :src="getBannerUrl(idx)" :alt="`Imagen de la motocicleta ${product.name}`" title="product.name" />
           <div class="overflow">
-            <q-btn :to="`/vehiculos/${product.name}?reference=${product._id}`" v-if="route.query.type !== 'product'"
+            <q-btn :to="`/vehiculos/${urlString(product.name)}?reference=${product._id}`" v-if="route.query.type !== 'product'"
               square outline color="white" label="Agendar test drive"></q-btn>
-            <q-btn :to="`/productos/${product.name}?reference=${product._id}`" v-else square outline color="white"
+            <q-btn :to="`/productos/${urlString(product.name)}?reference=${product._id}`" v-else square outline color="white"
               label="Agregar al carrito"></q-btn>
           </div>
         </figure>
@@ -195,6 +195,17 @@ const resetFilter = () => {
 
 const showMoreBrands = () => {
   emit('handle-load-brands')
+}
+
+const urlString = (value) => {
+  if (!value) return ''
+  return value
+    .toString()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-zA-Z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .toLowerCase()
 }
 
 // hook

@@ -41,49 +41,49 @@
     </section>
 
     <section class="motowork-item-data__tabs-content">
-      <div id="tab1" class="motowork-item-data__tabs-content--item" v-show="activeTab === 1"
-        :class="{ 'slide-in': activeTab === 1, 'slide-out': activeTab !== 1 }" role="tabpanel" aria-labelledby="tab1">
-        <!--detail information-->
-        <div class="motowork-item-data__tabs-content--item__container-tab" v-if="product.type === 'vehicle'">
-          <div class="motowork-item-data__tabs-content--item__container-tab--content">
-            <span class="label">Potencia / Cilindraje</span>
-            <span class="value">{{ product.details.power || '' }} CC</span>
-          </div>
-          <div class="motowork-item-data__tabs-content--item__container-tab--content">
-            <span class="label">Peso (Con aceite y gasolina)</span>
-            <span class="value">{{ product.details.weight || '' }}</span>
-          </div>
-          <div class="motowork-item-data__tabs-content--item__container-tab--content">
-            <span class="label">Potencia maxima</span>
-            <span class="value">{{ product.details.max_power || '' }}</span>
-          </div>
-          <div class="motowork-item-data__tabs-content--item__container-tab--content">
-            <span class="label">Torque maximo</span>
-            <span class="value">{{ product.details.torque || '' }}</span>
-          </div>
-          <div class="motowork-item-data__tabs-content--item__container-tab--content">
-            <span class="label">Tipo de motor</span>
-            <span class="value">{{ product.details.type_engine || '' }}</span>
-          </div>
-        </div>
-        <!--End detail information-->
-      </div>
-      <div id="tab2" class="motowork-item-data__tabs-content--item" v-show="activeTab === 2"
-        :class="{ 'slide-in': activeTab === 2, 'slide-out': activeTab !== 2 }" role="tabpanel" aria-labelledby="tab2">
-        <div class="motowork-item-data__tabs-content--item__container-tab" v-if="product.type === 'vehicle'">
-          <!--Vehicles aditional information-->
-          <q-scroll-area style="width: 100%; height: 160px; padding-right: 20px">
-            <div class="full-width" v-for="(content, idx) in product.additionalInfo" :key="idx">
-              <div class="motowork-item-data__tabs-content--item__container-tab--content"
-                v-for="(subsection, idxSubsection) in content.subsections" :key="idxSubsection">
-                <span class="label">{{ subsection.name || ''}}</span>
-                <span class="value">{{ subsection.value || '' }}</span>
-              </div>
+      <q-scroll-area style="width: 100%; height: 190px; padding-right: 20px">
+        <div id="tab1" class="motowork-item-data__tabs-content--item" v-show="activeTab === 1"
+          :class="{ 'slide-in': activeTab === 1, 'slide-out': activeTab !== 1 }" role="tabpanel" aria-labelledby="tab1">
+          <!--detail information-->
+          <div class="motowork-item-data__tabs-content--item__container-tab" v-if="product.type === 'vehicle'">
+            <div class="motowork-item-data__tabs-content--item__container-tab--content">
+              <span class="label">Potencia / Cilindraje</span>
+              <span class="value">{{ product.details.power || '' }} CC</span>
             </div>
-          </q-scroll-area>
-          <!--End vehicles aditional information-->
+            <div class="motowork-item-data__tabs-content--item__container-tab--content">
+              <span class="label">Peso (Con aceite y gasolina)</span>
+              <span class="value">{{ product.details.weight || '' }}</span>
+            </div>
+            <div class="motowork-item-data__tabs-content--item__container-tab--content">
+              <span class="label">Potencia maxima</span>
+              <span class="value">{{ product.details.max_power || '' }}</span>
+            </div>
+            <div class="motowork-item-data__tabs-content--item__container-tab--content">
+              <span class="label">Torque maximo</span>
+              <span class="value">{{ product.details.torque || '' }}</span>
+            </div>
+            <div class="motowork-item-data__tabs-content--item__container-tab--content">
+              <span class="label">Tipo de motor</span>
+              <span class="value">{{ product.details.type_engine || '' }}</span>
+            </div>
+          </div>
+          <!--End detail information-->
         </div>
-      </div>
+        <div id="tab2" class="motowork-item-data__tabs-content--item" v-show="activeTab === 2"
+          :class="{ 'slide-in': activeTab === 2, 'slide-out': activeTab !== 2 }" role="tabpanel" aria-labelledby="tab2">
+          <div class="motowork-item-data__tabs-content--item__container-tab" v-if="product.type === 'vehicle'">
+            <!--Vehicles aditional information-->
+              <div class="full-width" v-for="(content, idx) in product.additionalInfo" :key="idx">
+                <div class="motowork-item-data__tabs-content--item__container-tab--content"
+                  v-for="(subsection, idxSubsection) in content.subsections" :key="idxSubsection">
+                  <span class="label">{{ subsection.name || ''}}</span>
+                  <span class="value">{{ subsection.value || '' }}</span>
+                </div>
+              </div>
+            <!--End vehicles aditional information-->
+          </div>
+        </div>
+    </q-scroll-area>
     </section>
   </article>
 </template>

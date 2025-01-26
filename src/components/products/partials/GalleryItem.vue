@@ -91,6 +91,8 @@ const chunkArray = (arr, tamano) => {
   display: flex;
   gap: 32px;
   flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
 
   &__main-image {
     display: flex;
