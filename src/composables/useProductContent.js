@@ -68,6 +68,10 @@ export const useProductsContent = () => {
     }
   }
 
+  const pushProductReviews = (reviews) => {
+    product.value.reviews = reviews
+  }
+
   return {
     setPage,
     product,
@@ -80,6 +84,7 @@ export const useProductsContent = () => {
     similarProducts,
     totalPagesProduct,
     addOnePageProduct,
+    pushProductReviews,
     removeOnePageProduct
   }
 }

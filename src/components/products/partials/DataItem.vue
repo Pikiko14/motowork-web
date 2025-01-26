@@ -16,9 +16,9 @@
 
     <section class="motowork-item-data__rating" v-if="product.type === 'product'"
       aria-label="Calificación del producto">
-      <span>1/5</span>
-      <q-rating :no-reset="true" v-model="productRating" size="24pt" color="grey-5" icon="star_border"
-        icon-selected="star" disable aria-hidden="true" />
+      <span>{{ productRating }}/5</span>
+      <q-rating no-dimming v-model="productRating" size="24pt" color="grey-5" icon="star_border" icon-selected="star"
+        disable aria-hidden="true" />
     </section>
 
     <p class="motowork-item-data__description" v-if="product.description">
@@ -61,7 +61,7 @@
         :aria-selected="activeTab === 1 ? 'true' : 'false'" :aria-controls="'tab1'">
         Detalles
       </span>
-      <span :class="{ active: activeTab === 2 }" @click="activateTab(2)" role="tab"
+      <span  v-if="product.type === 'vehicle' && product.additionalInfo.length > 0 || product.type === 'product' && product.additionalInfo.length > 0" :class="{ active: activeTab === 2 }" @click="activateTab(2)" role="tab"
         :aria-selected="activeTab === 2 ? 'true' : 'false'" :aria-controls="'tab2'">
         Información adicional
       </span>
@@ -104,7 +104,7 @@
         <div id="tab2" class="motowork-item-data__tabs-content--item" v-show="activeTab === 2"
           :class="{ 'slide-in': activeTab === 2, 'slide-out': activeTab !== 2 }" role="tabpanel" aria-labelledby="tab2">
           <div class="motowork-item-data__tabs-content--item__container-tab"
-            v-if="product.type === 'vehicle' || product.type === 'product'">
+            v-if="product.type === 'vehicle' && product.additionalInfo.length > 0 || product.type === 'product' && product.additionalInfo.length > 0">
             <!--Vehicles aditional information-->
             <div class="full-width" v-for="(content, idx) in product.additionalInfo" :key="idx">
               <div class="motowork-item-data__tabs-content--item__container-tab--content"
@@ -122,10 +122,40 @@
           <div class="motowork-item-data__tabs-content--item__container-tab" v-if="product.type === 'product'">
             <!--Vehicles aditional information-->
             <div class="motowork-review">
-              <div class="motowork-review__list"></div>
-              <div class="motowork-review__form">
-                <q-btn label="Agregar calificación" @click="modalReview = true" unelevated color="secondary"
-                  square></q-btn>
+              <div class="motowork-review__list">
+                <q-list>
+                  <q-item-label header>
+                    Calificaciones
+
+                    <q-btn icon="add" flat dense rounded @click="modalReview = true" unelevated color="secondary"
+                      square>
+                      <q-tooltip class="bg-secondary">
+                        Calificar
+                      </q-tooltip>
+                    </q-btn>
+                  </q-item-label>
+
+                  <q-item v-for="(review, idx) in product.reviews" :key="idx">
+                    <q-item-section top avatar>
+                      <q-avatar color="secondary" text-color="white">
+                        {{ review.name ? review.name.substring(0, 1) : '' }}
+                      </q-avatar>
+                    </q-item-section>
+
+                    <q-item-section>
+                      <q-item-label>{{ review.name }}</q-item-label>
+                      <q-item-label caption lines="2">
+                        {{ review.description }}
+                      </q-item-label>
+                    </q-item-section>
+
+                    <q-item-section side top>
+                      <q-item-label caption>{{ review.date }}</q-item-label>
+                      <q-rating :no-reset="true" v-model="review.amount" size="24pt" color="grey-5" icon="star_border"
+                        icon-selected="star" disable aria-hidden="true" />
+                    </q-item-section>
+                  </q-item>
+                </q-list>
               </div>
             </div>
             <!--End vehicles aditional information-->
@@ -159,7 +189,7 @@
         </q-card-section>
         <q-card-section class="row">
           <div class="col-12 text-center">
-            <q-btn @click="sendReview" :disable="!review.name || !review.quantity" type="submit"
+            <q-btn :loading="loading" @click="sendReview" :disable="!review.name || review.quantity === 0" type="submit"
               label="Calificar producto" unelevated color="secondary" square></q-btn>
           </div>
         </q-card-section>
@@ -172,7 +202,7 @@
 <script setup>
 // Importar
 import { formatPrice } from 'src/utils/utils'
-import { defineProps, ref, defineEmits, onBeforeMount } from 'vue'
+import { defineProps, ref, defineEmits, onBeforeMount, computed } from 'vue'
 import { useProductsContent } from 'src/composables/useProductContent'
 import { notification } from 'src/boot/notification'
 
@@ -196,10 +226,15 @@ const review = ref({
 const quantity = ref(1)
 const activeTab = ref(1)
 const loading = ref(false)
-const productRating = ref(2)
 const modalReview = ref(false)
 const selectedVariant = ref({})
-const { addReview } = useProductsContent()
+const { addReview, pushProductReviews } = useProductsContent()
+
+// computed
+const productRating = computed(() => {
+  const total = props.product.reviews.reduce((accumulated, item) => accumulated + item.amount, 0)
+  return total > 0 ? parseFloat((total / props.product.reviews.length).toFixed(2)) : 0
+})
 
 // methods
 const activateTab = (index) => {
@@ -224,16 +259,18 @@ const removeQuantity = () => {
 }
 
 const sendReview = async () => {
+  loading.value = true
   try {
     const response = await addReview(props.product._id, review.value)
     if (response.success) {
-      notification('pos', response.message)
+      notification('pos', 'Calificación enviada', 'primary')
       modalReview.value = false
       review.value = {
         name: '',
         description: '',
         quantity: 0
       }
+      pushProductReviews(response.data.product.reviews)
     }
   } catch (error) {
   } finally {
@@ -244,7 +281,7 @@ const sendReview = async () => {
 // hook
 onBeforeMount(() => {
   if (props.product.type === 'product') {
-    activeTab.value = 2
+    activeTab.value = props.product.additionalInfo.length > 0 ? 2 : 3
   }
 })
 </script>
