@@ -24,7 +24,7 @@
 <script setup>
 // imports
 import { useMeta } from 'quasar'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import BreadCrumb from 'src/components/layout/BreadCrumb.vue'
 import { useStoreContent } from 'src/stores/storeContent-store'
 import { useBannersContent } from 'src/composables/useBannerContent'
@@ -34,6 +34,7 @@ import MainAccesories from 'src/components/products/accesories/MainAccesories.vu
 
 // references
 const route = useRoute()
+const router = useRouter()
 const store = useStoreContent()
 const { banner, getBanner } = useBannersContent()
 
@@ -127,5 +128,18 @@ if (!storeBenner) {
   } else {
     getBanner('?page=1&perPage=1&type=accesories')
   }
+}
+
+if (!type && route.path === '/vehiculos') {
+  router.push({
+    path: route.path,
+    query: {
+      page: 1,
+      perPage: 9,
+      type: 'vehicle',
+      sortBy: 'createdAt',
+      order: -1
+    }
+  })
 }
 </script>

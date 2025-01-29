@@ -41,7 +41,7 @@
     </section>
 
     <section class="motowork-item-data__action">
-      <q-btn v-if="product.type === 'vehicle'" square unelevated color="secondary" label="Agendar test drive"
+      <q-btn :to="`/vehiculos/${product.name}/formulario?reference=${product._id}`" v-if="product.type === 'vehicle'" square unelevated color="secondary" label="Agendar test drive"
         aria-label="Agendar test drive para el vehículo"></q-btn>
 
       <div class="motowork-item-data__action--product" v-if="product.type === 'product'">
