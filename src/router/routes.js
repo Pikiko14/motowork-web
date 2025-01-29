@@ -16,13 +16,18 @@ const routes = [
       },
       {
         path: 'vehiculos/:product_name',
-        component: () => import('pages/products/PorductShow.vue'),
+        component: () => import('src/pages/products/ProductShow.vue'),
         name: 'vehiclesShow'
       },
       {
         path: 'productos/:product_name',
-        component: () => import('pages/products/PorductShow.vue'),
+        component: () => import('src/pages/products/ProductShow.vue'),
         name: 'productsShow'
+      },
+      {
+        path: 'vehiculos/:product_name/formulario',
+        component: () => import('src/pages/products/VehicleFormulario.vue'),
+        name: 'vehicleForm'
       }
     ]
   },

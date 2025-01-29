@@ -135,7 +135,7 @@
                     </q-btn>
                   </q-item-label>
 
-                  <q-item v-for="(review, idx) in product.reviews" :key="idx">
+                  <q-item v-for="(review, idx) in productStore.reviews" :key="idx">
                     <q-item-section top avatar>
                       <q-avatar color="secondary" text-color="white">
                         {{ review.name ? review.name.substring(0, 1) : '' }}
@@ -202,9 +202,10 @@
 <script setup>
 // Importar
 import { formatPrice } from 'src/utils/utils'
+import { notification } from 'src/boot/notification'
 import { defineProps, ref, defineEmits, onBeforeMount, computed } from 'vue'
 import { useProductsContent } from 'src/composables/useProductContent'
-import { notification } from 'src/boot/notification'
+import { useStoreContent } from 'src/stores/storeContent-store'
 
 // Props
 const props = defineProps({
@@ -228,6 +229,7 @@ const activeTab = ref(1)
 const loading = ref(false)
 const modalReview = ref(false)
 const selectedVariant = ref({})
+const store = useStoreContent()
 const { addReview, pushProductReviews } = useProductsContent()
 
 // computed
@@ -235,6 +237,8 @@ const productRating = computed(() => {
   const total = props.product.reviews.reduce((accumulated, item) => accumulated + item.amount, 0)
   return total > 0 ? parseFloat((total / props.product.reviews.length).toFixed(2)) : 0
 })
+
+const productStore = computed(() => store.product)
 
 // methods
 const activateTab = (index) => {

@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 import { getUrlParams } from 'src/utils/utils'
 
 export const useStoreContent = defineStore('storeContent', () => {
+  const product = ref({})
   const banners = ref({})
   const brandsList = ref([])
   const categoriesList = ref([])
@@ -30,10 +31,16 @@ export const useStoreContent = defineStore('storeContent', () => {
     brandsList.value = payload
   }
 
+  const setProduct = (payload) => {
+    product.value = payload
+  }
+
   return {
     banners,
+    product,
     setBrands,
     setBanner,
+    setProduct,
     brandsList,
     filterBanner,
     setCategories,

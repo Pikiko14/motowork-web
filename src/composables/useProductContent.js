@@ -1,5 +1,6 @@
 import { ref } from 'vue'
 import { api } from 'src/boot/axios'
+import { useStoreContent } from 'src/stores/storeContent-store'
 
 export const useProductsContent = () => {
   // references
@@ -8,6 +9,7 @@ export const useProductsContent = () => {
   const path = 'products'
   const pageProduct = ref(1)
   const totalProducts = ref(1)
+  const store = useStoreContent()
   const similarProducts = ref([])
   const totalPagesProduct = ref(0)
 
@@ -43,6 +45,7 @@ export const useProductsContent = () => {
       if (data.success && data.data) {
         product.value = data.data.product
         similarProducts.value = data.data.similarProduct
+        store.setProduct(product.value)
       }
     } catch (error) {
       throw new Error(error.message)
@@ -70,6 +73,7 @@ export const useProductsContent = () => {
 
   const pushProductReviews = (reviews) => {
     product.value.reviews = reviews
+    store.setProduct(product.value)
   }
 
   return {
