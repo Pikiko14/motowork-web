@@ -14,110 +14,104 @@
 
     <!--page container-->
     <section class="container-motowork bg-white" v-if="product._id">
-      <div class="row">
-        <div class="col-12 col-sm-4 motowork-form-grid" :class="{ 'q-pr-md': $q.screen.gt.sm }">
-          <div class="motowork-form-grid__selected">
-            <article>
-              <h2>
-                {{ product.name }}
-              </h2>
+      <div class="motowork-form-grid">
+        <div class="motowork-form-grid__selected">
+          <article>
+            <h2>
+              {{ product.name }}
+            </h2>
 
-              <section class="card">
-                <figure>
-                  <img :src="firstProductImage"
-                    :alt="`Imagen de la motocicleta ${product.name}, utilizado por Motowork en su Pagina Web`"
-                    :title="`Imagen de la motocicleta ${product.name}, utilizado por Motowork en su Pagina Web`" />
-                </figure>
-                <div class="card__content">
-                  <div class="card__content--item">
-                    <span class="label">
-                      Modelo
-                    </span>
-                    <span class="value">
-                      {{ product?.model }}
-                    </span>
-                  </div>
-                  <div class="card__content--item">
-                    <span class="label">
-                      Cilindraje
-                    </span>
-                    <span class="value">
-                      {{ product?.details?.power }} CC
-                    </span>
-                  </div>
-                  <div class="card__content--item">
-                    <span class="label">
-                      Peso total
-                    </span>
-                    <span class="value">
-                      {{ product?.details?.weight }}
-                    </span>
-                  </div>
-                </div>
-              </section>
-
-              <q-btn square @click="$router.back()" label="Cambiar modelo" color="primary" outline
-                unelevated=""></q-btn>
-            </article>
-
-            <div class="motowork-form-grid__legals">
-              <h2>
-                CONSENTIMIENTO DE PRIVACIDAD
-              </h2>
-              <div class="motowork-form-grid__legals--politics">
-                <span>
-                  Puede obtener más información sobre el consentimiento de privacidad
-                  <a href="http://motowork.co/tratamiento-de-datos/">Políticas de privacidad</a>
-                </span>
-
-                <div class="accept-section">
-                  <q-checkbox color="secondary" dense v-model="creationProfile"></q-checkbox>
-                  <div class="accept-section__content">
-                    <h3>
-                      Suscríbete a la creación de perfiles <span>(opcional)</span>
-                    </h3>
-                    <p>
-                      Acepto que Motowork utilice mis datos personales para perfilar mis hábitos de consumo y analizar
-                      mis preferencias e intereses para personalizar los contenidos del sitio web de Motowork y las
-                      comunicaciones por correo electrónico.
-                    </p>
-                  </div>
-                </div>
-
-                <div class="accept-section">
-                  <q-checkbox color="secondary" dense v-model="acceptMarketing"></q-checkbox>
-                  <div class="accept-section__content">
-                    <h3>
-                      Suscríbete al marketing <span>(opcional)</span>
-                    </h3>
-                    <p>
-                      Acepto que mis datos se procesarán con fines de marketing directo, incluido el envío de
-                      información
-                      sobre productos y servicios, para crear el perfil del cliente (por ejemplo, a través de análisis
-                      de
-                      datos) y para atención personalizada al cliente, como boletines informativos, encuestas de
-                      satisfacción del cliente, promociones especiales. , invitaciones a eventos (pruebas de conducción
-                      y
-                      ferias comerciales)
-                    </p>
-                  </div>
-                </div>
-
-                <div class="motowork-form-grid__complement">
-                  <span>
-                    Si ha proporcionado previamente consentimientos de marketing y desea retirarlos, puede ponerse en
-                    <a href="https://api.whatsapp.com/send?phone=573183996249&text=Hola%20Motowork" target="__blank"
-                      rel="noopener noreferrer">
-                      contacto con nosotros
-                    </a>
+            <section class="card">
+              <figure>
+                <img :src="firstProductImage"
+                  :alt="`Imagen de la motocicleta ${product.name}, utilizado por Motowork en su Pagina Web`"
+                  :title="`Imagen de la motocicleta ${product.name}, utilizado por Motowork en su Pagina Web`" />
+              </figure>
+              <div class="card__content">
+                <div class="card__content--item">
+                  <span class="label">
+                    Modelo
+                  </span>
+                  <span class="value">
+                    {{ product?.model }}
                   </span>
                 </div>
+                <div class="card__content--item">
+                  <span class="label">
+                    Cilindraje
+                  </span>
+                  <span class="value">
+                    {{ product?.details?.power }} CC
+                  </span>
+                </div>
+                <div class="card__content--item">
+                  <span class="label">
+                    Peso total
+                  </span>
+                  <span class="value">
+                    {{ product?.details?.weight }}
+                  </span>
+                </div>
+              </div>
+            </section>
+
+            <q-btn square @click="$router.back()" label="Cambiar modelo" color="primary" outline unelevated=""></q-btn>
+          </article>
+
+          <div class="motowork-form-grid__legals">
+            <h2>
+              CONSENTIMIENTO DE PRIVACIDAD
+            </h2>
+            <div class="motowork-form-grid__legals--politics">
+              <span>
+                Puede obtener más información sobre el consentimiento de privacidad
+                <a href="http://motowork.co/tratamiento-de-datos/">Políticas de privacidad</a>
+              </span>
+
+              <div class="accept-section">
+                <q-checkbox color="secondary" dense v-model="creationProfile"></q-checkbox>
+                <div class="accept-section__content">
+                  <h3>
+                    Suscríbete a la creación de perfiles <span>(opcional)</span>
+                  </h3>
+                  <p>
+                    Acepto que Motowork utilice mis datos personales para perfilar mis hábitos de consumo y analizar
+                    mis preferencias e intereses para personalizar los contenidos del sitio web de Motowork y las
+                    comunicaciones por correo electrónico.
+                  </p>
+                </div>
+              </div>
+
+              <div class="accept-section">
+                <q-checkbox color="secondary" dense v-model="acceptMarketing"></q-checkbox>
+                <div class="accept-section__content">
+                  <h3>
+                    Suscríbete al marketing <span>(opcional)</span>
+                  </h3>
+                  <p>
+                    Acepto que mis datos se procesarán con fines de marketing directo, incluido el envío de información
+                    sobre productos y servicios, para crear el perfil del cliente (por ejemplo, a través de análisis de
+                    datos) y para atención personalizada al cliente, como boletines informativos, encuestas de
+                    satisfacción del cliente, promociones especiales. , invitaciones a eventos (pruebas de conducción y
+                    ferias comerciales)
+                  </p>
+                </div>
+              </div>
+
+              <div class="motowork-form-grid__complement">
+                <span>
+                  Si ha proporcionado previamente consentimientos de marketing y desea retirarlos, puede ponerse en
+                  <a href="https://api.whatsapp.com/send?phone=573183996249&text=Hola%20Motowork" target="__blank"
+                    rel="noopener noreferrer">
+                    contacto con nosotros
+                  </a>
+                </span>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-12 col-sm-8" :class="{ 'q-pl-md': $q.screen.gt.sm }">
-          asd
+        <div class="motowork-form-grid__form">
+          <VehicleForm />
         </div>
       </div>
     </section>
@@ -132,6 +126,7 @@ import BreadCrumb from 'src/components/layout/BreadCrumb.vue'
 import { useStoreContent } from 'src/stores/storeContent-store'
 import BannerMotowork from 'src/components/banner/BannerMotowork.vue'
 import { useProductsContent } from 'src/composables/useProductContent'
+import VehicleForm from 'src/components/products/partials/VehicleForm.vue'
 
 // references
 const route = useRoute()
@@ -168,6 +163,13 @@ if (!product.value._id) {
 
 <style scoped lang="scss">
 .motowork-form-grid {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+
+  &__form {
+    flex: 1;
+  }
 
   &__selected {
     max-width: 530px;
@@ -195,6 +197,7 @@ if (!product.value._id) {
       .card {
         figure {
           width: 100%;
+          max-height: 360px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -202,6 +205,8 @@ if (!product.value._id) {
           overflow: hidden;
 
           img {
+            width: 75%;
+            height: 100%;
             object-fit: cover;
           }
         }
