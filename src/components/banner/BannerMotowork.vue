@@ -3,7 +3,7 @@
     <figure>
       <img class="motowor-banner__image"  v-if="!banner.path" :src="imgBanner.path || defaultImg" :alt="banner.name" :title="banner.name">
       <img class="motowor-banner__image"  v-else :src="banner.path || defaultImg" :alt="bannerAlt" :title="bannerAlt">
-      <figcaption :class="{ 'no-overflow': noOverflow }">
+      <figcaption :class="{ 'no-overflow': noOverflow, 'justify-end': contentEnd }">
         <div class="container">
           <div class="row">
            <div class="col-12" v-if="title">
@@ -63,6 +63,10 @@ const props = defineProps({
   bannerAlt: {
     type: String,
     default: () => 'Un banner de motowork utilizado en las distintas landings'
+  },
+  contentEnd: {
+    type: Boolean,
+    default: () => false
   }
 })
 
@@ -178,5 +182,10 @@ const imgBanner = computed(() => {
 
 .no-overflow {
   background: transparent !important;
+}
+
+.justify-end {
+  justify-content: flex-end !important;
+  padding-bottom: 64px !important;
 }
 </style>
