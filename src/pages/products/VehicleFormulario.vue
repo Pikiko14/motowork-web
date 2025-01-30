@@ -111,7 +111,7 @@
           </div>
         </div>
         <div class="motowork-form-grid__form">
-          <VehicleForm />
+          <VehicleForm @handler-form="doSendRequest" />
         </div>
       </div>
     </section>
@@ -158,6 +158,10 @@ if (!product.value._id) {
   getProductData()
 }
 
+const doSendRequest = (formData) => {
+  console.log(formData)
+}
+
 // hook
 </script>
 
@@ -192,6 +196,10 @@ if (!product.value._id) {
         line-height: 125%;
         /* 30px */
         text-transform: uppercase;
+
+        @media(max-width: 767px) {
+          font-size: 18px;
+        }
       }
 
       .card {
@@ -233,6 +241,10 @@ if (!product.value._id) {
               font-weight: 600;
               line-height: 125%;
               /* 20px */
+
+              @media(max-width: 767px) {
+                font-size: 12pt;
+              }
             }
 
             .value {
@@ -247,6 +259,10 @@ if (!product.value._id) {
               font-weight: 400;
               line-height: 125%;
               /* 20px */
+
+              @media(max-width: 767px) {
+                font-size: 12pt;
+              }
             }
           }
         }
@@ -263,6 +279,10 @@ if (!product.value._id) {
 
     @media(min-width: 768px) and (max-width: 991px) {
       max-width: 360px;
+    }
+
+    @media(max-width: 767px) {
+      max-width: 100%;
     }
   }
 
@@ -358,6 +378,10 @@ if (!product.value._id) {
         }
       }
     }
+
+    @media(max-width: 767px) {
+      display: none;
+    }
   }
 
   &__complement {
@@ -365,6 +389,10 @@ if (!product.value._id) {
       color: $secondary;
       text-decoration: none;
     }
+  }
+
+  @media(max-width: 767px) {
+    flex-direction: column;
   }
 }
 </style>
