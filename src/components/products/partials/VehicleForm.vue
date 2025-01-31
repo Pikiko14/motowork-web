@@ -1,5 +1,5 @@
 <template>
-  <q-form @submit="habdlerForm" class="vehicle-form" :class="{ 'full-height': $q.screen.gt.xs }">
+  <q-form ref="formRef" @submit="habdlerForm" class="vehicle-form" :class="{ 'full-height': $q.screen.gt.xs }">
     <div class="row">
       <div class="col-12 mt-mobile">
         <h2>
@@ -181,14 +181,47 @@
         </div>
       </div>
     </div>
-    <q-btn label="Agendar test drive" type="submit" :class="{ 'absolute-bottom': $q.screen.gt.xs }" class="full-width"
+    <q-btn :loading="loading" label="Agendar test drive" type="submit" :class="{ 'absolute-bottom': $q.screen.gt.xs }" class="full-width"
       color="secondary" unelevated=""></q-btn>
+      {{ clearForm }}
   </q-form>
 </template>
 
 <script setup>
 // imports
-import { ref, defineEmits } from 'vue'
+import { useOrdersStore } from 'src/stores/ordersStore'
+import { ref, defineEmits, defineProps, watch, computed } from 'vue'
+
+const store = useOrdersStore()
+
+// props
+defineProps({
+  loading: {
+    type: Boolean,
+    default: () => false
+  }
+})
+
+// computed
+const clearForm = computed(() => {
+  return store.clearOrderForm
+})
+
+// watch
+watch(
+  () => clearForm.value,
+  () => {
+    form.value = {
+      date: '',
+      hour: '',
+      name: '',
+      lastname: '',
+      contact_type: false,
+      type: 'Test Drive Request'
+    }
+    formRef.value.reset()
+  }
+)
 
 // emits
 const emit = defineEmits(['handler-form'])
@@ -199,8 +232,10 @@ const form = ref({
   hour: '',
   name: '',
   lastname: '',
-  contact_type: false
+  contact_type: false,
+  type: 'Test Drive Request'
 })
+const formRef = ref()
 const dateProxy = ref()
 const hourProxy = ref()
 const optionsContact = [

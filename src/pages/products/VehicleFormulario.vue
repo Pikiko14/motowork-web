@@ -111,7 +111,7 @@
           </div>
         </div>
         <div class="motowork-form-grid__form">
-          <VehicleForm @handler-form="doSendRequest" />
+          <VehicleForm @handler-form="doSendRequest" :loading="loading" />
         </div>
       </div>
     </section>
@@ -124,12 +124,15 @@ import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import BreadCrumb from 'src/components/layout/BreadCrumb.vue'
 import { useStoreContent } from 'src/stores/storeContent-store'
+import { useOrdersContent } from 'src/composables/useOrdersContent'
 import BannerMotowork from 'src/components/banner/BannerMotowork.vue'
 import { useProductsContent } from 'src/composables/useProductContent'
 import VehicleForm from 'src/components/products/partials/VehicleForm.vue'
+import { notification } from 'src/boot/notification'
 
 // references
 const route = useRoute()
+const loading = ref(false)
 const store = useStoreContent()
 const creationProfile = ref(false)
 const acceptMarketing = ref(false)
@@ -137,6 +140,7 @@ const { showProduct } = useProductsContent()
 const formularioBanner = ref({
   path: '/images/banner_formulario_motowork.webp'
 })
+const { saveOrders } = useOrdersContent()
 
 // computed
 const product = computed(() => store.product)
@@ -158,8 +162,42 @@ if (!product.value._id) {
   getProductData()
 }
 
-const doSendRequest = (formData) => {
-  console.log(formData)
+const doSendRequest = async (formData) => {
+  const params = {
+    serviceDate: formData.date,
+    serviceTime: formData.hour,
+    client: {
+      firstName: formData.name,
+      lastName: formData.lastname,
+      phone: formData.phone,
+      email: formData.email,
+      marketingConsent: acceptMarketing.value === true ? acceptMarketing.value : (formData.acceptMarketing === true ? formData.acceptMarketing : false),
+      profileCreation: creationProfile.value === true ? creationProfile.value : (formData.creationProfile === true ? formData.creationProfile : false)
+    },
+    type: formData.type,
+    items: [
+      {
+        name: product.value.name,
+        reference: product.value.model,
+        sku: product.value.sku,
+        purchasePrice: product.value.price,
+        total: 0,
+        quantity: 1
+      }
+    ],
+    vehicleDetails: {
+    }
+  }
+  try {
+    loading.value = true
+    const response = await saveOrders(params)
+    if (response.success) {
+      notification('pos', response.message, 'secondary')
+    }
+  } catch (error) {
+  } finally {
+    loading.value = false
+  }
 }
 
 // hook
