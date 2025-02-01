@@ -11,38 +11,47 @@ export const useOrdersStore = defineStore('ordersStore', () => {
     clearOrderForm.value = !clearOrderForm.value
   }
 
+  // agrega un nuevo item al carrito
   const addNewItemToCar = (product) => {
-    const { variant } = product
+    const { variant, quantity, _id } = product
 
-    let issetIndex = shoppingCart.value.findIndex((item) => item._id === product._id)
+    // Busca el índice del producto (considerando variante si existe)
+    const issetIndex = shoppingCart.value.findIndex(
+      (item) =>
+        item._id === _id && (!variant || item.variant?._id === variant._id)
+    )
 
-    if (variant) {
-      issetIndex = shoppingCart.value.findIndex((item) => item._id === product._id && item.variant._id === variant._id)
-    }
+    const productIsset = shoppingCart.value[issetIndex] || null
 
-    let productIsset = null
-    if (issetIndex !== -1) {
-      productIsset = shoppingCart.value[issetIndex]
-    }
-
+    // Agrega nuevo producto si no existe
     if (!productIsset) {
       product.limit = productLimit.value
       shoppingCart.value.push(product)
       return true
     }
 
-    if ((product.quantity + productIsset.quantity) > productLimit.value) {
-      notification('negative', 'No puedes agregar mas unidades porque excede el limite total', 'primary')
+    const newQuantity = productIsset.quantity + quantity
+
+    // Valida si la cantidad excede el límite
+    if (newQuantity > productLimit.value) {
+      notification(
+        'negative',
+        'No puedes agregar más unidades porque excede el límite total',
+        'primary'
+      )
       return false
     }
 
-    // aumentamos la cantidad del store basado en la cantidad que venga desde el metodo
-    productIsset.quantity += product.quantity
-    shoppingCart.value[issetIndex] = productIsset
+    // Actualiza la cantidad del producto existente
+    shoppingCart.value[issetIndex].quantity = newQuantity
+    return true
   }
 
   const countItemsInCart = () => {
-    const totalQuantity = shoppingCart.value.reduce((accumulated, item) => accumulated + item.quantity, 0)
+    const totalQuantity = shoppingCart.value.reduce(
+      (accumulated, item) => accumulated + item.quantity,
+      0
+    )
     return totalQuantity
   }
 
