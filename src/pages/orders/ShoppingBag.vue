@@ -8,7 +8,8 @@
       :btnLabel="''"
       :bannerComplement="'¿Todo listo para llevar tus productos favoritos? Revisa tu selección, asegura que no te falte nada y finaliza tu compra.'"
       :contentEnd="true"
-      :noOverflow="true" />
+      :noOverflow="true"
+      :reduceBanner="true" />
     <!--End banner-->
 
     <!--main content-->

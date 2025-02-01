@@ -1,5 +1,5 @@
 <template>
-  <section class="motowor-banner">
+  <section class="motowor-banner" :class="{ 'reduce': reduceBanner }">
     <figure>
       <img class="motowor-banner__image"  v-if="!banner.path" :src="imgBanner.path || defaultImg" :alt="banner.name" :title="banner.name">
       <img class="motowor-banner__image"  v-else :src="banner.path || defaultImg" :alt="bannerAlt" :title="bannerAlt">
@@ -67,6 +67,10 @@ const props = defineProps({
   contentEnd: {
     type: Boolean,
     default: () => false
+  },
+  reduceBanner: {
+    type: Boolean,
+    default: () => false
   }
 })
 
@@ -131,7 +135,7 @@ const imgBanner = computed(() => {
         text-transform: uppercase;
 
         @media(max-width: 767px) {
-          font-size: 32px;
+          font-size: 28px;
         }
       }
 
@@ -177,6 +181,18 @@ const imgBanner = computed(() => {
 
   @media(max-width: 767px) {
     height: 320px;
+  }
+}
+
+.motowor-banner.reduce {
+  height: 270px;
+
+  figure {
+    height: 270px;
+  }
+
+  .container {
+    max-width: 80% !important;
   }
 }
 
