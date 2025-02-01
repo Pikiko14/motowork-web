@@ -46,7 +46,7 @@
 
       <div class="motowork-item-data__action--product" v-if="product.type === 'product'">
         <q-btn :disable="product.variants.length > 0 && !selectedVariant._id" square unelevated color="secondary"
-          label="Agregar al carrito" aria-label="Agregar este producto al carrito"></q-btn>
+          label="Agregar al carrito" @click="handlerAddToCar" aria-label="Agregar este producto al carrito"></q-btn>
 
         <div class="motowork-item-data__action--product__quantity">
           <q-btn @click="removeQuantity" icon="arrow_back_ios" unelevated dense></q-btn>
@@ -203,9 +203,10 @@
 // Importar
 import { formatPrice } from 'src/utils/utils'
 import { notification } from 'src/boot/notification'
-import { defineProps, ref, defineEmits, onBeforeMount, computed } from 'vue'
-import { useProductsContent } from 'src/composables/useProductContent'
+import { useOrdersStore } from 'src/stores/ordersStore'
 import { useStoreContent } from 'src/stores/storeContent-store'
+import { useProductsContent } from 'src/composables/useProductContent'
+import { defineProps, ref, defineEmits, onBeforeMount, computed } from 'vue'
 
 // Props
 const props = defineProps({
@@ -230,6 +231,7 @@ const loading = ref(false)
 const modalReview = ref(false)
 const selectedVariant = ref({})
 const store = useStoreContent()
+const ordersStore = useOrdersStore()
 const { addReview, pushProductReviews } = useProductsContent()
 
 // computed
@@ -239,6 +241,10 @@ const productRating = computed(() => {
 })
 
 const productStore = computed(() => store.product)
+
+const totalItemsLimit = computed(() => {
+  return ordersStore.productLimit
+})
 
 // methods
 const activateTab = (index) => {
@@ -253,6 +259,9 @@ const setImageFromColor = (color) => {
 }
 
 const addQuantity = () => {
+  if (quantity.value === totalItemsLimit.value) {
+    return
+  }
   quantity.value++
 }
 
@@ -280,6 +289,21 @@ const sendReview = async () => {
   } finally {
     loading.value = false
   }
+}
+
+const handlerAddToCar = () => {
+  const { product } = props
+  const carItemObj = {
+    _id: product._id,
+    name: product.name,
+    reference: product.model,
+    sku: product.sku,
+    purchasePrice: product.price,
+    total: quantity.value * product.price,
+    quantity: quantity.value,
+    variant: selectedVariant.value || null
+  }
+  ordersStore.addNewItemToCar(carItemObj)
 }
 
 // hook

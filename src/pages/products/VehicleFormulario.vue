@@ -176,17 +176,13 @@ const doSendRequest = async (formData) => {
     },
     type: formData.type,
     items: [
-      {
-        name: product.value.name,
-        reference: product.value.model,
-        sku: product.value.sku,
-        purchasePrice: product.value.price,
-        total: 0,
-        quantity: 1
-      }
     ],
     vehicleDetails: {
-    }
+      name: product.value.name,
+      model: product.value.model,
+      image: product.value.images.length > 0 ? product.value.images[0].path : ''
+    },
+    contact_type: formData.contact_type
   }
   try {
     loading.value = true

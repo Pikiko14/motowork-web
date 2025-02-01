@@ -183,7 +183,6 @@
     </div>
     <q-btn :loading="loading" label="Agendar test drive" type="submit" :class="{ 'absolute-bottom': $q.screen.gt.xs }" class="full-width"
       color="secondary" unelevated=""></q-btn>
-      {{ clearForm }}
   </q-form>
 </template>
 
