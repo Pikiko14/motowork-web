@@ -1,12 +1,12 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import { SessionStorage } from 'quasar'
+import { LocalStorage } from 'quasar'
 import { notification } from 'src/boot/notification'
 
 export const useOrdersStore = defineStore('ordersStore', () => {
-  const shoppingCart = ref(JSON.parse(SessionStorage.getItem('cart_items') || []) || [])
   const productLimit = ref(3) // sacar del api del software de facturación
   const clearOrderForm = ref(false)
+  const shoppingCart = ref(LocalStorage.getItem('cart_items') ? JSON.parse(LocalStorage.getItem('cart_items') || []) : [])
 
   const handlerClearOrderForm = () => {
     clearOrderForm.value = !clearOrderForm.value
@@ -60,11 +60,11 @@ export const useOrdersStore = defineStore('ordersStore', () => {
 
   // guarda el carrito en la sesion storage
   const validateCartInStorage = () => {
-    if (SessionStorage.getItem('cart_items')) {
-      SessionStorage.removeItem('cart_items')
+    if (LocalStorage.getItem('cart_items')) {
+      LocalStorage.removeItem('cart_items')
     }
 
-    SessionStorage.setItem('cart_items', JSON.stringify(shoppingCart.value))
+    LocalStorage.setItem('cart_items', JSON.stringify(shoppingCart.value))
   }
 
   // remuevo una unida desde el carrito
@@ -74,6 +74,7 @@ export const useOrdersStore = defineStore('ordersStore', () => {
       product.quantity--
       shoppingCart.value[idx] = product
     }
+    calculateTotalInCart()
   }
 
   // agrego una unidad desde el carrito
@@ -83,6 +84,26 @@ export const useOrdersStore = defineStore('ordersStore', () => {
       product.quantity++
       shoppingCart.value[idx] = product
     }
+    calculateTotalInCart()
+  }
+
+  // recalculate total
+  const calculateTotalInCart = () => {
+    shoppingCart.value = shoppingCart.value.map((item) => {
+      // calculate total
+      const total = (item.quantity * item.purchasePrice)
+      item.total = total.toFixed(2)
+
+      // return item
+      return item
+    })
+    validateCartInStorage()
+  }
+
+  // delete items in cart
+  const deleteItemInCart = (idx) => {
+    shoppingCart.value.splice(idx, 1)
+    validateCartInStorage()
   }
 
   return {
@@ -93,6 +114,7 @@ export const useOrdersStore = defineStore('ordersStore', () => {
     clearOrderForm,
     addNewItemToCar,
     countItemsInCart,
+    deleteItemInCart,
     handlerClearOrderForm
   }
 })

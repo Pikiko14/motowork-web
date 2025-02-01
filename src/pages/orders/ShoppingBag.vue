@@ -18,14 +18,14 @@
       <!--End breadcrumb-->
 
       <section class="row q-mt-xl">
-        <div class="col-12 col-md-8" :class="{ 'q-pr-md': $q.screen.gt.sm }">
+        <div class="col-12 col-sm-12 col-md-8 full-on-1199" :class="{ 'q-pr-md': $q.screen.gt.sm }">
           <h2>
             Tu carrito
           </h2>
           <ShoppingbagTableVue />
         </div>
 
-        <div class="col-12 col-md-4" :class="{ 'q-pl-md': $q.screen.gt.sm }">
+        <div class="col-12 col-sm-12 col-md-4 full-on-1199" :class="{ 'q-pl-md': $q.screen.gt.sm }">
           <h2>
             Detalles de tu pedido
           </h2>
@@ -55,5 +55,15 @@ h2 {
   font-weight: 700;
   line-height: 125%; /* 30px */
   text-transform: uppercase;
+}
+
+.full-on-1199 {
+  @media(max-width: 1199px) {
+    width: 100%;
+
+    &:not(:first-child) {
+      margin-top: 72px;
+    }
+  }
 }
 </style>

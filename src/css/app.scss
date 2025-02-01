@@ -1044,3 +1044,17 @@ ul {
 .shake {
   animation: shake 0.5s ease-in-out;
 }
+
+.hide-mobile {
+  @media(max-width: 767px) {
+    display: none;
+  }
+}
+
+.show-mobile {
+  display: none;
+
+  @media(max-width: 767px) {
+    display: table;
+  }
+}

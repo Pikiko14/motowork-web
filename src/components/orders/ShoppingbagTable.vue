@@ -1,59 +1,97 @@
 <template>
-  <table>
-    <thead>
-      <th>
-        Productos
-      </th>
-      <th>
-        Precio
-      </th>
-      <th>
-        Cantidad
-      </th>
-      <th>
-        Subtotal
-      </th>
-    </thead>
+  <section class="full-width">
+    <!--table desktop-->
+    <table class="hide-mobile">
+      <thead>
+        <th>
+          Productos
+        </th>
+        <th>
+          Precio
+        </th>
+        <th>
+          Cantidad
+        </th>
+        <th>
+          Subtotal
+        </th>
+      </thead>
 
-    <tbody>
-      <tr v-for="(item, idx) in shoppingCart" :key="idx">
-        <td>
-          <article class="product-card">
-            <figure>
-              <img :src="item.image" :alt="item.name">
-            </figure>
+      <tbody>
+        <tr v-for="(item, idx) in shoppingCart" :key="idx">
+          <td>
+            <article class="product-card">
+              <figure>
+                <img :src="item.image" :alt="item.name" :title="item.name">
+              </figure>
 
-            <div class="product-card__information">
-              <span>SKU {{ item.sku }}</span>
-              <h3>
-                {{ item.name }}
-              </h3>
-              <p>
-                {{ item.variant.attribute || '' }}
-              </p>
+              <div class="product-card__information">
+                <span>SKU {{ item.sku }}</span>
+                <h3 class="ellipsis-2-lines">
+                  {{ item.name }}
+                </h3>
+                <p>
+                  {{ item.variant.attribute || '' }}
+                </p>
+              </div>
+            </article>
+          </td>
+          <td>
+            <span class="price">
+              {{ formatPrice(item.purchasePrice || 0) }}
+            </span>
+          </td>
+          <td>
+            <div class="quantity">
+              <q-btn square @click="removeQuantity(idx)" icon="img:/images/back_arrow.png" unelevated dense></q-btn>
+              <span>{{ item.quantity }}</span>
+              <q-btn square @click="addQuantity(idx)" unelevated dense icon="img:/images/arrow_next.png"></q-btn>
             </div>
-          </article>
-        </td>
-        <td>
-          <span class="price">
-            {{ formatPrice(item.purchasePrice || 0) }}
-          </span>
-        </td>
-        <td>
-          <div class="quantity">
-            <q-btn square @click="removeQuantity(idx)" icon="img:/images/back_arrow.png" unelevated dense></q-btn>
-            <span>{{ item.quantity }}</span>
-            <q-btn square @click="addQuantity(idx)" unelevated dense icon="img:/images/arrow_next.png"></q-btn>
-          </div>
-        </td>
-        <td>
-          <span class="total">
-            {{ formatPrice(item.total || 0) }}
-          </span>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+          </td>
+          <td>
+            <span class="total">
+              {{ formatPrice(item.total || 0) }}
+              <q-btn @click="deleteItemInCart(idx)" class="float-right" flat dense rounded icon="close">
+                <q-tooltip class="bg-grey-5">
+                  Eliminar
+                </q-tooltip>
+              </q-btn>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!--End table desktop-->
+
+    <!--mobile table-->
+    <table class="show-mobile full-width">
+      <tbody>
+        <tr v-for="(item, idx) in shoppingCart" :key="idx">
+          <td>
+            <article class="product-card">
+              <figure>
+                <img :src="item.image" :alt="item.name" :title="item.name">
+              </figure>
+
+              <div class="product-card__information">
+                <span>SKU {{ item.sku }}</span>
+                <h3 class="ellipsis-2-lines">
+                  {{ item.name }}
+                </h3>
+                <p>
+                  {{ item.variant.attribute || '' }}
+                </p>
+                <span class="total">
+                  {{ formatPrice(item.total || 0) }}
+                </span>
+              </div>
+            </article>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!--End mobile table-->
+  </section>
 </template>
 
 <script setup>
@@ -72,11 +110,15 @@ const shoppingCart = computed(() => {
 
 // methods
 const removeQuantity = (idx) => {
-  return store.removeQuantity(idx)
+  store.removeQuantity(idx)
 }
 
 const addQuantity = (idx) => {
-  return store.addQuantity(idx)
+  store.addQuantity(idx)
+}
+
+const deleteItemInCart = (idx) => {
+  store.deleteItemInCart(idx)
 }
 </script>
 
@@ -104,6 +146,16 @@ table {
 
   td {
     padding: 24px 16px;
+
+    @media(max-width: 767px) {
+      padding: 18px;
+    }
+  }
+
+  tr {
+    @media(max-width: 767px) {
+      border: 2px solid #E3E3E3;
+    }
   }
 
   .product-card {
@@ -141,6 +193,14 @@ table {
         line-height: 125%;
         /* 15px */
         text-transform: uppercase;
+
+        @media(max-width: 991px) {
+          font-size: 10px;
+        }
+
+        @media(max-width: 767px) {
+          font-size: 12px;
+        }
       }
 
       h3 {
@@ -154,6 +214,10 @@ table {
         line-height: 125%;
         /* 20px */
         text-transform: uppercase;
+
+        @media(max-width: 991px) {
+          font-size: 12px;
+        }
       }
 
       p {
@@ -166,7 +230,29 @@ table {
         line-height: 125%;
         /* 20px */
         text-transform: uppercase;
+
+        @media(max-width: 991px) {
+          font-size: 10px;
+        }
+
+        @media(max-width: 767px) {
+          font-size: 12px;
+        }
       }
+
+      .total {
+        color: #000;
+        font-family: Play;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 125%; /* 15px */
+        text-transform: uppercase;
+      }
+    }
+
+    @media(max-width: 767px) {
+      min-height: 90px;
     }
   }
 
@@ -184,6 +270,10 @@ table {
     line-height: 125%;
     /* 20px */
     text-transform: uppercase;
+
+    @media(max-width: 991px) {
+      font-size: 14px;
+    }
   }
 
   .quantity {
@@ -205,6 +295,10 @@ table {
       display: inline-block;
       /* 20px */
       text-transform: uppercase;
+
+      @media(max-width: 991px) {
+        font-size: 12px;
+      }
     }
 
     .q-btn {
@@ -216,7 +310,10 @@ table {
   }
 
   .total {
-    width: 120px;
+    width: 140px;
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
     color: #000;
     text-align: left;
 
@@ -227,6 +324,14 @@ table {
     font-weight: 700;
     line-height: 125%; /* 20px */
     text-transform: uppercase;
+
+    .q-btn {
+      color: #B2B2B2;
+    }
+
+    @media(max-width: 991px) {
+      font-size: 14px;
+    }
   }
 }
 </style>
