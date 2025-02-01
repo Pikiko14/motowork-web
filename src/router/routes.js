@@ -28,6 +28,11 @@ const routes = [
         path: 'vehiculos/:product_name/formulario',
         component: () => import('src/pages/products/VehicleFormulario.vue'),
         name: 'vehicleForm'
+      },
+      {
+        path: 'carro-de-compra',
+        component: () => import('src/pages/orders/ShoppingBag.vue'),
+        name: 'shoppingCart'
       }
     ]
   },

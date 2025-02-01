@@ -45,7 +45,7 @@
         <!--End Search section-->
 
         <!--shopping car-->
-        <div class="motowork-navbar__right-section--search-and-card__shopping-car">
+        <div class="motowork-navbar__right-section--search-and-card__shopping-car" @click="$router.push({ name: 'shoppingCart' })">
           <figure>
             <img class="motowork-navbar__right-section--search-and-card__shopping-car--icon"
               src="/images/shopping_bag.webp" alt="Icono de la bolsa de compra, utilizado por motowork"
@@ -121,7 +121,7 @@
             </ul>
             <div class="mobile-car mobile-show">
               <!--shopping car-->
-                <div class="motowork-navbar__right-section--search-and-card__shopping-car">
+                <div class="motowork-navbar__right-section--search-and-card__shopping-car" @click="$router.push({ name: 'shoppingCart' })">
                   <div class="icon-text">
                     <figure>
                       <img class="motowork-navbar__right-section--search-and-card__shopping-car--icon"

@@ -49,9 +49,9 @@
           label="Agregar al carrito" @click="handlerAddToCar" aria-label="Agregar este producto al carrito"></q-btn>
 
         <div class="motowork-item-data__action--product__quantity">
-          <q-btn @click="removeQuantity" icon="arrow_back_ios" unelevated dense></q-btn>
+          <q-btn @click="removeQuantity" icon="img:/images/back_arrow.png" unelevated dense square></q-btn>
           <span>{{ quantity }}</span>
-          <q-btn @click="addQuantity" unelevated dense icon="arrow_forward_ios"></q-btn>
+          <q-btn @click="addQuantity" unelevated dense icon="img:/images/arrow_next.png" square></q-btn>
         </div>
       </div>
     </section>
@@ -301,7 +301,8 @@ const handlerAddToCar = () => {
     purchasePrice: product.price,
     total: quantity.value * product.price,
     quantity: quantity.value,
-    variant: selectedVariant.value || null
+    variant: selectedVariant.value || null,
+    image: product.images.length > 0 ? product.images[0].path : ''
   }
   ordersStore.addNewItemToCar(carItemObj)
 }

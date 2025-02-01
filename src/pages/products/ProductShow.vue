@@ -5,7 +5,7 @@
     <!--End breadcrumb-->
 
     <!--Banner-->
-    <BannerMotowork :title="`${product.type === 'vehicle' ? 'Yamaha' : ''} ${product.name}`"
+    <BannerMotowork v-if="product.type === 'vehicle'" :title="`${product.type === 'vehicle' ? 'Yamaha' : ''} ${product.name}`"
       :banner="productBanner || {}"
       :default-img="product.type === 'vehicle' ? 'https://res.cloudinary.com/dg14xloef/image/upload/v1737398094/banners/boxfnfyssqzw809kxhsc.webp' : ''"
       :btnLabel="''"

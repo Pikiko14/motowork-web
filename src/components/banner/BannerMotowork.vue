@@ -182,6 +182,10 @@ const imgBanner = computed(() => {
 
 .no-overflow {
   background: transparent !important;
+
+  h1, p {
+    color: $primary !important;
+  }
 }
 
 .justify-end {

@@ -1,9 +1,10 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
+import { SessionStorage } from 'quasar'
 import { notification } from 'src/boot/notification'
 
 export const useOrdersStore = defineStore('ordersStore', () => {
-  const shoppingCart = ref([])
+  const shoppingCart = ref(JSON.parse(SessionStorage.getItem('cart_items') || []) || [])
   const productLimit = ref(3) // sacar del api del software de facturación
   const clearOrderForm = ref(false)
 
@@ -27,6 +28,7 @@ export const useOrdersStore = defineStore('ordersStore', () => {
     if (!productIsset) {
       product.limit = productLimit.value
       shoppingCart.value.push(product)
+      validateCartInStorage()
       return true
     }
 
@@ -44,6 +46,7 @@ export const useOrdersStore = defineStore('ordersStore', () => {
 
     // Actualiza la cantidad del producto existente
     shoppingCart.value[issetIndex].quantity = newQuantity
+    validateCartInStorage()
     return true
   }
 
@@ -55,9 +58,38 @@ export const useOrdersStore = defineStore('ordersStore', () => {
     return totalQuantity
   }
 
+  // guarda el carrito en la sesion storage
+  const validateCartInStorage = () => {
+    if (SessionStorage.getItem('cart_items')) {
+      SessionStorage.removeItem('cart_items')
+    }
+
+    SessionStorage.setItem('cart_items', JSON.stringify(shoppingCart.value))
+  }
+
+  // remuevo una unida desde el carrito
+  const removeQuantity = (idx) => {
+    const product = shoppingCart.value[idx]
+    if (product && product.quantity > 1) {
+      product.quantity--
+      shoppingCart.value[idx] = product
+    }
+  }
+
+  // agrego una unidad desde el carrito
+  const addQuantity = (idx) => {
+    const product = shoppingCart.value[idx]
+    if (product && product.quantity < product.limit) {
+      product.quantity++
+      shoppingCart.value[idx] = product
+    }
+  }
+
   return {
+    addQuantity,
     shoppingCart,
     productLimit,
+    removeQuantity,
     clearOrderForm,
     addNewItemToCar,
     countItemsInCart,
