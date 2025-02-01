@@ -52,8 +52,8 @@
               loading="lazy" />
           </figure>
 
-          <div class="motowork-navbar__right-section--search-and-card__shopping-car--count-items">
-            +{{ itemsInCar }}
+          <div class="motowork-navbar__right-section--search-and-card__shopping-car--count-items" id="shoppingCartCount">
+            +{{ itemsInCart }}
           </div>
         </div>
         <!--End shopping car-->
@@ -135,7 +135,7 @@
                   </div>
 
                   <div class="motowork-navbar__right-section--search-and-card__shopping-car--count-items">
-                    +{{ itemsInCar }}
+                    +{{ itemsInCart }}
                   </div>
                 </div>
                 <!--End shopping car-->
@@ -181,17 +181,38 @@
 
 <script setup>
 // imports
-import { ref } from 'vue'
-import { useCategoriesContent } from 'src/composables/useCategoriesContent'
 import { useRouter } from 'vue-router'
+import { computed, ref, watch } from 'vue'
+import { useOrdersStore } from 'src/stores/ordersStore'
+import { useCategoriesContent } from 'src/composables/useCategoriesContent'
 
 // references
-const router = useRouter()
-const itemsInCar = ref('0')
 const search = ref('')
+const router = useRouter()
 const showMenu = ref(false)
 const itemToShow = ref('vehicle')
+const ordersStore = useOrdersStore()
 const { categoriesMenu, getMenuCategories } = useCategoriesContent()
+
+// computed
+const itemsInCart = computed(() => {
+  return ordersStore.countItemsInCart()
+})
+
+// watch
+watch(
+  () => itemsInCart.value,
+  () => {
+    const element = document.getElementById('shoppingCartCount')
+    if (element) {
+      element.classList.add('shake')
+
+      setTimeout(() => {
+        element.classList.remove('shake')
+      }, 500)
+    }
+  }
+)
 
 // methods
 const openHamburguerMenu = async (e) => {

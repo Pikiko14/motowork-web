@@ -276,7 +276,7 @@ const sendReview = async () => {
   try {
     const response = await addReview(props.product._id, review.value)
     if (response.success) {
-      notification('pos', 'Calificación enviada', 'secondary')
+      notification('positive', 'Calificación enviada', 'secondary')
       modalReview.value = false
       review.value = {
         name: '',
