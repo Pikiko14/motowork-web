@@ -19,17 +19,21 @@
       <!--End breadcrumb-->
 
       <section class="row q-mt-xl">
-        <div class="col-12 col-sm-12 col-md-8 full-on-1199" :class="{ 'q-pr-md': $q.screen.gt.sm }">
+        <div class="col-12 col-sm-12 col-md-9 full-on-1199" :class="{ 'q-pr-md': $q.screen.gt.sm }">
           <h2>
             Tu carrito
           </h2>
           <ShoppingbagTableVue />
         </div>
 
-        <div class="col-12 col-sm-12 col-md-4 full-on-1199" :class="{ 'q-pl-md': $q.screen.gt.sm }">
+        <div class="col-12 col-sm-12 col-md-3 full-on-1199" :class="{ 'q-pl-md': $q.screen.gt.sm }">
           <h2>
             Detalles de tu pedido
           </h2>
+          <p>
+            Los artículos de su carrito de compras se reservan por 30 minutos.
+          </p>
+          <ShoppingbagOrderResume />
         </div>
       </section>
     </section>
@@ -43,6 +47,7 @@
 import BreadCrumb from 'src/components/layout/BreadCrumb.vue'
 import BannerMotowork from 'src/components/banner/BannerMotowork.vue'
 import ShoppingbagTableVue from '../../components/orders/ShoppingbagTable.vue'
+import ShoppingbagOrderResume from '../../components/orders/ShoppingbagOrderResume.vue'
 </script>
 
 <style lang="scss" scoped>
@@ -56,6 +61,18 @@ h2 {
   font-weight: 700;
   line-height: 125%; /* 30px */
   text-transform: uppercase;
+}
+
+p {
+  margin-top: 16px;
+  color: #9F9C9C;
+  /* Desktop/Body/Text/Medium */
+  font-family: Ubuntu;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 125%; /* 20px */
+  margin-bottom: 32px;
 }
 
 .full-on-1199 {

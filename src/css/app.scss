@@ -1,5 +1,5 @@
 // app global css in SCSS form
-@use './pages/store.scss';
+@use "./pages/store.scss";
 
 @import url("https://fonts.googleapis.com/css2?family=Play:wght@400;700&family=Ubuntu:wght@400;700&display=swap");
 
@@ -197,7 +197,7 @@ ul {
         align-items: center;
         gap: 12px;
         position: relative;
-        transition: all .1s ease-out;
+        transition: all 0.1s ease-out;
 
         img {
           width: 100%;
@@ -227,7 +227,7 @@ ul {
             text-transform: uppercase;
           }
 
-          @media(max-width: 991px) {
+          @media (max-width: 991px) {
             background: rgba(0, 0, 0, 0.527);
           }
         }
@@ -235,7 +235,7 @@ ul {
         .back-content {
           display: none;
 
-          @media(max-width: 991px) {
+          @media (max-width: 991px) {
             display: flex;
             gap: 24px;
             flex-direction: column;
@@ -247,10 +247,8 @@ ul {
           }
         }
 
-        
-
         .front-content {
-          @media(max-width: 991px) {
+          @media (max-width: 991px) {
             display: none;
           }
         }
@@ -380,7 +378,7 @@ ul {
       cursor: pointer;
       box-sizing: border-box;
       position: relative;
-      transition: all .3s ease-out;
+      transition: all 0.3s ease-out;
 
       figure {
         width: 100%;
@@ -690,7 +688,6 @@ ul {
     transform: translateY(0);
   }
 }
-
 
 .cns-fields-section {
   display: flex;
@@ -1035,10 +1032,25 @@ ul {
 }
 
 @keyframes shake {
-  0% { transform: translatey(0); }
-  10%, 30%, 50%, 70%, 90% { transform: translatey(-5px); }
-  20%, 40%, 60%, 80% { transform: translatey(5px); }
-  100% { transform: translatey(0); }
+  0% {
+    transform: translatey(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translatey(-5px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translatey(5px);
+  }
+  100% {
+    transform: translatey(0);
+  }
 }
 
 .shake {
@@ -1046,7 +1058,7 @@ ul {
 }
 
 .hide-mobile {
-  @media(max-width: 767px) {
+  @media (max-width: 767px) {
     display: none;
   }
 }
@@ -1054,7 +1066,17 @@ ul {
 .show-mobile {
   display: none;
 
-  @media(max-width: 767px) {
+  @media (max-width: 767px) {
     display: table;
+  }
+}
+
+.order-resume {
+  .q-radio {
+    align-items: flex-start;
+
+    .q-radio__inner {
+      margin: 3px 0px !important;
+    }
   }
 }

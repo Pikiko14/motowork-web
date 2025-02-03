@@ -46,7 +46,7 @@
           <template #append>
             <q-icon size="16pt" class="cursor-pointer" name="img:/images/time.png">
               <q-popup-proxy ref="hourProxy" cover transition-show="scale" transition-hide="scale">
-                <q-time @update:model-value="setHour" v-model="form.hour" mask="HH:mm" format24h>
+                <q-time color="secondary" @update:model-value="setHour" v-model="form.hour" mask="HH:mm" format24h>
                 </q-time>
               </q-popup-proxy>
             </q-icon>

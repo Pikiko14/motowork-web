@@ -42,6 +42,10 @@ onBeforeMount(() => {
   padding: 24px 72px;
   margin: 0px auto;
   max-width: 1920px;
+
+  @media(max-width: 767px) {
+    padding: 24px 16px;
+  }
 }
 
 .q-link {
