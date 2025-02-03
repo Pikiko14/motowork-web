@@ -3,7 +3,7 @@
     <!--items grid-->
     <div class="motowork-item-page__grid--items">
       <!--item product-->
-      <article class="motowork-item-page__grid--items__product" v-for="(product, idx) in products" :key="idx">
+      <article class="motowork-item-page__grid--items__product" v-for="(product, idx) in products" :key="idx" @click="handlerRouterPush(product)">
         <figure>
           <img :src="getBannerUrl(idx)" :alt="`Imagen de la motocicleta ${product.name}`" title="product.name" />
           <div class="overflow">
@@ -88,6 +88,7 @@
 import { formatPrice } from 'src/utils/utils'
 import { useRoute, useRouter } from 'vue-router'
 import { defineProps, defineEmits, ref, onBeforeMount } from 'vue'
+import { useQuasar } from 'quasar'
 
 // emit
 const emit = defineEmits([
@@ -98,6 +99,7 @@ const emit = defineEmits([
 ])
 
 // reference
+const q = useQuasar()
 const minPrice = ref(1)
 const route = useRoute()
 const router = useRouter()
@@ -206,6 +208,24 @@ const urlString = (value) => {
     .replace(/[^a-zA-Z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '')
     .toLowerCase()
+}
+
+const handlerRouterPush = (product) => {
+  if (q.screen.gt.sm) {
+    return
+  }
+  let path = ''
+  if (route.query.type !== 'product') {
+    path = `/vehiculos/${urlString(product.name)}`
+  } else {
+    path = `/productos/${urlString(product.name)}`
+  }
+  router.push({
+    path,
+    query: {
+      reference: product._id
+    }
+  })
 }
 
 // hook
