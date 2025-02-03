@@ -43,13 +43,13 @@
 
 <script setup>
 // imports
-import { ref } from 'vue'
+import { ref, computed, onBeforeMount } from 'vue'
 import { useOrdersStore } from 'src/stores/ordersStore'
 
 // references
 const conveyor = ref('')
 const store = useOrdersStore()
-const shippingMethods = ref('delivery')
+const shippingMethods = ref('')
 const conveyorsOptions = [
   {
     label: 'Servientrega',
@@ -78,6 +78,15 @@ const emit = defineEmits([
   'update-shipping'
 ])
 
+// computed
+const shippingInStore = computed(() => {
+  return store.shippingMethodSelected
+})
+
+const conveyorInStore = computed(() => {
+  return store.conveyorSelected
+})
+
 // methods
 const handlerShippingMethods = (e) => {
   emit('update-shipping', e)
@@ -87,6 +96,16 @@ const setConveyor = (e) => {
   store.setConveyor(e)
 }
 
+// hook
+onBeforeMount(() => {
+  if (shippingInStore.value) {
+    shippingMethods.value = shippingInStore.value
+  }
+
+  if (conveyorInStore.value) {
+    conveyor.value = conveyorInStore.value
+  }
+})
 </script>
 
 <style scoped lang="scss">

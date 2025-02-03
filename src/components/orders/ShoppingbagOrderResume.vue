@@ -46,7 +46,7 @@
 
         <!--button to confuirm-->
         <div class="order-resume__total--action">
-          <q-btn square label="confirmar pago" color="secondary" unelevated class="full-width"></q-btn>
+          <q-btn :disable="shippingInStore === 'delivery' && !conveyorInStore || shippingInStore" square label="confirmar pago" color="secondary" unelevated class="full-width"></q-btn>
         </div>
         <!--End button to confirm-->
       </div>
@@ -66,6 +66,14 @@ const ordersStore = useOrdersStore()
 const shippingMethods = ref('delivery')
 
 // computed
+const shippingInStore = computed(() => {
+  return ordersStore.shippingMethodSelected
+})
+
+const conveyorInStore = computed(() => {
+  return ordersStore.conveyorSelected
+})
+
 const discount = computed(() => 0)
 
 const shipping = computed(() => 0)

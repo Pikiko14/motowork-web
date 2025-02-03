@@ -5,9 +5,9 @@ import { notification } from 'src/boot/notification'
 
 export const useOrdersStore = defineStore('ordersStore', () => {
   const productLimit = ref(3) // sacar del api del software de facturación
-  const conveyorSelected = ref('')
+  const conveyorSelected = ref(LocalStorage.getItem('conveyor') ? LocalStorage.getItem('conveyor') : '')
   const clearOrderForm = ref(false)
-  const shippingMethodSelected = ref('')
+  const shippingMethodSelected = ref(LocalStorage.getItem('shippingMethod') ? LocalStorage.getItem('shippingMethod') : '')
   const shoppingCart = ref(LocalStorage.getItem('cart_items') ? JSON.parse(LocalStorage.getItem('cart_items') || []) : [])
 
   const handlerClearOrderForm = () => {
@@ -109,11 +109,19 @@ export const useOrdersStore = defineStore('ordersStore', () => {
   }
 
   const setShippingMethod = (e) => {
+    if (LocalStorage.getItem('shippingMethod')) {
+      LocalStorage.remove('shippingMethod')
+    }
     shippingMethodSelected.value = e
+    LocalStorage.setItem('shippingMethod', e)
   }
 
   const setConveyor = (e) => {
+    if (LocalStorage.getItem('conveyor')) {
+      LocalStorage.remove('conveyor')
+    }
     conveyorSelected.value = e
+    LocalStorage.setItem('conveyor', e)
   }
 
   return {
