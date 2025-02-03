@@ -1,26 +1,25 @@
 <template>
   <div class="order-resume__shipping-methods">
     <article class="order-resume__shipping-methods--item">
-      <q-radio @update:model-value="handlerShippingMethods" dense v-model="shippingMethods" val="delivery" color="secondary">
+      <q-radio @update:model-value="handlerShippingMethods" dense v-model="shippingMethods" val="delivery"
+        color="secondary">
         <template #default>
           <div class="order-resume__shipping-methods--item__complement">
             <h3>
               Entrega
             </h3>
-            <span>
-              00.000$
-            </span>
           </div>
           <p>
-            000 COP para pedidos inferiores a 000 COP gratis para pedidos superiores a 000 COP.
-            La entrega se realizará en un plazo de 5 a 10 días hábiles.
-
+            El precio del envio dependera del peso total de tu pedido y la transportadora de tu elección.
           </p>
+          <q-select @update:model-value="setConveyor" emit-value map-options class="q-mt-md" :options="conveyorsOptions"
+            v-if="shippingMethods === 'delivery'" v-model="conveyor" square outlined></q-select>
         </template>
       </q-radio>
     </article>
     <article class="order-resume__shipping-methods--item">
-      <q-radio @update:model-value="handlerShippingMethods" dense v-model="shippingMethods" val="pick_on_store" color="secondary">
+      <q-radio @update:model-value="handlerShippingMethods" dense v-model="shippingMethods" val="pick_on_store"
+        color="secondary">
         <template #default>
           <div class="order-resume__shipping-methods--item__complement">
             <h3>
@@ -45,9 +44,34 @@
 <script setup>
 // imports
 import { ref } from 'vue'
+import { useOrdersStore } from 'src/stores/ordersStore'
 
 // references
+const conveyor = ref('')
+const store = useOrdersStore()
 const shippingMethods = ref('delivery')
+const conveyorsOptions = [
+  {
+    label: 'Servientrega',
+    value: 'servientrega'
+  },
+  {
+    label: 'Inter Rapidísimo',
+    value: 'inter_rapidisimo'
+  },
+  {
+    label: 'Coordinadora',
+    value: 'coordinadora'
+  },
+  {
+    label: 'Envía',
+    value: 'envia'
+  },
+  {
+    label: 'TCC',
+    value: 'tcc'
+  }
+]
 
 // emit
 const emit = defineEmits([
@@ -57,6 +81,10 @@ const emit = defineEmits([
 // methods
 const handlerShippingMethods = (e) => {
   emit('update-shipping', e)
+}
+
+const setConveyor = (e) => {
+  store.setConveyor(e)
 }
 
 </script>

@@ -18,7 +18,7 @@
       <figure>
         <img :src="getBannerUrl(idx)" :alt="`Imagen del producto ${product.name}`" :title="`Imagen del producto ${product.name}`" loading="lazy">
         <div class="motowork-product-accesories__grid--item__overflow">
-          <q-btn no-cap square outline color="white" label="Agregar al carrito"></q-btn>
+          <q-btn :to="`/productos/${urlString(product.name)}?reference=${product._id}`" square outline color="white" label="Agregar al carrito"></q-btn>
         </div>
         <figcaption>
           <h3>{{ product.name }}</h3>
@@ -46,8 +46,10 @@
 
 <script setup>
 // import
-import { defineProps, ref, defineEmits } from 'vue'
+import { useQuasar } from 'quasar'
 import { formatPrice } from 'src/utils/utils'
+import { useRouter } from 'vue-router'
+import { defineProps, ref, defineEmits } from 'vue'
 
 // props
 const props = defineProps({
@@ -65,6 +67,8 @@ const emit = defineEmits([
 ])
 
 // references
+const q = useQuasar()
+const router = useRouter()
 const gridContainer = ref(null)
 let touchStartX = 0
 let touchEndX = 0
@@ -111,7 +115,28 @@ const handleDragStart = (e) => {
 }
 
 const addProductToCart = (product) => {
-  alert(product.name)
+  if (q.screen.gt.sm) {
+    return
+  }
+  const path = `/productos/${urlString(product.name)}`
+
+  router.push({
+    path,
+    query: {
+      reference: product._id
+    }
+  })
+}
+
+const urlString = (value) => {
+  if (!value) return ''
+  return value
+    .toString()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-zA-Z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .toLowerCase()
 }
 
 const getBannerUrl = (idx) => {

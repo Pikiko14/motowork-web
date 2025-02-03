@@ -1,7 +1,7 @@
 <template>
   <section class="order-resume">
     <!--Shipping methods-->
-    <ShippingMethodsSelectorVue @update-shipping="((e) => shippingMethods = e)" :shippingMethods="shippingMethods" />
+    <ShippingMethodsSelectorVue @update-shipping="setShippingMethods" :shippingMethods="shippingMethods" />
     <!--End shipping methods-->
 
     <!--Total section-->
@@ -76,6 +76,12 @@ const total = computed(() => {
 })
 
 const subtotal = computed(() => (total.value / 1.19).toFixed(2))
+
+// methods
+const setShippingMethods = (e) => {
+  shippingMethods.value = e
+  ordersStore.setShippingMethod(e)
+}
 </script>
 
 <style scoped lang="scss">

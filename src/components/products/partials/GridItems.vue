@@ -85,10 +85,10 @@
 
 <script setup>
 // imports, ref
+import { useQuasar } from 'quasar'
 import { formatPrice } from 'src/utils/utils'
 import { useRoute, useRouter } from 'vue-router'
 import { defineProps, defineEmits, ref, onBeforeMount } from 'vue'
-import { useQuasar } from 'quasar'
 
 // emit
 const emit = defineEmits([
