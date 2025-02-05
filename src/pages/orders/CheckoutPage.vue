@@ -18,7 +18,7 @@
       <BreadCrumb />
       <!--End breadcrumb-->
 
-      <section class="row q-mt-xl">
+      <q-form class="row q-mt-xl">
         <div class="col-12 col-sm-12 col-md-7 full-on-1199" :class="{ 'q-pr-md': $q.screen.gt.sm }">
           <h2>
             Método de envió
@@ -41,7 +41,7 @@
           </h2>
           <ShoppingbagOrderResume />
         </div>
-      </section>
+      </q-form>
     </section>
   </q-page>
 </template>

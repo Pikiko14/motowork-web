@@ -1,5 +1,5 @@
 <template>
-  <q-form class="row shipping-form">
+  <div class="row shipping-form">
     <div class="col-12">
       <h2>
         Detalles de facturación
@@ -38,28 +38,82 @@
           </q-input>
         </div>
         <div class="col-12 col-md-6 relative" :class="{ 'q-pr-sm': $q.screen.gt.sm }">
-          <label :for="shippingData.lastname">Departamento <span class="text-secondary">*</span></label>
+          <label>Departamento <span class="text-secondary">*</span></label>
           <q-select @update:model-value="getCities" @filter="filterDepartament" use-input input-debounce="0"
             label="Selecciona una opción" hide-dropdown-icon class="q-mt-sm" square emit-value map-options
             :rules="[(val) => !!val || 'Selecciona una opción']" outlined v-model="shippingData.state"
             :options="departaments"></q-select>
-          <div class="select-custom-icom">
+          <div class="select-custom-icom" style="margin-right: 0px">
             <q-icon name="img:/images/chevron-right.webp"></q-icon>
           </div>
         </div>
         <div class="col-12 col-md-6 relative" :class="{ 'q-pl-sm': $q.screen.gt.sm }">
-          <label :for="shippingData.lastname">Ciudad <span class="text-secondary">*</span></label>
-          <q-select @filter="filterCity" use-input input-debounce="0" label="Selecciona una opción"
-            hide-dropdown-icon class="q-mt-sm" square emit-value map-options
-            :rules="[(val) => !!val || 'Selecciona una opción']" outlined v-model="shippingData.city"
-            :options="cities"></q-select>
+          <label>Ciudad <span class="text-secondary">*</span></label>
+          <q-select @filter="filterCity" use-input input-debounce="0" label="Selecciona una opción" hide-dropdown-icon
+            class="q-mt-sm" square emit-value map-options :rules="[(val) => !!val || 'Selecciona una opción']" outlined
+            v-model="shippingData.city" :options="cities"></q-select>
           <div class="select-custom-icom" style="margin-right: -8px">
             <q-icon name="img:/images/chevron-right.webp"></q-icon>
           </div>
         </div>
+        <div class="col-12">
+          <label for="address">
+            Dirección
+            <span>
+              *
+            </span>
+          </label>
+          <q-input id="address" outlined class="q-mt-sm" square placeholder="Carrera 75 # 6A - 99"
+            v-model="shippingData.address" :rules="[
+              vall => !!vall || 'Este campo es requerido',
+              vall => vall.length < 90 || 'Maximo 90 caracteres'
+            ]">
+          </q-input>
+        </div>
+        <div class="col-12">
+          <label for="type_of_housing">
+            Tipo de vivienda
+          </label>
+          <q-input id="type_of_housing" outlined class="q-mt-sm" square placeholder="Apartamento, Casa, Unidad, Otros"
+            v-model="shippingData.type_of_housing" />
+        </div>
+        <div class="col-12 q-mt-md q-pt-xs">
+          <label for="postal_code">
+            Código postal
+          </label>
+          <q-input id="postal_code" outlined class="q-mt-sm" square placeholder="05001"
+            v-model="shippingData.postal_code" />
+        </div>
+        <div class="col-12 col-md-6 q-mt-md q-pt-xs" :class="{ 'q-pr-sm': $q.screen.gt.sm }">
+          <label for="phone">
+            Teléfono
+            <span>
+              *
+            </span>
+          </label>
+          <q-input id="phone" outlined class="q-mt-sm" square placeholder="300 5253 654" v-model="shippingData.phone" mask="### #### ###" :rules="[
+            vall => !!vall || 'Este campo es requerido',
+            vall => vall.length <= 12 || 'Ingresa un teléfono valido'
+          ]">
+          </q-input>
+        </div>
+        <div class="col-12 col-md-6" :class="{ 'q-pl-sm q-mt-md q-pt-xs': $q.screen.gt.sm }">
+          <label for="email">
+            Correo
+            <span>
+              *
+            </span>
+          </label>
+          <q-input id="email" outlined class="q-mt-sm" square placeholder="jhon@doe.com" v-model="shippingData.email"
+            :rules="[
+              vall => !!vall || 'Este campo es requerido',
+              vall => /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(vall) || 'Ingresa un correo valido',
+            ]">
+          </q-input>
+        </div>
       </div>
     </section>
-  </q-form>
+  </div>
 </template>
 
 <script setup>
@@ -74,7 +128,8 @@ const shippingData = ref({
   name: '',
   lastname: '',
   city: '',
-  state: ''
+  state: '',
+  address: ''
 })
 
 // computed
