@@ -46,7 +46,7 @@
 
         <!--button to confuirm-->
         <div class="order-resume__total--action">
-          <q-btn :disable="shippingInStore === 'delivery' && !conveyorInStore || shippingInStore" square label="confirmar pago" color="secondary" unelevated class="full-width"></q-btn>
+          <q-btn to="/carro-de-compra/detalles-del-envio" :disable="shippingInStore === 'delivery' && !conveyorInStore || shippingInStore" square label="confirmar pago" color="secondary" unelevated class="full-width"></q-btn>
         </div>
         <!--End button to confirm-->
       </div>

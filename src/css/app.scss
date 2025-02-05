@@ -1071,9 +1071,9 @@ ul {
   }
 }
 
-.order-resume {
+.order-resume, .checkout-page {
   .q-radio {
-    align-items: flex-start;
+    align-items: flex-start !important;
 
     .q-radio__inner {
       margin: 3px 0px !important;

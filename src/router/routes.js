@@ -33,6 +33,11 @@ const routes = [
         path: 'carro-de-compra',
         component: () => import('src/pages/orders/ShoppingBag.vue'),
         name: 'shoppingCart'
+      },
+      {
+        path: 'carro-de-compra/detalles-del-envio',
+        component: () => import('src/pages/orders/CheckoutPage.vue'),
+        name: 'checkout'
       }
     ]
   },

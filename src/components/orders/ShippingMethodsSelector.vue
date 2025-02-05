@@ -1,5 +1,5 @@
 <template>
-  <div class="order-resume__shipping-methods">
+  <div class="order-resume__shipping-methods" :class="{ 'full-width': $route.path === '/carro-de-compra/detalles-del-envio' }">
     <article class="order-resume__shipping-methods--item">
       <q-radio @update:model-value="handlerShippingMethods" dense v-model="shippingMethods" val="delivery"
         color="secondary">
@@ -10,7 +10,7 @@
             </h3>
           </div>
           <p>
-            El precio del envio dependera del peso total de tu pedido y la transportadora de tu elección.
+            El precio del envio dependera del peso total de tu pedido y la transportadora de tu elección. El tiempo de entrega dependera de la transportadora seleccionada y el costo del envio sera costeado por el cliente.
           </p>
           <q-select @update:model-value="setConveyor" emit-value map-options class="q-mt-md" :options="conveyorsOptions"
             v-if="shippingMethods === 'delivery'" v-model="conveyor" square outlined></q-select>
@@ -112,6 +112,7 @@ onBeforeMount(() => {
 .order-resume__shipping-methods {
   display: flex;
   flex-direction: column;
+  max-width: 640px;
 
   &--item {
     display: flex;
@@ -157,5 +158,9 @@ onBeforeMount(() => {
       border-top: 1px solid #E3E3E3;
     }
   }
+}
+
+.full-width {
+  max-width: 100%;
 }
 </style>
