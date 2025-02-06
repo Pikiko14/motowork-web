@@ -48,10 +48,10 @@
       <!--button to confuirm-->
       <div class="order-resume__total--action">
         <q-btn v-if="$route.path !== '/carro-de-compra/detalles-del-envio'" to="/carro-de-compra/detalles-del-envio"
-          :disable="shippingInStore === 'delivery' && !conveyorInStore || shippingInStore" square label="confirmar pago"
+          :disable="shippingInStore === 'delivery' && !conveyorInStore || shippingInStore || !cartItems" square label="confirmar pago"
           color="secondary" unelevated class="full-width"></q-btn>
         <q-btn type="submit" v-else :disable="shippingInStore === 'delivery' && !conveyorInStore || shippingInStore" square
-          label="confirmar pago" color="secondary" unelevated class="full-width"></q-btn>
+          label="Realizar pedido" color="secondary" unelevated class="full-width"></q-btn>
       </div>
       <!--End button to confirm-->
     </div>
@@ -77,6 +77,10 @@ const shippingInStore = computed(() => {
 
 const conveyorInStore = computed(() => {
   return ordersStore.conveyorSelected
+})
+
+const cartItems = computed(() => {
+  return ordersStore.shoppingCart
 })
 
 const discount = computed(() => 0)

@@ -43,7 +43,7 @@
             label="Selecciona una opción" hide-dropdown-icon class="q-mt-sm" square emit-value map-options
             :rules="[(val) => !!val || 'Selecciona una opción']" outlined v-model="shippingData.state"
             :options="departaments"></q-select>
-          <div class="select-custom-icom" style="margin-right: 0px">
+          <div class="select-custom-icom mr-mobile">
             <q-icon name="img:/images/chevron-right.webp"></q-icon>
           </div>
         </div>
@@ -81,7 +81,7 @@
           <label for="postal_code">
             Código postal
           </label>
-          <q-input id="postal_code" outlined class="q-mt-sm" square placeholder="05001"
+          <q-input mask="######" id="postal_code" outlined class="q-mt-sm" square placeholder="05001"
             v-model="shippingData.postal_code" />
         </div>
         <div class="col-12 col-md-6 q-mt-md q-pt-xs" :class="{ 'q-pr-sm': $q.screen.gt.sm }">
@@ -91,10 +91,11 @@
               *
             </span>
           </label>
-          <q-input id="phone" outlined class="q-mt-sm" square placeholder="300 5253 654" v-model="shippingData.phone" mask="### #### ###" :rules="[
-            vall => !!vall || 'Este campo es requerido',
-            vall => vall.length <= 12 || 'Ingresa un teléfono valido'
-          ]">
+          <q-input id="phone" outlined class="q-mt-sm" square placeholder="300 5253 654" v-model="shippingData.phone"
+            mask="### #### ###" :rules="[
+              vall => !!vall || 'Este campo es requerido',
+              vall => vall.length <= 12 || 'Ingresa un teléfono valido'
+            ]">
           </q-input>
         </div>
         <div class="col-12 col-md-6" :class="{ 'q-pl-sm q-mt-md q-pt-xs': $q.screen.gt.sm }">
@@ -118,8 +119,9 @@
 
 <script setup>
 // imports
-import { onBeforeMount, ref } from 'vue'
+import { onBeforeMount, ref, watch } from 'vue'
 import Colombia from '../../utils/colombia.json'
+import { useOrdersStore } from 'src/stores/ordersStore'
 
 // references
 const cities = ref([])
@@ -129,12 +131,89 @@ const shippingData = ref({
   lastname: '',
   city: '',
   state: '',
-  address: ''
+  address: '',
+  type_of_housing: '',
+  postal_code: '',
+  phone: '',
+  email: ''
 })
-
-// computed
 const departaments = ref([])
+const store = useOrdersStore()
 const allDepartaments = ref([])
+
+// watchs
+
+// set name
+watch(
+  () => shippingData.value.name,
+  (val) => {
+    store.setShippingData({ key: 'name', value: val })
+  }
+)
+
+// set lastname
+watch(
+  () => shippingData.value.lastname,
+  (val) => {
+    store.setShippingData({ key: 'lastname', value: val })
+  }
+)
+
+// set state
+watch(
+  () => shippingData.value.state,
+  (val) => {
+    store.setShippingData({ key: 'state', value: val })
+  }
+)
+
+// set city
+watch(
+  () => shippingData.value.city,
+  (val) => {
+    store.setShippingData({ key: 'city', value: val })
+  }
+)
+
+// set address
+watch(
+  () => shippingData.value.address,
+  (val) => {
+    store.setShippingData({ key: 'address', value: val })
+  }
+)
+
+// set type_of_housing
+watch(
+  () => shippingData.value.type_of_housing,
+  (val) => {
+    store.setShippingData({ key: 'type_of_housing', value: val })
+  }
+)
+
+// set postal_code
+watch(
+  () => shippingData.value.postal_code,
+  (val) => {
+    store.setShippingData({ key: 'postal_code', value: val })
+  }
+)
+
+// set phone
+watch(
+  () => shippingData.value.phone,
+  (val) => {
+    store.setShippingData({ key: 'phone', value: val })
+  }
+)
+
+// set email
+watch(
+  () => shippingData.value.email,
+  (val) => {
+    store.setShippingData({ key: 'email', value: val })
+  }
+)
 
 // methods
 const filterDepartament = (val, update) => {
@@ -268,5 +347,11 @@ onBeforeMount(() => {
 
 .relative {
   position: relative;
+}
+
+.mr-mobile {
+  @media(max-width: 1023px) {
+    margin-right: -8px;
+  }
 }
 </style>

@@ -18,7 +18,7 @@
       <BreadCrumb />
       <!--End breadcrumb-->
 
-      <q-form class="row q-mt-xl">
+      <q-form class="row q-mt-xl" @submit="handlerSaveOrder">
         <div class="col-12 col-sm-12 col-md-7 full-on-1199" :class="{ 'q-pr-xl': $q.screen.gt.sm }">
           <h2>
             Método de envió
@@ -73,10 +73,34 @@ const shoppingCart = computed(() => {
   return ordersStore.shoppingCart
 })
 
+const shippingData = computed(() => {
+  return ordersStore.shippingData
+})
+
+const conveyor = computed(() => {
+  return ordersStore.conveyorSelected
+})
+
+const shippingMethod = computed(() => {
+  return ordersStore.shippingMethodSelected
+})
+
 // methods
 const setShippingMethods = (e) => {
   shippingMethods.value = e
   ordersStore.setShippingMethod(e)
+}
+
+const handlerSaveOrder = () => {
+  const order = {
+    conveyor: conveyor.value || null,
+    shippingMethod: shippingMethod.value || 'pick_on_store',
+    client: {
+      ...shippingData.value
+    },
+    items: shoppingCart.value || []
+  }
+  console.log(order)
 }
 
 </script>

@@ -4,6 +4,17 @@ import { LocalStorage } from 'quasar'
 import { notification } from 'src/boot/notification'
 
 export const useOrdersStore = defineStore('ordersStore', () => {
+  const shippingData = ref({
+    name: '',
+    lastname: '',
+    city: '',
+    state: '',
+    address: '',
+    type_of_housing: '',
+    postal_code: '',
+    phone: '',
+    email: ''
+  })
   const productLimit = ref(3) // sacar del api del software de facturación
   const conveyorSelected = ref(LocalStorage.getItem('conveyor') ? LocalStorage.getItem('conveyor') : '')
   const clearOrderForm = ref(false)
@@ -124,13 +135,19 @@ export const useOrdersStore = defineStore('ordersStore', () => {
     LocalStorage.setItem('conveyor', e)
   }
 
+  const setShippingData = (obj) => {
+    shippingData.value[obj.key] = obj.value
+  }
+
   return {
     setConveyor,
     addQuantity,
     shoppingCart,
     productLimit,
+    shippingData,
     removeQuantity,
     clearOrderForm,
+    setShippingData,
     addNewItemToCar,
     conveyorSelected,
     countItemsInCart,
