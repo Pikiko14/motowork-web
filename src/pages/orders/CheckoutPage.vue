@@ -121,9 +121,9 @@ const handlerSaveOrder = async () => {
   try {
     const response = await orderContent.saveOrders(order)
     if (response.success) {
+      ordersStore.clearStore()
       notification('positive', response.message, 'primary')
       formRef.value.reset()
-      orderContent.clearStore()
     }
   } catch (error) {
   } finally {
