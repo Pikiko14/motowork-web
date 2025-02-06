@@ -5,7 +5,7 @@ import { notification } from 'src/boot/notification'
 
 export const useOrdersStore = defineStore('ordersStore', () => {
   const shippingData = ref({
-    name: '',
+    firstName: '',
     lastname: '',
     city: '',
     state: '',

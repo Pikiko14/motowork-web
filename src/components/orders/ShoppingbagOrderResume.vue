@@ -50,7 +50,7 @@
         <q-btn v-if="$route.path !== '/carro-de-compra/detalles-del-envio'" to="/carro-de-compra/detalles-del-envio"
           :disable="shippingInStore === 'delivery' && !conveyorInStore || shippingInStore || !cartItems" square label="confirmar pago"
           color="secondary" unelevated class="full-width"></q-btn>
-        <q-btn type="submit" v-else :disable="shippingInStore === 'delivery' && !conveyorInStore || shippingInStore" square
+        <q-btn :loading="loading" type="submit" v-else :disable="shippingInStore === 'delivery' && !conveyorInStore || shippingInStore" square
           label="Realizar pedido" color="secondary" unelevated class="full-width"></q-btn>
       </div>
       <!--End button to confirm-->
@@ -61,10 +61,18 @@
 
 <script setup>
 // imports
-import { ref, computed } from 'vue'
 import { formatPrice } from 'src/utils/utils'
+import { ref, computed, defineProps } from 'vue'
 import { useOrdersStore } from 'src/stores/ordersStore'
 import ShippingMethodsSelectorVue from './ShippingMethodsSelector.vue'
+
+// props
+defineProps({
+  loading: {
+    type: Boolean,
+    default: () => false
+  }
+})
 
 // references
 const ordersStore = useOrdersStore()

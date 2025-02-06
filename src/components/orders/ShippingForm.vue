@@ -11,13 +11,13 @@
     <section class="col-12 fields-section">
       <div class="row">
         <div class="col-12 col-md-6" :class="{ 'q-pr-sm': $q.screen.gt.sm }">
-          <label for="name">
+          <label for="firstName">
             Nombre
             <span>
               *
             </span>
           </label>
-          <q-input id="name" outlined class="q-mt-sm" square placeholder="Jhon" v-model="shippingData.name" :rules="[
+          <q-input id="firstName" outlined class="q-mt-sm" square placeholder="Jhon" v-model="shippingData.firstName" :rules="[
             vall => !!vall || 'Este campo es requerido',
             vall => /^[A-ZÁÉÍÓÚÑa-záéíóúñ]+(?: [A-ZÁÉÍÓÚÑa-záéíóúñ]+)*$/.test(vall) || 'Ingresa un nombre valido'
           ]">
@@ -30,7 +30,7 @@
               *
             </span>
           </label>
-          <q-input id="lastname" outlined class="q-mt-sm" square placeholder="Doe" v-model="shippingData.lastname"
+          <q-input id="lastname" outlined class="q-mt-sm" square placeholder="Doe" v-model="shippingData.lastName"
             :rules="[
               vall => !!vall || 'Este campo es requerido',
               vall => /^[A-ZÁÉÍÓÚÑa-záéíóúñ]+(?: [A-ZÁÉÍÓÚÑa-záéíóúñ]+)*$/.test(vall) || 'Ingresa un apellido valido'
@@ -127,8 +127,8 @@ import { useOrdersStore } from 'src/stores/ordersStore'
 const cities = ref([])
 const allCities = ref([])
 const shippingData = ref({
-  name: '',
-  lastname: '',
+  firstName: '',
+  lastName: '',
   city: '',
   state: '',
   address: '',
@@ -145,17 +145,17 @@ const allDepartaments = ref([])
 
 // set name
 watch(
-  () => shippingData.value.name,
+  () => shippingData.value.firstName,
   (val) => {
-    store.setShippingData({ key: 'name', value: val })
+    store.setShippingData({ key: 'firstName', value: val })
   }
 )
 
 // set lastname
 watch(
-  () => shippingData.value.lastname,
+  () => shippingData.value.lastName,
   (val) => {
-    store.setShippingData({ key: 'lastname', value: val })
+    store.setShippingData({ key: 'lastName', value: val })
   }
 )
 

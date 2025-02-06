@@ -181,7 +181,7 @@
         </div>
       </div>
     </div>
-    <q-btn :loading="loading" label="Agendar test drive" type="submit" :class="{ 'absolute-bottom': $q.screen.gt.xs }" class="full-width"
+    <q-btn :loading="loading" label="Prueba de manejo" type="submit" :class="{ 'absolute-bottom': $q.screen.gt.xs }" class="full-width"
       color="secondary" unelevated=""></q-btn>
   </q-form>
 </template>
@@ -363,6 +363,7 @@ const setHour = () => {
   max-width: 680px;
   left: (50%);
   transform: translateX(-50%);
+  min-height: 48px;
 
   @media(max-width: 767px) {
     margin-top: 36px;

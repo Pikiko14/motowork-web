@@ -45,7 +45,7 @@
           <!--End products items-->
 
           <!--En cart totals-->
-          <ShoppingbagOrderResume />
+          <ShoppingbagOrderResume :loading="loading" />
           <!--End cart totals-->
         </div>
       </q-form>
@@ -55,18 +55,22 @@
 
 <script setup>
 // import
-import { ref, computed } from 'vue'
+import { ref, computed, toRaw } from 'vue'
 import { useOrdersStore } from 'src/stores/ordersStore'
 import BreadCrumb from 'src/components/layout/BreadCrumb.vue'
 import ShippingForm from 'src/components/orders/ShippingForm.vue'
+import { useOrdersContent } from 'src/composables/useOrdersContent'
 import BannerMotowork from 'src/components/banner/BannerMotowork.vue'
 import CheckoutListProduct from 'src/components/orders/CheckoutListProduct.vue'
 import ShoppingbagOrderResume from '../../components/orders/ShoppingbagOrderResume.vue'
 import ShippingMethodsSelectorVue from 'src/components/orders/ShippingMethodsSelector.vue'
+import { notification } from 'src/boot/notification'
 
 // references
+const loading = ref(false)
 const ordersStore = useOrdersStore()
 const shippingMethods = ref('delivery')
+const orderContent = useOrdersContent()
 
 // computed
 const shoppingCart = computed(() => {
@@ -85,6 +89,15 @@ const shippingMethod = computed(() => {
   return ordersStore.shippingMethodSelected
 })
 
+const shipping = computed(() => 0)
+
+const total = computed(() => {
+  const total = ordersStore.shoppingCart.reduce((accumulated, item) => accumulated + parseFloat(item.total), 0)
+  return (total + shipping.value) || 0
+})
+
+const subtotal = computed(() => (total.value / 1.19).toFixed(2))
+
 // methods
 const setShippingMethods = (e) => {
   shippingMethods.value = e
@@ -92,15 +105,27 @@ const setShippingMethods = (e) => {
 }
 
 const handlerSaveOrder = () => {
+  loading.value = true
   const order = {
     conveyor: conveyor.value || null,
     shippingMethod: shippingMethod.value || 'pick_on_store',
     client: {
       ...shippingData.value
     },
-    items: shoppingCart.value || []
+    items: toRaw(shoppingCart.value) || [],
+    subtotal: subtotal.value,
+    total: total.value,
+    type: 'Sales Order'
   }
-  console.log(order)
+  try {
+    const response = orderContent.saveOrders(order)
+    if (response.success) {
+      notification('positive', response.message, 'primary')
+    }
+  } catch (error) {
+  } finally {
+    loading.value = false
+  }
 }
 
 </script>
