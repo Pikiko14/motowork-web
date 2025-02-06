@@ -37,6 +37,19 @@
             ]">
           </q-input>
         </div>
+        <div class="col-12">
+          <label for="dni">
+            Cédula de identidad
+            <span>
+              *
+            </span>
+          </label>
+          <q-input id="dni" mask="#################" outlined class="q-mt-sm" square placeholder="1234567890" v-model="shippingData.dni"
+            :rules="[
+              vall => !!vall || 'Este campo es requerido'
+            ]">
+          </q-input>
+        </div>
         <div class="col-12 col-md-6 relative" :class="{ 'q-pr-sm': $q.screen.gt.sm }">
           <label>Departamento <span class="text-secondary">*</span></label>
           <q-select @update:model-value="getCities" @filter="filterDepartament" use-input input-debounce="0"
@@ -135,7 +148,8 @@ const shippingData = ref({
   type_of_housing: '',
   postal_code: '',
   phone: '',
-  email: ''
+  email: '',
+  dni: ''
 })
 const departaments = ref([])
 const store = useOrdersStore()
@@ -161,7 +175,8 @@ watch(
       type_of_housing: '',
       postal_code: '',
       phone: '',
-      email: ''
+      email: '',
+      dni: ''
     }
   }
 )
@@ -179,6 +194,14 @@ watch(
   () => shippingData.value.lastName,
   (val) => {
     store.setShippingData({ key: 'lastName', value: val })
+  }
+)
+
+// set dni
+watch(
+  () => shippingData.value.dni,
+  (val) => {
+    store.setShippingData({ key: 'dni', value: val })
   }
 )
 

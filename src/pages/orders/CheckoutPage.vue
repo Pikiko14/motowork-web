@@ -123,6 +123,7 @@ const handlerSaveOrder = async () => {
     if (response.success) {
       notification('positive', response.message, 'primary')
       formRef.value.reset()
+      orderContent.clearStore()
     }
   } catch (error) {
   } finally {

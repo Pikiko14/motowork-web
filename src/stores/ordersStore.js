@@ -13,13 +13,24 @@ export const useOrdersStore = defineStore('ordersStore', () => {
     type_of_housing: '',
     postal_code: '',
     phone: '',
-    email: ''
+    email: '',
+    dni: ''
   })
   const productLimit = ref(3) // sacar del api del software de facturación
-  const conveyorSelected = ref(LocalStorage.getItem('conveyor') ? LocalStorage.getItem('conveyor') : '')
+  const conveyorSelected = ref(
+    LocalStorage.getItem('conveyor') ? LocalStorage.getItem('conveyor') : ''
+  )
   const clearOrderForm = ref(false)
-  const shippingMethodSelected = ref(LocalStorage.getItem('shippingMethod') ? LocalStorage.getItem('shippingMethod') : '')
-  const shoppingCart = ref(LocalStorage.getItem('cart_items') ? JSON.parse(LocalStorage.getItem('cart_items') || []) : [])
+  const shippingMethodSelected = ref(
+    LocalStorage.getItem('shippingMethod')
+      ? LocalStorage.getItem('shippingMethod')
+      : ''
+  )
+  const shoppingCart = ref(
+    LocalStorage.getItem('cart_items')
+      ? JSON.parse(LocalStorage.getItem('cart_items') || [])
+      : []
+  )
 
   const handlerClearOrderForm = () => {
     clearOrderForm.value = !clearOrderForm.value
@@ -104,7 +115,7 @@ export const useOrdersStore = defineStore('ordersStore', () => {
   const calculateTotalInCart = () => {
     shoppingCart.value = shoppingCart.value.map((item) => {
       // calculate total
-      const total = (item.quantity * item.purchasePrice)
+      const total = item.quantity * item.purchasePrice
       item.total = total.toFixed(2)
 
       // return item
@@ -143,6 +154,21 @@ export const useOrdersStore = defineStore('ordersStore', () => {
     LocalStorage.remove('conveyor')
     LocalStorage.remove('shippingMethod')
     LocalStorage.removeItem('cart_items')
+    shippingData.value = {
+      firstName: '',
+      lastName: '',
+      city: '',
+      state: '',
+      address: '',
+      type_of_housing: '',
+      postal_code: '',
+      phone: '',
+      email: '',
+      dni: ''
+    }
+    conveyorSelected.value = ''
+    shippingMethodSelected.value = ''
+    shoppingCart.value = []
   }
 
   return {
