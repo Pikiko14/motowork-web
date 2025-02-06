@@ -1,55 +1,60 @@
 <template>
   <section class="order-resume">
     <!--Shipping methods-->
-    <ShippingMethodsSelectorVue @update-shipping="setShippingMethods" :shippingMethods="shippingMethods" />
+    <ShippingMethodsSelectorVue v-if="$route.path !== '/carro-de-compra/detalles-del-envio'"
+      @update-shipping="setShippingMethods" :shippingMethods="shippingMethods" />
     <!--End shipping methods-->
 
     <!--Total section-->
-      <div class="order-resume__total">
-        <h2>
-          Total del carrito
-        </h2>
+    <div class="order-resume__total">
+      <h2>
+        Total del carrito
+      </h2>
 
-        <div class="order-resume__total--items">
-          <div class="order-resume__total--items__item">
-            <span>Subtotal</span>
-            <span class="value">
-              {{ formatPrice(subtotal) }}
-            </span>
-          </div>
-
-          <div class="order-resume__total--items__item">
-            <span>Envio</span>
-            <span class="value text-success">
-              {{ shippingMethods === 'delivery' ? formatPrice(shipping || 0) : 'Gratis' }}
-            </span>
-          </div>
-
-          <div class="order-resume__total--items__item">
-            <span>Descuento</span>
-            <span class="value text-success">
-              -{{ discount }}
-            </span>
-          </div>
-        </div>
-
-        <!--total item-->
-        <div class="order-resume__total--total">
-          <span class="label">
-            Total  (IVA incluido)
-          </span>
+      <div class="order-resume__total--items">
+        <div class="order-resume__total--items__item">
+          <span>Subtotal</span>
           <span class="value">
-            {{ formatPrice(total) }}
+            {{ formatPrice(subtotal) }}
           </span>
         </div>
-        <!--end total item-->
 
-        <!--button to confuirm-->
-        <div class="order-resume__total--action">
-          <q-btn to="/carro-de-compra/detalles-del-envio" :disable="shippingInStore === 'delivery' && !conveyorInStore || shippingInStore" square label="confirmar pago" color="secondary" unelevated class="full-width"></q-btn>
+        <div class="order-resume__total--items__item">
+          <span>Envio</span>
+          <span class="value text-success">
+            {{ shippingMethods === 'delivery' ? formatPrice(shipping || 0) : 'Gratis' }}
+          </span>
         </div>
-        <!--End button to confirm-->
+
+        <div class="order-resume__total--items__item">
+          <span>Descuento</span>
+          <span class="value text-success">
+            -{{ discount }}
+          </span>
+        </div>
       </div>
+
+      <!--total item-->
+      <div class="order-resume__total--total">
+        <span class="label">
+          Total (IVA incluido)
+        </span>
+        <span class="value">
+          {{ formatPrice(total) }}
+        </span>
+      </div>
+      <!--end total item-->
+
+      <!--button to confuirm-->
+      <div class="order-resume__total--action">
+        <q-btn v-if="$route.path !== '/carro-de-compra/detalles-del-envio'" to="/carro-de-compra/detalles-del-envio"
+          :disable="shippingInStore === 'delivery' && !conveyorInStore || shippingInStore" square label="confirmar pago"
+          color="secondary" unelevated class="full-width"></q-btn>
+        <q-btn type="submit" v-else :disable="shippingInStore === 'delivery' && !conveyorInStore || shippingInStore" square
+          label="confirmar pago" color="secondary" unelevated class="full-width"></q-btn>
+      </div>
+      <!--End button to confirm-->
+    </div>
     <!--End total section-->
   </section>
 </template>
@@ -111,7 +116,8 @@ const setShippingMethods = (e) => {
       font-size: 24px;
       font-style: normal;
       font-weight: 700;
-      line-height: 125%; /* 30px */
+      line-height: 125%;
+      /* 30px */
       text-transform: uppercase;
     }
 
@@ -130,7 +136,8 @@ const setShippingMethods = (e) => {
         font-size: 16px;
         font-style: normal;
         font-weight: 700;
-        line-height: 125%; /* 20px */
+        line-height: 125%;
+        /* 20px */
         text-transform: uppercase;
 
         display: flex;
@@ -144,7 +151,8 @@ const setShippingMethods = (e) => {
           font-size: 16px;
           font-style: normal;
           font-weight: 700;
-          line-height: 125%; /* 20px */
+          line-height: 125%;
+          /* 20px */
           text-transform: uppercase;
         }
 
@@ -170,7 +178,8 @@ const setShippingMethods = (e) => {
         font-size: 16px;
         font-style: normal;
         font-weight: 700;
-        line-height: 125%; /* 20px */
+        line-height: 125%;
+        /* 20px */
         text-transform: uppercase;
       }
 
@@ -182,7 +191,8 @@ const setShippingMethods = (e) => {
         font-size: 24px;
         font-style: normal;
         font-weight: 700;
-        line-height: 125%; /* 30px */
+        line-height: 125%;
+        /* 30px */
         text-transform: uppercase;
       }
     }

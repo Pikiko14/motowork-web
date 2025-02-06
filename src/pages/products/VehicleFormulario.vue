@@ -122,13 +122,14 @@
 // imports
 import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
+import { useMeta } from 'quasar'
+import { notification } from 'src/boot/notification'
 import BreadCrumb from 'src/components/layout/BreadCrumb.vue'
 import { useStoreContent } from 'src/stores/storeContent-store'
 import { useOrdersContent } from 'src/composables/useOrdersContent'
 import BannerMotowork from 'src/components/banner/BannerMotowork.vue'
 import { useProductsContent } from 'src/composables/useProductContent'
 import VehicleForm from 'src/components/products/partials/VehicleForm.vue'
-import { notification } from 'src/boot/notification'
 
 // references
 const route = useRoute()
@@ -195,6 +196,86 @@ const doSendRequest = async (formData) => {
     loading.value = false
   }
 }
+
+// set metadada
+const metaData = {
+  // sets document title
+  title: 'MotoWork',
+  // optional; sets final title as "Index Page - My Website", useful for multiple level meta
+  titleTemplate: title => `${title} - Agenda tu prueba de manejo de la ${route.params.product_name}`,
+
+  // meta tags
+  meta: {
+    description: {
+      name: 'description',
+      content: 'Agenda tu test drive para poder probar la motocicleta de tus sueños y vive la mejor experiencia YAMAHA'
+    },
+    keywords: {
+      name: 'keywords',
+      content: 'Yamaha, motocicletas Yamaha, motos Yamaha, NMAX, CRYPTON, XMAX300, TMAX, MT-03, Ténéré 700, motos deportivas, motos urbanas, motos de aventura, motocicletas confiables, venta de motos, motos nuevas Yamaha, concesionarios Yamaha, motos económicas, Pruebas de manejo, Test Drive, accesorios Yamaha'
+    },
+    equiv: {
+      'http-equiv': 'Content-Type',
+      content: 'text/html; charset=UTF-8'
+    },
+    ogTitle: {
+      property: 'og:title',
+      template (ogTitle) {
+        return `${ogTitle} - Agenda tu prueba de manejo`
+      }
+    },
+    ogDescription: {
+      property: 'og:description',
+      content: 'Agenda tu test drive para poder probar la motocicleta de tus sueños y vive la mejor experiencia YAMAHA. ¡La moto perfecta para cada aventura está aquí!'
+    },
+    ogType: {
+      property: 'og:type',
+      content: 'website'
+    },
+    ogUrl: {
+      property: 'og:url',
+      content: 'https://www.motowork.co'
+    },
+    twitterCard: {
+      name: 'twitter:card',
+      content: 'summary_large_image'
+    },
+    twitterTitle: {
+      name: 'twitter:title',
+      content: 'MotoWork - Web'
+    },
+    twitterDescription: {
+      name: 'twitter:description',
+      content: 'Agenda tu test drive para poder probar la motocicleta de tus sueños y vive la mejor experiencia YAMAHA.'
+    },
+    robots: {
+      name: 'robots',
+      content: 'index, follow'
+    },
+    language: {
+      name: 'language',
+      content: 'es'
+    }
+  },
+
+  // CSS tags
+  link: {
+    favicon: {
+      rel: 'icon',
+      href: '/favicon.ico'
+    },
+    canonical: {
+      rel: 'canonical',
+      href: 'https://www.motowork.co'
+    }
+  },
+
+  // <noscript> tags
+  noscript: {
+    default: 'Este contenido es visible para navegadores sin soporte de JavaScript o con JavaScript desactivado.'
+  }
+}
+useMeta(metaData)
 
 // hook
 </script>

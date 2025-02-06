@@ -19,7 +19,7 @@
       <!--End breadcrumb-->
 
       <q-form class="row q-mt-xl">
-        <div class="col-12 col-sm-12 col-md-7 full-on-1199" :class="{ 'q-pr-md': $q.screen.gt.sm }">
+        <div class="col-12 col-sm-12 col-md-7 full-on-1199" :class="{ 'q-pr-xl': $q.screen.gt.sm }">
           <h2>
             Método de envió
           </h2>
@@ -35,11 +35,18 @@
           <!--formulario de shipping-->
         </div>
 
-        <div class="col-12 col-sm-12 col-md-5 full-on-1199" :class="{ 'q-pl-md': $q.screen.gt.sm }">
+        <div class="col-12 col-sm-12 col-md-5 full-on-1199" :class="{ 'q-pl-xl': $q.screen.gt.sm }">
           <h2>
             Detalles de tu pedido
           </h2>
+
+          <!--Product items-->
+          <CheckoutListProduct :products="shoppingCart" />
+          <!--End products items-->
+
+          <!--En cart totals-->
           <ShoppingbagOrderResume />
+          <!--End cart totals-->
         </div>
       </q-form>
     </section>
@@ -48,16 +55,23 @@
 
 <script setup>
 // import
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useOrdersStore } from 'src/stores/ordersStore'
 import BreadCrumb from 'src/components/layout/BreadCrumb.vue'
 import ShippingForm from 'src/components/orders/ShippingForm.vue'
 import BannerMotowork from 'src/components/banner/BannerMotowork.vue'
+import CheckoutListProduct from 'src/components/orders/CheckoutListProduct.vue'
+import ShoppingbagOrderResume from '../../components/orders/ShoppingbagOrderResume.vue'
 import ShippingMethodsSelectorVue from 'src/components/orders/ShippingMethodsSelector.vue'
 
 // references
 const ordersStore = useOrdersStore()
 const shippingMethods = ref('delivery')
+
+// computed
+const shoppingCart = computed(() => {
+  return ordersStore.shoppingCart
+})
 
 // methods
 const setShippingMethods = (e) => {
