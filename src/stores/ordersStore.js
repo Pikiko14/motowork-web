@@ -6,7 +6,7 @@ import { notification } from 'src/boot/notification'
 export const useOrdersStore = defineStore('ordersStore', () => {
   const shippingData = ref({
     firstName: '',
-    lastname: '',
+    lastName: '',
     city: '',
     state: '',
     address: '',
@@ -139,7 +139,14 @@ export const useOrdersStore = defineStore('ordersStore', () => {
     shippingData.value[obj.key] = obj.value
   }
 
+  const clearStore = () => {
+    LocalStorage.remove('conveyor')
+    LocalStorage.remove('shippingMethod')
+    LocalStorage.removeItem('cart_items')
+  }
+
   return {
+    clearStore,
     setConveyor,
     addQuantity,
     shoppingCart,

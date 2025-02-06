@@ -119,7 +119,7 @@
 
 <script setup>
 // imports
-import { onBeforeMount, ref, watch } from 'vue'
+import { computed, onBeforeMount, ref, watch } from 'vue'
 import Colombia from '../../utils/colombia.json'
 import { useOrdersStore } from 'src/stores/ordersStore'
 
@@ -141,7 +141,30 @@ const departaments = ref([])
 const store = useOrdersStore()
 const allDepartaments = ref([])
 
+// computed
+const clearForm = computed(() => {
+  return store.clearOrderForm
+})
+
 // watchs
+
+// clear form
+watch(
+  () => clearForm.value,
+  () => {
+    shippingData.value = {
+      firstName: '',
+      lastName: '',
+      city: '',
+      state: '',
+      address: '',
+      type_of_housing: '',
+      postal_code: '',
+      phone: '',
+      email: ''
+    }
+  }
+)
 
 // set name
 watch(

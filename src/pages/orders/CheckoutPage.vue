@@ -18,7 +18,7 @@
       <BreadCrumb />
       <!--End breadcrumb-->
 
-      <q-form class="row q-mt-xl" @submit="handlerSaveOrder">
+      <q-form ref="formRef" class="row q-mt-xl" @submit="handlerSaveOrder">
         <div class="col-12 col-sm-12 col-md-7 full-on-1199" :class="{ 'q-pr-xl': $q.screen.gt.sm }">
           <h2>
             Método de envió
@@ -56,6 +56,7 @@
 <script setup>
 // import
 import { ref, computed, toRaw } from 'vue'
+import { notification } from 'src/boot/notification'
 import { useOrdersStore } from 'src/stores/ordersStore'
 import BreadCrumb from 'src/components/layout/BreadCrumb.vue'
 import ShippingForm from 'src/components/orders/ShippingForm.vue'
@@ -64,9 +65,9 @@ import BannerMotowork from 'src/components/banner/BannerMotowork.vue'
 import CheckoutListProduct from 'src/components/orders/CheckoutListProduct.vue'
 import ShoppingbagOrderResume from '../../components/orders/ShoppingbagOrderResume.vue'
 import ShippingMethodsSelectorVue from 'src/components/orders/ShippingMethodsSelector.vue'
-import { notification } from 'src/boot/notification'
 
 // references
+const formRef = ref()
 const loading = ref(false)
 const ordersStore = useOrdersStore()
 const shippingMethods = ref('delivery')
@@ -104,7 +105,7 @@ const setShippingMethods = (e) => {
   ordersStore.setShippingMethod(e)
 }
 
-const handlerSaveOrder = () => {
+const handlerSaveOrder = async () => {
   loading.value = true
   const order = {
     conveyor: conveyor.value || null,
@@ -113,14 +114,15 @@ const handlerSaveOrder = () => {
       ...shippingData.value
     },
     items: toRaw(shoppingCart.value) || [],
-    subtotal: subtotal.value,
-    total: total.value,
+    subtotal: parseFloat(subtotal.value),
+    total: parseFloat(total.value),
     type: 'Sales Order'
   }
   try {
-    const response = orderContent.saveOrders(order)
+    const response = await orderContent.saveOrders(order)
     if (response.success) {
       notification('positive', response.message, 'primary')
+      formRef.value.reset()
     }
   } catch (error) {
   } finally {
