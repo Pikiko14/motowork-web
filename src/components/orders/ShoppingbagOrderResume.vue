@@ -55,7 +55,7 @@
           label="Realizar pedido" color="secondary" unelevated class="full-width"></q-btn>
       </div>
 
-      <div class="order-resume__total--action q-mt-lg" v-if="orderToPay._id">
+      <div class="order-resume__total--action q-mt-lg" v-if="orderToPay._id && !orderFinished.order">
         <q-btn :loading="loading" @click="finishOrder" :disable="!paymentMethod" square label="Finalizar compra" color="secondary" unelevated class="full-width"></q-btn>
       </div>
       <!--End button to confirm-->
@@ -116,6 +116,8 @@ const total = computed(() => {
 const subtotal = computed(() => (total.value / 1.19).toFixed(2))
 
 const paymentMethod = computed(() => ordersStore.paymentMethod)
+
+const orderFinished = computed(() => ordersStore.finishOrder)
 
 // methods
 const setShippingMethods = (e) => {

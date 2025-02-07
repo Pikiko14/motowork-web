@@ -24,7 +24,25 @@ export const useOrdersContent = () => {
     }
   }
 
+  const payOrder = async (obj) => {
+    try {
+      const { data } = await api.post(`${path}/${obj.order_id}/init-payment`, obj, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+
+      if (data.success && data.data) {
+        store.setFinishDataOrder(data.data)
+        return data
+      }
+    } catch (error) {
+      throw new Error(error.message)
+    }
+  }
+
   return {
+    payOrder,
     saveOrders
   }
 }

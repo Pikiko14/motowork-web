@@ -66,7 +66,7 @@
               <q-btn @click="handlerCancelPreviewOrder" class="full-width" label="Cancelar" unelevated color="primary"
                 outline></q-btn>
             </div>
-            <div class="col-12 col-md-6 text-center" :class="{ 'q-pl-md': $q.screen.gt.sm }">
+            <div class="col-12 col-md-6 text-center" :class="{ 'q-pl-md': $q.screen.gt.sm, 'q-mt-lg': $q.screen.lt.md }">
               <q-btn to="/carro-de-compra/detalles-de-pago" class="full-width" label="Continuar" unelevated
                 color="secondary"></q-btn>
             </div>

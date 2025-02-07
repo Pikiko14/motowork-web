@@ -21,7 +21,7 @@
 
     <!--Transferencia-->
     <article class="payment-method__item transfer">
-      <q-radio @update:model-value="handlerShippingMethods" dense v-model="paymentMethod" val="trasnfer"
+      <q-radio @update:model-value="handlerShippingMethods" dense v-model="paymentMethod" val="trasnferencia"
         color="secondary">
         <template #default>
           <div class="payment-method__item--complement">

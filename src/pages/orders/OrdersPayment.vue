@@ -15,15 +15,20 @@
       <div class="row q-mt-xl">
         <div class="col-12 col-sm-12 col-md-7 full-on-1199" :class="{ 'q-pr-xl': $q.screen.gt.sm }">
           <h2>
-            Método de pago
+            <span v-if="!orderCreatedData.order">Método de pago</span>
+            <span v-else>información de pedido</span>
           </h2>
-          <p>
+          <p v-if="!orderCreatedData.order">
             Necesitas confirmar tus datos de pago para asegurar tu pedido.
           </p>
 
           <!--payment options-->
-          <PaymentMethod @set-payment="handlerSetPayment" />
+          <PaymentMethod v-if="!orderCreatedData.order" @set-payment="handlerSetPayment" />
           <!--End payment options-->
+
+          <!--order resume-->
+          <OrderFinish v-if="orderCreatedData.order" :order="orderCreatedData.order" />
+          <!--End order resume-->
         </div>
 
         <!--Detail from order items and total-->
@@ -49,8 +54,11 @@
 <script setup>
 // imports
 import { computed, ref } from 'vue'
+import { notification } from 'src/boot/notification'
 import { useOrdersStore } from 'src/stores/ordersStore'
 import BreadCrumb from 'src/components/layout/BreadCrumb.vue'
+import OrderFinish from 'src/components/orders/OrderFinish.vue'
+import { useOrdersContent } from 'src/composables/useOrdersContent'
 import PaymentMethod from 'src/components/orders/PaymentMethod.vue'
 import BannerMotowork from 'src/components/banner/BannerMotowork.vue'
 import CheckoutListProduct from 'src/components/orders/CheckoutListProduct.vue'
@@ -58,7 +66,9 @@ import ShoppingbagOrderResume from '../../components/orders/ShoppingbagOrderResu
 
 // references
 const loading = ref(false)
+const orderCreatedData = ref({})
 const ordersStore = useOrdersStore()
+const ordersContent = useOrdersContent()
 
 // computed
 const orderToPay = computed(() => {
@@ -72,14 +82,23 @@ const handlerSetPayment = (e) => {
   ordersStore.setPaymentMethod(e)
 }
 
-const finishOrder = () => {
+const finishOrder = async () => {
   const obj = {
     order_id: orderToPay.value._id,
     payment_methods: paymentMethod.value
   }
-
+  loading.value = true
   try {
-    console.log(obj)
+    const response = await ordersContent.payOrder(obj)
+    if (response.success) {
+      notification('positive', response.message, 'primary')
+      orderCreatedData.value = response.data
+      if (paymentMethod.value === 'mercadopago') {
+        setTimeout(() => {
+          window.open(response.data.preference.init_point, '__blank')
+        }, 3000)
+      }
+    }
   } catch (error) {
   } finally {
     loading.value = false
