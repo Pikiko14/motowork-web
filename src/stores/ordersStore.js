@@ -182,6 +182,7 @@ export const useOrdersStore = defineStore('ordersStore', () => {
 
   const clearPreviewOrder = () => {
     LocalStorage.removeItem('order_to_pay')
+    orderToPay.value = {}
   }
 
   return {

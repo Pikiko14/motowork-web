@@ -168,6 +168,9 @@ const handlerSaveOrder = async () => {
 const handlerCancelPreviewOrder = () => {
   ordersStore.clearPreviewOrder()
   previewOrderModal.value = false
+  router.push({
+    path: '/'
+  })
 }
 
 // hook
@@ -185,7 +188,7 @@ onBeforeMount(() => {
 })
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 h2 {
   color: #000;
 

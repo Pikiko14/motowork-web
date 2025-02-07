@@ -1,7 +1,8 @@
 <template>
   <section class="order-resume">
     <!--Shipping methods-->
-    <ShippingMethodsSelectorVue v-if="$route.path !== '/carro-de-compra/detalles-del-envio'"
+    <ShippingMethodsSelectorVue
+      v-if="$route.path !== '/carro-de-compra/detalles-del-envio' && $route.path !== '/carro-de-compra/detalles-de-pago'"
       @update-shipping="setShippingMethods" :shippingMethods="shippingMethods" />
     <!--End shipping methods-->
 
@@ -50,7 +51,8 @@
         <q-btn v-if="$route.path !== '/carro-de-compra/detalles-del-envio'" to="/carro-de-compra/detalles-del-envio"
           :disable="shippingInStore === 'delivery' && !conveyorInStore || shippingInStore" square label="confirmar pago"
           color="secondary" unelevated class="full-width"></q-btn>
-        <q-btn :loading="loading" type="submit" v-else :disable="shippingInStore === 'delivery' && !conveyorInStore || shippingInStore" square
+        <q-btn :loading="loading" type="submit" v-else
+          :disable="shippingInStore === 'delivery' && !conveyorInStore || shippingInStore" square
           label="Realizar pedido" color="secondary" unelevated class="full-width"></q-btn>
       </div>
       <!--End button to confirm-->
