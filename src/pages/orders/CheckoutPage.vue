@@ -13,7 +13,7 @@
       <!--End breadcrumb-->
 
       <q-form ref="formRef" class="row q-mt-xl" @submit="handlerSaveOrder">
-        <div class="col-12 col-sm-12 col-md-7 full-on-1199" :class="{ 'q-pr-xl': $q.screen.gt.sm }">
+        <div class="col-12 col-sm-12 col-md-8 full-on-1199" :class="{ 'q-pr-xl': $q.screen.gt.sm }">
           <h2>
             Método de envió
           </h2>
@@ -29,7 +29,7 @@
           <!--formulario de shipping-->
         </div>
 
-        <div class="col-12 col-sm-12 col-md-5 full-on-1199" :class="{ 'q-pl-xl': $q.screen.gt.sm }">
+        <div class="col-12 col-sm-12 col-md-4 full-on-1199" :class="{ 'q-pl-xl': $q.screen.gt.sm }">
           <h2>
             Detalles de tu pedido
           </h2>
@@ -168,9 +168,6 @@ const handlerSaveOrder = async () => {
 const handlerCancelPreviewOrder = () => {
   ordersStore.clearPreviewOrder()
   previewOrderModal.value = false
-  router.push({
-    path: '/'
-  })
 }
 
 // hook

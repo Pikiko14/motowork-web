@@ -1084,3 +1084,10 @@ ul {
 .q-btn {
   font-weight: 700;
 }
+
+.payment-method {
+  .q-radio__label {
+    width: 100%;
+    padding-left: 16px;
+  }
+}

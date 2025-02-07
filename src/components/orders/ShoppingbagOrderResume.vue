@@ -11,12 +11,11 @@
       <h2>
         Total del carrito
       </h2>
-
       <div class="order-resume__total--items">
         <div class="order-resume__total--items__item">
           <span>Subtotal</span>
           <span class="value">
-            {{ formatPrice(subtotal) }}
+            {{ orderToPay.subtotal ? formatPrice(orderToPay.subtotal) : formatPrice(subtotal) }}
           </span>
         </div>
 
@@ -41,19 +40,23 @@
           Total (IVA incluido)
         </span>
         <span class="value">
-          {{ formatPrice(total) }}
+          {{ orderToPay.total ? formatPrice(orderToPay.total) : formatPrice(total) }}
         </span>
       </div>
       <!--end total item-->
 
       <!--button to confuirm-->
-      <div class="order-resume__total--action" v-if="cartItems.length > 0">
+      <div class="order-resume__total--action" v-if="cartItems.length > 0 && $route.path !== '/carro-de-compra/detalles-de-pago'">
         <q-btn v-if="$route.path !== '/carro-de-compra/detalles-del-envio'" to="/carro-de-compra/detalles-del-envio"
           :disable="shippingInStore === 'delivery' && !conveyorInStore || shippingInStore" square label="confirmar pago"
           color="secondary" unelevated class="full-width"></q-btn>
         <q-btn :loading="loading" type="submit" v-else
           :disable="shippingInStore === 'delivery' && !conveyorInStore || shippingInStore" square
           label="Realizar pedido" color="secondary" unelevated class="full-width"></q-btn>
+      </div>
+
+      <div class="order-resume__total--action q-mt-lg" v-if="orderToPay._id">
+        <q-btn :loading="loading" @click="finishOrder" :disable="!paymentMethod" square label="Finalizar compra" color="secondary" unelevated class="full-width"></q-btn>
       </div>
       <!--End button to confirm-->
     </div>
@@ -64,8 +67,8 @@
 <script setup>
 // imports
 import { formatPrice } from 'src/utils/utils'
-import { ref, computed, defineProps } from 'vue'
 import { useOrdersStore } from 'src/stores/ordersStore'
+import { ref, computed, defineProps, defineEmits } from 'vue'
 import ShippingMethodsSelectorVue from './ShippingMethodsSelector.vue'
 
 // props
@@ -73,8 +76,16 @@ defineProps({
   loading: {
     type: Boolean,
     default: () => false
+  },
+  orderToPay: {
+    type: Object,
+    default: () => {
+      return {}
+    }
   }
 })
+
+const emit = defineEmits(['finish-order'])
 
 // references
 const ordersStore = useOrdersStore()
@@ -104,10 +115,16 @@ const total = computed(() => {
 
 const subtotal = computed(() => (total.value / 1.19).toFixed(2))
 
+const paymentMethod = computed(() => ordersStore.paymentMethod)
+
 // methods
 const setShippingMethods = (e) => {
   shippingMethods.value = e
   ordersStore.setShippingMethod(e)
+}
+
+const finishOrder = () => {
+  emit('finish-order')
 }
 </script>
 

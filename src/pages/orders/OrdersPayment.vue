@@ -20,22 +20,27 @@
           <p>
             Necesitas confirmar tus datos de pago para asegurar tu pedido.
           </p>
-          <!--Shipping methods-->
+
+          <!--payment options-->
+          <PaymentMethod @set-payment="handlerSetPayment" />
+          <!--End payment options-->
         </div>
 
+        <!--Detail from order items and total-->
         <div class="col-12 col-sm-12 col-md-5 full-on-1199" :class="{ 'q-pl-xl': $q.screen.gt.sm }">
           <h2>
             Detalles de tu pedido
           </h2>
 
           <!--Product items-->
-          <CheckoutListProduct :products="shoppingCart" />
+          <CheckoutListProduct :products="orderToPay.items" />
           <!--End products items-->
 
           <!--En cart totals-->
-          <ShoppingbagOrderResume :loading="false" />
+          <ShoppingbagOrderResume @finish-order="finishOrder" :loading="loading" :orderToPay="orderToPay" />
           <!--End cart totals-->
         </div>
+        <!--End details-->
       </div>
     </section>
   </q-page>
@@ -43,20 +48,43 @@
 
 <script setup>
 // imports
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useOrdersStore } from 'src/stores/ordersStore'
 import BreadCrumb from 'src/components/layout/BreadCrumb.vue'
+import PaymentMethod from 'src/components/orders/PaymentMethod.vue'
 import BannerMotowork from 'src/components/banner/BannerMotowork.vue'
 import CheckoutListProduct from 'src/components/orders/CheckoutListProduct.vue'
 import ShoppingbagOrderResume from '../../components/orders/ShoppingbagOrderResume.vue'
 
 // references
+const loading = ref(false)
 const ordersStore = useOrdersStore()
 
 // computed
-const shoppingCart = computed(() => {
-  return ordersStore.shoppingCart
+const orderToPay = computed(() => {
+  return ordersStore.orderToPay
 })
+
+const paymentMethod = computed(() => ordersStore.paymentMethod)
+
+// methods
+const handlerSetPayment = (e) => {
+  ordersStore.setPaymentMethod(e)
+}
+
+const finishOrder = () => {
+  const obj = {
+    order_id: orderToPay.value._id,
+    payment_methods: paymentMethod.value
+  }
+
+  try {
+    console.log(obj)
+  } catch (error) {
+  } finally {
+    loading.value = false
+  }
+}
 
 // hook
 </script>

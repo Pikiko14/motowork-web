@@ -34,6 +34,7 @@ export const useOrdersStore = defineStore('ordersStore', () => {
   const orderToPay = ref(
     LocalStorage.getItem('order_to_pay') ? JSON.parse(LocalStorage.getItem('order_to_pay') || {}) : {}
   )
+  const paymentMethod = ref('')
 
   const handlerClearOrderForm = () => {
     clearOrderForm.value = !clearOrderForm.value
@@ -185,6 +186,10 @@ export const useOrdersStore = defineStore('ordersStore', () => {
     orderToPay.value = {}
   }
 
+  const setPaymentMethod = (e) => {
+    paymentMethod.value = e
+  }
+
   return {
     clearStore,
     setConveyor,
@@ -193,11 +198,13 @@ export const useOrdersStore = defineStore('ordersStore', () => {
     shoppingCart,
     productLimit,
     shippingData,
+    paymentMethod,
     removeQuantity,
     clearOrderForm,
     setOrderCreated,
     setShippingData,
     addNewItemToCar,
+    setPaymentMethod,
     conveyorSelected,
     countItemsInCart,
     deleteItemInCart,
