@@ -1,15 +1,9 @@
 <template>
   <q-page class="checkout-page">
     <!--Banner-->
-    <BannerMotowork
-      title="Detalles del envió"
-      :banner="{}"
-      default-img="/images/cart_background.webp"
-      :btnLabel="''"
+    <BannerMotowork title="Detalles del envió" :banner="{}" default-img="/images/cart_background.webp" :btnLabel="''"
       :bannerComplement="'¿Todo listo para llevar tus productos favoritos? Revisa tu selección, asegura que no te falte nada y finaliza tu compra.'"
-      :contentEnd="true"
-      :noOverflow="true"
-      :reduceBanner="true" />
+      :contentEnd="true" :noOverflow="true" :reduceBanner="true" />
     <!--End banner-->
 
     <!--main content-->
@@ -50,6 +44,37 @@
         </div>
       </q-form>
     </section>
+    <!--End main content-->
+
+    <!--dialog preview order to pay-->
+    <q-dialog persistent v-model="previewOrderModal">
+      <q-card class="card-preview-modal">
+        <q-card-section>
+          <h2 class="modal-title">Orden previa</h2>
+        </q-card-section>
+        <q-card-section style="margin-top: -20px">
+          <div class="row">
+            <div class="col-12">
+              <p class="text-primary">
+                Posees una orden previa sin pagar en nuestro sistema, confirma si deseas continuar con el pago de la
+                orden o en su respectivo caso presiona cancelar para omitir este paso.
+                <br /><br />
+                Es importante tener en cuenta que la orden previa se perdera por completo si presionas cancelar.
+              </p>
+            </div>
+            <div class="col-12 col-md-6 text-center" :class="{ 'q-pr-md': $q.screen.gt.sm }">
+              <q-btn @click="handlerCancelPreviewOrder" class="full-width" label="Cancelar" unelevated color="primary"
+                outline></q-btn>
+            </div>
+            <div class="col-12 col-md-6 text-center" :class="{ 'q-pl-md': $q.screen.gt.sm }">
+              <q-btn to="/carro-de-compra/detalles-de-pago" class="full-width" label="Continuar" unelevated
+                color="secondary"></q-btn>
+            </div>
+          </div>
+        </q-card-section>
+      </q-card>
+    </q-dialog>
+    <!--End dialog preview pay-->
   </q-page>
 </template>
 
@@ -71,6 +96,7 @@ import ShippingMethodsSelectorVue from 'src/components/orders/ShippingMethodsSel
 const formRef = ref()
 const loading = ref(false)
 const router = useRouter()
+const previewOrderModal = ref(false)
 const ordersStore = useOrdersStore()
 const shippingMethods = ref('delivery')
 const orderContent = useOrdersContent()
@@ -101,6 +127,8 @@ const total = computed(() => {
 
 const subtotal = computed(() => (total.value / 1.19).toFixed(2))
 
+const orderToPay = computed(() => ordersStore.orderToPay)
+
 // methods
 const setShippingMethods = (e) => {
   shippingMethods.value = e
@@ -126,7 +154,7 @@ const handlerSaveOrder = async () => {
       ordersStore.clearStore()
       notification('positive', response.message, 'primary')
       formRef.value.reset()
-      ordersStore.setOrderCreated(response.order)
+      ordersStore.setOrderCreated(response.data)
       router.push({
         name: 'payment'
       })
@@ -137,8 +165,18 @@ const handlerSaveOrder = async () => {
   }
 }
 
+const handlerCancelPreviewOrder = () => {
+  ordersStore.clearPreviewOrder()
+  previewOrderModal.value = false
+}
+
 // hook
 onBeforeMount(() => {
+  if (orderToPay.value && orderToPay.value._id) {
+    previewOrderModal.value = true
+    return
+  }
+
   if (shoppingCart.value.length === 0) {
     router.push({
       path: '/'
@@ -156,7 +194,8 @@ h2 {
   font-size: 24px;
   font-style: normal;
   font-weight: 700;
-  line-height: 125%; /* 30px */
+  line-height: 125%;
+  /* 30px */
   text-transform: uppercase;
 }
 
@@ -168,7 +207,8 @@ p {
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
-  line-height: 125%; /* 20px */
+  line-height: 125%;
+  /* 20px */
   margin-bottom: 32px;
 }
 
@@ -180,5 +220,9 @@ p {
       margin-top: 72px;
     }
   }
+}
+
+.card-preview-modal {
+  width: 360px;
 }
 </style>

@@ -31,7 +31,9 @@ export const useOrdersStore = defineStore('ordersStore', () => {
       ? JSON.parse(LocalStorage.getItem('cart_items') || [])
       : []
   )
-  const orderCreated = ref({})
+  const orderToPay = ref(
+    LocalStorage.getItem('order_to_pay') ? JSON.parse(LocalStorage.getItem('order_to_pay') || {}) : {}
+  )
 
   const handlerClearOrderForm = () => {
     clearOrderForm.value = !clearOrderForm.value
@@ -173,14 +175,20 @@ export const useOrdersStore = defineStore('ordersStore', () => {
   }
 
   const setOrderCreated = (payload) => {
-    orderCreated.value = payload
+    orderToPay.value = payload
+    LocalStorage.removeItem('order_to_pay')
+    LocalStorage.setItem('order_to_pay', JSON.stringify(payload))
+  }
+
+  const clearPreviewOrder = () => {
+    LocalStorage.removeItem('order_to_pay')
   }
 
   return {
     clearStore,
     setConveyor,
     addQuantity,
-    orderCreated,
+    orderToPay,
     shoppingCart,
     productLimit,
     shippingData,
@@ -193,6 +201,7 @@ export const useOrdersStore = defineStore('ordersStore', () => {
     countItemsInCart,
     deleteItemInCart,
     setShippingMethod,
+    clearPreviewOrder,
     handlerClearOrderForm,
     shippingMethodSelected
   }
