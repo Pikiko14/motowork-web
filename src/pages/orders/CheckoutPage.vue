@@ -55,6 +55,7 @@
 
 <script setup>
 // import
+import { useRouter } from 'vue-router'
 import { ref, computed, toRaw } from 'vue'
 import { notification } from 'src/boot/notification'
 import { useOrdersStore } from 'src/stores/ordersStore'
@@ -69,6 +70,7 @@ import ShippingMethodsSelectorVue from 'src/components/orders/ShippingMethodsSel
 // references
 const formRef = ref()
 const loading = ref(false)
+const router = useRouter()
 const ordersStore = useOrdersStore()
 const shippingMethods = ref('delivery')
 const orderContent = useOrdersContent()
@@ -124,6 +126,10 @@ const handlerSaveOrder = async () => {
       ordersStore.clearStore()
       notification('positive', response.message, 'primary')
       formRef.value.reset()
+      ordersStore.setOrderCreated(response.order)
+      router.push({
+        name: 'payment'
+      })
     }
   } catch (error) {
   } finally {

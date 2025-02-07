@@ -38,6 +38,11 @@ const routes = [
         path: 'carro-de-compra/detalles-del-envio',
         component: () => import('src/pages/orders/CheckoutPage.vue'),
         name: 'checkout'
+      },
+      {
+        path: 'carro-de-compra/detalles-de-pago',
+        component: () => import('src/pages/orders/OrdersPayment.vue'),
+        name: 'payment'
       }
     ]
   },

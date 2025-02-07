@@ -31,6 +31,7 @@ export const useOrdersStore = defineStore('ordersStore', () => {
       ? JSON.parse(LocalStorage.getItem('cart_items') || [])
       : []
   )
+  const orderCreated = ref({})
 
   const handlerClearOrderForm = () => {
     clearOrderForm.value = !clearOrderForm.value
@@ -171,15 +172,21 @@ export const useOrdersStore = defineStore('ordersStore', () => {
     shoppingCart.value = []
   }
 
+  const setOrderCreated = (payload) => {
+    orderCreated.value = payload
+  }
+
   return {
     clearStore,
     setConveyor,
     addQuantity,
+    orderCreated,
     shoppingCart,
     productLimit,
     shippingData,
     removeQuantity,
     clearOrderForm,
+    setOrderCreated,
     setShippingData,
     addNewItemToCar,
     conveyorSelected,
