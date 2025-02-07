@@ -11,4 +11,6 @@
 <script setup>
 // imports
 import BannerMotowork from 'src/components/banner/BannerMotowork.vue'
+
+// hook
 </script>

@@ -56,9 +56,9 @@
 <script setup>
 // import
 import { useRouter } from 'vue-router'
-import { ref, computed, toRaw } from 'vue'
 import { notification } from 'src/boot/notification'
 import { useOrdersStore } from 'src/stores/ordersStore'
+import { ref, computed, toRaw, onBeforeMount } from 'vue'
 import BreadCrumb from 'src/components/layout/BreadCrumb.vue'
 import ShippingForm from 'src/components/orders/ShippingForm.vue'
 import { useOrdersContent } from 'src/composables/useOrdersContent'
@@ -137,6 +137,14 @@ const handlerSaveOrder = async () => {
   }
 }
 
+// hook
+onBeforeMount(() => {
+  if (shoppingCart.value.length === 0) {
+    router.push({
+      path: '/'
+    })
+  }
+})
 </script>
 
 <style scoped>

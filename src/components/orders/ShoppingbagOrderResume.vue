@@ -46,7 +46,7 @@
       <!--end total item-->
 
       <!--button to confuirm-->
-      <div class="order-resume__total--action">
+      <div class="order-resume__total--action" v-if="cartItems.length > 0">
         <q-btn v-if="$route.path !== '/carro-de-compra/detalles-del-envio'" to="/carro-de-compra/detalles-del-envio"
           :disable="shippingInStore === 'delivery' && !conveyorInStore || shippingInStore || cartItems.length === 0" square label="confirmar pago"
           color="secondary" unelevated class="full-width"></q-btn>
