@@ -15,7 +15,7 @@ export const useOrdersContent = () => {
           'Content-Type': 'application/json'
         }
       })
-      if (data.success && data.order) {
+      if (data.success && data.data) {
         store.handlerClearOrderForm()
         return data
       }

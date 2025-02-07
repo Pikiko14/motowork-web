@@ -1,5 +1,5 @@
 <template>
-  <q-form ref="formRef" @submit="habdlerForm" class="vehicle-form" :class="{ 'full-height': $q.screen.gt.xs }">
+  <q-form ref="formRef" @submit="handlerForm" class="vehicle-form" :class="{ 'full-height': $q.screen.gt.xs }">
     <div class="row">
       <div class="col-12 mt-mobile">
         <h2>
@@ -181,7 +181,7 @@
         </div>
       </div>
     </div>
-    <q-btn :loading="loading" label="Prueba de manejo" type="submit" :class="{ 'absolute-bottom': $q.screen.gt.xs }" class="full-width"
+    <q-btn :loading="loading" label="Agendar Prueba de manejo" type="submit" :class="{ 'absolute-bottom': $q.screen.gt.xs }" class="full-width"
       color="secondary" unelevated=""></q-btn>
   </q-form>
 </template>
@@ -251,7 +251,7 @@ const creationProfile = ref(false)
 const acceptMarketing = ref(false)
 
 // methods
-const habdlerForm = () => {
+const handlerForm = () => {
   if (creationProfile.value) {
     form.value.creationProfile = true
   } else {

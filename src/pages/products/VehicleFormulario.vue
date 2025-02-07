@@ -189,7 +189,7 @@ const doSendRequest = async (formData) => {
     loading.value = true
     const response = await saveOrders(params)
     if (response.success) {
-      notification('positive', response.message, 'secondary')
+      notification('positive', response.message, 'primary')
     }
   } catch (error) {
   } finally {
