@@ -100,7 +100,7 @@
 <script setup>
 // imports
 import { useRoute } from 'vue-router'
-import { computed, onBeforeMount, ref } from 'vue'
+import { computed, onBeforeMount, onBeforeUnmount, ref } from 'vue'
 import { notification } from 'src/boot/notification'
 import { useOrdersStore } from 'src/stores/ordersStore'
 import BreadCrumb from 'src/components/layout/BreadCrumb.vue'
@@ -171,8 +171,11 @@ onBeforeMount(() => {
     loadOrderFinished(order)
     orderStatus.value = route.query.collection_status
     paymentRef.value = route.query.payment_id
-    ordersStore.clearOrderToPay()
   }
+})
+
+onBeforeUnmount(() => {
+  ordersStore.clearOrderToPay()
 })
 </script>
 
