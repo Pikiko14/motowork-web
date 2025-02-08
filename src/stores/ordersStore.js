@@ -198,6 +198,10 @@ export const useOrdersStore = defineStore('ordersStore', () => {
     orderToPay.value = e.order || e
   }
 
+  const clearOrderToPay = () => {
+    orderToPay.value = {}
+  }
+
   return {
     clearStore,
     orderToPay,
@@ -207,10 +211,10 @@ export const useOrdersStore = defineStore('ordersStore', () => {
     shoppingCart,
     productLimit,
     shippingData,
-    setFinishDataOrder,
     paymentMethod,
     removeQuantity,
     clearOrderForm,
+    clearOrderToPay,
     setOrderCreated,
     setShippingData,
     addNewItemToCar,
@@ -220,6 +224,7 @@ export const useOrdersStore = defineStore('ordersStore', () => {
     deleteItemInCart,
     setShippingMethod,
     clearPreviewOrder,
+    setFinishDataOrder,
     handlerClearOrderForm,
     shippingMethodSelected
   }

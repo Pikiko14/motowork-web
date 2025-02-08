@@ -171,6 +171,7 @@ onBeforeMount(() => {
     loadOrderFinished(order)
     orderStatus.value = route.query.collection_status
     paymentRef.value = route.query.payment_id
+    ordersStore.clearOrderToPay()
   }
 })
 </script>
