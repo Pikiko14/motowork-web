@@ -175,9 +175,7 @@ onBeforeMount(() => {
 })
 
 onBeforeUnmount(() => {
-  alert(1)
   if (isStatus.value && orderStatus.value) {
-    alert(2)
     ordersStore.clearOrderToPay()
   }
 })
