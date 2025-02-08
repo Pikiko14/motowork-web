@@ -175,7 +175,9 @@ onBeforeMount(() => {
 })
 
 onBeforeUnmount(() => {
-  ordersStore.clearOrderToPay()
+  if (route.params.order) {
+    ordersStore.clearOrderToPay()
+  }
 })
 </script>
 
