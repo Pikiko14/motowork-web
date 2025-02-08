@@ -32,7 +32,7 @@
           <!--End order resume-->
         </div>
 
-        <div v-if="!sStatus" class="col-12 col-sm-12 col-md-7 full-on-1199" :class="{ 'q-pr-xl': $q.screen.gt.sm }">
+        <div v-if="isStatus" class="col-12 col-sm-12 col-md-7 full-on-1199" :class="{ 'q-pr-xl': $q.screen.gt.sm }">
           <div class="details-order">
             <figure>
               <img src="/images/finish_order.webp" alt="Icono de pago de orden" title="Pago orden">
