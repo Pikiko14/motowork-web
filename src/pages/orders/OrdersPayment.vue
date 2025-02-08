@@ -1,8 +1,9 @@
 <template>
   <q-page>
     <!--Banner-->
-    <BannerMotowork title="Detalles del pago" :banner="{}" default-img="/images/cart_background.webp" :btnLabel="''"
-      :bannerComplement="'¿Todo listo para llevar tus productos favoritos?, Paga tu orden para recibir los productos lo mas pronto posible.'"
+    <BannerMotowork :title="isStatus ? `Pedido Finalizado` : 'Detalles del pago'" :banner="{}"
+      default-img="/images/cart_background.webp" :btnLabel="''"
+      :bannerComplement="isStatus ? (orderStatus === 'approved' ? 'Te agradecemos tu compra y esperamos poder enviarte tus productos pronto.' : 'Te agradecemos por querer comprar con nosotros, per lo sentimos, tu pago no pudo ser procesado.') : '¿Todo listo para llevar tus productos favoritos?, Paga tu orden para recibir los productos lo mas pronto posible.'"
       :contentEnd="true" :noOverflow="true" :reduceBanner="true" />
     <!--End banner-->
 
@@ -13,7 +14,7 @@
       <!--End breadcrumb-->
 
       <div class="row q-mt-xl">
-        <div class="col-12 col-sm-12 col-md-7 full-on-1199" :class="{ 'q-pr-xl': $q.screen.gt.sm }">
+        <div v-if="!isStatus" class="col-12 col-sm-12 col-md-7 full-on-1199" :class="{ 'q-pr-xl': $q.screen.gt.sm }">
           <h2>
             <span v-if="!orderCreatedData.order">Método de pago</span>
             <span v-else>información de pedido</span>
@@ -29,6 +30,51 @@
           <!--order resume-->
           <OrderFinish v-if="orderCreatedData.order" :order="orderCreatedData.order" />
           <!--End order resume-->
+        </div>
+
+        <div v-if="!sStatus" class="col-12 col-sm-12 col-md-7 full-on-1199" :class="{ 'q-pr-xl': $q.screen.gt.sm }">
+          <div class="details-order">
+            <figure>
+              <img src="/images/finish_order.webp" alt="Icono de pago de orden" title="Pago orden">
+            </figure>
+
+            <div class="details-order__content">
+              <h2>
+                <span v-if="orderStatus !== 'approved' && orderStatus !== 'pending'">
+                  ¡Vaya! Parece que hay un problema con tu pedido.
+                </span>
+                <span v-else>
+                  Tu pedido de ha compleado de forma correcta.
+                </span>
+              </h2>
+
+              <p v-if="orderStatus !== 'approved' && orderStatus !== 'pending'" class="text-primary">
+                Lamentamos informarte que tu pedido ha sido rechazado. Desafortunadamente, no podemos procesar tu pedido en este momento. Aquí una lista de posibles razones
+              </p>
+              <p class="text-primary" v-else>
+                Tu pago a sido confirmado correctamente, procederemos a enviar tu pedido lo mas pronto posible. En caso de que tu pago quedara en estado pendiente, debemos esperar la confirmación de acreditación de los fondos para poderlo despachar.
+              </p>
+
+              <q-list>
+                <q-item>
+                  <q-item-section>
+                    <q-item-label># ORDEN:</q-item-label>
+                    <q-item-label caption lines="1">
+                      {{ orderToPay._id }}
+                    </q-item-label>
+                  </q-item-section>
+                </q-item>
+                <q-item>
+                  <q-item-section>
+                    <q-item-label>REFERENCIA DE PAGO:</q-item-label>
+                    <q-item-label caption lines="1">
+                      {{ paymentRef }}
+                    </q-item-label>
+                  </q-item-section>
+                </q-item>
+              </q-list>
+            </div>
+          </div>
         </div>
 
         <!--Detail from order items and total-->
@@ -53,7 +99,8 @@
 
 <script setup>
 // imports
-import { computed, ref } from 'vue'
+import { useRoute } from 'vue-router'
+import { computed, onBeforeMount, ref } from 'vue'
 import { notification } from 'src/boot/notification'
 import { useOrdersStore } from 'src/stores/ordersStore'
 import BreadCrumb from 'src/components/layout/BreadCrumb.vue'
@@ -65,7 +112,11 @@ import CheckoutListProduct from 'src/components/orders/CheckoutListProduct.vue'
 import ShoppingbagOrderResume from '../../components/orders/ShoppingbagOrderResume.vue'
 
 // references
+const route = useRoute()
 const loading = ref(false)
+const isStatus = ref(false)
+const paymentRef = ref(null)
+const orderStatus = ref(null)
 const orderCreatedData = ref({})
 const ordersStore = useOrdersStore()
 const ordersContent = useOrdersContent()
@@ -105,7 +156,23 @@ const finishOrder = async () => {
   }
 }
 
+const loadOrderFinished = async (order) => {
+  try {
+    await ordersContent.loadOrderData(order)
+  } catch (error) {
+  }
+}
+
 // hook
+onBeforeMount(() => {
+  if (route.params.order) {
+    isStatus.value = true
+    const { order } = route.params
+    loadOrderFinished(order)
+    orderStatus.value = route.query.collection_status
+    paymentRef.value = route.query.payment_id
+  }
+})
 </script>
 
 <style scoped lang="scss">
@@ -143,5 +210,20 @@ p {
   line-height: 125%;
   /* 20px */
   margin-bottom: 32px;
+}
+
+.details-order {
+  figure {
+    width: 150px;
+    height: 150px;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  h2 {
+    margin-top: 32px;
+  }
 }
 </style>

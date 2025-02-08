@@ -2,7 +2,7 @@
   <section class="order-resume">
     <!--Shipping methods-->
     <ShippingMethodsSelectorVue
-      v-if="$route.path !== '/carro-de-compra/detalles-del-envio' && $route.path !== '/carro-de-compra/detalles-de-pago'"
+      v-if="$route.path !== '/carro-de-compra/detalles-del-envio' && $route.path !== '/carro-de-compra/detalles-de-pago' && !$route.params.status"
       @update-shipping="setShippingMethods" :shippingMethods="shippingMethods" />
     <!--End shipping methods-->
 
@@ -55,7 +55,7 @@
           label="Realizar pedido" color="secondary" unelevated class="full-width"></q-btn>
       </div>
 
-      <div class="order-resume__total--action q-mt-lg" v-if="orderToPay._id && !orderFinished.order">
+      <div class="order-resume__total--action q-mt-lg" v-if="orderToPay._id && !orderFinished.order && !$route.params.status">
         <q-btn :loading="loading" @click="finishOrder" :disable="!paymentMethod" square label="Finalizar compra" color="secondary" unelevated class="full-width"></q-btn>
       </div>
       <!--End button to confirm-->

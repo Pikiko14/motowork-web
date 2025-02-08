@@ -195,7 +195,7 @@ export const useOrdersStore = defineStore('ordersStore', () => {
     finishOrder.value = e
     clearPreviewOrder()
     clearStore()
-    orderToPay.value = e.order || {}
+    orderToPay.value = e.order || e
   }
 
   return {

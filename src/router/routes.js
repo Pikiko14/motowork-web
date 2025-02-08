@@ -43,6 +43,11 @@ const routes = [
         path: 'carro-de-compra/detalles-de-pago',
         component: () => import('src/pages/orders/OrdersPayment.vue'),
         name: 'payment'
+      },
+      {
+        path: 'orden-de-compra/:order/:status',
+        component: () => import('src/pages/orders/OrdersPayment.vue'),
+        name: 'payment_complete'
       }
     ]
   },

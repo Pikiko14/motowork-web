@@ -41,8 +41,26 @@ export const useOrdersContent = () => {
     }
   }
 
+  const loadOrderData = async (id) => {
+    try {
+      const { data } = await api.get(`${path}/${id}`, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+
+      if (data.success && data.data) {
+        store.setFinishDataOrder(data.data)
+        return data
+      }
+    } catch (error) {
+      throw new Error(error.message)
+    }
+  }
+
   return {
     payOrder,
-    saveOrders
+    saveOrders,
+    loadOrderData
   }
 }

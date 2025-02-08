@@ -154,5 +154,6 @@ defineProps({
   font-weight: 600;
   line-height: 125%; /* 15px */
   text-transform: uppercase;
+  min-width: 80px;
 }
 </style>
