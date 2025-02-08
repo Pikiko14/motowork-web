@@ -14,6 +14,7 @@
       <!--End breadcrumb-->
 
       <div class="row q-mt-xl">
+        <!--Lo que se muestra luego de seleccionar el emdio de paog-->
         <div v-if="!isStatus" class="col-12 col-sm-12 col-md-7 full-on-1199" :class="{ 'q-pr-xl': $q.screen.gt.sm }">
           <h2>
             <span v-if="!orderCreatedData.order">Método de pago</span>
@@ -45,14 +46,14 @@
                 <q-item>
                   <q-item-section>
                     <q-item-label>
-                      Numero de cuenta:
+                      Número de cuenta:
                     </q-item-label>
                     <q-item-label caption lines="1">
-                      {{ paymentData.account_number }}
+                      {{ paymentData.account_number ? paymentData.account_number : account.account_number }}
                     </q-item-label>
                   </q-item-section>
                   <q-item-section side>
-                    <q-btn flat dense rounded icon="img:/images/whatsapp.webp">
+                    <q-btn @click="openWhatsapp" flat dense rounded icon="img:/images/whatsapp.webp">
                       <q-tooltip class="bg-primary">
                         Enviar comprobante de pago
                       </q-tooltip>
@@ -65,17 +66,17 @@
                       Documento:
                     </q-item-label>
                     <q-item-label caption lines="1">
-                      {{ paymentData.account_document }}
+                      {{ paymentData.account_document || account.account_document }}
                     </q-item-label>
                   </q-item-section>
                 </q-item>
                 <q-item>
                   <q-item-section>
                     <q-item-label>
-                      Numero de la cuenta:
+                      Nombre de la cuenta:
                     </q-item-label>
                     <q-item-label caption lines="1">
-                      {{ paymentData.account_holder }}
+                      {{ paymentData.doc ? paymentData.account_holder : account.account_holder }}
                     </q-item-label>
                   </q-item-section>
                 </q-item>
@@ -83,7 +84,9 @@
             </div>
           </div>
         </div>
+        <!--End lo que se muestra media pago-->
 
+        <!--Cuando se carga desde los valores del storage-->
         <div v-if="isStatus" class="col-12 col-sm-12 col-md-7 full-on-1199" :class="{ 'q-pr-xl': $q.screen.gt.sm }">
           <div class="details-order" v-if="orderToPay.payment_method === 'mercadopago'">
             <figure>
@@ -156,6 +159,7 @@
           <!--order resume-->
           <OrderFinish v-if="orderToPay.payment_method === 'trasnferencia'" :order="orderToPay" />
           <!--End order resume-->
+
           <div class="account-to-transfer q-mt-xl" v-if="orderToPay._id && orderToPay.payment_method === 'trasnferencia'">
             <p>
               <span class="text-bold text-primary">
@@ -173,11 +177,11 @@
                       Numero de cuenta:
                     </q-item-label>
                     <q-item-label caption lines="1">
-                      {{ paymentData.account_number }}
+                      {{ paymentData.account_number || account.account_number }}
                     </q-item-label>
                   </q-item-section>
                   <q-item-section side>
-                    <q-btn flat dense rounded icon="img:/images/whatsapp.webp">
+                    <q-btn @click="openWhatsapp" flat dense rounded icon="img:/images/whatsapp.webp">
                       <q-tooltip class="bg-primary">
                         Enviar comprobante de pago
                       </q-tooltip>
@@ -190,17 +194,17 @@
                       Documento:
                     </q-item-label>
                     <q-item-label caption lines="1">
-                      {{ paymentData.account_document }}
+                      {{ paymentData.account_document || account.account_document }}
                     </q-item-label>
                   </q-item-section>
                 </q-item>
                 <q-item>
                   <q-item-section>
                     <q-item-label>
-                      Numero de la cuenta:
+                      Nombre de la cuenta
                     </q-item-label>
                     <q-item-label caption lines="1">
-                      {{ paymentData.account_holder }}
+                      {{ paymentData.account_holder || account.account_holder }}
                     </q-item-label>
                   </q-item-section>
                 </q-item>
@@ -208,6 +212,7 @@
             </div>
           </div>
         </div>
+        <!--End cuando se carga-->
 
         <!--Detail from order items and total-->
         <div class="col-12 col-sm-12 col-md-5 full-on-1199" :class="{ 'q-pl-xl': $q.screen.gt.sm }">
@@ -231,10 +236,11 @@
 
 <script setup>
 // imports
-import { date, LocalStorage } from 'quasar'
 import { useRoute } from 'vue-router'
 import { notification } from 'src/boot/notification'
 import { useOrdersStore } from 'src/stores/ordersStore'
+import { date, LocalStorage, SessionStorage } from 'quasar'
+import MotoworkAccount from 'src/utils/motoworkAccount.json'
 import BreadCrumb from 'src/components/layout/BreadCrumb.vue'
 import OrderFinish from 'src/components/orders/OrderFinish.vue'
 import { useOrdersContent } from 'src/composables/useOrdersContent'
@@ -259,6 +265,8 @@ const ordersContent = useOrdersContent()
 const orderToPay = computed(() => {
   return ordersStore.orderToPay
 })
+
+const account = computed(() => MotoworkAccount)
 
 const paymentMethod = computed(() => ordersStore.paymentMethod)
 
@@ -285,7 +293,7 @@ const finishOrder = async () => {
         }, 5000)
       } else {
         paymentData.value = response.data.preference
-        LocalStorage.setItem('order_to_transfer', orderToPay.value._id)
+        SessionStorage.setItem('order_to_transfer', orderToPay.value._id)
       }
     }
   } catch (error) {
@@ -306,6 +314,15 @@ const formatDate = (dateString) => {
   return formattedString
 }
 
+const openWhatsapp = () => {
+  const phoneNumber = '573183996249'
+  const textMessage = `Hola Motowork, la presente es para adjuntar el soporte de pago de la orden: ${paymentData.value._id || orderToPay.value._id} por un monto de: ${paymentData.value.total || orderToPay.value.total}`
+
+  const encodedMessage = encodeURIComponent(textMessage)
+  const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodedMessage}`
+  window.open(whatsappUrl, '__blank')
+}
+
 // hook
 onBeforeMount(() => {
   if (route.params.order) {
@@ -314,20 +331,22 @@ onBeforeMount(() => {
     loadOrderFinished(order)
     orderStatus.value = route.query.collection_status
     paymentRef.value = route.query.payment_id
+    return false
   }
 
-  if (LocalStorage.getItem('order_to_transfer')) {
+  if (SessionStorage.getItem('order_to_transfer')) {
     isStatus.value = true
-    const order = LocalStorage.getItem('order_to_transfer')
+    const order = SessionStorage.getItem('order_to_transfer')
     loadOrderFinished(order)
+    return false
   }
 })
 
 onBeforeUnmount(() => {
   if (isStatus.value || orderStatus.value) {
     ordersStore.clearOrderToPay()
-    LocalStorage.removeItem('order_to_transfer')
   }
+  SessionStorage.removeItem('order_to_transfer')
 })
 </script>
 
