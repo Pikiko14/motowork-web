@@ -1,5 +1,6 @@
 // import { ref } from 'vue'
 import { api } from 'src/boot/axios'
+import { LocalStorage } from 'quasar'
 import { useOrdersStore } from 'src/stores/ordersStore'
 
 export const useOrdersContent = () => {
@@ -10,6 +11,10 @@ export const useOrdersContent = () => {
   // methods
   const saveOrders = async (order) => {
     try {
+      if (order.client) {
+        LocalStorage.removeItem('client')
+        LocalStorage.setItem('client', JSON.stringify(order.client))
+      }
       const { data } = await api.post(`${path}`, order, {
         headers: {
           'Content-Type': 'application/json'

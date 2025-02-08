@@ -132,9 +132,10 @@
 
 <script setup>
 // imports
-import { computed, onBeforeMount, ref, watch } from 'vue'
+import { LocalStorage } from 'quasar'
 import Colombia from '../../utils/colombia.json'
 import { useOrdersStore } from 'src/stores/ordersStore'
+import { computed, onBeforeMount, ref, watch } from 'vue'
 
 // references
 const cities = ref([])
@@ -307,6 +308,13 @@ onBeforeMount(() => {
     }
   })
   allDepartaments.value = departaments.value
+  if (LocalStorage.getItem('client')) {
+    const client = JSON.parse(LocalStorage.getItem('client') || {})
+    if (client.firstName) {
+      shippingData.value = client
+      getCities(client.state)
+    }
+  }
 })
 </script>
 
