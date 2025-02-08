@@ -30,10 +30,62 @@
           <!--order resume-->
           <OrderFinish v-if="orderCreatedData.order" :order="orderCreatedData.order" />
           <!--End order resume-->
+
+          <div class="account-to-transfer q-mt-xl" v-if="orderCreatedData.order && orderCreatedData.order.payment_method === 'trasnferencia'">
+            <p>
+              <span class="text-bold text-primary">
+                Nota:
+              </span>
+              <span class="text-primary">
+                Una vez realizada la transferencia deberas enviar el comprobante a nuestras lineas de atención.
+              </span>
+            </p>
+            <div class="box-account">
+              <q-list>
+                <q-item>
+                  <q-item-section>
+                    <q-item-label>
+                      Numero de cuenta:
+                    </q-item-label>
+                    <q-item-label caption lines="1">
+                      {{ paymentData.account_number }}
+                    </q-item-label>
+                  </q-item-section>
+                  <q-item-section side>
+                    <q-btn flat dense rounded icon="img:/images/whatsapp.webp">
+                      <q-tooltip class="bg-primary">
+                        Enviar comprobante de pago
+                      </q-tooltip>
+                    </q-btn>
+                  </q-item-section>
+                </q-item>
+                <q-item>
+                  <q-item-section>
+                    <q-item-label>
+                      Documento:
+                    </q-item-label>
+                    <q-item-label caption lines="1">
+                      {{ paymentData.account_document }}
+                    </q-item-label>
+                  </q-item-section>
+                </q-item>
+                <q-item>
+                  <q-item-section>
+                    <q-item-label>
+                      Numero de la cuenta:
+                    </q-item-label>
+                    <q-item-label caption lines="1">
+                      {{ paymentData.account_holder }}
+                    </q-item-label>
+                  </q-item-section>
+                </q-item>
+              </q-list>
+            </div>
+          </div>
         </div>
 
         <div v-if="isStatus" class="col-12 col-sm-12 col-md-7 full-on-1199" :class="{ 'q-pr-xl': $q.screen.gt.sm }">
-          <div class="details-order">
+          <div class="details-order" v-if="orderToPay.payment_method === 'mercadopago'">
             <figure>
               <img src="/images/finish_order.webp" alt="Icono de pago de orden" title="Pago orden">
             </figure>
@@ -101,6 +153,60 @@
               </q-list>
             </div>
           </div>
+          <!--order resume-->
+          <OrderFinish v-if="orderToPay.payment_method === 'trasnferencia'" :order="orderToPay" />
+          <!--End order resume-->
+          <div class="account-to-transfer q-mt-xl" v-if="orderToPay._id && orderToPay.payment_method === 'trasnferencia'">
+            <p>
+              <span class="text-bold text-primary">
+                Nota:
+              </span>
+              <span class="text-primary">
+                Una vez realizada la transferencia deberas enviar el comprobante a nuestras lineas de atención.
+              </span>
+            </p>
+            <div class="box-account">
+              <q-list>
+                <q-item>
+                  <q-item-section>
+                    <q-item-label>
+                      Numero de cuenta:
+                    </q-item-label>
+                    <q-item-label caption lines="1">
+                      {{ paymentData.account_number }}
+                    </q-item-label>
+                  </q-item-section>
+                  <q-item-section side>
+                    <q-btn flat dense rounded icon="img:/images/whatsapp.webp">
+                      <q-tooltip class="bg-primary">
+                        Enviar comprobante de pago
+                      </q-tooltip>
+                    </q-btn>
+                  </q-item-section>
+                </q-item>
+                <q-item>
+                  <q-item-section>
+                    <q-item-label>
+                      Documento:
+                    </q-item-label>
+                    <q-item-label caption lines="1">
+                      {{ paymentData.account_document }}
+                    </q-item-label>
+                  </q-item-section>
+                </q-item>
+                <q-item>
+                  <q-item-section>
+                    <q-item-label>
+                      Numero de la cuenta:
+                    </q-item-label>
+                    <q-item-label caption lines="1">
+                      {{ paymentData.account_holder }}
+                    </q-item-label>
+                  </q-item-section>
+                </q-item>
+              </q-list>
+            </div>
+          </div>
         </div>
 
         <!--Detail from order items and total-->
@@ -125,7 +231,7 @@
 
 <script setup>
 // imports
-import { date } from 'quasar'
+import { date, LocalStorage } from 'quasar'
 import { useRoute } from 'vue-router'
 import { notification } from 'src/boot/notification'
 import { useOrdersStore } from 'src/stores/ordersStore'
@@ -141,6 +247,7 @@ import ShoppingbagOrderResume from '../../components/orders/ShoppingbagOrderResu
 // references
 const route = useRoute()
 const loading = ref(false)
+const paymentData = ref({})
 const isStatus = ref(false)
 const paymentRef = ref(null)
 const orderStatus = ref(null)
@@ -173,8 +280,12 @@ const finishOrder = async () => {
       orderCreatedData.value = response.data
       if (paymentMethod.value === 'mercadopago') {
         setTimeout(() => {
+          LocalStorage.removeItem('order_to_transfer')
           location.href = response.data.preference.init_point
         }, 5000)
+      } else {
+        paymentData.value = response.data.preference
+        LocalStorage.setItem('order_to_transfer', orderToPay.value._id)
       }
     }
   } catch (error) {
@@ -204,11 +315,18 @@ onBeforeMount(() => {
     orderStatus.value = route.query.collection_status
     paymentRef.value = route.query.payment_id
   }
+
+  if (LocalStorage.getItem('order_to_transfer')) {
+    isStatus.value = true
+    const order = LocalStorage.getItem('order_to_transfer')
+    loadOrderFinished(order)
+  }
 })
 
 onBeforeUnmount(() => {
-  if (isStatus.value && orderStatus.value) {
+  if (isStatus.value || orderStatus.value) {
     ordersStore.clearOrderToPay()
+    LocalStorage.removeItem('order_to_transfer')
   }
 })
 </script>
@@ -267,5 +385,12 @@ p {
 
 .q-item__label {
   font-size: 16px;
+}
+
+.box-account {
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #9F9C9C;
+  max-width: 520px;
 }
 </style>
