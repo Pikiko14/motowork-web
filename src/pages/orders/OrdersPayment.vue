@@ -146,7 +146,7 @@ const finishOrder = async () => {
       orderCreatedData.value = response.data
       if (paymentMethod.value === 'mercadopago') {
         setTimeout(() => {
-          window.open(response.data.preference.init_point, '__blank')
+          location.href = response.data.preference.init_point
         }, 3000)
       }
     }
