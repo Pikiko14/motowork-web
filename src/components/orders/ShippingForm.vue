@@ -311,8 +311,8 @@ onBeforeMount(() => {
   if (LocalStorage.getItem('client')) {
     const client = JSON.parse(LocalStorage.getItem('client') || {})
     if (client.firstName) {
-      shippingData.value = client
       getCities(client.state)
+      shippingData.value = client
     }
   }
 })
