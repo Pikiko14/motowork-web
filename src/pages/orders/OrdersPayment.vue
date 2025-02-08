@@ -40,7 +40,7 @@
 
             <div class="details-order__content">
               <h2>
-                <span v-if="orderStatus !== 'approved' && orderStatus !== 'pending'">
+                <span v-if="orderStatus !== 'approved' && orderStatus !== 'pending' && orderStatus !== 'in_process'">
                   ¡Vaya! Parece que hay un problema con tu pedido.
                 </span>
                 <span v-else>
@@ -48,7 +48,7 @@
                 </span>
               </h2>
 
-              <p v-if="orderStatus !== 'approved' && orderStatus !== 'pending'" class="text-primary">
+              <p v-if="orderStatus !== 'approved' && orderStatus !== 'pending' && orderStatus !== 'in_process'" class="text-primary">
                 Lamentamos informarte que tu pedido ha sido rechazado. Desafortunadamente, no podemos procesar tu pedido en este momento. Aquí una lista de posibles razones
               </p>
               <p class="text-primary" v-else>
@@ -58,7 +58,7 @@
               <q-list>
                 <q-item>
                   <q-item-section>
-                    <q-item-label># ORDEN:</q-item-label>
+                    <q-item-label># Orden:</q-item-label>
                     <q-item-label caption lines="1">
                       {{ orderToPay._id }}
                     </q-item-label>
@@ -66,9 +66,35 @@
                 </q-item>
                 <q-item>
                   <q-item-section>
-                    <q-item-label>REFERENCIA DE PAGO:</q-item-label>
+                    <q-item-label>Referencia de pago:</q-item-label>
                     <q-item-label caption lines="1">
                       {{ paymentRef }}
+                    </q-item-label>
+                  </q-item-section>
+                </q-item>
+                <q-item>
+                  <q-item-section>
+                    <q-item-label>Estado de la orden:</q-item-label>
+                    <q-item-label caption lines="1">
+                      <q-chip class="bg-primary text-white">
+                        {{ orderToPay.status }}
+                      </q-chip>
+                    </q-item-label>
+                  </q-item-section>
+                </q-item>
+                <q-item v-if="orderToPay.payment_data?.date_approved">
+                  <q-item-section>
+                    <q-item-label>Fecha de aprobación:</q-item-label>
+                    <q-item-label caption lines="1">
+                      {{ formatDate(orderToPay?.payment_data?.date_approved) }}
+                    </q-item-label>
+                  </q-item-section>
+                </q-item>
+                <q-item v-if="orderToPay.payment_data?.card">
+                  <q-item-section>
+                    <q-item-label>Orden pagada con la tarjeta:</q-item-label>
+                    <q-item-label caption lines="1">
+                      **** **** **** {{ orderToPay?.payment_data?.card.last_four_digits }}
                     </q-item-label>
                   </q-item-section>
                 </q-item>
@@ -99,14 +125,15 @@
 
 <script setup>
 // imports
+import { date } from 'quasar'
 import { useRoute } from 'vue-router'
-import { computed, onBeforeMount, onBeforeUnmount, ref } from 'vue'
 import { notification } from 'src/boot/notification'
 import { useOrdersStore } from 'src/stores/ordersStore'
 import BreadCrumb from 'src/components/layout/BreadCrumb.vue'
 import OrderFinish from 'src/components/orders/OrderFinish.vue'
 import { useOrdersContent } from 'src/composables/useOrdersContent'
 import PaymentMethod from 'src/components/orders/PaymentMethod.vue'
+import { computed, onBeforeMount, onBeforeUnmount, ref } from 'vue'
 import BannerMotowork from 'src/components/banner/BannerMotowork.vue'
 import CheckoutListProduct from 'src/components/orders/CheckoutListProduct.vue'
 import ShoppingbagOrderResume from '../../components/orders/ShoppingbagOrderResume.vue'
@@ -147,7 +174,7 @@ const finishOrder = async () => {
       if (paymentMethod.value === 'mercadopago') {
         setTimeout(() => {
           location.href = response.data.preference.init_point
-        }, 3000)
+        }, 5000)
       }
     }
   } catch (error) {
@@ -161,6 +188,11 @@ const loadOrderFinished = async (order) => {
     await ordersContent.loadOrderData(order)
   } catch (error) {
   }
+}
+
+const formatDate = (dateString) => {
+  const formattedString = date.formatDate(dateString, 'YYYY-MM-DD HH:mm:ss')
+  return formattedString
 }
 
 // hook
@@ -231,5 +263,9 @@ p {
   h2 {
     margin-top: 32px;
   }
+}
+
+.q-item__label {
+  font-size: 16px;
 }
 </style>

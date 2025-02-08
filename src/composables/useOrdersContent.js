@@ -11,7 +11,7 @@ export const useOrdersContent = () => {
   // methods
   const saveOrders = async (order) => {
     try {
-      if (order.client) {
+      if (order.client && order.client.state) {
         LocalStorage.removeItem('client')
         LocalStorage.setItem('client', JSON.stringify(order.client))
       }

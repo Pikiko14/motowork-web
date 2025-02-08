@@ -14,7 +14,7 @@
           Fecha de compra
         </span>
         <span class="text-primary text-semibold q-pl-md">
-          {{ order.createdAt }}
+          {{ formatDate(order.createdAt) }}
         </span>
       </p>
     </div>
@@ -54,6 +54,10 @@
 </template>
 
 <script setup>
+// imports
+import { date } from 'quasar'
+
+// props
 defineProps({
   order: {
     type: Object,
@@ -62,6 +66,12 @@ defineProps({
     }
   }
 })
+
+// methods
+const formatDate = (dateString) => {
+  const formattedString = date.formatDate(dateString, 'DD-MM-YYYY HH:mm:ss')
+  return formattedString
+}
 </script>
 
 <style scoped lang="scss">
