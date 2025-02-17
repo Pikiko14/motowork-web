@@ -1,5 +1,5 @@
 <template>
-  <section class="motowor-banner" :class="{ 'reduce': reduceBanner, 'about-us-banner': isAboutBanner }">
+  <section class="motowor-banner" :class="{ 'reduce': reduceBanner, 'about-us-banner': isAboutBanner, 'experience-banner': isExperienceBanner }">
     <figure>
       <img class="motowor-banner__image"  v-if="!banner.path" :src="imgBanner.path || defaultImg" :alt="banner.name" :title="banner.name">
       <img class="motowor-banner__image"  v-else :src="banner.path || defaultImg" :alt="bannerAlt" :title="bannerAlt">
@@ -76,6 +76,10 @@ const props = defineProps({
     default: () => false
   },
   isAboutBanner: {
+    type: Boolean,
+    default: () => false
+  },
+  isExperienceBanner: {
     type: Boolean,
     default: () => false
   }
@@ -234,6 +238,14 @@ const imgBanner = computed(() => {
 
   @media(max-width: 767px) {
     height: 320px;
+  }
+}
+
+.experience-banner {
+  figure {
+    img {
+      object-position: bottom;
+    }
   }
 }
 </style>

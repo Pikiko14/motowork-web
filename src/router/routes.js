@@ -53,6 +53,11 @@ const routes = [
         path: 'conocenos',
         component: () => import('src/pages/aboutUs/AboutUs.vue'),
         name: 'aboutUs'
+      },
+      {
+        path: 'experiencias',
+        component: () => import('src/pages/experiences/ExperiencesPage.vue'),
+        name: 'experiences'
       }
     ]
   },

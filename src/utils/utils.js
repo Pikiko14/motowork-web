@@ -26,3 +26,15 @@ export const getUrlParams = (query, param) => {
   const paramGetter = params.get(param)
   return paramGetter
 }
+
+export const formatDateIso = (isoDate) => {
+  const date = new Date(isoDate)
+  const options = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }
+  const formattedDate = date.toLocaleDateString('es-ES', options)
+  const dateSplit = formattedDate.split(' ')
+  return `${dateSplit[2] ? dateSplit[2].toUpperCase() : ''} ${dateSplit[0] ? dateSplit[0] : ''}, ${dateSplit[4]}`
+}
