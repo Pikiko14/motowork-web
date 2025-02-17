@@ -1,11 +1,14 @@
 <template>
-  <section class="motowor-banner" :class="{ 'reduce': reduceBanner }">
+  <section class="motowor-banner" :class="{ 'reduce': reduceBanner, 'about-us-banner': isAboutBanner }">
     <figure>
       <img class="motowor-banner__image"  v-if="!banner.path" :src="imgBanner.path || defaultImg" :alt="banner.name" :title="banner.name">
       <img class="motowor-banner__image"  v-else :src="banner.path || defaultImg" :alt="bannerAlt" :title="bannerAlt">
       <figcaption :class="{ 'no-overflow': noOverflow, 'justify-end': contentEnd }">
         <div class="container">
           <div class="row">
+            <div class="col-12" v-if="$route.path === '/conocenos'">
+              <img class="logo" src="/images/motowork-footer-logo.png" alt="Logo motowork">
+            </div>
            <div class="col-12" v-if="title">
               <h1>{{ title }}</h1>
            </div>
@@ -71,6 +74,10 @@ const props = defineProps({
   reduceBanner: {
     type: Boolean,
     default: () => false
+  },
+  isAboutBanner: {
+    type: Boolean,
+    default: () => false
   }
 })
 
@@ -95,7 +102,7 @@ const imgBanner = computed(() => {
 <style scoped lang="scss">
 .motowor-banner {
   height: 560px;
-  max-width: 1920px;
+  max-width: 1600px;
   margin: 0px auto !important;
 
   figure {
@@ -207,5 +214,26 @@ const imgBanner = computed(() => {
 .justify-end {
   justify-content: flex-end !important;
   padding-bottom: 64px !important;
+}
+
+.about-us-banner {
+
+  figure {
+    .logo {
+      width: 219px;
+    }
+
+    img {
+      object-position: top;
+    }
+
+    @media(max-width: 767px) {
+      height: 320px;
+    }
+  }
+
+  @media(max-width: 767px) {
+    height: 320px;
+  }
 }
 </style>

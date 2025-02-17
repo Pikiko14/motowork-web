@@ -48,6 +48,11 @@ const routes = [
         path: 'orden-de-compra/:order/:status',
         component: () => import('src/pages/orders/OrdersPayment.vue'),
         name: 'payment_complete'
+      },
+      {
+        path: 'conocenos',
+        component: () => import('src/pages/aboutUs/AboutUs.vue'),
+        name: 'aboutUs'
       }
     ]
   },

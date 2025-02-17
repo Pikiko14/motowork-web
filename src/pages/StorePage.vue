@@ -8,7 +8,7 @@
     <BannerMotowork
       :title="''"
       :banner="storeBenner && storeBenner._id ? storeBenner : banner"
-      :default-img="type === 'vehicle' ? 'https://res.cloudinary.com/dg14xloef/image/upload/v1737398094/banners/boxfnfyssqzw809kxhsc.webp' : ''"
+      :default-img="type === 'vehicle' ? '/images/xcsudrnoqdnhmmo48hqi.webp' : '/images/nyul4gipytza14oemvwg.webp'"
       :btnLabel="''" noOverflow :bannerComplement="''" />
     <!--End banner-->
 

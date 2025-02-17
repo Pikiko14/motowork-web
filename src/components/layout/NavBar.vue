@@ -24,7 +24,7 @@
               class="text-uppercase">Accesorios</q-btn></li>
           <li><q-btn flat to="/services" class="text-uppercase">Servicio técnico</q-btn></li>
           <li><q-btn flat to="/experiences" class="text-uppercase">Experiencias</q-btn></li>
-          <li><q-btn flat to="/about-us" class="text-uppercase">Nosotros</q-btn></li>
+          <li><q-btn flat to="/conocenos" class="text-uppercase">Nosotros</q-btn></li>
         </ul>
       </section>
       <!--End link Section-->
@@ -541,7 +541,7 @@ const openAllProducts = () => {
     height: 335px;
     position: absolute;
     background: #fff;
-    max-width: 1920px;
+    max-width: 1600px;
     width: 100%;
     left: 50%;
     transform: translate(-50%);

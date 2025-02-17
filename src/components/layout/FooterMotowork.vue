@@ -48,7 +48,7 @@
               aria-label="Política de tratamiento de datos" title="Política de tratamiento de datos">
               Política de datos
             </a>
-            <a target="_blank" href="https://motowork.co/conocenos/" rel="noopener noreferrer"
+            <a target="_blank" href="/conocenos" rel="noopener noreferrer"
               aria-label="Sobre nosotros" title="Sobre nosotros">
               Sobre nosotros
             </a>
