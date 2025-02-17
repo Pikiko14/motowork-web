@@ -228,6 +228,10 @@ onMounted(async () => {
           height: 100%;
           object-fit: cover;
         }
+
+        @media(max-width: 767px) {
+          height: auto;
+        }
       }
 
       &__content {
@@ -281,6 +285,10 @@ onMounted(async () => {
 
     @media(max-width: 991px) {
       grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media(max-width: 767px) {
+      grid-template-columns: repeat(1, 1fr);
     }
   }
 }
