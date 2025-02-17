@@ -68,7 +68,7 @@
               rel="noopener noreferrer" aria-label="Soporte por WhatsApp de Motowork" title="Soporte por WhatsApp">
               Soporte WhatsApp
             </a>
-            <a href="tel:+6044449727" aria-label="Llamar a PBX (604) 444 97 27" title="Llamar a PBX">
+            <a @click="openPbxModal" aria-label="Llamar a PBX (604) 444 97 27" title="Llamar a PBX" class="cursor-pointer">
               PBX (604)444 97 27
             </a>
             <a href="mailto:info@motowork.co" target="_blank" rel="noopener noreferrer"
@@ -100,10 +100,6 @@
         title="Visita nuestro TikTok de Motowork" aria-label="Ir a la página de TikTok de Motowork">
         <img src="/images/tiktok.png" alt="Ícono de TikTok de Motowork" />
       </a>
-      <a href="https://youtube.com/motowork" target="_blank" rel="noopener noreferrer"
-        title="Visita nuestro canal de YouTube de Motowork" aria-label="Ir al canal de YouTube de Motowork">
-        <img src="/images/youtube.png" alt="Ícono de YouTube de Motowork" />
-      </a>
     </div>
     <!--End rrss mobile-->
 
@@ -118,13 +114,72 @@
       </p>
     </div>
     <!--End Copy-->
+
+    <!--Pbx modal-->
+    <q-dialog v-model="pbxModal">
+      <q-card class="pbx">
+        <q-card-section>
+          <h2 class="modal-title">Asesores de venta</h2>
+          <q-btn color="secondary" v-close-popup class="absolute-top-right" style="right: 10px; top: 10px" rounded flat
+            dense icon="close"></q-btn>
+        </q-card-section>
+        <q-card-section>
+          <q-list>
+            <q-item v-for="(asesor, index) in asesores" :key="index">
+              <q-item-section>
+                <q-item-label class="text-bold">{{ asesor.nombre }}</q-item-label>
+                <q-item-label caption>{{ asesor.area }}</q-item-label>
+              </q-item-section>
+              <q-item-section side class="d-flex">
+                <a :href="`tel:${asesor.celular}`" aria-label="Contactar con asesor">
+                  <q-icon color="green" name="phone_in_talk" title="Llanada teléfonica" size="22px" />
+                  <q-tooltip class="bg-green">
+                    Llamar asesor
+                  </q-tooltip>
+                </a>
+                <a :href="`tel:${asesor.celular}`" aria-label="Contactar con asesor">
+                  <q-icon color="green" name="mail" title="Llanada teléfonica" size="22px" />
+                  <q-tooltip class="bg-green">
+                    Enviar correo
+                  </q-tooltip>
+                </a>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </q-card-section>
+      </q-card>
+    </q-dialog>
+    <!--End pbx modal-->
   </section>
 </template>
 
 <script setup>
+// imports
 import { ref } from 'vue'
 
+// references
+const pbxModal = ref(false)
 const currentYear = ref(new Date().getFullYear())
+const asesores = [
+  { nombre: 'Juan Jose', area: 'Asesor venta de repuestos y accesorios', correo: 'comercial-repuestos1@motowork.com.co', celular: '3175052541' },
+  { nombre: 'Alejandro Osorio', area: 'Asesor venta de repuestos y accesorios', correo: 'auxiliar-repuestos@motowork.com.co', celular: '3188279037' },
+  { nombre: 'Daniel Ruiz', area: 'Asesor venta de repuestos y accesorios', correo: 'comercial-repuestos4@motowork.com.co', celular: '3173117333' },
+  { nombre: 'Euvaldo Camacho', area: 'Asesor venta de repuestos y accesorios', correo: 'e.camacho@motowork.com.co', celular: '3173711290' },
+  { nombre: 'David Mesa', area: 'Asesor venta de repuestos y accesorios', correo: 'comercial-repuestos3@motowork.com.co', celular: '3173642461' },
+  { nombre: 'Jose Cossio', area: 'Asesor venta de repuestos y accesorios', correo: 'comercial-repuestos2@motowork.com.co', celular: '3106133770' },
+  { nombre: 'Carlos Vasquez', area: 'Asesor de ventas motos', correo: 'ventasmotos3@motowork.com.co', celular: '3176432070' },
+  { nombre: 'Flor Velasquez', area: 'Asesora de ventas motos', correo: 'ventasmotos1@motowork.com.co', celular: '3016610615' },
+  { nombre: 'Katherine Montoya', area: 'Asesora de ventas motos', correo: 'ventasmotos2@motowork.com.co', celular: '3164743748' },
+  { nombre: 'Santiago Cardona', area: 'Asesor de ventas motos', correo: 'ventasmotos@motowork.com.co', celular: '3173712794' },
+  { nombre: 'Adriana Perez', area: 'Asesora de ventas redes', correo: 'marketing@motowork.com.co', celular: '3157240417' },
+  { nombre: 'Anderon Jimenez', area: 'Coordinadora de Servicio tecnico', correo: 'taller@motowork.co', celular: '3188279036' },
+  { nombre: 'Otros', area: 'Administracion', correo: 'administrador@motowork.co', celular: '3182576333' }
+]
+
+// methods
+const openPbxModal = () => {
+  pbxModal.value = !pbxModal.value
+}
 </script>
 
 <style scoped lang="scss">
@@ -330,5 +385,26 @@ const currentYear = ref(new Date().getFullYear())
   @media(max-width: 767px) {
     display: flex;
   }
+}
+
+.pbx {
+  width: 420px;
+
+  h2 {
+    font-size: 16px;
+    color: $primary;
+    font-weight: 600;
+    line-height: 120%;
+  }
+
+  @media(max-width: 767px) {
+    width: 320px;
+  }
+}
+
+.d-flex {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
 }
 </style>
