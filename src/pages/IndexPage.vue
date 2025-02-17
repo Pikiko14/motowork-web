@@ -1,7 +1,7 @@
 <template>
   <q-page>
     <!--Banner-->
-    <BannerMotowork :title="'Motowork'" :banner="storeBenner || banner" :btnLabel="'Adquiere tu moto'"
+    <BannerMotowork :default-img="'/images/urfm8rjjfdonjh63f8xi.webp'" :title="'Motowork'" :banner="storeBenner || banner" :btnLabel="'Adquiere tu moto'"
       :bannerComplement="'Consigue la moto que mejor se acople a tus gustos, no esperes más y adquiere tu moto con nosotros.'" />
     <!--End banner-->
 
