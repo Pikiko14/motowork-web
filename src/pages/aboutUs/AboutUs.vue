@@ -103,7 +103,7 @@
 
           <article class="our-team-section__body--item">
             <figure>
-              <img src="/images/image.webp" alt="Imagen del area 03" title="Imagen del area 03">
+              <img src="/images/Image_05.webp" alt="Imagen del area 03" title="Imagen del area 03">
               <div class="overflow"></div>
             </figure>
             <div class="our-team-section__body--item__content">
