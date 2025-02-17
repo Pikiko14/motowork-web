@@ -90,7 +90,7 @@
 
 <script setup>
 // imports
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { formatDateIso } from 'src/utils/utils'
 import BreadCrumb from 'src/components/layout/BreadCrumb.vue'
 import { useStoreContent } from 'src/stores/storeContent-store'
@@ -106,6 +106,11 @@ const newsletterSection = ref(null)
 const instagramsFeeds = store.instagramsFeeds
 const { getExperiences, experiences } = useBlogsContent()
 const { getfeed, feedsHistories } = useInstangramContent()
+
+// computed
+const feeds = computed(() => {
+  return instagramsFeeds.length > 0 ? instagramsFeeds : feedsHistories.value
+})
 
 // hook
 const query = '?page=1&perPage=9&sortBy=createdAt&order=-1'
