@@ -64,7 +64,7 @@
 
      <!--team section-->
      <section class="container-motowork bg-white">
-      <div class="our-team-section">
+      <div class="our-team-section  wySelectus-section" ref="ourTeam">
         <!--header team-->
         <div class="our-team-section__header">
           <h2>
@@ -84,7 +84,10 @@
               <img src="/images/area_01.webp" alt="Imagen del area 01" title="Imagen del area 01">
               <div class="overflow"></div>
             </figure>
-            <h3>Sector empresarial</h3>
+            <div class="our-team-section__body--item__content">
+              <h3>Sector empresarial</h3>
+              <p>Nombre del área</p>
+            </div>
           </article>
 
           <article class="our-team-section__body--item">
@@ -92,7 +95,10 @@
               <img src="/images/area_02.webp" alt="Imagen del area 02" title="Imagen del area 02">
               <div class="overflow"></div>
             </figure>
-            <h3>Sector empresarial</h3>
+            <div class="our-team-section__body--item__content">
+              <h3>Sector empresarial</h3>
+              <p>Nombre del área</p>
+            </div>
           </article>
 
           <article class="our-team-section__body--item">
@@ -100,20 +106,119 @@
               <img src="/images/image.webp" alt="Imagen del area 03" title="Imagen del area 03">
               <div class="overflow"></div>
             </figure>
-            <h3>Sector empresarial</h3>
+            <div class="our-team-section__body--item__content">
+              <h3>Sector empresarial</h3>
+              <p>Nombre del área</p>
+            </div>
           </article>
         </div>
         <!--End body team-->
       </div>
     </section>
     <!--End team section-->
+
+    <!--porque elegirnos-->
+    <section class="container-motowork bg-gray-motowork wySelectus-section" ref="wySelectus">
+      <!--top section-->
+      <div class="motowork-por-elegirnos">
+        <div class="motowork-por-elegirnos__title">
+          <h2>¿PORQUE ELEGIRNOS?</h2>
+        </div>
+        <div class="motowork-por-elegirnos__subtitle">
+          <h3>Precioes motowork</h3>
+        </div>
+      </div>
+      <!--End top section-->
+
+      <!--card section-->
+      <div class="motowork-por-elegirnos__grid">
+        <!--card one-->
+        <article class="motowork-por-elegirnos__grid--item">
+          <div class="motowork-por-elegirnos__grid--item__icon">
+            <figure>
+              <img src="/images/personalizacion.png" alt="Icono de la carta de calidad" title="Icono de la carta de calidad">
+            </figure>
+          </div>
+          <div class="motowork-por-elegirnos__grid--item__text">
+            <h4>Calidad</h4>
+            <p class="ellipsis--lines">En Motowork ofrecemos motocicletas Yamaha diseñadas con la más alta tecnología y materiales de primera, garantizando un rendimiento excepcional en cada viaje.</p>
+          </div>
+        </article>
+        <!--End card one-->
+        <!--card two-->
+        <article class="motowork-por-elegirnos__grid--item">
+          <div class="motowork-por-elegirnos__grid--item__icon">
+            <figure>
+              <img src="/images/Confianza.png" alt="Icono de la carta de confianza" title="Icono de la carta de confianza">
+            </figure>
+          </div>
+          <div class="motowork-por-elegirnos__grid--item__text">
+            <h4>Confianza</h4>
+            <p class="ellipsis--lines">Somos distribuidores oficiales de Yamaha, brindando a nuestros clientes motos seguras, duraderas y con respaldo garantizado.</p>
+          </div>
+        </article>
+        <!--End card two-->
+        <!--card three-->
+        <article class="motowork-por-elegirnos__grid--item">
+          <div class="motowork-por-elegirnos__grid--item__icon">
+            <figure>
+              <img src="/images/reconocimiento.png" alt="Icono de la carta de reconocimiento" title="Icono de la carta de reconocimiento">
+            </figure>
+          </div>
+          <div class="motowork-por-elegirnos__grid--item__text">
+            <h4 class="ellipsis reconocimiento">Reconocimiento</h4>
+            <p class="ellipsis--lines">Yamaha es sinónimo de excelencia en el mundo del motociclismo, y en Motowork llevamos esa tradición a cada moto que entregamos.</p>
+          </div>
+        </article>
+        <!--End card three-->
+        <!--card four-->
+        <article class="motowork-por-elegirnos__grid--item">
+          <div class="motowork-por-elegirnos__grid--item__icon">
+            <figure>
+              <img src="/images/servicio.png" alt="Icono de la carta de reconocimiento" title="Icono de la carta de reconocimiento">
+            </figure>
+          </div>
+          <div class="motowork-por-elegirnos__grid--item__text">
+            <h4>Servicio</h4>
+            <p class="ellipsis--lines">Contamos con asesoría experta y servicio técnico especializado para que disfrutes tu Yamaha al máximo, sin preocupaciones.</p>
+          </div>
+        </article>
+        <!--End card four-->
+      </div>
+      <!--End card section-->
+    </section>
+    <!--End porque elejirnos-->
   </q-page>
 </template>
 
 <script setup>
 // imports
+import { onMounted, ref } from 'vue'
 import BreadCrumb from 'src/components/layout/BreadCrumb.vue'
 import BannerMotowork from 'src/components/banner/BannerMotowork.vue'
+
+// references
+const ourTeam = ref()
+const wySelectus = ref()
+
+// hooks
+onMounted(async () => {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible')
+        }
+      })
+    },
+    { threshold: 0.2 }
+  )
+
+  if (wySelectus.value) {
+    observer.observe(wySelectus.value)
+    observer.observe(ourTeam.value)
+  }
+})
 </script>
 
 <style scoped lang="scss">
@@ -139,6 +244,10 @@ import BannerMotowork from 'src/components/banner/BannerMotowork.vue'
       line-height: 125%;
       /* 40px */
       text-transform: uppercase;
+
+      @media(max-width: 767px) {
+        font-size: 22px;
+      }
     }
 
     .separator {
@@ -163,11 +272,16 @@ import BannerMotowork from 'src/components/banner/BannerMotowork.vue'
       /* 20px */
       letter-spacing: 3.84px;
       text-transform: uppercase;
+
+      @media(max-width: 767px) {
+        font-size: 12px;
+      }
     }
 
     @media(max-width: 767px) {
       flex-direction: column;
       align-items: flex-start;
+      gap: 16px;
 
       padding: 0px 0px;
     }
@@ -176,6 +290,7 @@ import BannerMotowork from 'src/components/banner/BannerMotowork.vue'
   &__body {
     display: flex;
     gap: 16px;
+    align-items: center;
     margin-top: 56px;
 
     figure {
@@ -186,6 +301,10 @@ import BannerMotowork from 'src/components/banner/BannerMotowork.vue'
         width: 100%;
         height: 100%;
         object-fit: cover;
+      }
+
+      @media(max-width: 767px) {
+        width: 100%;
       }
     }
 
@@ -207,7 +326,21 @@ import BannerMotowork from 'src/components/banner/BannerMotowork.vue'
         font-weight: 400;
         line-height: 125%;
         /* 20px */
+
+        @media(max-width: 767px) {
+          margin-top: 30px;
+          font-size: 14px;
+        }
       }
+
+      @media(max-width: 767px) {
+        padding: 0;
+      }
+    }
+
+    @media(max-width: 991px) {
+      flex-direction: column;
+      margin-top: 36px;
     }
   }
 }
@@ -234,6 +367,10 @@ import BannerMotowork from 'src/components/banner/BannerMotowork.vue'
       line-height: 125%;
       /* 40px */
       text-transform: uppercase;
+
+      @media(max-width: 767px) {
+        font-size: 22px;
+      }
     }
 
     .separator {
@@ -258,12 +395,16 @@ import BannerMotowork from 'src/components/banner/BannerMotowork.vue'
       /* 20px */
       letter-spacing: 3.84px;
       text-transform: uppercase;
+
+      @media(max-width: 767px) {
+        font-size: 12px;
+      }
     }
 
     @media(max-width: 767px) {
       flex-direction: column;
       align-items: flex-start;
-
+      gap: 16px;
       padding: 0px 0px;
     }
   }
@@ -288,28 +429,55 @@ import BannerMotowork from 'src/components/banner/BannerMotowork.vue'
           width: 100%;
           object-fit: cover;
         }
+      }
 
-        .overflow {
-          position: absolute;
-          width: 100%;
-          height: 99%;
-          top: 0;
-          background-color: rgba(0, 0, 0, 0.349);
+      &__content {
+        h3 {
+          overflow: hidden;
+          color: #ED1C24;
+          text-overflow: ellipsis;
+
+          /* Desktop/Body/Text/Medium */
+          font-family: Ubuntu;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 125%; /* 20px */
+        }
+
+        p {
+          margin-top: 4px;
+          color: #000;
+
+          /* Desktop/Headings/H4 */
+          font-family: Play;
+          font-size: 24px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 125%; /* 30px */
+          text-transform: uppercase;
+
+          @media(max-width: 991px) {
+            font-size: 18px;
+          }
+
+          @media(max-width: 767px) {
+          }
         }
       }
 
-      h3 {
-        overflow: hidden;
-        color: #ED1C24;
-        text-overflow: ellipsis;
-
-        /* Desktop/Body/Text/Medium */
-        font-family: Ubuntu;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 125%; /* 20px */
+      @media(max-width: 767px) {
+        gap: 16px;
       }
+    }
+
+    @media(max-width: 991px) {
+      margin-top: 36px;
+    }
+
+    @media(max-width: 767px) {
+      flex-direction: column;
+      gap: 24px;
     }
   }
 }

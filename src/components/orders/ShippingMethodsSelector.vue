@@ -10,7 +10,7 @@
             </h3>
           </div>
           <p>
-            El precio del envio dependera del peso total de tu pedido y la transportadora de tu elección. El tiempo de entrega dependera de la transportadora seleccionada y el costo del envio sera costeado por el cliente.
+            El costo del envio dependera del peso total de tu pedido y la transportadora de tu elección, sera costeado en su totalidad por el cliente.
           </p>
           <q-select @update:model-value="setConveyor" emit-value map-options class="q-mt-md" :options="conveyorsOptions"
             v-if="shippingMethods === 'delivery'" v-model="conveyor" square outlined></q-select>
@@ -32,8 +32,6 @@
           <p>
             No hay gastos de envío para este pedido.
             Recibirá un correo electrónico dentro de 2 a 3 días hábiles cuando su pedido esté disponible.
-            Recibirá un correo electrónico cuando el pedido esté listo para ser recogido.
-
           </p>
         </template>
       </q-radio>

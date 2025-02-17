@@ -116,7 +116,7 @@
                   class="text-uppercase">Accesorios</q-btn></li>
               <li><q-btn flat to="/services" class="text-uppercase text-left">Servicio técnico</q-btn></li>
               <li><q-btn flat to="/experiences" class="text-uppercase">Experiencias</q-btn></li>
-              <li><q-btn flat to="/about-us" class="text-uppercase">Nosotros</q-btn></li>
+              <li><q-btn flat to="/conocenos" class="text-uppercase">Nosotros</q-btn></li>
               <li class="mobile-show"><q-btn color="secondary" flat to="/about-us" class="text-uppercase">financiar</q-btn></li>
             </ul>
             <div class="mobile-car mobile-show">

@@ -92,7 +92,7 @@
           </div>
           <div class="motowork-por-elegirnos__grid--item__text">
             <h4>Calidad</h4>
-            <p class="ellipsis-2-lines">Lorem ipsum dolor sit amet consectetur. Augue tortor amet</p>
+            <p class="ellipsis--lines">En Motowork ofrecemos motocicletas Yamaha diseñadas con la más alta tecnología y materiales de primera, garantizando un rendimiento excepcional en cada viaje.</p>
           </div>
         </article>
         <!--End card one-->
@@ -105,7 +105,7 @@
           </div>
           <div class="motowork-por-elegirnos__grid--item__text">
             <h4>Confianza</h4>
-            <p class="ellipsis-2-lines">Lorem ipsum dolor sit amet consectetur. Augue tortor amet</p>
+            <p class="ellipsis--lines">Somos distribuidores oficiales de Yamaha, brindando a nuestros clientes motos seguras, duraderas y con respaldo garantizado.</p>
           </div>
         </article>
         <!--End card two-->
@@ -118,7 +118,7 @@
           </div>
           <div class="motowork-por-elegirnos__grid--item__text">
             <h4 class="ellipsis reconocimiento">Reconocimiento</h4>
-            <p class="ellipsis-2-lines">Lorem ipsum dolor sit amet consectetur. Augue tortor amet</p>
+            <p class="ellipsis--lines">Yamaha es sinónimo de excelencia en el mundo del motociclismo, y en Motowork llevamos esa tradición a cada moto que entregamos.</p>
           </div>
         </article>
         <!--End card three-->
@@ -131,7 +131,7 @@
           </div>
           <div class="motowork-por-elegirnos__grid--item__text">
             <h4>Servicio</h4>
-            <p class="ellipsis-2-lines">Lorem ipsum dolor sit amet consectetur. Augue tortor amet</p>
+            <p class="ellipsis--lines">Contamos con asesoría experta y servicio técnico especializado para que disfrutes tu Yamaha al máximo, sin preocupaciones.</p>
           </div>
         </article>
         <!--End card four-->

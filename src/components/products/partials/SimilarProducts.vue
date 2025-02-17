@@ -146,7 +146,7 @@ const getBannerUrl = (idx) => {
         }
 
         @media(min-width: 1601px) {
-          height: 380px;
+          height: 340px;
         }
 
         @media(max-width: 550px) {
