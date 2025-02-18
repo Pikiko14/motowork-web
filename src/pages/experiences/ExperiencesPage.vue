@@ -33,7 +33,7 @@
             <div class="experiences-section__body--item__content">
               <h3>{{ formatDateIso(item.createdAt) }}</h3>
               <p class="ellipsis-2-lines">{{ item.title }}</p>
-              <q-btn :to="`/experiencias/${item._id}/ver`" flat dense color="primary" label="saber mas"></q-btn>
+              <q-btn @click="showExperience(item)" flat dense color="primary" label="saber mas"></q-btn>
             </div>
           </article>
         </div>
@@ -90,6 +90,7 @@
 
 <script setup>
 // imports
+import { useRouter } from 'vue-router'
 import { ref, onMounted, computed } from 'vue'
 import { formatDateIso } from 'src/utils/utils'
 import BreadCrumb from 'src/components/layout/BreadCrumb.vue'
@@ -100,6 +101,7 @@ import BannerMotowork from 'src/components/banner/BannerMotowork.vue'
 import { useInstangramContent } from 'src/composables/useInstagramContent'
 
 // references
+const router = useRouter()
 const store = useStoreContent()
 const instagramFeed = ref(null)
 const newsletterSection = ref(null)
@@ -111,6 +113,20 @@ const { getfeed, feedsHistories } = useInstangramContent()
 const feeds = computed(() => {
   return instagramsFeeds.length > 0 ? instagramsFeeds : feedsHistories.value
 })
+
+// methods
+const showExperience = (experience) => {
+  store.setExperience(experience)
+  router.push({
+    name: 'showExperience',
+    params: {
+      name: experience.title
+    },
+    query: {
+      reference: experience._id
+    }
+  })
+}
 
 // hook
 const query = '?page=1&perPage=9&sortBy=createdAt&order=-1'

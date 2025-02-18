@@ -58,6 +58,11 @@ const routes = [
         path: 'experiencias',
         component: () => import('src/pages/experiences/ExperiencesPage.vue'),
         name: 'experiences'
+      },
+      {
+        path: 'experiencias/:name',
+        component: () => import('src/pages/experiences/ShowExperience.vue'),
+        name: 'showExperience'
       }
     ]
   },

@@ -18,8 +18,20 @@ export const useBlogsContent = () => {
     }
   }
 
+  const getExperience = async (id) => {
+    try {
+      const { data } = await api.get(`${path}/${id}/show/from-web`)
+      if (data.success && data.data) {
+        return data
+      }
+    } catch (error) {
+      throw new Error(error.message)
+    }
+  }
+
   return {
     experiences,
+    getExperience,
     getExperiences
   }
 }
