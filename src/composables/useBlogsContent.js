@@ -29,9 +29,26 @@ export const useBlogsContent = () => {
     }
   }
 
+  const loadSimilarsEntries = async (id) => {
+    try {
+      const { data } = await api.get(`${path}/${id}/similar-entries`, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+
+      if (data.success && data.data) {
+        return data
+      }
+    } catch (error) {
+      throw new Error(error.message)
+    }
+  }
+
   return {
     experiences,
     getExperience,
-    getExperiences
+    getExperiences,
+    loadSimilarsEntries
   }
 }
