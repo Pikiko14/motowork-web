@@ -544,6 +544,7 @@ const openAllProducts = () => {
     max-width: 1600px;
     width: 100%;
     left: 50%;
+    z-index: 99999 !important;
     transform: translate(-50%);
     top: 72px;
     box-shadow: #000;

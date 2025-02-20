@@ -3,7 +3,7 @@
     <h2>Productos similares</h2>
 
     <section class="motowork-similars__grid">
-      <article class="motowork-similars__grid--item" v-for="(product, idx) in similarsProducts" :key="idx">
+      <article class="motowork-similars__grid--item" v-for="(product, idx) in similarsProducts" :key="idx" @click="showItem(product)">
         <figure>
           <img :src="getBannerUrl(idx)" :alt="`Imagen de la motocicleta ${product.name}`" title="product.name" />
           <div class="overflow">
@@ -32,8 +32,9 @@
 <script setup>
 // imports
 import { defineProps } from 'vue'
-import { useRoute } from 'vue-router'
+import { useQuasar } from 'quasar'
 import { formatPrice } from 'src/utils/utils'
+import { useRoute, useRouter } from 'vue-router'
 
 // props
 const props = defineProps({
@@ -44,7 +45,9 @@ const props = defineProps({
 })
 
 // references
+const q = useQuasar()
 const route = useRoute()
+const router = useRouter()
 
 // methods
 const getBannerUrl = (idx) => {
@@ -60,6 +63,35 @@ const getBannerUrl = (idx) => {
     }
   }
   return url
+}
+
+const showItem = (product) => {
+  if (q.screen.gt.sm) {
+    return
+  }
+  let path = ''
+  if (route.query.type !== 'product') {
+    path = `/vehiculos/${urlString(product.name)}`
+  } else {
+    path = `/productos/${urlString(product.name)}`
+  }
+  router.push({
+    path,
+    query: {
+      reference: product._id
+    }
+  })
+}
+
+const urlString = (value) => {
+  if (!value) return ''
+  return value
+    .toString()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-zA-Z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .toLowerCase()
 }
 </script>
 

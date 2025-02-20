@@ -10,7 +10,7 @@
             <q-btn :to="`/vehiculos/${urlString(product.name)}?reference=${product._id}`" v-if="route.query.type !== 'product'"
               square outline color="white" label="Prueba de manejo"></q-btn>
             <q-btn :to="`/productos/${urlString(product.name)}?reference=${product._id}`" v-else square outline color="white"
-              label="Agregar al carrito"></q-btn>
+            :label="$q.screen.gt.xs ? 'Agregar al carrito' : 'Agregar'"></q-btn>
           </div>
         </figure>
 

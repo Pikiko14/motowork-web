@@ -46,7 +46,7 @@
 
       <div class="motowork-item-data__action--product" v-if="product.type === 'product'">
         <q-btn :disable="product.variants.length > 0 && !selectedVariant._id" square unelevated color="secondary"
-          label="Agregar al carrito" @click="handlerAddToCar" aria-label="Agregar este producto al carrito"></q-btn>
+          :label="$q.screen.gt.xs ? 'Agregar al carrito' : 'Agregar'" @click="handlerAddToCar" aria-label="Agregar este producto al carrito"></q-btn>
 
         <div class="motowork-item-data__action--product__quantity">
           <q-btn @click="removeQuantity" icon="img:/images/back_arrow.png" unelevated dense square></q-btn>

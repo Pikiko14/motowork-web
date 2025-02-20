@@ -18,7 +18,7 @@
       <figure>
         <img :src="getBannerUrl(idx)" :alt="`Imagen del producto ${product.name}`" :title="`Imagen del producto ${product.name}`" loading="lazy">
         <div class="motowork-product-accesories__grid--item__overflow">
-          <q-btn :to="`/productos/${urlString(product.name)}?reference=${product._id}`" square outline color="white" label="Agregar al carrito"></q-btn>
+          <q-btn :to="`/productos/${urlString(product.name)}?reference=${product._id}`" square outline color="white" :label="$q.screen.gt.xs ? 'Agregar al carrito' : 'Agregar'"></q-btn>
         </div>
         <figcaption>
           <h3>{{ product.name }}</h3>
