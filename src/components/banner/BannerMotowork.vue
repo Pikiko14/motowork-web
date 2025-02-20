@@ -133,7 +133,7 @@ const imgBanner = computed(() => {
       align-items: center;
       justify-content: center;
       /* Linear gradient */
-      background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.25) 25%, rgba(0, 0, 0, 1) 100%);
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.422) 0%, rgba(0, 0, 0, 0.25) 25%, rgba(0, 0, 0, 0.121) 100%);
 
       h1 {
         color: #FFF;

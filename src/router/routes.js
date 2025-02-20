@@ -63,6 +63,11 @@ const routes = [
         path: 'experiencias/:name',
         component: () => import('src/pages/experiences/ShowExperience.vue'),
         name: 'showExperience'
+      },
+      {
+        path: 'servicio-tecnico',
+        component: () => import('src/pages/services/ServicesPage.vue'),
+        name: 'tecnicalServices'
       }
     ]
   },

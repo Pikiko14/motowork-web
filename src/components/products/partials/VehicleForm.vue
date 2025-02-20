@@ -60,7 +60,7 @@
       </div>
       <div class="col-12">
         <p>
-          Datos personales para agendar Test drive
+          Datos personales para la prueba de manejo
         </p>
       </div>
       <div class="col-12 col-md-6 vehicle-form__input-date" :class="{ 'q-pr-md': $q.screen.gt.sm }">

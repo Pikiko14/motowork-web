@@ -22,7 +22,7 @@
               class="text-uppercase">Motos</q-btn></li>
           <li @click="openHamburguerMenu('product')"><q-btn flat
               class="text-uppercase">Accesorios</q-btn></li>
-          <li><q-btn flat to="/services" class="text-uppercase">Servicio técnico</q-btn></li>
+          <li><q-btn flat to="/servicio-tecnico" class="text-uppercase">Servicio técnico</q-btn></li>
           <li><q-btn flat to="/experiencias" class="text-uppercase">Experiencias</q-btn></li>
           <li><q-btn flat to="/conocenos" class="text-uppercase">Nosotros</q-btn></li>
         </ul>
@@ -114,7 +114,7 @@
                   class="text-uppercase">Motos</q-btn></li>
               <li><q-btn to="/productos?page=1&perPage=9&sortBy=createdAt&order=-1&type=product&state=Nueva" flat
                   class="text-uppercase">Accesorios</q-btn></li>
-              <li><q-btn flat to="/services" class="text-uppercase text-left">Servicio técnico</q-btn></li>
+              <li><q-btn flat to="/servicio-tecnico" class="text-uppercase text-left">Servicio técnico</q-btn></li>
               <li><q-btn flat to="/experiencias" class="text-uppercase">Experiencias</q-btn></li>
               <li><q-btn flat to="/conocenos" class="text-uppercase">Nosotros</q-btn></li>
               <li class="mobile-show"><q-btn color="secondary" flat to="/about-us" class="text-uppercase">financiar</q-btn></li>
