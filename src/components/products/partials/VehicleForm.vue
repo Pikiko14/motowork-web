@@ -45,8 +45,11 @@
         ]">
           <template #append>
             <q-icon size="16pt" class="cursor-pointer" name="img:/images/time.png">
-              <q-popup-proxy ref="hourProxy" cover transition-show="scale" transition-hide="scale">
-                <q-time color="secondary" @update:model-value="setHour" v-model="form.hour" mask="HH:mm" format24h>
+              <q-popup-proxy ref="hourProxy" transition-show="scale" transition-hide="scale">
+                <q-time color="secondary" v-model="form.hour" format24h>
+                  <div class="row">
+                    <q-btn v-close-popup label="Confirmar" color="primary" flat @click="setHour" />
+                  </div>
                 </q-time>
               </q-popup-proxy>
             </q-icon>
@@ -64,13 +67,13 @@
         </p>
       </div>
       <div class="col-12 col-md-6 vehicle-form__input-date" :class="{ 'q-pr-md': $q.screen.gt.sm }">
-        <label for="date">
+        <label for="name">
           Nombre
           <span>
             *
           </span>
         </label>
-        <q-input id="date" outlined class="q-mt-sm" square placeholder="Jhon" v-model="form.name" :rules="[
+        <q-input id="name" outlined class="q-mt-sm" square placeholder="Jhon" v-model="form.name" :rules="[
           vall => !!vall || 'Ingresa este campo',
           vall => /^[A-ZÁÉÍÓÚÑa-záéíóúñ]+(?: [A-ZÁÉÍÓÚÑa-záéíóúñ]+)*$/.test(vall) || 'Ingresa un nombre valido'
         ]">
@@ -78,13 +81,13 @@
       </div>
 
       <div class="col-12 col-md-6 vehicle-form__input-date" :class="{ 'q-pl-md': $q.screen.gt.sm }">
-        <label for="hour">
+        <label for="lastname">
           Apellidos
           <span>
             *
           </span>
         </label>
-        <q-input id="hour" outlined class="q-mt-sm" square placeholder="Doe" v-model="form.lastname" :rules="[
+        <q-input id="lastname" outlined class="q-mt-sm" square placeholder="Doe" v-model="form.lastname" :rules="[
           vall => !!vall || 'Ingresa este campo',
           vall => /^[A-ZÁÉÍÓÚÑa-záéíóúñ]+(?: [A-ZÁÉÍÓÚÑa-záéíóúñ]+)*$/.test(vall) || 'Ingresa un apellido valido'
         ]">

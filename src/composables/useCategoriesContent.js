@@ -81,44 +81,7 @@ export const useCategoriesContent = () => {
       id: '67618fac419ac8bb5a07e946'
     }
   ])
-  const categoriesMenu = ref([
-    {
-      _id: '675dee989736dfe3b22a776a',
-      name: 'Seguridad',
-      icon: 'https://res.cloudinary.com/dg14xloef/image/upload/v1736773642/categories/b0mavdiaasufisx44ijz.png',
-      is_active: true,
-      type: 'product',
-      createdAt: '2024-12-14T20:46:16.161Z',
-      updatedAt: '2025-01-13T13:06:54.640Z',
-      count_news: 10,
-      count_used: 5,
-      id: '675dee989736dfe3b22a776a'
-    },
-    {
-      _id: '6758745bfd00028d7cf26d4e',
-      name: 'Repuestos',
-      icon: 'https://res.cloudinary.com/dg14xloef/image/upload/v1736773525/categories/f1nwemhlhaavxxgn5bmu.png',
-      is_active: true,
-      type: 'product',
-      createdAt: '2024-12-10T17:03:23.468Z',
-      updatedAt: '2025-01-13T13:04:58.062Z',
-      count_news: 10,
-      count_used: 5,
-      id: '6758745bfd00028d7cf26d4e'
-    },
-    {
-      _id: '6758739dfd00028d7cf26d36',
-      name: 'Personalización',
-      icon: 'https://res.cloudinary.com/dg14xloef/image/upload/v1736773433/categories/fymc2yjmrpaqcqgblums.png',
-      is_active: true,
-      type: 'product',
-      createdAt: '2024-12-10T17:00:13.784Z',
-      updatedAt: '2025-01-13T15:20:09.724Z',
-      count_news: 10,
-      count_used: 5,
-      id: '6758739dfd00028d7cf26d36'
-    }
-  ])
+  const categoriesMenu = ref([])
   const store = useStoreContent()
 
   // methods

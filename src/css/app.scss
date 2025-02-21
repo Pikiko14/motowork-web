@@ -1091,3 +1091,13 @@ ul {
     padding-left: 16px;
   }
 }
+
+.motowork-stepper {  
+  .q-stepper__header--border {
+    border-bottom: none !important;
+  }
+}
+
+.q-time__header {
+  display: none !important;
+}
