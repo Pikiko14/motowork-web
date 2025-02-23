@@ -92,7 +92,9 @@
           </div>
           <div class="motowork-por-elegirnos__grid--item__text">
             <h4>Calidad</h4>
-            <p class="ellipsis--lines">En Motowork ofrecemos motocicletas Yamaha diseñadas con la más alta tecnología y materiales de primera, garantizando un rendimiento excepcional en cada viaje.</p>
+            <p class="ellipsis--lines">
+              Nuestra prioridad es buscar siempre la excelencia en nuestros productos y servicios. Trabajamos con responsabilidad y compromiso para brindar, productos y servicios que cumplan las expectativas de nuestros clientes, garantizando durabilidad, seguridad y alto desempeño. Nuestra pasión por las motos se refleja en cada detalle, ofreciendo solo lo mejor en calidad y servicio.
+            </p>
           </div>
         </article>
         <!--End card one-->
@@ -105,7 +107,7 @@
           </div>
           <div class="motowork-por-elegirnos__grid--item__text">
             <h4>Confianza</h4>
-            <p class="ellipsis--lines">Somos distribuidores oficiales de Yamaha, brindando a nuestros clientes motos seguras, duraderas y con respaldo garantizado.</p>
+            <p class="ellipsis--lines">La confianza es la base de nuestra relación con los clientes. Nos comprometemos a ofrecer motocicletas Yamaha, repuestos y servicios, garantizando transparencia en cada operación. Nuestro equipo brinda asesoramiento honesto y profesional, asegurando que cada cliente tome la mejor decisión según sus necesidades. Construimos confianza a través de la calidad, el cumplimiento de compromisos y la pasión por las motocicletas, creando una experiencia de compra segura y satisfactoria.</p>
           </div>
         </article>
         <!--End card two-->
@@ -117,8 +119,8 @@
             </figure>
           </div>
           <div class="motowork-por-elegirnos__grid--item__text">
-            <h4 class="ellipsis reconocimiento">Reconocimiento</h4>
-            <p class="ellipsis--lines">Yamaha es sinónimo de excelencia en el mundo del motociclismo, y en Motowork llevamos esa tradición a cada moto que entregamos.</p>
+            <h4 class="reconocimiento ellipsis">Reconocimiento</h4>
+            <p class="ellipsis--lines">Con una trayectoria de más de 2 décadas en el mercado nos hemos esforzamos por ser una empresa líder y reconocida en la venta de motocicletas Yamaha, repuestos, accesorios y servicios técnico. Nuestro prestigio se basa en la calidad, la innovación y el compromiso con nuestros clientes. A través de un servicio excepcional y un equipo altamente capacitado, La satisfacción de nuestros clientes y su preferencia son el mayor reconocimiento a nuestro trabajo y dedicación.</p>
           </div>
         </article>
         <!--End card three-->
@@ -131,7 +133,9 @@
           </div>
           <div class="motowork-por-elegirnos__grid--item__text">
             <h4>Servicio</h4>
-            <p class="ellipsis--lines">Contamos con asesoría experta y servicio técnico especializado para que disfrutes tu Yamaha al máximo, sin preocupaciones.</p>
+            <p class="ellipsis--lines">
+              El servicio es el pilar de nuestra empresa. Nos dedicamos a brindar una atención personalizada, eficiente y profesional en la venta de motocicletas Yamaha, repuestos, accesorios y servicio técnico. Nos enfocamos en superar las expectativas de nuestros clientes, ofreciendo asesoría experta, soluciones rápidas y un soporte postventa confiable. La satisfacción y seguridad de quienes confían en nosotros es nuestra mayor prioridad, garantizando una experiencia de compra y mantenimiento de alta calidad.
+            </p>
           </div>
         </article>
         <!--End card four-->
