@@ -37,18 +37,18 @@
             Corporativo
           </h2>
           <div class="links-section">
-            <a href="/terminos" aria-label="Términos y condiciones" title="Términos y condiciones">
+            <a href="/terminos-y-condiciones" aria-label="Términos y condiciones" title="Términos y condiciones">
               Términos y condiciones
             </a>
-            <a target="_blank" href="http://motowork.co/politica-privacidad" rel="noopener noreferrer"
+            <a href="/politicas-de-privacidad"
               aria-label="Política de uso y privacidad" title="Política de uso y privacidad">
               Políticas de uso y privacidad
             </a>
-            <a target="_blank" href="http://motowork.co/tratamiento-de-datos" rel="noopener noreferrer"
+            <a href="/politicas-de-datos"
               aria-label="Política de tratamiento de datos" title="Política de tratamiento de datos">
               Política de datos
             </a>
-            <a target="_blank" href="/conocenos" rel="noopener noreferrer"
+            <a href="/conocenos"
               aria-label="Sobre nosotros" title="Sobre nosotros">
               Sobre nosotros
             </a>

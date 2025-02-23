@@ -70,9 +70,19 @@ const routes = [
         name: 'tecnicalServices'
       },
       {
-        path: 'terminos',
+        path: 'terminos-y-condiciones',
         component: () => import('src/pages/legals/TermConditionPage.vue'),
         name: 'terminosYCondiciones'
+      },
+      {
+        path: 'politicas-de-privacidad',
+        component: () => import('src/pages/legals/TermConditionPage.vue'),
+        name: 'politicasPrivacidad'
+      },
+      {
+        path: 'politicas-de-datos',
+        component: () => import('src/pages/legals/TermConditionPage.vue'),
+        name: 'politicaDatos'
       }
     ]
   },
