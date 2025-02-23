@@ -68,6 +68,11 @@ const routes = [
         path: 'servicio-tecnico',
         component: () => import('src/pages/services/ServicesPage.vue'),
         name: 'tecnicalServices'
+      },
+      {
+        path: 'terminos',
+        component: () => import('src/pages/legals/TermConditionPage.vue'),
+        name: 'terminosYCondiciones'
       }
     ]
   },
