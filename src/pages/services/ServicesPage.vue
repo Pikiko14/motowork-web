@@ -37,7 +37,7 @@
     <!--End stepper-->
 
     <!--Stepper content-->
-    <section class="container-motowork bg-white">
+    <q-form ref="formRef" class="container-motowork bg-white" @submit="handlerScheduleServices">
       <!--Paso 1 content-->
       <div class="motowork-stepper-content one" v-if="step === 1">
         <!--Date picker section-->
@@ -268,7 +268,7 @@
                 </span>
               </label>
               <q-input id="vehicle_type" outlined class="q-mt-sm" square placeholder="Adventure"
-                v-model="serviceSchedule.verhicle_type" :rules="[
+                v-model="serviceSchedule.vehicle_type" :rules="[
                   vall => !!vall || 'Ingresa este campo',
                 ]">
               </q-input>
@@ -322,18 +322,16 @@
 
           <q-option-group v-model="serviceSchedule.level_to_schedule" :options="options" color="secondary" />
 
-          <q-btn v-if="step === 3" @click="handlerSchedule"
-            :disable="
-              step === 2 && !serviceSchedule.vehicle_dni ||
-              step === 3 && !serviceSchedule.verhicle_type ||
-              step === 3 && !serviceSchedule.vehicle_km ||
-              step === 3 && !serviceSchedule.complement
+          <q-btn :loading="loading" v-if="step === 3" type="submit" :disable="step === 3 && !serviceSchedule.vehicle_dni ||
+            step === 3 && !serviceSchedule.vehicle_type ||
+            step === 3 && !serviceSchedule.vehicle_km ||
+            step === 3 && !serviceSchedule.complement
             " square unelevated label="Continuar" class="q-mt-xl" color="secondary"></q-btn>
         </div>
         <!--End detalles generales-->
       </div>
       <!--End paso 3-->
-    </section>
+    </q-form>
     <!--End stepper content-->
   </q-page>
 </template>
@@ -345,10 +343,15 @@ import { computed, ref, watch } from 'vue'
 import BreadCrumb from 'src/components/layout/BreadCrumb.vue'
 import DateSelected from 'src/components/schedule/DateSelected.vue'
 import BannerMotowork from 'src/components/banner/BannerMotowork.vue'
+import { useScheduleServices } from 'src/composables/scheduleServices'
+import { notification } from 'src/boot/notification'
 
 // references
 const step = ref(1)
+const formRef = ref()
+const loading = ref(false)
 const timeStamp = Date.now()
+const { handlerSchedule } = useScheduleServices()
 const formattedString = date.formatDate(timeStamp, 'YYYY/MM/DD')
 const dateModel = ref(formattedString)
 const serviceSchedule = ref({
@@ -363,7 +366,7 @@ const serviceSchedule = ref({
     phone: ''
   },
   vehicle_dni: '',
-  verhicle_type: '',
+  vehicle_type: '',
   vehicle_km: '',
   complement: '',
   level_to_schedule: 'Muy fácil'
@@ -422,8 +425,35 @@ const disablePastDates = (date) => {
   return selectedDate >= today && !isSunday
 }
 
-const handlerSchedule = async () => {
-  alert(1)
+const handlerScheduleServices = async () => {
+  loading.value = true
+  try {
+    const response = await handlerSchedule(serviceSchedule.value)
+    if (response?.success) {
+      notification('positive', response?.message, 'primary')
+      serviceSchedule.value = {
+        hour: '',
+        date: '',
+        hourType: 'A.m.',
+        client: {
+          name: '',
+          lastName: '',
+          email: '',
+          dni: '',
+          phone: ''
+        },
+        vehicle_dni: '',
+        vehicle_type: '',
+        vehicle_km: '',
+        complement: '',
+        level_to_schedule: 'Muy fácil'
+      }
+      formRef.value.reset()
+    }
+  } catch (error) {
+  } finally {
+    loading.value = false
+  }
 }
 </script>
 
@@ -585,6 +615,10 @@ const handlerSchedule = async () => {
           height: 400px;
         }
       }
+
+      @media(max-width: 767px) {
+        width: 100%;
+      }
     }
 
     // general section
@@ -637,6 +671,12 @@ const handlerSchedule = async () => {
       .q-btn {
         height: 48px;
       }
+
+      @media(max-width: 767px) {
+        padding-left: 0px;
+        padding-right: 0px;
+        width: 100%;
+      }
     }
   }
 
@@ -680,6 +720,11 @@ const handlerSchedule = async () => {
 
       &--fields {
         margin-top: 16px;
+      }
+
+      @media(max-width: 767px) {
+        width: 100%;
+        max-width: 100%;
       }
     }
   }

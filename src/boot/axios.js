@@ -25,12 +25,12 @@ export default boot(({ app }) => {
           const { msg } = data.shift()
           notification('red', msg, 'red')
         }
-      } else {
-        // error.response.data.message
-        //   ? notification('red', error.response.data.message, 'red')
-        //   : error.response.data.error
-        //     ? notification('red', error.response.data.error, 'red')
-        //     : notification('red', error.response.statusText, 'red')
+      } else if (error.response.status === 400) {
+        const { data } = error.response
+        if (data.message && typeof data.message === 'object') {
+          const msg = data.message.shift()
+          notification('red', msg, 'red')
+        }
       }
     } else {
       // notification(
