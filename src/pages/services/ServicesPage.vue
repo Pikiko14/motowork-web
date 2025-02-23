@@ -333,6 +333,85 @@
       <!--End paso 3-->
     </q-form>
     <!--End stepper content-->
+
+    <!--Complement text-->
+    <section class="container-motowork bg-white">
+      <div class="motowork-complement">
+        <div class="header-section">
+          <h2>
+            ¿Necesitas Ayuda?
+          </h2>
+          <p>
+            Te ofrecemos múltiples vías de contacto para que puedas resolver todas tus dudas y consultas de manera ágil
+            y
+            personalizada. Nuestros diversos canales están aquí para brindarte el apoyo que necesitas en cualquier
+            momento.
+          </p>
+        </div>
+
+        <div class="contact-section">
+          <div class="item">
+            <div class="item-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="18" viewBox="0 0 22 18" fill="none">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M22 0.25H0V2.68L11 9.855L22 2.68V0.25ZM22 4.471L11.41 11.378L11 11.645L10.59 11.378L0 4.471V17.25H22V4.471Z"
+                  fill="#B2B2B2" />
+              </svg>
+            </div>
+
+            <div class="item-content">
+              <h3>
+                correo
+              </h3>
+              <a aria-label="Enviar correo a motowork" href="mailto:info@motowork.co">
+                info@motowork.co
+              </a>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="item-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M3.00247 0.320312H31.6801V28.9979H11.2561L0.320068 31.6803L3.00247 20.7442V0.320312ZM16.6585 15.3419V9.87951H11.1961V13.9763H13.9273V15.3419C13.9273 16.0962 13.3158 16.7075 12.5617 16.7075V19.4387C14.8242 19.4387 16.6585 17.6046 16.6585 15.3419ZM23.4865 15.3419V9.87951H18.0241V13.9763H20.7553V15.3419C20.7553 16.0962 20.1439 16.7075 19.3897 16.7075V19.4387C21.6522 19.4387 23.4865 17.6046 23.4865 15.3419Z"
+                  fill="#B2B2B2" />
+              </svg>
+            </div>
+
+            <div class="item-content">
+              <h3>
+                Whatsapp
+              </h3>
+              <a href="https://api.whatsapp.com/send?phone=573183996249&amp;text=Hola%20Motowork" target="_blank"
+                rel="noopener noreferrer" aria-label="Soporte por WhatsApp de Motowork"
+                title="Soporte por WhatsApp">
+                +573183996249
+              </a>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="item-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M14.9999 2.99967C10.5816 2.99967 6.99992 6.58139 6.99992 10.9997V21.6663H0.333252V10.9997H4.33325C4.33325 5.10863 9.10888 0.333008 14.9999 0.333008C20.891 0.333008 25.6666 5.10863 25.6666 10.9997H29.6666V21.6663H25.6666C25.6666 25.3482 22.6818 28.333 18.9999 28.333V29.6663H10.9999V24.333H18.9999V25.6663C21.2091 25.6663 22.9999 23.8755 22.9999 21.6663V10.9997C22.9999 6.58139 19.4182 2.99967 14.9999 2.99967Z"
+                  fill="#B2B2B2" />
+              </svg>
+            </div>
+
+            <div class="item-content">
+              <h3>
+                Linea fija
+              </h3>
+              <a href="tel:3188279036" aria-label="Llamar a linea de atención">
+                3188279036
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--End complement text-->
   </q-page>
 </template>
 
@@ -747,6 +826,115 @@ const handlerScheduleServices = async () => {
     line-height: 125%;
     /* 20px */
     margin-top: 16px;
+  }
+}
+
+.motowork-complement {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .header-section {
+    max-width: 640px;
+
+    h2 {
+      color: #ED1C24;
+
+      /* Desktop/Headings/H4 */
+      font-family: Play;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 125%;
+      /* 30px */
+      text-transform: uppercase;
+
+      @media(max-width: 767px) {
+        font-size: 18px;
+      }
+    }
+
+    p {
+      color: #9F9C9C;
+      text-align: center;
+      margin-top: 16px;
+
+      /* Desktop/Body/Text/Medium */
+      font-family: Ubuntu;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 125%;
+      /* 20px */
+
+      @media(max-width: 767px) {
+        font-size: 12px;
+      }
+    }
+  }
+
+  .contact-section {
+    margin-top: 24px;
+    display: flex;
+    gap: 32px;
+
+    .item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .item-icon {
+        display: flex;
+        width: 48px;
+        height: 48px;
+        padding: 9px;
+        background: #F5F5F5;
+        justify-content: center;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .item-content {
+        h3 {
+          color: #000;
+          text-align: center;
+
+          /* Desktop/Body/Title/Medium */
+          font-family: Play;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 125%;
+          /* 20px */
+          text-transform: uppercase;
+
+          @media(max-width: 767px) {
+            font-size: 14px;
+          }
+        }
+      }
+
+      a {
+        margin-top: 8px;
+        color: #ED1C24;
+        text-align: center;
+
+        /* Desktop/Body/Text/Small */
+        font-family: Ubuntu;
+        font-size: 12px;
+        font-style: normal;
+        text-decoration: none;
+        font-weight: 400;
+        line-height: 125%;
+        /* 15px */
+
+        @media(max-width: 767px) {
+          font-size: 10px;
+        }
+      }
+    }
   }
 }
 </style>
