@@ -260,18 +260,21 @@
                 ]" mask="XXX-XXX">
               </q-input>
             </div>
-            <div class="col-12 col-md-6 vehicle-form__input-date" :class="{ 'q-pl-md': $q.screen.gt.sm }">
+            <div class="col-12 col-md-6 vehicle-form__input-date relative" :class="{ 'q-pl-md': $q.screen.gt.sm }">
               <label for="vehicle_type">
                 Tipo de motocicleta
                 <span>
                   *
                 </span>
               </label>
-              <q-input id="vehicle_type" outlined class="q-mt-sm" square placeholder="Adventure"
-                v-model="serviceSchedule.vehicle_type" :rules="[
-                  vall => !!vall || 'Ingresa este campo',
+              <q-select id="vehicle_type" outlined class="q-mt-sm" square label="Selecciona una opción"
+                v-model="serviceSchedule.vehicle_type" :options="categoriesOption" :rules="[
+                  vall => !!vall || 'Selecciona una opción',
                 ]">
-              </q-input>
+              </q-select>
+              <div class="select-custom-icom mr-mobile">
+                <q-icon name="img:/images/chevron-right.webp"></q-icon>
+              </div>
             </div>
             <div class="col-12 vehicle-form__input">
               <label for="vehicle_km">
@@ -419,11 +422,12 @@
 // imports
 import { date } from 'quasar'
 import { computed, ref, watch } from 'vue'
+import { notification } from 'src/boot/notification'
 import BreadCrumb from 'src/components/layout/BreadCrumb.vue'
 import DateSelected from 'src/components/schedule/DateSelected.vue'
 import BannerMotowork from 'src/components/banner/BannerMotowork.vue'
 import { useScheduleServices } from 'src/composables/scheduleServices'
-import { notification } from 'src/boot/notification'
+import { useCategoriesContent } from 'src/composables/useCategoriesContent'
 
 // references
 const step = ref(1)
@@ -450,7 +454,10 @@ const serviceSchedule = ref({
   complement: '',
   level_to_schedule: 'Muy fácil'
 })
-
+const {
+  getCategories,
+  categories
+} = useCategoriesContent()
 const options = [
   {
     label: 'Muy fácil',
@@ -482,6 +489,10 @@ const selectedDate = computed(() => {
     day,
     month
   }
+})
+
+const categoriesOption = computed(() => {
+  return categories.value.map((el) => el.name)
 })
 
 // watch
@@ -534,6 +545,9 @@ const handlerScheduleServices = async () => {
     loading.value = false
   }
 }
+
+// hook
+getCategories('?page=1&perPage=30&type=vehicle')
 </script>
 
 <style scoped lang="scss">
@@ -935,6 +949,22 @@ const handlerScheduleServices = async () => {
         }
       }
     }
+  }
+}
+
+.select-custom-icom {
+  background-color: red;
+  width: 56px;
+  height: 56px;
+  position: absolute;
+  right: 0px;
+  top: 29px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 1024px) {
+    right: 0px;
   }
 }
 </style>

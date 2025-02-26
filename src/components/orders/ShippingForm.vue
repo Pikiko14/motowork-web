@@ -389,7 +389,7 @@ onBeforeMount(() => {
   height: 56px;
   position: absolute;
   right: 8px;
-  top: 30px;
+  top: 29px;
   display: flex;
   align-items: center;
   justify-content: center;
