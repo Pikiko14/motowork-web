@@ -328,7 +328,12 @@
           <q-btn :loading="loading" v-if="step === 3" type="submit" :disable="step === 3 && !serviceSchedule.vehicle_dni ||
             step === 3 && !serviceSchedule.vehicle_type ||
             step === 3 && !serviceSchedule.vehicle_km ||
-            step === 3 && !serviceSchedule.complement
+            step === 3 && !serviceSchedule.complement ||
+            step === 3 && !serviceSchedule.client.name ||
+            step === 3 && !serviceSchedule.client.lastName ||
+            step === 3 && !serviceSchedule.client.email ||
+            step === 3 && !serviceSchedule.client.dni ||
+            step === 3 && !serviceSchedule.client.phone
             " square unelevated label="Continuar" class="q-mt-xl" color="secondary"></q-btn>
         </div>
         <!--End detalles generales-->
@@ -539,6 +544,7 @@ const handlerScheduleServices = async () => {
         level_to_schedule: 'Muy fácil'
       }
       formRef.value.reset()
+      step.value = 1
     }
   } catch (error) {
   } finally {
