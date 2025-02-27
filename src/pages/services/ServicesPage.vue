@@ -973,4 +973,8 @@ getCategories('?page=1&perPage=30&type=vehicle')
     right: 0px;
   }
 }
+
+.relative {
+  position: relative;
+}
 </style>
