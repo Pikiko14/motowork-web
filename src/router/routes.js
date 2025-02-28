@@ -83,6 +83,11 @@ const routes = [
         path: 'politicas-de-datos',
         component: () => import('src/pages/legals/TermConditionPage.vue'),
         name: 'politicaDatos'
+      },
+      {
+        path: 'servicio-tecnico/validacion',
+        component: () => import('src/pages/services/ServicesPage.vue'),
+        name: 'tecnicalServicesValidation'
       }
     ]
   },
