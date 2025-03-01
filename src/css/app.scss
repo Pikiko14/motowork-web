@@ -1101,3 +1101,186 @@ ul {
 .q-time__header {
   display: none !important;
 }
+
+.confirmation-card {
+  width: 800px;
+  display: flex;
+  padding: 56px 72px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 48px;
+  margin: 0px auto;
+  background-image: url('/images/blur-motowork.webp');
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: fill;
+
+  &__logo {
+    width: 82px;
+    height: 82px;
+
+    img {
+      width: 100%;
+    }
+
+    @media(max-width: 767px) {
+      width: 56px;
+      height: 56px;
+    }
+  }
+
+  &__title {
+    color: #000;
+    font-family: Play;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 125%;
+    text-transform: uppercase;
+
+    span {
+      color: #ED1C24;
+    }
+
+    @media(max-width: 767px) {
+      font-size: 18px;
+    }
+  }
+
+  &__hello {
+    color: #000;
+    font-family: Ubuntu;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 125%; /* 30px */
+
+    @media(max-width: 767px) {
+      font-size: 14px;
+    }
+  }
+
+  &__vehicle-type {
+    color: #898384;
+    font-family: Ubuntu;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 125%; /* 20px */
+
+    @media(max-width: 767px) {
+      font-size: 10px;
+    }
+  }
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    &--item {
+      gap: 12px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      svg {
+        width: 20px;
+        height: 20px;
+
+        @media(max-width: 767px) {
+          width: 16px;
+          height: 16px;
+        }
+      }
+
+      .title {
+        color: #000;
+        font-family: Ubuntu;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 125%; /* 30px */
+
+        @media(max-width: 767px) {
+          font-size: 16px;
+        }
+      }
+
+      .value {
+        color: #898384;
+        font-family: Ubuntu;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 125%; /* 30px */
+
+        @media(max-width: 767px) {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+
+  &__list {
+    gap: 16px;
+    display: flex;
+    flex-direction: column;
+
+    p {
+      color: #000;
+
+      /* Desktop/Body/Description/Medium */
+      font-family: Ubuntu;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 125%; /* 20px */
+
+      @media(max-width: 767px) {
+        font-size: 12px;
+      }
+    }
+
+    ul {
+      padding: 0px;
+
+      li {
+        color: #898384;
+        font-family: Ubuntu;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 125%; /* 20px */
+
+        &:not(:first-child) {
+          margin-top: 8px;
+        }
+
+        @media(max-width: 767px) {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+
+  .q-btn {
+    min-height: 48px;
+  }
+
+  &__terms {
+    color: #ED1C24;
+    /* Desktop/Body/Text/Small */
+    font-family: Ubuntu;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 125%; /* 15px */
+  }
+
+  @media(max-width: 767px) {
+    width: 100%;
+    padding: 32px;
+    gap: 24px;
+  }
+}

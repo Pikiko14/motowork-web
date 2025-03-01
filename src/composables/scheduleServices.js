@@ -20,7 +20,19 @@ export const useScheduleServices = () => {
     }
   }
 
+  const getScheduleData = async (reference) => {
+    try {
+      const { data } = await api.get(`${path}/${reference}/validation`)
+      if (data.success && data.data) {
+        return data
+      }
+    } catch (error) {
+      throw new Error(error.message)
+    }
+  }
+
   return {
+    getScheduleData,
     handlerSchedule
   }
 }

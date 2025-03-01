@@ -85,8 +85,8 @@ const routes = [
         name: 'politicaDatos'
       },
       {
-        path: 'servicio-tecnico/validacion',
-        component: () => import('src/pages/services/ServicesPage.vue'),
+        path: 'servicio-tecnico/:reference/validacion',
+        component: () => import('src/pages/services/ValidationPage.vue'),
         name: 'tecnicalServicesValidation'
       }
     ]
