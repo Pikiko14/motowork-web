@@ -90,6 +90,7 @@
 
 <script setup>
 // imports
+import { useMeta } from 'quasar'
 import { useRouter } from 'vue-router'
 import { ref, onMounted, computed } from 'vue'
 import { formatDateIso } from 'src/utils/utils'
@@ -127,6 +128,85 @@ const showExperience = (experience) => {
     }
   })
 }
+
+const metaData = {
+  // sets document title
+  title: 'MotoWork',
+  // optional; sets final title as "Index Page - My Website", useful for multiple level meta
+  titleTemplate: title => `${title} - Experiencias y blog`,
+
+  // meta tags
+  meta: {
+    description: {
+      name: 'description',
+      content: '¡Aca encontraras información sobre como cuidar tu moto, eventos y mas.!'
+    },
+    keywords: {
+      name: 'keywords',
+      content: 'Yamaha, motocicletas Yamaha, motos Yamaha, NMAX, CRYPTON, XMAX300, TMAX, MT-03, Ténéré 700, motos deportivas, motos urbanas, motos de aventura, motocicletas confiables, venta de motos, motos nuevas Yamaha, concesionarios Yamaha, motos económicas, accesorios Yamaha, Blog, Experiencias, Experiencias Motowork'
+    },
+    equiv: {
+      'http-equiv': 'Content-Type',
+      content: 'text/html; charset=UTF-8'
+    },
+    ogTitle: {
+      property: 'og:title',
+      template (ogTitle) {
+        return `${ogTitle} - Blog y Experiencias`
+      }
+    },
+    ogDescription: {
+      property: 'og:description',
+      content: 'Descubre nuestra amplia gama de motocicletas Yamaha. ¡La moto perfecta para cada aventura está aquí!'
+    },
+    ogType: {
+      property: 'og:type',
+      content: 'website'
+    },
+    ogUrl: {
+      property: 'og:url',
+      content: 'https://www.motowork.co'
+    },
+    twitterCard: {
+      name: 'twitter:card',
+      content: 'summary_large_image'
+    },
+    twitterTitle: {
+      name: 'twitter:title',
+      content: 'MotoWork - Web'
+    },
+    twitterDescription: {
+      name: 'twitter:description',
+      content: 'Explora las mejores motocicletas Yamaha: diseño, innovación y aventura en cada modelo.'
+    },
+    robots: {
+      name: 'robots',
+      content: 'index, follow'
+    },
+    language: {
+      name: 'language',
+      content: 'es'
+    }
+  },
+
+  // CSS tags
+  link: {
+    favicon: {
+      rel: 'icon',
+      href: '/favicon.ico'
+    },
+    canonical: {
+      rel: 'canonical',
+      href: 'https://www.motowork.co'
+    }
+  },
+
+  // <noscript> tags
+  noscript: {
+    default: 'Este contenido es visible para navegadores sin soporte de JavaScript o con JavaScript desactivado.'
+  }
+}
+useMeta(metaData)
 
 // hook
 const query = '?page=1&perPage=9&sortBy=createdAt&order=-1'
