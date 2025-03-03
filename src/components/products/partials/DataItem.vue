@@ -21,8 +21,7 @@
         disable aria-hidden="true" />
     </section>
 
-    <p class="motowork-item-data__description" v-if="product.description">
-      {{ product.description }}
+    <p class="motowork-item-data__description" v-if="product.description" v-html="product.description">
     </p>
 
     <section class="motowork-item-data__variants" v-if="product.type === 'product'">
