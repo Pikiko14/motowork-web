@@ -5,7 +5,8 @@
     </div>
 
     <div class="col-12 col-md-6">
-      <DataItem v-if="product._id" @set-image-color="setImageColor" :product="product" />
+      <DataItem :totalInContacpime="totalInContacpime" v-if="product._id" @set-image-color="setImageColor"
+        :product="product" />
     </div>
   </div>
 </template>
@@ -23,6 +24,10 @@ defineProps({
     default: () => {
       return {}
     }
+  },
+  totalInContacpime: {
+    type: Number,
+    default: () => 0
   }
 })
 

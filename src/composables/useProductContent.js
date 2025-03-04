@@ -12,6 +12,8 @@ export const useProductsContent = () => {
   const store = useStoreContent()
   const similarProducts = ref([])
   const totalPagesProduct = ref(0)
+  const totalInContacpime = ref(0)
+  const pathContacpime = 'contacpime'
 
   // methods
   const getProducts = async (query) => {
@@ -76,6 +78,17 @@ export const useProductsContent = () => {
     store.setProduct(product.value)
   }
 
+  const loadProductDataWherehouse = async (productCode) => {
+    try {
+      const { data } = await api.get(`${pathContacpime}?productCode=${productCode}`)
+      if (data.success && data.data) {
+        totalInContacpime.value = data?.data?.qproducto ? parseInt(data?.data?.qproducto) : 0
+      }
+    } catch (error) {
+      console.error(error.message)
+    }
+  }
+
   return {
     setPage,
     product,
@@ -88,7 +101,9 @@ export const useProductsContent = () => {
     similarProducts,
     totalPagesProduct,
     addOnePageProduct,
+    totalInContacpime,
     pushProductReviews,
-    removeOnePageProduct
+    removeOnePageProduct,
+    loadProductDataWherehouse
   }
 }

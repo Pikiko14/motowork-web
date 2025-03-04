@@ -45,7 +45,7 @@
         aria-label="Agendar prueba de manejo para el vehículo"></q-btn>
 
       <div class="motowork-item-data__action--product" v-if="product.type === 'product'">
-        <q-btn :disable="product.variants.length > 0 && !selectedVariant._id" square unelevated color="secondary"
+        <q-btn :disable="product.variants.length > 0 && !selectedVariant._id || totalItemsLimit === 0" square unelevated color="secondary"
           :label="$q.screen.gt.xs ? 'Agregar al carrito' : 'Agregar'" @click="handlerAddToCar" aria-label="Agregar este producto al carrito"></q-btn>
 
         <div class="motowork-item-data__action--product__quantity">
@@ -213,6 +213,10 @@ const props = defineProps({
   product: {
     type: Object,
     default: () => ({})
+  },
+  totalInContacpime: {
+    type: Number,
+    default: () => 0
   }
 })
 
@@ -243,7 +247,7 @@ const productRating = computed(() => {
 const productStore = computed(() => store.product)
 
 const totalItemsLimit = computed(() => {
-  return ordersStore.productLimit
+  return props.totalInContacpime || 0
 })
 
 // methods
@@ -302,7 +306,8 @@ const handlerAddToCar = () => {
     total: quantity.value * product.price,
     quantity: quantity.value,
     variant: selectedVariant.value || null,
-    image: product.images.length > 0 ? product.images[0].path : ''
+    image: product.images.length > 0 ? product.images[0].path : '',
+    productLimit: props.totalInContacpime
   }
   ordersStore.addNewItemToCar(carItemObj)
 }
