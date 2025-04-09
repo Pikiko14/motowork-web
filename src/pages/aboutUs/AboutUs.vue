@@ -5,7 +5,7 @@
     <!--End breadcrumb-->
 
     <!--Banner-->
-    <BannerMotowork :title="'Conócenos.'" default-img="/images/banner_about_us.webp" :btnLabel="''"
+    <BannerMotowork :title="'Conócenos.'" default-img="/images/motowork_banner.jpg" :btnLabel="''"
       :is-about-banner="true"
       :bannerComplement="'Somos empresa colombiana con más de 23 años de experiencia, especializada en la venta de motocicletas, repuestos, accesorios y servicios técnicos de la marca YAMAHA.'" />
     <!--End banner-->
@@ -29,7 +29,7 @@
         <article class="history-section__body">
           <!--image-->
           <figure>
-            <img src="/images/coolaborador_01.webp" alt="Colaborador 01 de motowork" title="Colaborador 01 de motowork">
+            <img src="/images/equipo_01.webp" alt="Colaborador 01 de motowork" title="Colaborador 01 de motowork">
           </figure>
           <!--End image-->
 
@@ -60,10 +60,47 @@
         <!--End history body-->
       </div>
     </section>
+
+    <section class="container-motowork bg-white">
+      <div class="history-section">
+        <!--header history-->
+        <div class="history-section__header">
+          <h2>
+            MISIóN Y VISIóN
+          </h2>
+          <div class="separator"></div>
+          <span>
+            sobre nosotros
+          </span>
+        </div>
+        <!--End header history-->
+
+        <!--History body-->
+        <div class="row q-mt-lg history-section__vision">
+          <div class="col-12 col-md-6" :class="{ 'q-pr-md': $q.screen.gt.sm }">
+            <h2>Misión</h2>
+            <p class="q-mt-sm">
+              La razon deser nuestra empresa es darle al cleinte lo que busca, repuestos y accesorios de diferentes
+              marcas para atender todos las necesidades del mercado asegurando una relación permanente y valiosa con
+              nuestros clientes, colaboradores, proveedores, accionistas, comunidad y medio ambiente, obteniendo de esta
+              manera una adecuada rentabilidad y garantizando calidad en nuestros servicios con permanencia y
+              crecimiento continuo en el mercado bajo lineamientos de responsabilidad y compromiso.
+            </p>
+          </div>
+          <div class="col-12 col-md-6" :class="{ 'q-pl-md': $q.screen.gt.sm, 'q-mt-lg': $q.screen.lt.md }">
+            <h2>Visión</h2>
+            <p class="q-mt-sm">
+              Ser la empresa líder en la distribución de motocicletas Yamaha, repuestos y accesorios en nuestra de las mejores marcas, ofreciendo un servicio técnico de excelencia que garantice la satisfacción y confianza de nuestros clientes. Nos enfocamos en la innovación, la calidad y la pasión por el motociclismo, brindando soluciones integrales que potencien la movilidad y el estilo de vida de nuestros clientes.
+            </p>
+          </div>
+        </div>
+        <!--End history body-->
+      </div>
+    </section>
     <!--End history section-->
 
-     <!--team section-->
-     <section class="container-motowork bg-white">
+    <!--team section-->
+    <section class="container-motowork bg-white">
       <div class="our-team-section  wySelectus-section" ref="ourTeam">
         <!--header team-->
         <div class="our-team-section__header">
@@ -81,23 +118,23 @@
         <div class="our-team-section__body">
           <article class="our-team-section__body--item">
             <figure>
-              <img src="/images/area_01.webp" alt="Imagen del area 01" title="Imagen del area 01">
+              <img src="/images/equipo_02.webp" alt="Imagen del area 01" title="Imagen del area 01">
               <div class="overflow"></div>
             </figure>
             <div class="our-team-section__body--item__content">
-              <h3>Sector empresarial</h3>
-              <p>Nombre del área</p>
+              <h3>MOTOWORK</h3>
+              <p>Servicio técnico</p>
             </div>
           </article>
 
           <article class="our-team-section__body--item">
             <figure>
-              <img src="/images/area_02.webp" alt="Imagen del area 02" title="Imagen del area 02">
+              <img src="/images/equipo_01.webp" alt="Imagen del area 02" title="Imagen del area 02">
               <div class="overflow"></div>
             </figure>
             <div class="our-team-section__body--item__content">
-              <h3>Sector empresarial</h3>
-              <p>Nombre del área</p>
+              <h3>MOTOWORK</h3>
+              <p>Repuestos</p>
             </div>
           </article>
 
@@ -136,13 +173,17 @@
         <article class="motowork-por-elegirnos__grid--item">
           <div class="motowork-por-elegirnos__grid--item__icon">
             <figure>
-              <img src="/images/personalizacion.png" alt="Icono de la carta de calidad" title="Icono de la carta de calidad">
+              <img src="/images/personalizacion.png" alt="Icono de la carta de calidad"
+                title="Icono de la carta de calidad">
             </figure>
           </div>
           <div class="motowork-por-elegirnos__grid--item__text">
             <h4>Calidad</h4>
             <p class="ellipsis--lines">
-              Nuestra prioridad es buscar siempre la excelencia en nuestros productos y servicios. Trabajamos con responsabilidad y compromiso para brindar, productos y servicios que cumplan las expectativas de nuestros clientes, garantizando durabilidad, seguridad y alto desempeño. Nuestra pasión por las motos se refleja en cada detalle, ofreciendo solo lo mejor en calidad y servicio.
+              Nuestra prioridad es buscar siempre la excelencia en nuestros productos y servicios. Trabajamos con
+              responsabilidad y compromiso para brindar, productos y servicios que cumplan las expectativas de nuestros
+              clientes, garantizando durabilidad, seguridad y alto desempeño. Nuestra pasión por las motos se refleja en
+              cada detalle, ofreciendo solo lo mejor en calidad y servicio.
             </p>
           </div>
         </article>
@@ -151,12 +192,17 @@
         <article class="motowork-por-elegirnos__grid--item">
           <div class="motowork-por-elegirnos__grid--item__icon">
             <figure>
-              <img src="/images/Confianza.png" alt="Icono de la carta de confianza" title="Icono de la carta de confianza">
+              <img src="/images/Confianza.png" alt="Icono de la carta de confianza"
+                title="Icono de la carta de confianza">
             </figure>
           </div>
           <div class="motowork-por-elegirnos__grid--item__text">
             <h4>Confianza</h4>
-            <p class="ellipsis--lines">La confianza es la base de nuestra relación con los clientes. Nos comprometemos a ofrecer motocicletas Yamaha, repuestos y servicios, garantizando transparencia en cada operación. Nuestro equipo brinda asesoramiento honesto y profesional, asegurando que cada cliente tome la mejor decisión según sus necesidades. Construimos confianza a través de la calidad, el cumplimiento de compromisos y la pasión por las motocicletas, creando una experiencia de compra segura y satisfactoria.</p>
+            <p class="ellipsis--lines">La confianza es la base de nuestra relación con los clientes. Nos comprometemos a
+              ofrecer motocicletas Yamaha, repuestos y servicios, garantizando transparencia en cada operación. Nuestro
+              equipo brinda asesoramiento honesto y profesional, asegurando que cada cliente tome la mejor decisión
+              según sus necesidades. Construimos confianza a través de la calidad, el cumplimiento de compromisos y la
+              pasión por las motocicletas, creando una experiencia de compra segura y satisfactoria.</p>
           </div>
         </article>
         <!--End card two-->
@@ -164,12 +210,17 @@
         <article class="motowork-por-elegirnos__grid--item">
           <div class="motowork-por-elegirnos__grid--item__icon">
             <figure>
-              <img src="/images/reconocimiento.png" alt="Icono de la carta de reconocimiento" title="Icono de la carta de reconocimiento">
+              <img src="/images/reconocimiento.png" alt="Icono de la carta de reconocimiento"
+                title="Icono de la carta de reconocimiento">
             </figure>
           </div>
           <div class="motowork-por-elegirnos__grid--item__text">
             <h4 class="reconocimiento ellipsis">Reconocimiento</h4>
-            <p class="ellipsis--lines">Con una trayectoria de más de 2 décadas en el mercado nos hemos esforzamos por ser una empresa líder y reconocida en la venta de motocicletas Yamaha, repuestos, accesorios y servicios técnico. Nuestro prestigio se basa en la calidad, la innovación y el compromiso con nuestros clientes. A través de un servicio excepcional y un equipo altamente capacitado, La satisfacción de nuestros clientes y su preferencia son el mayor reconocimiento a nuestro trabajo y dedicación.</p>
+            <p class="ellipsis--lines">Con una trayectoria de más de 2 décadas en el mercado nos hemos esforzamos por
+              ser una empresa líder y reconocida en la venta de motocicletas Yamaha, repuestos, accesorios y servicios
+              técnico. Nuestro prestigio se basa en la calidad, la innovación y el compromiso con nuestros clientes. A
+              través de un servicio excepcional y un equipo altamente capacitado, La satisfacción de nuestros clientes y
+              su preferencia son el mayor reconocimiento a nuestro trabajo y dedicación.</p>
           </div>
         </article>
         <!--End card three-->
@@ -177,13 +228,18 @@
         <article class="motowork-por-elegirnos__grid--item">
           <div class="motowork-por-elegirnos__grid--item__icon">
             <figure>
-              <img src="/images/servicio.png" alt="Icono de la carta de reconocimiento" title="Icono de la carta de reconocimiento">
+              <img src="/images/servicio.png" alt="Icono de la carta de reconocimiento"
+                title="Icono de la carta de reconocimiento">
             </figure>
           </div>
           <div class="motowork-por-elegirnos__grid--item__text">
             <h4>Servicio</h4>
             <p class="ellipsis--lines">
-              El servicio es el pilar de nuestra empresa. Nos dedicamos a brindar una atención personalizada, eficiente y profesional en la venta de motocicletas Yamaha, repuestos, accesorios y servicio técnico. Nos enfocamos en superar las expectativas de nuestros clientes, ofreciendo asesoría experta, soluciones rápidas y un soporte postventa confiable. La satisfacción y seguridad de quienes confían en nosotros es nuestra mayor prioridad, garantizando una experiencia de compra y mantenimiento de alta calidad.
+              El servicio es el pilar de nuestra empresa. Nos dedicamos a brindar una atención personalizada, eficiente
+              y profesional en la venta de motocicletas Yamaha, repuestos, accesorios y servicio técnico. Nos enfocamos
+              en superar las expectativas de nuestros clientes, ofreciendo asesoría experta, soluciones rápidas y un
+              soporte postventa confiable. La satisfacción y seguridad de quienes confían en nosotros es nuestra mayor
+              prioridad, garantizando una experiencia de compra y mantenimiento de alta calidad.
             </p>
           </div>
         </article>
@@ -385,6 +441,7 @@ onMounted(async () => {
         width: 100%;
         height: 100%;
         object-fit: cover;
+        border-radius: 4px;
       }
 
       @media(max-width: 767px) {
@@ -425,6 +482,43 @@ onMounted(async () => {
     @media(max-width: 991px) {
       flex-direction: column;
       margin-top: 36px;
+    }
+  }
+
+  &__vision {
+    h2 {
+      color: #000;
+      text-align: left;
+
+      /* Desktop/Headings/H3 */
+      font-family: Play;
+      font-size: 32px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 125%;
+      /* 40px */
+      text-transform: uppercase;
+
+      @media(max-width: 767px) {
+        font-size: 22px;
+      }
+    }
+
+    p {
+      color: #9F9C9C;
+
+      /* Desktop/Body/Text/Medium */
+      font-family: Ubuntu;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 125%;
+      /* 20px */
+
+      @media(max-width: 767px) {
+        margin-top: 30px;
+        font-size: 14px;
+      }
     }
   }
 }
@@ -507,10 +601,12 @@ onMounted(async () => {
 
       figure {
         width: 100%;
+        height: 360px;
         position: relative;
 
         img {
           width: 100%;
+          height: 100%;
           object-fit: cover;
         }
       }
@@ -526,7 +622,8 @@ onMounted(async () => {
           font-size: 16px;
           font-style: normal;
           font-weight: 400;
-          line-height: 125%; /* 20px */
+          line-height: 125%;
+          /* 20px */
         }
 
         p {
@@ -538,15 +635,15 @@ onMounted(async () => {
           font-size: 24px;
           font-style: normal;
           font-weight: 700;
-          line-height: 125%; /* 30px */
+          line-height: 125%;
+          /* 30px */
           text-transform: uppercase;
 
           @media(max-width: 991px) {
             font-size: 18px;
           }
 
-          @media(max-width: 767px) {
-          }
+          @media(max-width: 767px) {}
         }
       }
 

@@ -55,7 +55,7 @@ export const useOrdersStore = defineStore('ordersStore', () => {
 
     // Agrega nuevo producto si no existe
     if (!productIsset) {
-      product.limit = productLimit.value
+      product.limit = product.productLimit
       shoppingCart.value.push(product)
       validateCartInStorage()
       return true
@@ -64,7 +64,7 @@ export const useOrdersStore = defineStore('ordersStore', () => {
     const newQuantity = productIsset.quantity + quantity
 
     // Valida si la cantidad excede el límite
-    if (newQuantity > productLimit.value) {
+    if (newQuantity > product.productLimit) {
       notification(
         'negative',
         'No puedes agregar más unidades porque excede el límite total',
@@ -76,6 +76,7 @@ export const useOrdersStore = defineStore('ordersStore', () => {
     // Actualiza la cantidad del producto existente
     shoppingCart.value[issetIndex].quantity = newQuantity
     validateCartInStorage()
+    calculateTotalInCart()
     return true
   }
 
