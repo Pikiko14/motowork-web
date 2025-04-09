@@ -13,6 +13,7 @@ export const useProductsContent = () => {
   const similarProducts = ref([])
   const totalPagesProduct = ref(0)
   const totalInContacpime = ref(0)
+  const variantsWherehouse = ref([])
   const pathContacpime = 'contacpime'
 
   // methods
@@ -78,11 +79,12 @@ export const useProductsContent = () => {
     store.setProduct(product.value)
   }
 
-  const loadProductDataWherehouse = async (productCode) => {
+  const loadProductDataWherehouse = async (productCode, variantsCodeArr) => {
     try {
-      const { data } = await api.get(`${pathContacpime}?productCode=${productCode}`)
+      const { data } = await api.get(`${pathContacpime}?productCode=${productCode}&variantsSkuArr=${variantsCodeArr}`)
       if (data.success && data.data) {
-        totalInContacpime.value = data?.data?.qproducto ? parseInt(data?.data?.qproducto) : 0
+        variantsWherehouse.value = data.data.variants ? data.data.variants.filter((el) => el !== null) : []
+        totalInContacpime.value = data?.data?.product?.qproducto ? parseInt(data?.data?.product?.qproducto) : 0
       }
     } catch (error) {
       console.error(error.message)
@@ -102,6 +104,7 @@ export const useProductsContent = () => {
     totalPagesProduct,
     addOnePageProduct,
     totalInContacpime,
+    variantsWherehouse,
     pushProductReviews,
     removeOnePageProduct,
     loadProductDataWherehouse

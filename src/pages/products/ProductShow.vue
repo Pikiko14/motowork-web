@@ -15,7 +15,7 @@
 
     <!--Item data-->
     <section class="container-motowork bg-white">
-      <ShowProductData :product="product" :totalInContacpime="totalInContacpime" />
+      <ShowProductData :product="product" :totalInContacpime="totalInContacpime" :variantsWherehouse="variantsWherehouse" />
     </section>
     <!--End items data-->
 
@@ -43,7 +43,7 @@ import ShowProductData from 'src/components/products/partials/ShowProductData.vu
 const route = useRoute()
 const router = useRouter()
 const q = useQuasar()
-const { showProduct, product, similarProducts, loadProductDataWherehouse, totalInContacpime } = useProductsContent()
+const { showProduct, product, similarProducts, loadProductDataWherehouse, totalInContacpime, variantsWherehouse } = useProductsContent()
 
 // computed
 const productBanner = computed(() => {
@@ -65,7 +65,11 @@ const getProductData = async () => {
   const { reference } = route.query
   await showProduct(reference)
   if (product.value?._id) {
-    await loadProductDataWherehouse(product.value?.sku)
+    let variantsSku = []
+    if (product.value?.variants && product.value?.variants.length > 0) {
+      variantsSku = product.value?.variants.map((el) => el.sku)
+    }
+    await loadProductDataWherehouse(product.value?.sku, variantsSku.join(', '))
   }
 }
 

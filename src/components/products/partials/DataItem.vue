@@ -27,7 +27,7 @@
 
     <section class="motowork-item-data__variants" v-if="product.type === 'product'">
       <article class="motowork-item-data__variants--item" v-for="(variant, idx) in product.variants" :key="idx"
-        @click="selectedVariant = variant" :class="{ active: selectedVariant._id === variant._id }" role="button"
+        @click="selectedVariantForShopping(variant)" :class="{ active: selectedVariant._id === variant._id }" role="button"
         :aria-label="'Seleccionar variante: ' + variant.attribute" tabindex="0">
         <span>{{ variant.attribute }}</span>
         <p>{{ variant.description || 'Sin descripción.' }}</p>
@@ -49,9 +49,9 @@
           :label="$q.screen.gt.xs ? 'Agregar al carrito' : 'Agregar'" @click="handlerAddToCar" aria-label="Agregar este producto al carrito"></q-btn>
 
         <div class="motowork-item-data__action--product__quantity">
-          <q-btn @click="removeQuantity" icon="img:/images/back_arrow.png" unelevated dense square></q-btn>
+          <q-btn :disable="product.variants.length > 0 && !selectedVariant._id || totalItemsLimit === 0" @click="removeQuantity" icon="img:/images/back_arrow.png" unelevated dense square></q-btn>
           <span>{{ quantity }}</span>
-          <q-btn @click="addQuantity" unelevated dense icon="img:/images/arrow_next.png" square></q-btn>
+          <q-btn :disable="product.variants.length > 0 && !selectedVariant._id || totalItemsLimit === 0" @click="addQuantity" unelevated dense icon="img:/images/arrow_next.png" square></q-btn>
         </div>
       </div>
     </section>
@@ -217,6 +217,10 @@ const props = defineProps({
   totalInContacpime: {
     type: Number,
     default: () => 0
+  },
+  variantsWherehouse: {
+    type: Array,
+    return: () => []
   }
 })
 
@@ -310,6 +314,16 @@ const handlerAddToCar = () => {
     productLimit: props.totalInContacpime
   }
   ordersStore.addNewItemToCar(carItemObj)
+}
+
+const selectedVariantForShopping = (variant) => {
+  const issetInContacpime = props.variantsWherehouse.find((el) => el?.irecurso === variant?.sku)
+  if (!issetInContacpime) {
+    notification('red', 'La variación no existe en contacpime, no puede ser comprada', 'red')
+    return false
+  }
+
+  selectedVariant.value = variant
 }
 
 // hook

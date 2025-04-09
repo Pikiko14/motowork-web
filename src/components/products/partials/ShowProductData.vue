@@ -5,7 +5,7 @@
     </div>
 
     <div class="col-12 col-md-6">
-      <DataItem :totalInContacpime="totalInContacpime" v-if="product._id" @set-image-color="setImageColor"
+      <DataItem :variantsWherehouse="variantsWherehouse" :totalInContacpime="totalInContacpime" v-if="product._id" @set-image-color="setImageColor"
         :product="product" />
     </div>
   </div>
@@ -28,6 +28,10 @@ defineProps({
   totalInContacpime: {
     type: Number,
     default: () => 0
+  },
+  variantsWherehouse: {
+    type: Array,
+    return: () => []
   }
 })
 
