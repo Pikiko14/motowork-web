@@ -61,7 +61,7 @@
 
       <!--Finalcial button-->
       <section class="motowork-navbar__right-section--financial">
-        <q-btn to="/finance" square outline label="Financiar" color="secondary"></q-btn>
+        <q-btn @click="financial" square outline label="Financiar" color="secondary"></q-btn>
       </section>
       <!--End financial buttons-->
 
@@ -100,13 +100,6 @@
                   </q-item-label>
                 </q-item-section>
               </q-item>
-              <q-item v-if="itemToShow === 'product'" class="q-pa-none" clickable v-ripple to="/productos?page=1&perPage=9&sortBy=createdAt&order=-1&type=product&state=Usada">
-                <q-item-section>
-                  <q-item-label>
-                    Accesorios usados
-                  </q-item-label>
-                </q-item-section>
-              </q-item>
             </q-list>
 
             <ul class="items-mobile">
@@ -117,7 +110,7 @@
               <li><q-btn flat to="/servicio-tecnico" class="text-uppercase text-left">Servicio técnico</q-btn></li>
               <li><q-btn flat to="/experiencias" class="text-uppercase">Experiencias</q-btn></li>
               <li><q-btn flat to="/conocenos" class="text-uppercase">Nosotros</q-btn></li>
-              <li class="mobile-show"><q-btn color="secondary" flat to="/about-us" class="text-uppercase">financiar</q-btn></li>
+              <li class="mobile-show"><q-btn color="secondary" flat @click="financial" class="text-uppercase">financiar</q-btn></li>
             </ul>
             <div class="mobile-car mobile-show">
               <!--shopping car-->
@@ -252,6 +245,10 @@ const openAllProducts = () => {
       order: '-1'
     }
   })
+}
+
+const financial = () => {
+  window.open('https://api.whatsapp.com/send?phone=573183996249&text=Hola%20Motowork', '__blank')
 }
 </script>
 

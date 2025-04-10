@@ -323,6 +323,7 @@ onMounted(async () => {
           width: 100%;
           height: 100%;
           object-fit: cover;
+          object-position: top;
         }
 
         @media(max-width: 767px) {
