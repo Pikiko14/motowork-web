@@ -49,7 +49,7 @@
             La fecha y hora que selecciones asegura la recepción de tu motocicleta en el centro de servicio de MotoWork.
           </p>
 
-          <q-date class="shadow-0 full-width" v-model="dateModel" minimal :options="disablePastDates" />
+          <q-date class="shadow-0 full-width" v-model="dateModel" minimal :options="datesAvailable" />
         </div>
         <!--End date picker section-->
 
@@ -72,26 +72,6 @@
               mask="##:##">
               <template #append>
                 <div class="append">
-                  <span class="cursor-pointer hour-type">
-                    {{ serviceSchedule.hourType }}
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" viewBox="0 0 14 12" fill="none">
-                      <path d="M2 3.5L7 8.5L12 3.5" stroke="#9F9C9C" stroke-width="1.5" stroke-linecap="square" />
-                    </svg>
-                    <q-menu auto-close>
-                      <q-list dense>
-                        <q-item clickable @click="serviceSchedule.hourType = 'A.m.'">
-                          <q-item-section>
-                            A.m.
-                          </q-item-section>
-                        </q-item>
-                        <q-item clickable @click="serviceSchedule.hourType = 'P.m.'">
-                          <q-item-section>
-                            P.m.
-                          </q-item-section>
-                        </q-item>
-                      </q-list>
-                    </q-menu>
-                  </span>
                   <span class="cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                       <path
@@ -106,7 +86,8 @@
                       <path d="M10 5.41602V9.99939L13.6667 13.6661" stroke="#9F9C9C" stroke-width="1.5" />
                     </svg>
                     <q-popup-proxy ref="hourProxy" transition-show="scale" transition-hide="scale">
-                      <q-time color="secondary" v-model="serviceSchedule.hour" format24h>
+                      <q-time :format24h="false" :locale="myLocale" mask="HH:mm" color="secondary"
+                        v-model="serviceSchedule.hour">
                         <div class="row text-center">
                           <div class="col">
                             <q-btn v-close-popup label="Confirmar" color="primary" flat @click="setHour" />
@@ -391,8 +372,7 @@
                 Whatsapp
               </h3>
               <a href="https://api.whatsapp.com/send?phone=573183996249&amp;text=Hola%20Motowork" target="_blank"
-                rel="noopener noreferrer" aria-label="Soporte por WhatsApp de Motowork"
-                title="Soporte por WhatsApp">
+                rel="noopener noreferrer" aria-label="Soporte por WhatsApp de Motowork" title="Soporte por WhatsApp">
                 +573183996249
               </a>
             </div>
@@ -428,6 +408,7 @@
 import { date, useMeta } from 'quasar'
 import { computed, ref, watch } from 'vue'
 import { notification } from 'src/boot/notification'
+import { datesAvailables } from 'src/utils/datesAvailables'
 import BreadCrumb from 'src/components/layout/BreadCrumb.vue'
 import DateSelected from 'src/components/schedule/DateSelected.vue'
 import BannerMotowork from 'src/components/banner/BannerMotowork.vue'
@@ -435,6 +416,16 @@ import { useScheduleServices } from 'src/composables/scheduleServices'
 import { useCategoriesContent } from 'src/composables/useCategoriesContent'
 
 // references
+const myLocale = {
+  /* starting with Sunday */
+  days: 'Domingo_Lunes_Martes_Miércoles_Jueves_Viernes_Sábado'.split('_'),
+  daysShort: 'Dom_Lun_Mar_Mié_Jue_Vie_Sáb'.split('_'),
+  months: 'Enero_Febrero_Marzo_Abril_Mayo_Junio_Julio_Agosto_Septiembre_Octubre_Noviembre_Diciembre'.split('_'),
+  monthsShort: 'Ene_Feb_Mar_Abr_May_Jun_Jul_Ago_Sep_Oct_Nov_Dic'.split('_'),
+  firstDayOfWeek: 1, // 0-6, 0 - Sunday, 1 Monday, ...
+  format24h: true,
+  pluralDay: 'dias'
+}
 const step = ref(1)
 const formRef = ref()
 const loading = ref(false)
@@ -444,7 +435,7 @@ const formattedString = date.formatDate(timeStamp, 'YYYY/MM/DD')
 const dateModel = ref(formattedString)
 const serviceSchedule = ref({
   hour: '',
-  date: '',
+  date: dateModel,
   hourType: 'A.m.',
   client: {
     name: '',
@@ -500,6 +491,10 @@ const categoriesOption = computed(() => {
   return categories.value.map((el) => el.name)
 })
 
+const datesAvailable = computed(() => {
+  return datesAvailables.map((el) => el.fecha.split('-').join('/'))
+})
+
 // watch
 watch(
   () => {
@@ -511,14 +506,14 @@ watch(
 )
 
 // methods
-const disablePastDates = (date) => {
-  const today = new Date()
-  today.setHours(0, 0, 0, 0)
-
-  const selectedDate = new Date(date)
-  const isSunday = selectedDate.getDay() === 0
-  return selectedDate >= today && !isSunday
-}
+// const disablePastDates = (date) => {
+//   const today = new Date()
+//   today.setHours(0, 0, 0, 0)
+//
+//   const selectedDate = new Date(date)
+//   const isSunday = selectedDate.getDay() === 0
+//   return selectedDate >= today && !isSunday
+// }
 
 const handlerScheduleServices = async () => {
   loading.value = true
@@ -630,6 +625,20 @@ const metaData = {
   }
 }
 useMeta(metaData)
+
+const setHour = () => {
+  const dateString = dateModel.value.split('/').join('-')
+  const dateSelected = datesAvailables.find((el) => el.fecha === dateString)
+  const hours = dateSelected.horario.split('-')
+  const [start, end] = hours
+  const startDate = date.formatDate(`${serviceSchedule.value.date} ${start}`, 'YYYY-MM-DD HH:mm:ss')
+  const endDate = date.formatDate(`${serviceSchedule.value.date} ${end}`, 'YYYY-MM-DD H:m:s')
+  const selectedDate = date.formatDate(`${serviceSchedule.value.date} ${serviceSchedule.value.hour}`, 'YYYY-MM-DD HH:mm:ss')
+  if (selectedDate < startDate || selectedDate > endDate) {
+    serviceSchedule.value.hour = null
+    notification('negative', `La hora en la que intentas agendar no esta disponible, Diponible entre(${start} y ${end})`, 'warning')
+  }
+}
 
 // hook
 getCategories('?page=1&perPage=30&type=vehicle')
