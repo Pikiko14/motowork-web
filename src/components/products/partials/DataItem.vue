@@ -41,7 +41,7 @@
     </section>
 
     <section class="motowork-item-data__action">
-      <q-btn :to="`/vehiculos/${product.name}/formulario?reference=${product._id}`" v-if="product.type === 'vehicle'" square unelevated color="secondary" label="Prueba de manejo"
+      <q-btn :to="`/vehiculos/${product.name}/formulario?reference=${product._id}`" v-if="product.type === 'vehicle' && product.dive_test" square unelevated color="secondary" label="Prueba de manejo"
         aria-label="Agendar prueba de manejo para el vehículo"></q-btn>
 
       <div class="motowork-item-data__action--product" v-if="product.type === 'product'">

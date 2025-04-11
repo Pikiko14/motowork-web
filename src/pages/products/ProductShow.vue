@@ -69,7 +69,9 @@ const getProductData = async () => {
     if (product.value?.variants && product.value?.variants.length > 0) {
       variantsSku = product.value?.variants.map((el) => el.sku)
     }
-    await loadProductDataWherehouse(product.value?.sku, variantsSku.join(', '))
+    if ((product.value?.sku && product.value?.sku.length > 0) || variantsSku.length > 0) {
+      await loadProductDataWherehouse(product.value?.sku, variantsSku.join(', '))
+    }
   }
 }
 

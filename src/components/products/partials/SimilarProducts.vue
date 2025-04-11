@@ -8,7 +8,7 @@
           <img :src="getBannerUrl(idx)" :alt="`Imagen de la motocicleta ${product.name}`" title="product.name" />
           <div class="overflow">
             <q-btn :to="`/vehiculos/${product.name}?reference=${product._id}`" v-if="route.query.type !== 'product'"
-              square outline color="white" label="Prueba de manejo"></q-btn>
+              square outline color="white" label="Ver vehículo"></q-btn>
             <q-btn :to="`/productos/${product.name}?reference=${product._id}`" v-else square outline color="white"
               label="Agendar al carrito"></q-btn>
           </div>
