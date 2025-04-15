@@ -28,6 +28,17 @@ export const useBrandsContent = () => {
     }
   }
 
+  const getAllBrands = async (query, append = false) => {
+    try {
+      const { data } = await api.get(`${path}/list/from-web${query}`)
+      if (data.success) {
+        return data.data
+      }
+    } catch (error) {
+      throw new Error(error.message)
+    }
+  }
+
   const addOnePageBrands = () => {
     pageBrands.value++
   }
@@ -35,6 +46,7 @@ export const useBrandsContent = () => {
   return {
     brands,
     pageBrands,
+    getAllBrands,
     getBrandsList,
     totalPagesBrand,
     addOnePageBrands

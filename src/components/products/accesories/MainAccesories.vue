@@ -25,14 +25,38 @@
         @update:model-value="doPagination" color="secondary" v-model="pageNumber" :max="totalPagesProduct" />
     </section>
     <!--End paginator-->
+
+    <!--Marcas-->
+    <!--pagination data-->
+    <section class="motowork-item-page__paginator-label" :class="{ 'q-pt-xl': $q.screen.gt.sm, 'q-pt-md': $q.screen.lt.md }">
+      <h2>Conoce nuestras marcas de accesorios</h2>
+    </section>
+    <!--end pagination data-->
+
+    <section class="motowork-item-page__all-brands">
+      <article v-for="(brand, idx) in allBrands" :key="idx" class="motowork-item-page__all-brands--item" @click="handleBrand(brand.name)">
+        <figure>
+          <img :src="brand.icon">
+          <figcaption>
+            <p class="motowork-item-page__all-brands--card__overflow">
+              {{ brand.name }}
+            </p>
+          </figcaption>
+        </figure>
+        <div class="motowork-item-page__all-brands--item__overlay">
+          <q-btn color="white" outline>Mas información</q-btn>
+        </div>
+      </article>
+    </section>
+    <!--End marcas-->
   </div>
 </template>
 
 <script setup>
 // imports
-import { onBeforeMount, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import GridItems from '../partials/GridItems.vue'
+import { onBeforeMount, ref, computed } from 'vue'
 import HeaderItems from '../partials/HeaderItems.vue'
 import { useStoreContent } from 'src/stores/storeContent-store'
 import { useBrandsContent } from 'src/composables/useBrandsContent'
@@ -102,7 +126,12 @@ const {
 } = useCategoriesContent()
 const store = useStoreContent()
 const { categoriesList, brandsList } = store
-const { getBrandsList, brands, pageBrands, totalPagesBrand, addOnePageBrands } = useBrandsContent()
+const { getBrandsList, brands, pageBrands, totalPagesBrand, addOnePageBrands, getAllBrands } = useBrandsContent()
+
+// computed
+const allBrands = computed(() => {
+  return store.allBrands
+})
 
 // methods
 const openFilter = () => {
@@ -260,8 +289,22 @@ const filterByPowerRange = (e) => {
 }
 
 const loadBrands = (append = false) => {
-  const queryString = `?page=${pageBrands.value}&perPage=1&type=${query.type}`
+  const queryString = `?page=${pageBrands.value}&perPage=5&type=${query.type}`
   getBrandsList(queryString, append)
+}
+
+const loadAllBrands = async () => {
+  try {
+    const queryString = `?page=${pageBrands.value}&perPage=50&type=${query.type}`
+    const response = await getAllBrands(queryString)
+    store.setAllBrands(response.brands)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const handleBrand = (brand) => {
+  window.open(`https://api.whatsapp.com/send?phone=573183996249&text=Hola%2C+me+gustar%C3%ADa+saber+mas+informaci%C3%B3n+acerca+de+los+accesorios+y+productos+de+la+categor%C3%ADa+%2A${brand}%2A%2C+Muchas+gracias`, '_blank')
 }
 
 // hooks
@@ -275,7 +318,10 @@ if (query.type === 'product' && brandsList && brandsList.length === 0) {
   loadBrands()
 }
 
-onBeforeMount(() => {
+onBeforeMount(async () => {
   pageNumber.value = parseInt(route.query.page)
+  if (allBrands.value.length === 0) {
+    await loadAllBrands()
+  }
 })
 </script>
