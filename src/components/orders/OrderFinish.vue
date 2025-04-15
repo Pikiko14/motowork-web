@@ -49,7 +49,25 @@
     </h2>
     <img v-if="order.payment_method === 'mercadopago'" src="/images/mercado_pago.webp" alt="Icono de mercadopago"
       title="Mercadopago" />
-    <img v-else src="/images/transferencia_bancaria.webp" alt="Icono de transferencia bancaria" title="Transferencia bancaria">
+    <img v-if="order.payment_method === 'trasnferencia'" src="/images/transferencia_bancaria.webp" alt="Icono de transferencia bancaria" title="Transferencia bancaria">
+    <img v-if="order.payment_method === 'link_pago'" src="/images/enlace.webp" alt="Icono de link de pago" title="Link de pago">
+    <h2 v-if="order.payment_method === 'link_pago'">
+      Instrucciones de pago
+    </h2>
+
+    <div class="address">
+      <p>
+        Realiza el pago desde nuestro link de pago, de una manera mas segura y rapida.
+      </p>
+      <p>
+        Una vez finalizado el pago, deberas enviar el comprobante de pago a nuestro whatsapp
+        <q-btn @click="openWhatsapp" flat dense rounded icon="img:/images/whatsapp.webp">
+          <q-tooltip class="bg-primary">
+            Enviar comprobante de pago
+          </q-tooltip>
+        </q-btn> para que tu orden sea procesada.
+      </p>
+    </div>
   </section>
 </template>
 
@@ -58,7 +76,7 @@
 import { date } from 'quasar'
 
 // props
-defineProps({
+const props = defineProps({
   order: {
     type: Object,
     default: () => {
@@ -71,6 +89,15 @@ defineProps({
 const formatDate = (dateString) => {
   const formattedString = date.formatDate(dateString, 'DD-MM-YYYY HH:mm:ss')
   return formattedString
+}
+
+const openWhatsapp = () => {
+  const phoneNumber = '573183996249'
+  const textMessage = `Hola Motowork, la presente es para adjuntar el soporte de pago de la orden: ${props.order._id} por un monto de: ${props.order.total}`
+
+  const encodedMessage = encodeURIComponent(textMessage)
+  const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodedMessage}`
+  window.open(whatsappUrl, '__blank')
 }
 </script>
 

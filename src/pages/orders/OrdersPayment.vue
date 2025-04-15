@@ -30,6 +30,7 @@
 
           <!--order resume-->
           <OrderFinish v-if="orderCreatedData.order" :order="orderCreatedData.order" />
+          <q-btn target="_blank" v-if="orderCreatedData && orderCreatedData.order && orderCreatedData.order.payment_method === 'link_pago'" class="q-mt-md" unelevated outline color="secondary" no-caps size="md" type="a" :href="orderCreatedData?.preference">Ir a pagar la orden</q-btn>
           <!--End order resume-->
 
           <div class="account-to-transfer q-mt-xl" v-if="orderCreatedData.order && orderCreatedData.order.payment_method === 'trasnferencia'">
@@ -157,7 +158,8 @@
             </div>
           </div>
           <!--order resume-->
-          <OrderFinish v-if="orderToPay.payment_method === 'trasnferencia'" :order="orderToPay" />
+          <OrderFinish v-if="orderToPay.payment_method === 'trasnferencia' || orderToPay.payment_method === 'link_pago'" :order="orderToPay" />
+          <q-btn target="_blank" v-if="orderCreatedData && orderCreatedData.order && orderCreatedData.order.payment_method === 'link_pago'" class="q-mt-md" unelevated outline color="secondary" no-caps size="md" type="a" :href="linkPayment">Ir a pagar la orden</q-btn>
           <!--End order resume-->
 
           <div class="account-to-transfer q-mt-xl" v-if="orderToPay._id && orderToPay.payment_method === 'trasnferencia'">
@@ -266,6 +268,10 @@ const orderToPay = computed(() => {
   return ordersStore.orderToPay
 })
 
+const linkPayment = computed(() => {
+  return SessionStorage.getItem('link_payment')
+})
+
 const account = computed(() => MotoworkAccount)
 
 const paymentMethod = computed(() => ordersStore.paymentMethod)
@@ -294,6 +300,9 @@ const finishOrder = async () => {
       } else {
         paymentData.value = response.data.preference
         SessionStorage.setItem('order_to_transfer', orderToPay.value._id)
+        if (response.data.preference) {
+          SessionStorage.setItem('link_payment', response.data.preference)
+        }
       }
     }
   } catch (error) {
@@ -304,7 +313,12 @@ const finishOrder = async () => {
 
 const loadOrderFinished = async (order) => {
   try {
-    await ordersContent.loadOrderData(order)
+    const response = await ordersContent.loadOrderData(order)
+    if (response) {
+      orderCreatedData.value = {
+        order: response.data
+      }
+    }
   } catch (error) {
   }
 }

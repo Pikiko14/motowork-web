@@ -19,6 +19,25 @@
     </article>
     <!--Mercadopago-->
 
+    <!--Link de pago-->
+    <article class="payment-method__item transfer">
+      <q-radio @update:model-value="handlerShippingMethods" dense v-model="paymentMethod" val="link_pago"
+        color="secondary">
+        <template #default>
+          <div class="payment-method__item--complement">
+            <h3>
+              Link de pago
+            </h3>
+            <img src="/images/enlace.webp" alt="Icono de link de pago" title="Link de pago">
+          </div>
+          <p>
+           Paga con nuestro link de pago, de una manera mas segura y rapida.
+          </p>
+        </template>
+      </q-radio>
+    </article>
+    <!--End Link de pago-->
+
     <!--Transferencia-->
     <article class="payment-method__item transfer">
       <q-radio @update:model-value="handlerShippingMethods" dense v-model="paymentMethod" val="trasnferencia"
