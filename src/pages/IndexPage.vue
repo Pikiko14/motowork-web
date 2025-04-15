@@ -1,14 +1,14 @@
 <template>
   <q-page>
     <!--Banner-->
-    <BannerMotowork :default-img="'/images/urfm8rjjfdonjh63f8xi.webp'" :title="'Motowork'" :banner="storeBenner || banner" :btnLabel="'Adquiere tu moto'"
+    <BannerMotowork :default-img="'/images/urfm8rjjfdonjh63f8xi.webp'" :title="'Moto work'" :banner="storeBenner || banner" :btnLabel="'Adquiere tu moto'"
       :bannerComplement="'Consigue la moto que mejor se acople a tus gustos, no esperes más y adquiere tu moto con nosotros.'" />
     <!--End banner-->
 
     <!--Categories accessories-->
     <section class="container-motowork">
       <div class="motowork-section-title">
-        <h2>Explora Motowork</h2>
+        <h2>Explora Moto Work</h2>
         <span>{{ page }}/{{ totalPages }}</span>
       </div>
 
@@ -50,7 +50,7 @@
       <div class="motowork-newsletter" ref="newsletterSection">
         <div class="motowork-newsletter__item">
           <figure>
-            <img src="/images/newsletter-img.webp" alt="Newsletter imagen, utilizada por Motowork" title="Newsletter imagen, utilizada por Motowork" />
+            <img src="/images/newsletter-img.webp" alt="Newsletter imagen, utilizada por Motowork" title="Newsletter imagen, utilizada por Moto work" />
           </figure>
         </div>
         <div class="motowork-newsletter__item">
@@ -325,7 +325,7 @@ const doAddProduct = () => {
 
 const metaData = {
   // sets document title
-  title: 'MotoWork',
+  title: 'Moto Work',
   // optional; sets final title as "Index Page - My Website", useful for multiple level meta
   titleTemplate: title => `${title} - Web`,
 
@@ -367,7 +367,7 @@ const metaData = {
     },
     twitterTitle: {
       name: 'twitter:title',
-      content: 'MotoWork - Web'
+      content: 'Moto Work - Web'
     },
     twitterDescription: {
       name: 'twitter:description',
