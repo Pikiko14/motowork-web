@@ -18,6 +18,10 @@
       <MainAccesories v-if="type === 'product'" />
     </section>
     <!--End item component-->
+
+    <!--Wathsapp Button-->
+    <WathsappButton :category="type === 'vehicle' ? 'motocicletas' : 'accesorios'" />
+    <!--End Wathsapp Button-->
   </q-page>
 </template>
 
@@ -28,6 +32,7 @@ import { useRoute, useRouter } from 'vue-router'
 import BreadCrumb from 'src/components/layout/BreadCrumb.vue'
 import { useStoreContent } from 'src/stores/storeContent-store'
 import { useBannersContent } from 'src/composables/useBannerContent'
+import WathsappButton from 'src/components/layout/WathsappButton.vue'
 import BannerMotowork from 'src/components/banner/BannerMotowork.vue'
 import MainVehicles from 'src/components/products/vehicles/MainVehicles.vue'
 import MainAccesories from 'src/components/products/accesories/MainAccesories.vue'

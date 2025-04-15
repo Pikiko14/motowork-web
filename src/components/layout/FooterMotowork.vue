@@ -110,7 +110,7 @@
     <!--Copy-->
     <div class="footer-copy">
       <p>
-        © Copyright - {{ currentYear }} Motowork - Todos los derechos reservados.
+        © Copyright - {{ currentYear }} Moto Work - Todos los derechos reservados.
       </p>
     </div>
     <!--End Copy-->

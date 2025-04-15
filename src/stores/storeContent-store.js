@@ -5,6 +5,7 @@ import { getUrlParams } from 'src/utils/utils'
 export const useStoreContent = defineStore('storeContent', () => {
   const product = ref({})
   const banners = ref({})
+  const allBrands = ref([])
   const experience = ref({})
   const brandsList = ref([])
   const categoriesList = ref([])
@@ -40,14 +41,20 @@ export const useStoreContent = defineStore('storeContent', () => {
     experience.value = payload
   }
 
+  const setAllBrands = (payload) => {
+    allBrands.value = payload
+  }
+
   return {
     banners,
     product,
+    allBrands,
     setBrands,
     setBanner,
     setProduct,
     brandsList,
     experience,
+    setAllBrands,
     filterBanner,
     setCategories,
     setExperience,

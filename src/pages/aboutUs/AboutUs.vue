@@ -29,14 +29,14 @@
         <article class="history-section__body">
           <!--image-->
           <figure>
-            <img src="/images/equipo_01.webp" alt="Colaborador 01 de motowork" title="Colaborador 01 de motowork">
+            <img src="/images/equipo_01.webp" alt="Colaborador 01 de moto work" title="Colaborador 01 de moto work">
           </figure>
           <!--End image-->
 
           <!--Complement history-->
           <div class="history-section__body--complement">
             <p>
-              Hace 23 años empezamos a formar la familia motowork, un lugar donde los moteros del país encontrarán todo
+              Hace 23 años empezamos a formar la familia Moto Work, un lugar donde los moteros del país encontrarán todo
               lo necesario para sus motos. Gracias a su experiencia como motocrosistas y su gran visión comercial; lo
               que le permite también realizar alianza estratégica al ser distribuidor de las mejores marcas a nivel
               mundial en productos y accesorios, principalmente con Yamaha, logrando que nuestros clientes tengan un
@@ -46,13 +46,13 @@
             </p>
 
             <p>
-              <span class="text-bold">¿Por qué elegir MotoWork?</span> Porque entendemos que cada motero tiene una
+              <span class="text-bold">¿Por qué elegir Moto Work?</span> Porque entendemos que cada motero tiene una
               pasión única por las dos ruedas, y por eso ofrecemos un servicio integral que va más allá de la venta de
               motocicletas. Nos enorgullece ser su aliado en cada viaje, brindando asesoría especializada, repuestos
-              originales, y un servicio técnico altamente capacitado. Con MotoWork, no solo encuentras lo mejor en
+              originales, y un servicio técnico altamente capacitado. Con Moto Work, no solo encuentras lo mejor en
               productos, sino un compromiso firme con tu seguridad y satisfacción. Además, nuestra amplia experiencia en
               motocross y el respaldo de marcas reconocidas aseguran que cada producto o servicio que adquieras sea de
-              calidad superior. ¡En MotoWork, tu pasión por las motos es nuestra prioridad!
+              calidad superior. ¡En Moto Work, tu pasión por las motos es nuestra prioridad!
             </p>
           </div>
           <!--End complement history-->
@@ -109,7 +109,7 @@
           </h2>
           <div class="separator"></div>
           <span>
-            Equipo motowork
+            Equipo moto work
           </span>
         </div>
         <!--End header team-->
@@ -122,7 +122,7 @@
               <div class="overflow"></div>
             </figure>
             <div class="our-team-section__body--item__content">
-              <h3>MOTOWORK</h3>
+              <h3>MOTO WORK</h3>
               <p>Servicio técnico</p>
             </div>
           </article>
@@ -133,19 +133,19 @@
               <div class="overflow"></div>
             </figure>
             <div class="our-team-section__body--item__content">
-              <h3>MOTOWORK</h3>
+              <h3>MOTO WORK</h3>
               <p>Repuestos</p>
             </div>
           </article>
 
           <article class="our-team-section__body--item">
             <figure>
-              <img src="/images/Image_05.webp" alt="Imagen del area 03" title="Imagen del area 03">
+              <img src="/images/area_ventas.webp" alt="Imagen del area 03" title="Imagen del area 03">
               <div class="overflow"></div>
             </figure>
             <div class="our-team-section__body--item__content">
-              <h3>Sector empresarial</h3>
-              <p>Nombre del área</p>
+              <h3>MOTO WORK</h3>
+              <p>Area de ventas</p>
             </div>
           </article>
         </div>
@@ -162,7 +162,7 @@
           <h2>¿PORQUE ELEGIRNOS?</h2>
         </div>
         <div class="motowork-por-elegirnos__subtitle">
-          <h3>Precioes motowork</h3>
+          <h3>moto work</h3>
         </div>
       </div>
       <!--End top section-->

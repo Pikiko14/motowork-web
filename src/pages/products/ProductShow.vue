@@ -49,11 +49,11 @@ const { showProduct, product, similarProducts, loadProductDataWherehouse, totalI
 const productBanner = computed(() => {
   if (product.value.banner) {
     if (q.screen.width <= 767) {
-      return product.value.banner.find((item) => item.type_banner === 'mobile')
+      return product.value.banner.find((item) => item.type_banner === 'desktop')
     }
 
     if (q.screen.width >= 768 && q.screen.width <= 991) {
-      return product.value.banner.find((item) => item.type_banner === 'mobile')
+      return product.value.banner.find((item) => item.type_banner === 'desktop')
     }
     return product.value.banner.find((item) => item.type_banner === 'desktop')
   }
