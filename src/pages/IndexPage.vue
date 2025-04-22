@@ -34,7 +34,6 @@
     <section class="container-motowork bg-white">
       <div class="motowork-section-title">
         <h2>Lo mas vendido</h2>
-        <span>{{ pageProduct }}/{{ totalPagesProduct }}</span>
       </div>
 
       <!--product component-->
