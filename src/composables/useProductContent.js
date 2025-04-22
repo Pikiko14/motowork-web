@@ -102,6 +102,17 @@ export const useProductsContent = () => {
     }
   }
 
+  const getMostSells = async () => {
+    try {
+      const { data } = await api.get('orders/get/most-sells')
+      if (data.data) {
+        store.setProductMostSell(data.data)
+      }
+    } catch (error) {
+      throw new Error(error.message)
+    }
+  }
+
   return {
     setPage,
     product,
@@ -110,6 +121,7 @@ export const useProductsContent = () => {
     getProducts,
     pageProduct,
     showProduct,
+    getMostSells,
     totalProducts,
     searchProducts,
     similarProducts,

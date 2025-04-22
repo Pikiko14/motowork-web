@@ -32,6 +32,7 @@
 
     <!--lo mas vendido-->
     <section class="container-motowork bg-white">
+      {{ mostSells }}
       <div class="motowork-section-title">
         <h2>Lo mas vendido</h2>
         <span>{{ pageProduct }}/{{ totalPagesProduct }}</span>
@@ -174,12 +175,12 @@ import { getResolutionWidth } from 'src/utils/utils'
 import HomeGrid from 'src/components/products/HomeGrid.vue'
 import GridHome from 'src/components/categories/GridHome.vue'
 import { useStoreContent } from 'src/stores/storeContent-store'
-import { computed, onBeforeMount, onMounted, onUnmounted, ref } from 'vue'
 import FormFields from 'src/components/newsletter/FormFields.vue'
 import { useBannersContent } from 'src/composables/useBannerContent'
 import GridVehicles from 'src/components/categories/GridVehicles.vue'
 import BannerMotowork from 'src/components/banner/BannerMotowork.vue'
 import { useProductsContent } from 'src/composables/useProductContent'
+import { computed, onBeforeMount, onMounted, onUnmounted, ref } from 'vue'
 import { useInstangramContent } from 'src/composables/useInstagramContent'
 import { useCategoriesContent } from 'src/composables/useCategoriesContent'
 
@@ -197,7 +198,7 @@ const {
   categories
 } = useCategoriesContent()
 
-const { products, getProducts, totalPagesProduct, pageProduct, addOnePageProduct, removeOnePageProduct } = useProductsContent()
+const { products, getProducts, totalPagesProduct, pageProduct, addOnePageProduct, removeOnePageProduct, getMostSells } = useProductsContent()
 
 const { getfeed, feedsHistories } = useInstangramContent()
 
@@ -216,6 +217,10 @@ const router = useRouter()
 // computed
 const feeds = computed(() => {
   return instagramsFeeds.length > 0 ? instagramsFeeds : feedsHistories.value
+})
+
+const mostSells = computed(() => {
+  return store.productsMostSells.length > 0 ? store.productsMostSells : []
 })
 
 // Methods
@@ -415,6 +420,9 @@ onBeforeMount(() => {
 })
 
 onMounted(async () => {
+  if (mostSells.value.length === 0) {
+    await getMostSells()
+  }
   if (instagramsFeeds.length === 0) {
     await getfeed()
   }

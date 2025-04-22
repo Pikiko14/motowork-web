@@ -10,6 +10,7 @@ export const useStoreContent = defineStore('storeContent', () => {
   const brandsList = ref([])
   const categoriesList = ref([])
   const instagramsFeeds = ref([])
+  const productsMostSells = ref([])
 
   const setBanner = (payload) => {
     banners.value[getUrlParams(payload.query, 'type')] = payload.banner
@@ -45,6 +46,10 @@ export const useStoreContent = defineStore('storeContent', () => {
     allBrands.value = payload
   }
 
+  const setProductMostSell = (payload) => {
+    productsMostSells.value = payload
+  }
+
   return {
     banners,
     product,
@@ -60,6 +65,8 @@ export const useStoreContent = defineStore('storeContent', () => {
     setExperience,
     categoriesList,
     instagramsFeeds,
-    setInstagramsFeeds
+    productsMostSells,
+    setInstagramsFeeds,
+    setProductMostSell
   }
 })
