@@ -39,6 +39,13 @@
         :aria-label="'Seleccionar color: ' + color.name" tabindex="0"></div>
     </section>
 
+    <section v-if="product.type === 'vehicle'">
+      <p class="payment-link">
+        Si deseas realizar el pago a tu motocicleta, puedes hacerlo a través de nuestro link de pago. Una vez realizado el pago, deberas enviar el comprobante de pago a nuestro correo <a class="mail-link" href="mailto:info@motowork.co">info@motowork.co</a> para que podamos procesar tu pago
+        <q-btn type="a" flat dense label="Realizar pago" @click="openPaymentLink" color="secondary" />.
+      </p>
+    </section>
+
     <section class="motowork-item-data__action">
       <q-btn :to="`/vehiculos/${product.name}/formulario?reference=${product._id}`" v-if="product.type === 'vehicle' && product.dive_test" square unelevated color="secondary" label="Prueba de manejo"
         aria-label="Agendar prueba de manejo para el vehículo"></q-btn>
@@ -323,6 +330,10 @@ const selectedVariantForShopping = (variant) => {
   }
 
   selectedVariant.value = variant
+}
+
+const openPaymentLink = () => {
+  window.open('https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=17017&searchedCategoryId=&searchedAgreementName=YAMAHA%20MOTOWORK', '_blank')
 }
 
 // hook
@@ -692,5 +703,86 @@ onBeforeMount(() => {
 
 .active {
   color: $secondary !important;
+}
+
+.payment-method {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  article {
+    padding: 24px 16px;
+    border: 1px solid #E3E3E3;
+  }
+
+  &__item {
+    display: flex;
+    gap: 12px;
+    padding: 24px;
+    flex-direction: column;
+
+    &--complement {
+      gap: 12px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+
+      h3 {
+        overflow: hidden;
+        color: #9F9C9C;
+        text-overflow: ellipsis;
+
+        /* Desktop/Body/Text/Medium */
+        font-family: Ubuntu;
+        font-size: 16pt;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 125%; /* 20px */
+      }
+
+      img {
+        width: 40px;
+        position: absolute;
+        right: 0;
+        top: -20px;
+      }
+    }
+
+    p {
+      color: #9F9C9C;
+
+      /* Desktop/Body/Text/Medium */
+      font-family: Ubuntu;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 125%;
+      /* 20px */
+      margin-top: 12px;
+    }
+
+    border-bottom: 1px solid #E3E3E3;
+    border-left: 1px solid #E3E3E3;
+    border-right: 1px solid #E3E3E3;
+
+    &:not(:last-child) {
+      border-top: 1px solid #E3E3E3;
+    }
+  }
+}
+
+.payment-link {
+  font-size: 13pt;
+  color: #9F9C9C;
+  font-weight: 400;
+  line-height: 125%;
+  /* 15px */
+  margin-top: 12px;
+
+  .mail-link {
+    color: #ED1C24;
+    text-decoration: underline;
+  }
 }
 </style>
