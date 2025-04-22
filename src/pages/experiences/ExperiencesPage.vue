@@ -52,7 +52,7 @@
         </div>
         <div class="motowork-newsletter__item">
           <div class="motowork-newsletter__item--content">
-            <h2>Comunidad motowork</h2>
+            <h2>Comunidad moto work</h2>
             <h3>QUE ESPERAS PARA RODAR CON NOSOTROS</h3>
             <p>Únete a nuestra comunidad y disfruta de las mejores rodadas y del mejor contenido para moteros aficionados.</p>
 
@@ -131,7 +131,7 @@ const showExperience = (experience) => {
 
 const metaData = {
   // sets document title
-  title: 'MotoWork',
+  title: 'Moto Work',
   // optional; sets final title as "Index Page - My Website", useful for multiple level meta
   titleTemplate: title => `${title} - Experiencias y blog`,
 

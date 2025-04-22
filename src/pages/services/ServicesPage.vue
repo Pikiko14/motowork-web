@@ -46,7 +46,7 @@
             FECHA Y HORA
           </h2>
           <p>
-            La fecha y hora que selecciones asegura la recepción de tu motocicleta en el centro de servicio de MotoWork.
+            La fecha y hora que selecciones asegura la recepción de tu motocicleta en el centro de servicio de Moto Work.
           </p>
 
           <q-date class="shadow-0 full-width" v-model="dateModel" minimal :options="datesAvailable" />
@@ -549,7 +549,7 @@ const handlerScheduleServices = async () => {
 
 const metaData = {
   // sets document title
-  title: 'MotoWork',
+  title: 'Moto Work',
   // optional; sets final title as "Index Page - My Website", useful for multiple level meta
   titleTemplate: title => `${title} - Agenda de servicios`,
 

@@ -32,7 +32,6 @@
 
     <!--lo mas vendido-->
     <section class="container-motowork bg-white">
-      {{ mostSells }}
       <div class="motowork-section-title">
         <h2>Lo mas vendido</h2>
         <span>{{ pageProduct }}/{{ totalPagesProduct }}</span>
@@ -40,7 +39,7 @@
 
       <!--product component-->
       <div class="motowork-product-accesories">
-        <HomeGrid :products="products" @handle-filter="doAddProduct" @handle-back="goBackInProducts" @handle-next="goNextInProduct" />
+        <HomeGrid :products="mostSells" @handle-filter="doAddProduct" @handle-back="goBackInProducts" @handle-next="goNextInProduct" />
       </div>
       <!--End product component-->
     </section>
@@ -56,7 +55,7 @@
         </div>
         <div class="motowork-newsletter__item">
           <div class="motowork-newsletter__item--content">
-            <h2>Comunidad motowork</h2>
+            <h2>Comunidad moto work</h2>
             <h3>QUE ESPERAS PARA RODAR CON NOSOTROS</h3>
             <p>Únete a nuestra comunidad y disfruta de las mejores rodadas y del mejor contenido para moteros aficionados.</p>
 
@@ -77,7 +76,7 @@
           <h2>¿PORQUE ELEGIRNOS?</h2>
         </div>
         <div class="motowork-por-elegirnos__subtitle">
-          <h3>Precioes motowork</h3>
+          <h3>Precioes moto work</h3>
         </div>
       </div>
       <!--End top section-->
@@ -198,7 +197,7 @@ const {
   categories
 } = useCategoriesContent()
 
-const { products, getProducts, totalPagesProduct, pageProduct, addOnePageProduct, removeOnePageProduct, getMostSells } = useProductsContent()
+const { getProducts, totalPagesProduct, pageProduct, addOnePageProduct, removeOnePageProduct, getMostSells } = useProductsContent()
 
 const { getfeed, feedsHistories } = useInstangramContent()
 
