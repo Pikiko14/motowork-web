@@ -116,7 +116,7 @@
           </h2>
           <p>
             Llena el formulario con tus datos personales y de contacto, recuerda aceptar nuestras
-            <a href="/politicas">
+            <a href="https://motowork.xyz/politicas-de-privacidad">
               Políticas de uso y tratamiento de datos personales
             </a>
           </p>
@@ -222,7 +222,7 @@
           </h2>
           <p>
             Llena el formulario con tus datos del vehiculo, recuerda aceptar nuestras
-            <a href="/politicas">
+            <a href="https://motowork.xyz/politicas-de-privacidad">
               Políticas de uso y tratamiento de datos personales
             </a>
           </p>
