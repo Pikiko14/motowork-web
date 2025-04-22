@@ -103,6 +103,10 @@ const chunkArray = (arr, tamano) => {
       aspect-ratio: 1;
       max-width: 600px;
       max-height: 600px;
+
+      img {
+        object-fit: cover !important;
+      }
     }
   }
 
@@ -123,6 +127,7 @@ const chunkArray = (arr, tamano) => {
           height: 100%;
           border-radius: 4px;
           transition: transform 0.3s ease;
+          object-fit: contain;
 
           &:hover {
             transform: scale(1.05);
