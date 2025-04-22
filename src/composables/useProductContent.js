@@ -91,6 +91,17 @@ export const useProductsContent = () => {
     }
   }
 
+  const searchProducts = async (query) => {
+    try {
+      const { data } = await api.get(`${path}/list/from-web${query}`)
+      if (data.success && data.data) {
+        return data.data
+      }
+    } catch (error) {
+      throw new Error(error.message)
+    }
+  }
+
   return {
     setPage,
     product,
@@ -100,6 +111,7 @@ export const useProductsContent = () => {
     pageProduct,
     showProduct,
     totalProducts,
+    searchProducts,
     similarProducts,
     totalPagesProduct,
     addOnePageProduct,

@@ -18,10 +18,8 @@
       <!--Link Section-->
       <section class="motowork-navbar__left-section--links">
         <ul>
-          <li @click="openHamburguerMenu('vehicle')"><q-btn flat
-              class="text-uppercase">Motos</q-btn></li>
-          <li @click="openHamburguerMenu('product')"><q-btn flat
-              class="text-uppercase">Accesorios</q-btn></li>
+          <li @click="openHamburguerMenu('vehicle')"><q-btn flat class="text-uppercase">Motos</q-btn></li>
+          <li @click="openHamburguerMenu('product')"><q-btn flat class="text-uppercase">Accesorios</q-btn></li>
           <li><q-btn flat to="/servicio-tecnico" class="text-uppercase">Servicio técnico</q-btn></li>
           <li><q-btn flat to="/experiencias" class="text-uppercase">Experiencias</q-btn></li>
           <li><q-btn flat to="/conocenos" class="text-uppercase">Nosotros</q-btn></li>
@@ -36,7 +34,8 @@
       <section class="motowork-navbar__right-section--search-and-card">
         <!--Search section-->
         <div class="motowork-navbar__right-section--search-and-card__search">
-          <q-input placeholder="Buscar" dense v-model="search">
+          <q-input :loading="searching" debounce="1500" @update:model-value="handlerSearchProducts" placeholder="Buscar"
+            dense v-model="search">
             <template #append>
               <q-icon name="img:/images/search.webp" size="12pt"></q-icon>
             </template>
@@ -45,14 +44,16 @@
         <!--End Search section-->
 
         <!--shopping car-->
-        <div class="motowork-navbar__right-section--search-and-card__shopping-car" @click="$router.push({ name: 'shoppingCart' })">
+        <div class="motowork-navbar__right-section--search-and-card__shopping-car"
+          @click="$router.push({ name: 'shoppingCart' })">
           <figure>
             <img class="motowork-navbar__right-section--search-and-card__shopping-car--icon"
               src="/images/shopping_bag.webp" alt="Icono de la bolsa de compra, utilizado por motowork"
               loading="lazy" />
           </figure>
 
-          <div class="motowork-navbar__right-section--search-and-card__shopping-car--count-items" id="shoppingCartCount">
+          <div class="motowork-navbar__right-section--search-and-card__shopping-car--count-items"
+            id="shoppingCartCount">
             +{{ itemsInCart }}
           </div>
         </div>
@@ -67,7 +68,8 @@
 
       <!--menu button-->
       <section class="motowork-navbar__right-section--menu">
-        <q-btn @click="openHamburguerMenu('vehicle')" square unelevated color="primary" name="Boton del menu hamburguesa" icon="menu"></q-btn>
+        <q-btn @click="openHamburguerMenu('vehicle')" square unelevated color="primary"
+          name="Boton del menu hamburguesa" icon="menu"></q-btn>
       </section>
       <!--End menu buttons-->
     </div>
@@ -79,21 +81,24 @@
         <div class="col-12 col-sm-3 mobile-full-width">
           <div class="menu-item">
             <q-list class="items-desktop">
-              <q-item v-if="itemToShow === 'vehicle'" class="q-pa-none" clickable v-ripple to="/vehiculos?page=1&perPage=9&sortBy=createdAt&order=-1&type=vehicle&state=Nueva">
+              <q-item v-if="itemToShow === 'vehicle'" class="q-pa-none" clickable v-ripple
+                to="/vehiculos?page=1&perPage=9&sortBy=createdAt&order=-1&type=vehicle&state=Nueva">
                 <q-item-section>
                   <q-item-label>
                     Motos nuevas
                   </q-item-label>
                 </q-item-section>
               </q-item>
-              <q-item v-if="itemToShow === 'vehicle'" class="q-pa-none" clickable v-ripple to="/vehiculos?page=1&perPage=9&sortBy=createdAt&order=-1&type=vehicle&state=Usada">
+              <q-item v-if="itemToShow === 'vehicle'" class="q-pa-none" clickable v-ripple
+                to="/vehiculos?page=1&perPage=9&sortBy=createdAt&order=-1&type=vehicle&state=Usada">
                 <q-item-section>
                   <q-item-label>
                     Motos usadas
                   </q-item-label>
                 </q-item-section>
               </q-item>
-              <q-item v-if="itemToShow === 'product'" class="q-pa-none" clickable v-ripple to="/productos?page=1&perPage=9&sortBy=createdAt&order=-1&type=product&state=Nueva">
+              <q-item v-if="itemToShow === 'product'" class="q-pa-none" clickable v-ripple
+                to="/productos?page=1&perPage=9&sortBy=createdAt&order=-1&type=product&state=Nueva">
                 <q-item-section>
                   <q-item-label>
                     Accesorios nuevos
@@ -110,28 +115,30 @@
               <li><q-btn flat to="/servicio-tecnico" class="text-uppercase text-left">Servicio técnico</q-btn></li>
               <li><q-btn flat to="/experiencias" class="text-uppercase">Experiencias</q-btn></li>
               <li><q-btn flat to="/conocenos" class="text-uppercase">Nosotros</q-btn></li>
-              <li class="mobile-show"><q-btn color="secondary" flat @click="financial" class="text-uppercase">financiar</q-btn></li>
+              <li class="mobile-show"><q-btn color="secondary" flat @click="financial"
+                  class="text-uppercase">financiar</q-btn></li>
             </ul>
             <div class="mobile-car mobile-show">
               <!--shopping car-->
-                <div class="motowork-navbar__right-section--search-and-card__shopping-car" @click="$router.push({ name: 'shoppingCart' })">
-                  <div class="icon-text">
-                    <figure>
-                      <img class="motowork-navbar__right-section--search-and-card__shopping-car--icon"
-                        src="/images/shopping_bag.webp" alt="Icono de la bolsa de compra, utilizado por motowork"
-                        loading="lazy" />
-                    </figure>
+              <div class="motowork-navbar__right-section--search-and-card__shopping-car"
+                @click="$router.push({ name: 'shoppingCart' })">
+                <div class="icon-text">
+                  <figure>
+                    <img class="motowork-navbar__right-section--search-and-card__shopping-car--icon"
+                      src="/images/shopping_bag.webp" alt="Icono de la bolsa de compra, utilizado por motowork"
+                      loading="lazy" />
+                  </figure>
 
-                    <span>
-                      Mi carrito
-                    </span>
-                  </div>
-
-                  <div class="motowork-navbar__right-section--search-and-card__shopping-car--count-items">
-                    +{{ itemsInCart }}
-                  </div>
+                  <span>
+                    Mi carrito
+                  </span>
                 </div>
-                <!--End shopping car-->
+
+                <div class="motowork-navbar__right-section--search-and-card__shopping-car--count-items">
+                  +{{ itemsInCart }}
+                </div>
+              </div>
+              <!--End shopping car-->
             </div>
           </div>
         </div>
@@ -169,6 +176,45 @@
       </div>
     </div>
     <!--End hamburguer menu-->
+
+    <q-dialog v-model="searchMenu">
+      <q-card>
+        <q-card-section>
+          <h2 class="text-h6">
+            Resultados
+          </h2>
+
+          <q-btn icon="close" class="close-search-modal" flat dense rounded color="red" v-close-popup></q-btn>
+        </q-card-section>
+        <q-card-section>
+          <q-list v-for="(item, idx) in itemsSearch" :key="idx">
+            <q-item>
+              <q-item-section top avatar>
+                <q-avatar>
+                  <img style="width: 100%" :src="getBannerUrl(idx)" :alt="`Imagen del producto ${item.name}`"
+                    :title="`Imagen del producto ${item.name}`" loading="lazy">
+                </q-avatar>
+              </q-item-section>
+
+              <q-item-section>
+                <q-item-label>{{ item.name }}</q-item-label>
+                <q-item-label caption lines="2">
+                  {{ item.description }}
+                </q-item-label>
+              </q-item-section>
+
+              <q-item-section side>
+                <q-btn :to="`/vehiculos/${item.name}?reference=${item._id}`" color="secondary" flat dense rounded icon="visibility">
+                  <q-tooltip class="bg-secondary">
+                    Ver producto
+                  </q-tooltip>
+                </q-btn>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </q-card-section>
+      </q-card>
+    </q-dialog>
   </nav>
 </template>
 
@@ -177,14 +223,21 @@
 import { useRouter } from 'vue-router'
 import { computed, ref, watch } from 'vue'
 import { useOrdersStore } from 'src/stores/ordersStore'
+import { useProductsContent } from 'src/composables/useProductContent'
 import { useCategoriesContent } from 'src/composables/useCategoriesContent'
+import { notification } from 'src/boot/notification'
 
 // references
+const page = ref(1)
 const search = ref('')
 const router = useRouter()
+const itemsSearch = ref([])
 const showMenu = ref(false)
+const searching = ref(false)
+const searchMenu = ref(false)
 const itemToShow = ref('vehicle')
 const ordersStore = useOrdersStore()
+const { searchProducts } = useProductsContent()
 const { categoriesMenu, getMenuCategories } = useCategoriesContent()
 
 // computed
@@ -250,6 +303,44 @@ const openAllProducts = () => {
 const financial = () => {
   window.open('https://api.whatsapp.com/send?phone=573183996249&text=Hola%20Motowork', '__blank')
 }
+
+const handlerSearchProducts = async (e) => {
+  const query = {
+    page: page.value,
+    perPage: 9,
+    sortBy: 'createdAt',
+    order: '-1',
+    search: e
+  }
+  const queryString = new URLSearchParams(query).toString()
+  searching.value = true
+  try {
+    const response = await searchProducts(`?${queryString}`)
+    if (response.brands && response.brands.length > 0) {
+      itemsSearch.value = response.brands
+      searchMenu.value = true
+    } else {
+      notification('negative', 'No se han encontrado resultados en la busqueda', 'red')
+    }
+  } finally {
+    searching.value = false
+  }
+}
+
+const getBannerUrl = (idx) => {
+  const { banner } = itemsSearch.value[idx]
+  let url = ''
+  const mobileBanner = banner.find((banner) => banner.type_banner === 'mobile')
+  if (mobileBanner) {
+    url = mobileBanner.path
+  } else {
+    const desktopBanner = banner.find((banner) => banner.type_banner === 'desktop')
+    if (desktopBanner) {
+      url = desktopBanner.path
+    }
+  }
+  return url
+}
 </script>
 
 <style scoped lang="scss">
@@ -265,7 +356,8 @@ const financial = () => {
     font-size: 16pt;
     font-style: normal;
     font-weight: 700;
-    line-height: 125%; /* 20px */
+    line-height: 125%;
+    /* 20px */
     text-transform: uppercase;
   }
 }
@@ -346,7 +438,8 @@ const financial = () => {
             transition: all .3s ease;
           }
 
-          a, .q-btn {
+          a,
+          .q-btn {
             color: #000;
             font-family: Play;
             font-size: 12pt;
@@ -565,7 +658,8 @@ const financial = () => {
       font-size: 16pt;
       font-style: normal;
       font-weight: 500;
-      line-height: 125%; /* 20px */
+      line-height: 125%;
+      /* 20px */
 
       @media(max-width: 991px) {
         padding-left: 12px;
@@ -624,7 +718,8 @@ const financial = () => {
           font-size: 12pt;
           font-style: normal;
           font-weight: 700;
-          line-height: 125%; /* 15px */
+          line-height: 125%;
+          /* 15px */
           text-transform: uppercase;
         }
       }
@@ -663,7 +758,8 @@ const financial = () => {
     font-size: 24px;
     font-style: normal;
     font-weight: 700;
-    line-height: 125%; /* 30px */
+    line-height: 125%;
+    /* 30px */
     text-transform: uppercase;
 
     @media(max-width: 1199px) {
@@ -694,7 +790,8 @@ const financial = () => {
       font-size: 12pt;
       font-style: normal;
       font-weight: 700;
-      line-height: 125%; /* 15px */
+      line-height: 125%;
+      /* 15px */
       text-transform: uppercase;
       text-align: left !important;
 
