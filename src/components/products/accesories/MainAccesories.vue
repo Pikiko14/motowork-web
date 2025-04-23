@@ -37,11 +37,6 @@
       <article v-for="(brand, idx) in allBrands" :key="idx" class="motowork-item-page__all-brands--item" @click="handleBrand(brand.name)">
         <figure>
           <img :src="brand.icon">
-          <figcaption>
-            <p class="motowork-item-page__all-brands--card__overflow">
-              {{ brand.name }}
-            </p>
-          </figcaption>
         </figure>
         <div class="motowork-item-page__all-brands--item__overlay">
           <q-btn color="white" outline>Mas información</q-btn>

@@ -55,7 +55,7 @@
       Instrucciones de pago
     </h2>
 
-    <div class="address">
+    <div class="address" v-if="order.payment_method === 'link_pago'">
       <p>
         Realiza el pago desde nuestro link de pago, de una manera mas segura y rapida.
       </p>
