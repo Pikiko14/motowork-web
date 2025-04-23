@@ -301,7 +301,7 @@ const openAllProducts = () => {
 }
 
 const financial = () => {
-  window.open('https://api.whatsapp.com/send?phone=573183996249&text=Hola%20Motowork', '__blank')
+  window.open('https://api.whatsapp.com/send?phone=573183996249&text=Hola%20Moto%20Work', '__blank')
 }
 
 const handlerSearchProducts = async (e) => {
