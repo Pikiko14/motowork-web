@@ -65,7 +65,7 @@
             <div class="motowork-form-grid__legals--politics">
               <span>
                 Puede obtener más información sobre el consentimiento de privacidad
-                <a href="http://motowork.co/tratamiento-de-datos/">Políticas de privacidad</a>
+                <a href="/politicas-de-privacidad">Políticas de privacidad</a>
               </span>
 
               <div class="accept-section">
