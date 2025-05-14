@@ -29,7 +29,7 @@
         <article class="history-section__body">
           <!--image-->
           <figure>
-            <img src="/images/equipo_01.webp" alt="Colaborador 01 de moto work" title="Colaborador 01 de moto work">
+            <img src="/images/main_motowork.webp" alt="Colaborador 01 de moto work" title="Colaborador 01 de moto work">
           </figure>
           <!--End image-->
 
