@@ -157,7 +157,7 @@ const props = defineProps({
 // methods
 const getBannerUrl = (idx) => {
   const { images } = props.products[idx]
-  let url = ''
+  let url = 'https://s3.amazonaws.com/roypi.com/static/images/default_product.png'
   const mobileImage = images.find((image) => image.type === 'mobile')
   if (mobileImage) {
     url = mobileImage.path
