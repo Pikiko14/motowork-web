@@ -21,7 +21,7 @@
 
     <!--Paginator-->
     <section class="motowork-item-page__paginator">
-      <q-pagination active-design="unelevated" flat active-color="secondary" unelevated
+      <q-pagination  :max-pages="6" boundary-links direction-links active-design="unelevated" flat active-color="secondary" unelevated
         @update:model-value="doPagination" color="secondary" v-model="pageNumber" :max="totalPagesProduct" />
     </section>
     <!--End paginator-->
