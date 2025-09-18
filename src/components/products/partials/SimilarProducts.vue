@@ -3,7 +3,8 @@
     <h2>Productos similares</h2>
 
     <section class="motowork-similars__grid">
-      <article class="motowork-similars__grid--item" v-for="(product, idx) in similarsProducts" :key="idx" @click="showItem(product)">
+      <article class="motowork-similars__grid--item" v-for="(product, idx) in similarsProducts" :key="idx"
+        @click="showItem(product)">
         <figure>
           <img :src="getBannerUrl(idx)" :alt="`Imagen de la motocicleta ${product.name}`" title="product.name" />
           <div class="overflow">
@@ -62,7 +63,7 @@ const getBannerUrl = (idx) => {
       url = desktopImage.path
     }
   }
-  return url
+  return url || 'https://s3.amazonaws.com/roypi.com/static/images/default_product.png'
 }
 
 const showItem = (product) => {
@@ -109,7 +110,8 @@ const urlString = (value) => {
     font-size: 32px;
     font-style: normal;
     font-weight: 700;
-    line-height: 125%; /* 40px */
+    line-height: 125%;
+    /* 40px */
     text-transform: uppercase;
 
     @media(max-width: 767px) {
