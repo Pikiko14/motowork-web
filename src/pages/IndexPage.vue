@@ -1,20 +1,22 @@
 <template>
   <q-page>
     <!--Banner-->
-    <BannerMotowork :default-img="'/images/urfm8rjjfdonjh63f8xi.webp'" :title="'Moto work'" :banner="storeBenner || banner" :btnLabel="'Adquiere tu moto'"
+    <BannerMotowork :default-img="'/images/urfm8rjjfdonjh63f8xi.webp'" :title="'MOTOWORK'"
+      :banner="storeBenner || banner" :btnLabel="'Adquiere tu moto'"
       :bannerComplement="'Consigue la moto que mejor se acople a tus gustos, no esperes más y adquiere tu moto con nosotros.'" />
     <!--End banner-->
 
     <!--Categories accessories-->
     <section class="container-motowork">
       <div class="motowork-section-title">
-        <h2>Explora Moto Work</h2>
+        <h2>Explora MOTOWORK</h2>
         <span>{{ page }}/{{ totalPages }}</span>
       </div>
 
       <!--Categories component-->
       <div class="motowork-accessories-categories">
-        <GridHome :categories="categoriesMenu" @handle-filter="doFilterByCategory" @handle-back="goBackInCategories" @handle-next="goNextInCategories" />
+        <GridHome :categories="categoriesMenu" @handle-filter="doFilterByCategory" @handle-back="goBackInCategories"
+          @handle-next="goNextInCategories" />
       </div>
       <!--End categories component-->
     </section>
@@ -38,7 +40,8 @@
 
       <!--product component-->
       <div class="motowork-product-accesories">
-        <HomeGrid :products="mostSells" @handle-filter="doAddProduct" @handle-back="goBackInProducts" @handle-next="goNextInProduct" />
+        <HomeGrid :products="mostSells" @handle-filter="doAddProduct" @handle-back="goBackInProducts"
+          @handle-next="goNextInProduct" />
       </div>
       <!--End product component-->
     </section>
@@ -49,14 +52,16 @@
       <div class="motowork-newsletter" ref="newsletterSection">
         <div class="motowork-newsletter__item">
           <figure>
-            <img src="/images/newsletter-img.webp" alt="Newsletter imagen, utilizada por Motowork" title="Newsletter imagen, utilizada por Moto work" />
+            <img src="/images/newsletter-img.webp" alt="Newsletter imagen, utilizada por Motowork"
+              title="Newsletter imagen, utilizada por MOTOWORK" />
           </figure>
         </div>
         <div class="motowork-newsletter__item">
           <div class="motowork-newsletter__item--content">
-            <h2>Comunidad moto work</h2>
+            <h2>Comunidad MOTOWORK</h2>
             <h3>QUE ESPERAS PARA RODAR CON NOSOTROS</h3>
-            <p>Únete a nuestra comunidad y disfruta de las mejores rodadas y del mejor contenido para moteros aficionados.</p>
+            <p>Únete a nuestra comunidad y disfruta de las mejores rodadas y del mejor contenido para moteros
+              aficionados.</p>
 
             <div class="motowork-newsletter__item--form">
               <FormFields />
@@ -75,7 +80,7 @@
           <h2>¿PORQUE ELEGIRNOS?</h2>
         </div>
         <div class="motowork-por-elegirnos__subtitle">
-          <h3>Precioes moto work</h3>
+          <h3>Precios MOTOWORK</h3>
         </div>
       </div>
       <!--End top section-->
@@ -86,13 +91,17 @@
         <article class="motowork-por-elegirnos__grid--item">
           <div class="motowork-por-elegirnos__grid--item__icon">
             <figure>
-              <img src="/images/personalizacion.png" alt="Icono de la carta de calidad" title="Icono de la carta de calidad">
+              <img src="/images/personalizacion.png" alt="Icono de la carta de calidad"
+                title="Icono de la carta de calidad">
             </figure>
           </div>
           <div class="motowork-por-elegirnos__grid--item__text">
             <h4>Calidad</h4>
             <p class="ellipsis--lines">
-              Nuestra prioridad es buscar siempre la excelencia en nuestros productos y servicios. Trabajamos con responsabilidad y compromiso para brindar, productos y servicios que cumplan las expectativas de nuestros clientes, garantizando durabilidad, seguridad y alto desempeño. Nuestra pasión por las motos se refleja en cada detalle, ofreciendo solo lo mejor en calidad y servicio.
+              Nuestra prioridad es buscar siempre la excelencia en nuestros productos y servicios. Trabajamos con
+              responsabilidad y compromiso para brindar, productos y servicios que cumplan las expectativas de nuestros
+              clientes, garantizando durabilidad, seguridad y alto desempeño. Nuestra pasión por las motos se refleja en
+              cada detalle, ofreciendo solo lo mejor en calidad y servicio.
             </p>
           </div>
         </article>
@@ -101,12 +110,17 @@
         <article class="motowork-por-elegirnos__grid--item">
           <div class="motowork-por-elegirnos__grid--item__icon">
             <figure>
-              <img src="/images/Confianza.png" alt="Icono de la carta de confianza" title="Icono de la carta de confianza">
+              <img src="/images/Confianza.png" alt="Icono de la carta de confianza"
+                title="Icono de la carta de confianza">
             </figure>
           </div>
           <div class="motowork-por-elegirnos__grid--item__text">
             <h4>Confianza</h4>
-            <p class="ellipsis--lines">La confianza es la base de nuestra relación con los clientes. Nos comprometemos a ofrecer motocicletas Yamaha, repuestos y servicios, garantizando transparencia en cada operación. Nuestro equipo brinda asesoramiento honesto y profesional, asegurando que cada cliente tome la mejor decisión según sus necesidades. Construimos confianza a través de la calidad, el cumplimiento de compromisos y la pasión por las motocicletas, creando una experiencia de compra segura y satisfactoria.</p>
+            <p class="ellipsis--lines">La confianza es la base de nuestra relación con los clientes. Nos comprometemos a
+              ofrecer motocicletas Yamaha, repuestos y servicios, garantizando transparencia en cada operación. Nuestro
+              equipo brinda asesoramiento honesto y profesional, asegurando que cada cliente tome la mejor decisión
+              según sus necesidades. Construimos confianza a través de la calidad, el cumplimiento de compromisos y la
+              pasión por las motocicletas, creando una experiencia de compra segura y satisfactoria.</p>
           </div>
         </article>
         <!--End card two-->
@@ -114,12 +128,17 @@
         <article class="motowork-por-elegirnos__grid--item">
           <div class="motowork-por-elegirnos__grid--item__icon">
             <figure>
-              <img src="/images/reconocimiento.png" alt="Icono de la carta de reconocimiento" title="Icono de la carta de reconocimiento">
+              <img src="/images/reconocimiento.png" alt="Icono de la carta de reconocimiento"
+                title="Icono de la carta de reconocimiento">
             </figure>
           </div>
           <div class="motowork-por-elegirnos__grid--item__text">
             <h4 class="reconocimiento ellipsis">Reconocimiento</h4>
-            <p class="ellipsis--lines">Con una trayectoria de más de 2 décadas en el mercado nos hemos esforzamos por ser una empresa líder y reconocida en la venta de motocicletas Yamaha, repuestos, accesorios y servicios técnico. Nuestro prestigio se basa en la calidad, la innovación y el compromiso con nuestros clientes. A través de un servicio excepcional y un equipo altamente capacitado, La satisfacción de nuestros clientes y su preferencia son el mayor reconocimiento a nuestro trabajo y dedicación.</p>
+            <p class="ellipsis--lines">Con una trayectoria de más de 2 décadas en el mercado nos hemos esforzamos por
+              ser una empresa líder y reconocida en la venta de motocicletas Yamaha, repuestos, accesorios y servicios
+              técnico. Nuestro prestigio se basa en la calidad, la innovación y el compromiso con nuestros clientes. A
+              través de un servicio excepcional y un equipo altamente capacitado, La satisfacción de nuestros clientes y
+              su preferencia son el mayor reconocimiento a nuestro trabajo y dedicación.</p>
           </div>
         </article>
         <!--End card three-->
@@ -127,13 +146,18 @@
         <article class="motowork-por-elegirnos__grid--item">
           <div class="motowork-por-elegirnos__grid--item__icon">
             <figure>
-              <img src="/images/servicio.png" alt="Icono de la carta de reconocimiento" title="Icono de la carta de reconocimiento">
+              <img src="/images/servicio.png" alt="Icono de la carta de reconocimiento"
+                title="Icono de la carta de reconocimiento">
             </figure>
           </div>
           <div class="motowork-por-elegirnos__grid--item__text">
             <h4>Servicio</h4>
             <p class="ellipsis--lines">
-              El servicio es el pilar de nuestra empresa. Nos dedicamos a brindar una atención personalizada, eficiente y profesional en la venta de motocicletas Yamaha, repuestos, accesorios y servicio técnico. Nos enfocamos en superar las expectativas de nuestros clientes, ofreciendo asesoría experta, soluciones rápidas y un soporte postventa confiable. La satisfacción y seguridad de quienes confían en nosotros es nuestra mayor prioridad, garantizando una experiencia de compra y mantenimiento de alta calidad.
+              El servicio es el pilar de nuestra empresa. Nos dedicamos a brindar una atención personalizada, eficiente
+              y profesional en la venta de motocicletas Yamaha, repuestos, accesorios y servicio técnico. Nos enfocamos
+              en superar las expectativas de nuestros clientes, ofreciendo asesoría experta, soluciones rápidas y un
+              soporte postventa confiable. La satisfacción y seguridad de quienes confían en nosotros es nuestra mayor
+              prioridad, garantizando una experiencia de compra y mantenimiento de alta calidad.
             </p>
           </div>
         </article>
@@ -148,10 +172,11 @@
       <div class="instagram-feeds instagramFeed-section" ref="instagramFeed">
         <div class="instagram-feeds__item" v-for="(item, idx) in feeds" :key="idx">
           <figure>
-            <img draggable="false" :src="item.media_url" alt="Imagen de feed de instagram" title="Imagen de feed de instagram">
+            <img draggable="false" :src="item.media_url" alt="Imagen de feed de instagram"
+              title="Imagen de feed de instagram">
             <figcaption v-if="item.caption">
               <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
-                <circle cx="20" cy="20" r="20" fill="#ED1C24" fill-opacity="0.8"/>
+                <circle cx="20" cy="20" r="20" fill="#ED1C24" fill-opacity="0.8" />
               </svg>
               <h2>
                 @Motowork
@@ -328,7 +353,7 @@ const doAddProduct = () => {
 
 const metaData = {
   // sets document title
-  title: 'Moto Work',
+  title: 'MOTOWORK',
   // optional; sets final title as "Index Page - My Website", useful for multiple level meta
   titleTemplate: title => `${title} - Web`,
 
@@ -348,7 +373,7 @@ const metaData = {
     },
     ogTitle: {
       property: 'og:title',
-      template (ogTitle) {
+      template(ogTitle) {
         return `${ogTitle} - Página principal`
       }
     },
@@ -370,7 +395,7 @@ const metaData = {
     },
     twitterTitle: {
       name: 'twitter:title',
-      content: 'Moto Work - Web'
+      content: 'MOTOWORK - Web'
     },
     twitterDescription: {
       name: 'twitter:description',

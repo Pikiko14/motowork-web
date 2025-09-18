@@ -7,7 +7,7 @@
     <!--Banner-->
     <BannerMotowork :title="'Servicio técnico.'" is-experience-banner default-img="/images/services_image.webp"
       :btnLabel="''"
-      :bannerComplement="'En Moto Work, nos apasiona tu seguridad y tranquilidad en la vía. Por eso, te ofrecemos un Servicio Técnico de primera clase, con expertos altamente calificados.'" />
+      :bannerComplement="'En MOTOWORK, nos apasiona tu seguridad y tranquilidad en la vía. Por eso, te ofrecemos un Servicio Técnico de primera clase, con expertos altamente calificados.'" />
     <!--End banner-->
 
     <!--Stepper-->
@@ -46,7 +46,7 @@
             FECHA Y HORA
           </h2>
           <p>
-            La fecha y hora que selecciones asegura la recepción de tu motocicleta en el centro de servicio de Moto Work.
+            La fecha y hora que selecciones asegura la recepción de tu motocicleta en el centro de servicio de MOTOWORK.
           </p>
 
           <q-date class="shadow-0 full-width" v-model="dateModel" minimal :options="datesAvailable" />
@@ -549,7 +549,7 @@ const handlerScheduleServices = async () => {
 
 const metaData = {
   // sets document title
-  title: 'Moto Work',
+  title: 'MOTOWORK',
   // optional; sets final title as "Index Page - My Website", useful for multiple level meta
   titleTemplate: title => `${title} - Agenda de servicios`,
 

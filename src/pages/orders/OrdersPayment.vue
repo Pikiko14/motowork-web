@@ -330,7 +330,7 @@ const formatDate = (dateString) => {
 
 const openWhatsapp = () => {
   const phoneNumber = '573183996249'
-  const textMessage = `Hola Moto Work, la presente es para adjuntar el soporte de pago de la orden: ${paymentData.value._id || orderToPay.value._id} por un monto de: ${paymentData.value.total || orderToPay.value.total}`
+  const textMessage = `Hola MOTOWORK, la presente es para adjuntar el soporte de pago de la orden: ${paymentData.value._id || orderToPay.value._id} por un monto de: ${paymentData.value.total || orderToPay.value.total}`
 
   const encodedMessage = encodeURIComponent(textMessage)
   const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodedMessage}`

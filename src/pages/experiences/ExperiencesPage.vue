@@ -19,7 +19,7 @@
           </h2>
           <div class="separator"></div>
           <span>
-            Blog moto work
+            Blog MOTOWORK
           </span>
         </div>
         <!--End header history-->
@@ -52,7 +52,7 @@
         </div>
         <div class="motowork-newsletter__item">
           <div class="motowork-newsletter__item--content">
-            <h2>Comunidad moto work</h2>
+            <h2>Comunidad MOTOWORK</h2>
             <h3>QUE ESPERAS PARA RODAR CON NOSOTROS</h3>
             <p>Únete a nuestra comunidad y disfruta de las mejores rodadas y del mejor contenido para moteros aficionados.</p>
 
@@ -131,7 +131,7 @@ const showExperience = (experience) => {
 
 const metaData = {
   // sets document title
-  title: 'Moto Work',
+  title: 'MOTOWORK',
   // optional; sets final title as "Index Page - My Website", useful for multiple level meta
   titleTemplate: title => `${title} - Experiencias y blog`,
 

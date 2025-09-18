@@ -49,7 +49,7 @@ const storeBenner = store.filterBanner(type === 'vehicle' ? 'vehicles' : 'acceso
 // metadata
 const metaData = {
   // sets document title
-  title: 'Moto Work',
+  title: 'MOTOWORK',
   // optional; sets final title as "Index Page - My Website", useful for multiple level meta
   titleTemplate: title => `${title} - Listado de ${route.query.type === 'vehicle' ? 'Motocicletas' : 'Accesorios'}`,
 
@@ -91,7 +91,7 @@ const metaData = {
     },
     twitterTitle: {
       name: 'twitter:title',
-      content: 'Moto Work - Web'
+      content: 'MOTOWORK - Web'
     },
     twitterDescription: {
       name: 'twitter:description',

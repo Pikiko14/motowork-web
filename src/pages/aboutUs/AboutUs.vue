@@ -29,14 +29,14 @@
         <article class="history-section__body">
           <!--image-->
           <figure>
-            <img src="/images/main_motowork.webp" alt="Colaborador 01 de moto work" title="Colaborador 01 de moto work">
+            <img src="/images/main_motowork.webp" alt="Colaborador 01 de MOTOWORK" title="Colaborador 01 de MOTOWORK">
           </figure>
           <!--End image-->
 
           <!--Complement history-->
           <div class="history-section__body--complement">
             <p>
-              Hace 23 años empezamos a formar la familia Moto Work, un lugar donde los moteros del país encontrarán todo
+              Hace 23 años empezamos a formar la familia MOTOWORK, un lugar donde los moteros del país encontrarán todo
               lo necesario para sus motos. Gracias a su experiencia como motocrosistas y su gran visión comercial; lo
               que le permite también realizar alianza estratégica al ser distribuidor de las mejores marcas a nivel
               mundial en productos y accesorios, principalmente con Yamaha, logrando que nuestros clientes tengan un
@@ -46,13 +46,13 @@
             </p>
 
             <p>
-              <span class="text-bold">¿Por qué elegir Moto Work?</span> Porque entendemos que cada motero tiene una
+              <span class="text-bold">¿Por qué elegir MOTOWORK?</span> Porque entendemos que cada motero tiene una
               pasión única por las dos ruedas, y por eso ofrecemos un servicio integral que va más allá de la venta de
               motocicletas. Nos enorgullece ser su aliado en cada viaje, brindando asesoría especializada, repuestos
-              originales, y un servicio técnico altamente capacitado. Con Moto Work, no solo encuentras lo mejor en
+              originales, y un servicio técnico altamente capacitado. Con MOTOWORK, no solo encuentras lo mejor en
               productos, sino un compromiso firme con tu seguridad y satisfacción. Además, nuestra amplia experiencia en
               motocross y el respaldo de marcas reconocidas aseguran que cada producto o servicio que adquieras sea de
-              calidad superior. ¡En Moto Work, tu pasión por las motos es nuestra prioridad!
+              calidad superior. ¡En MOTOWORK, tu pasión por las motos es nuestra prioridad!
             </p>
           </div>
           <!--End complement history-->
@@ -109,7 +109,7 @@
           </h2>
           <div class="separator"></div>
           <span>
-            Equipo moto work
+            Equipo MOTOWORK
           </span>
         </div>
         <!--End header team-->
@@ -122,7 +122,7 @@
               <div class="overflow"></div>
             </figure>
             <div class="our-team-section__body--item__content">
-              <h3>MOTO WORK</h3>
+              <h3>MOTOWORK</h3>
               <p>Servicio técnico</p>
             </div>
           </article>
@@ -133,7 +133,7 @@
               <div class="overflow"></div>
             </figure>
             <div class="our-team-section__body--item__content">
-              <h3>MOTO WORK</h3>
+              <h3>MOTOWORK</h3>
               <p>Repuestos</p>
             </div>
           </article>
@@ -144,7 +144,7 @@
               <div class="overflow"></div>
             </figure>
             <div class="our-team-section__body--item__content">
-              <h3>MOTO WORK</h3>
+              <h3>MOTOWORK</h3>
               <p>Area de ventas</p>
             </div>
           </article>
@@ -162,7 +162,7 @@
           <h2>¿PORQUE ELEGIRNOS?</h2>
         </div>
         <div class="motowork-por-elegirnos__subtitle">
-          <h3>moto work</h3>
+          <h3>MOTOWORK</h3>
         </div>
       </div>
       <!--End top section-->
@@ -264,7 +264,7 @@ const wySelectus = ref()
 
 const metaData = {
   // sets document title
-  title: 'Moto Work',
+  title: 'MOTOWORK',
   // optional; sets final title as "Index Page - My Website", useful for multiple level meta
   titleTemplate: title => `${title} - Sobre nosotros`,
 
