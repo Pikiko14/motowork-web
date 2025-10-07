@@ -5,11 +5,11 @@
       <!--icon sections-->
       <section class="motowork-navbar__left-section--icon" @click="$router.push({ path: '/' })">
         <figure>
-          <img class="motowork-navbar__left-section--icon__first" src="/images/yamaha_mobile.svg"
-            alt="Logo de la marca Yamaha, utilizado en la landing de Motowork" loading="lazy" />
+          <img class="motowork-navbar__left-section--icon__second" src="/images/motowork_logo.webp"
+            alt="Logo de la Motowork Yamaha, utilizado en la landing de Motowork" loading="lazy" />
         </figure>
         <figure>
-          <img class="motowork-navbar__left-section--icon__second" src="/images/motowork_logo.webp"
+          <img class="motowork-navbar__left-section--icon__first" src="/images/yamaha_mobile.svg"
             alt="Logo de la marca Yamaha, utilizado en la landing de Motowork" loading="lazy" />
         </figure>
       </section>
@@ -204,7 +204,8 @@
               </q-item-section>
 
               <q-item-section side>
-                <q-btn :to="`/vehiculos/${item.name}?reference=${item._id}`" color="secondary" flat dense rounded icon="visibility">
+                <q-btn :to="`/vehiculos/${item.name}?reference=${item._id}`" color="secondary" flat dense rounded
+                  icon="visibility">
                   <q-tooltip class="bg-secondary">
                     Ver producto
                   </q-tooltip>
@@ -267,7 +268,7 @@ const openHamburguerMenu = async (e) => {
   } else {
     showMenu.value = true
   }
-  const query = `?page=1&perPage=3&type=${e}`
+  const query = `?page=1&perPage=20&type=${e}`
   await getMenuCategories(query)
   itemToShow.value = e
 }
@@ -385,9 +386,6 @@ const getBannerUrl = (idx) => {
       align-items: center;
 
       figure {
-        padding-left: 16px;
-        padding-right: 16px;
-
         @media(max-width: 767px) {
           padding-left: 12px;
           padding-right: 12px;
@@ -396,11 +394,11 @@ const getBannerUrl = (idx) => {
 
       &__first {
         width: 110px;
-        height: 32px;
+        height: auto;
 
         @media(max-width: 1199px) {
-          width: 82px;
-          height: 24px;
+          width: 90px;
+          height: 35px;
         }
 
         @media(max-width: 767px) {
@@ -409,18 +407,8 @@ const getBannerUrl = (idx) => {
       }
 
       &__second {
-        width: 33.34px;
-        height: 28px;
-
-        @media(max-width: 1199px) {
-          width: 23.34px;
-          height: 20px;
-        }
-
-        @media(max-width: 767px) {
-          width: 28px;
-          height: 25px;
-        }
+        width: 70px;
+        height: auto;
       }
     }
 
@@ -605,18 +593,26 @@ const getBannerUrl = (idx) => {
       button {
         width: 54px;
         height: 54px;
+
+        @media(max-width: 1199px) {
+          width: 60px;
+          height: 60px;
+        }
       }
 
       @media(max-width: 1199px) {
         display: flex;
         align-items: center;
         justify-content: center;
+
+        width: 60px;
+        height: 60px;
       }
     }
   }
 
   @media(max-width: 1199px) {
-    height: 54px;
+    height: 60px;
     padding-right: 0px;
     border-bottom: 0.7px solid #ccc;
   }
@@ -628,7 +624,7 @@ const getBannerUrl = (idx) => {
 
   &__hamgurger-menu {
     display: none;
-    height: 335px;
+    height: auto;
     position: absolute;
     background: #fff;
     max-width: 1600px;
@@ -680,25 +676,32 @@ const getBannerUrl = (idx) => {
         background: #F5F5F5;
 
         &--grid {
-          display: flex;
-          flex-direction: row;
+          display: grid;
+          grid-template-columns: repeat(5, 1fr);
           gap: 16px;
 
           figure {
             cursor: pointer;
-            height: 250px;
-            width: 299px;
+            height: 180px;
             width: 100%;
 
             .q-img {
               width: 100%;
               height: 100%;
-              object-fit: cover;
+              object-fit: contain !important;
             }
 
-            @media(max-width: 991px) {
-              height: 200px;
+            @media (max-width: 991px) {
+              height: 90px;
             }
+          }
+
+          @media (max-width: 991px) {
+            grid-template-columns: repeat(5, 1fr);
+          }
+
+          @media (max-width: 600px) {
+            grid-template-columns: 1fr;
           }
         }
       }
@@ -755,7 +758,7 @@ const getBannerUrl = (idx) => {
 
     /* Desktop/Headings/H4 */
     font-family: Play;
-    font-size: 24px;
+    font-size: 18px;
     font-style: normal;
     font-weight: 700;
     line-height: 125%;
