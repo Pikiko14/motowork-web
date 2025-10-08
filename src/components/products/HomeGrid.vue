@@ -1,24 +1,14 @@
 <template>
-  <div
-    class="motowork-product-accesories__grid"
-    ref="gridContainer"
-    @touchstart="handleTouchStart"
-    @touchend="handleTouchEnd"
-    @dragstart="handleDragStart"
-    @mousedown="handleMouseDown"
-    @mouseup="handleMouseUp"
-  >
-    <article
-      class="motowork-product-accesories__grid--item"
-      v-for="(product, idx) in products"
-      :key="idx"
-      @dragstart="handleDragStart"
-      @click="addProductToCart(product)"
-    >
+  <div class="motowork-product-accesories__grid" ref="gridContainer" @touchstart="handleTouchStart"
+    @touchend="handleTouchEnd" @dragstart="handleDragStart" @mousedown="handleMouseDown" @mouseup="handleMouseUp">
+    <article class="motowork-product-accesories__grid--item" v-for="(product, idx) in products" :key="idx"
+      @dragstart="handleDragStart" @click="addProductToCart(product)">
       <figure>
-        <img :src="getBannerUrl(idx)" :alt="`Imagen del producto ${product.name}`" :title="`Imagen del producto ${product.name}`" loading="lazy">
+        <img :src="getBannerUrl(idx)" :alt="`Imagen del producto ${product.name}`"
+          :title="`Imagen del producto ${product.name}`" loading="lazy">
         <div class="motowork-product-accesories__grid--item__overflow">
-          <q-btn :to="`/productos/${urlString(product.name)}?reference=${product._id}`" square outline color="white" :label="$q.screen.gt.xs ? 'Agregar al carrito' : 'Agregar'"></q-btn>
+          <q-btn :to="`/productos/${urlString(product.name)}?reference=${product._id}`" square outline color="white"
+            :label="$q.screen.gt.xs ? 'Agregar al carrito' : 'Agregar'"></q-btn>
         </div>
         <figcaption>
           <h3>{{ product.name }}</h3>
@@ -30,7 +20,9 @@
 
             <span class="rate">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="16" viewBox="0 0 18 16" fill="none">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M11.8117 4.86327L8.99853 0.0324707L6.18534 4.86329L0.721191 6.04698L4.44632 10.216L3.8823 15.7778L8.99853 13.5235L14.1145 15.7777L13.5522 10.2161L17.2774 6.04693L11.8117 4.86327ZM8.99984 2.02188V12.4313L12.9469 14.1705L12.513 9.8783L15.3878 6.66089L11.1693 5.74734L8.99984 2.02188Z" fill="#FF8000"/>
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M11.8117 4.86327L8.99853 0.0324707L6.18534 4.86329L0.721191 6.04698L4.44632 10.216L3.8823 15.7778L8.99853 13.5235L14.1145 15.7777L13.5522 10.2161L17.2774 6.04693L11.8117 4.86327ZM8.99984 2.02188V12.4313L12.9469 14.1705L12.513 9.8783L15.3878 6.66089L11.1693 5.74734L8.99984 2.02188Z"
+                  fill="#FF8000" />
               </svg>
 
               <span>
@@ -141,7 +133,7 @@ const urlString = (value) => {
 
 const getBannerUrl = (idx) => {
   const { banner } = props.products[idx]
-  let url = ''
+  let url = 'https://s3.amazonaws.com/roypi.com/static/images/default_product.png'
   const mobileBanner = banner.find((banner) => banner.type_banner === 'mobile')
   if (mobileBanner) {
     url = mobileBanner.path
