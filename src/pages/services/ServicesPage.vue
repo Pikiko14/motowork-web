@@ -5,8 +5,8 @@
     <!--End breadcrumb-->
 
     <!--Banner-->
-    <BannerMotowork :title="'Servicio técnico.'" is-experience-banner default-img="/images/services_image.webp"
-      :btnLabel="''"
+    <BannerMotowork style="object-position: center" :title="'Servicio técnico.'" is-experience-banner
+      default-img="/images/equipo-tecnico.webp" :btnLabel="''"
       :bannerComplement="'En MOTOWORK, nos apasiona tu seguridad y tranquilidad en la vía. Por eso, te ofrecemos un Servicio Técnico de primera clase, con expertos altamente calificados.'" />
     <!--End banner-->
 
@@ -400,6 +400,9 @@
       </div>
     </section>
     <!--End complement text-->
+    <!--Wathsapp Button-->
+    <WathsappButton :category="'motocicletas'" />
+    <!--End Wathsapp Button-->
   </q-page>
 </template>
 
@@ -411,6 +414,7 @@ import { notification } from 'src/boot/notification'
 import { datesAvailables } from 'src/utils/datesAvailables'
 import BreadCrumb from 'src/components/layout/BreadCrumb.vue'
 import DateSelected from 'src/components/schedule/DateSelected.vue'
+import WathsappButton from 'src/components/layout/WathsappButton.vue'
 import BannerMotowork from 'src/components/banner/BannerMotowork.vue'
 import { useScheduleServices } from 'src/composables/scheduleServices'
 import { useCategoriesContent } from 'src/composables/useCategoriesContent'
@@ -569,7 +573,7 @@ const metaData = {
     },
     ogTitle: {
       property: 'og:title',
-      template (ogTitle) {
+      template(ogTitle) {
         return `${ogTitle} - Agenda de servicios`
       }
     },

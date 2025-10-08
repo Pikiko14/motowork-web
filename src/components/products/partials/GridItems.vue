@@ -3,20 +3,21 @@
     <!--items grid-->
     <div class="motowork-item-page__grid--items">
       <!--item product-->
-      <article class="motowork-item-page__grid--items__product" v-for="(product, idx) in products" :key="idx" @click="handlerRouterPush(product)">
+      <article class="motowork-item-page__grid--items__product" v-for="(product, idx) in products" :key="idx"
+        @click="handlerRouterPush(product)">
         <figure>
           <img :src="getBannerUrl(idx)" :alt="`Imagen de la motocicleta ${product.name}`" title="product.name" />
-          <div class="overflow">
-            <q-btn :to="`/vehiculos/${urlString(product.name)}?reference=${product._id}`" v-if="route.query.type !== 'product'"
-              square outline color="white" label="Ver vehículo"></q-btn>
-            <q-btn :to="`/productos/${urlString(product.name)}?reference=${product._id}`" v-else square outline color="white"
-            :label="$q.screen.gt.xs ? 'Agregar al carrito' : 'Agregar'"></q-btn>
+          <div class="overflow" @click="handlerRouterPush(product)">
+            <q-btn :to="`/vehiculos/${urlString(product.name)}?reference=${product._id}`"
+              v-if="route.query.type !== 'product'" square outline color="white" label="Ver vehículo"></q-btn>
+            <q-btn :to="`/productos/${urlString(product.name)}?reference=${product._id}`" v-else square outline
+              color="white" :label="$q.screen.gt.xs ? 'Agregar al carrito' : 'Agregar'"></q-btn>
           </div>
         </figure>
 
         <div class="motowork-item-page__grid--items__product--content">
           <h2>{{ product.name }}</h2>
-          <h3>ref: {{ product.model }}</h3>
+          <!--<h3>ref: {{ product.model }}</h3>-->
           <div class="motowork-item-page__grid--items__product--content__price">
             <span class="motowork-item-page__grid--items__product--content__price--label">Desde</span>
             <span class="motowork-item-page__grid--items__product--content__price--amount">
@@ -211,9 +212,6 @@ const urlString = (value) => {
 }
 
 const handlerRouterPush = (product) => {
-  if (q.screen.gt.sm) {
-    return
-  }
   let path = ''
   if (route.query.type !== 'product') {
     path = `/vehiculos/${urlString(product.name)}`

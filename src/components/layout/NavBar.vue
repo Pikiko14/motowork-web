@@ -148,7 +148,7 @@
             <!--categories list-->
             <div class="categories-and-all__categories">
               <div class="categories-and-all__categories--grid full-width">
-                <figure v-for="(cat, idx) in categoriesMenu" :key="idx" @click="pushRoute(cat.name)">
+                <figure v-for="(cat, idx) in catMenu" :key="idx" @click="pushRoute(cat.name)">
                   <q-img :src="cat.icon">
                     <div class="absolute-bottom text-subtitle1 text-center caption">
                       {{ cat.name }}
@@ -245,6 +245,10 @@ const { categoriesMenu, getMenuCategories } = useCategoriesContent()
 const itemsInCart = computed(() => {
   return ordersStore.countItemsInCart()
 })
+
+const catMenu = computed(() => {
+  return categoriesMenu.value.filter((el) => el.is_active);
+});
 
 // watch
 watch(
@@ -682,7 +686,7 @@ const getBannerUrl = (idx) => {
 
           figure {
             cursor: pointer;
-            height: 180px;
+            max-height: 180px;
             width: 100%;
 
             .q-img {
@@ -692,7 +696,7 @@ const getBannerUrl = (idx) => {
             }
 
             @media (max-width: 991px) {
-              height: 90px;
+              max-height: 90px;
             }
           }
 
@@ -825,6 +829,22 @@ const getBannerUrl = (idx) => {
 
   @media(max-width: 767px) {
     display: flex;
+  }
+}
+
+.text-subtitle1 {
+  font-size: 14px;
+
+  @media(max-width: 1400px) {
+    font-size: 14px !important;
+  }
+
+  @media(max-width: 1100px) {
+    font-size: 12px !important;
+  }
+
+  @media(max-width: 1000px) {
+    font-size: 10px !important;
   }
 }
 </style>

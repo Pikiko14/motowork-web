@@ -64,7 +64,7 @@
               profesional y a tu medida.</p>
 
             <div class="motowork-newsletter__item--form">
-              <q-btn @click="pbxModal = true" outline color="secondary" size="md" no-caps no-wrap square
+              <q-btn @click="pbxModal = true" outline color="primary" size="md" no-caps no-wrap square
                 label="Contáctanos" icon="phone"></q-btn>
               <!--<FormFields />-->
             </div>
@@ -80,9 +80,6 @@
       <div class="motowork-por-elegirnos">
         <div class="motowork-por-elegirnos__title">
           <h2>¿PORQUE ELEGIRNOS?</h2>
-        </div>
-        <div class="motowork-por-elegirnos__subtitle">
-          <h3>Precios MOTOWORK</h3>
         </div>
       </div>
       <!--End top section-->
@@ -226,6 +223,10 @@
       </q-card>
     </q-dialog>
     <!--End modal comunication-->
+
+    <!--Wathsapp Button-->
+    <WathsappButton :category="'motocicletas'" />
+    <!--End Wathsapp Button-->
   </q-page>
 </template>
 
@@ -237,6 +238,7 @@ import HomeGrid from 'src/components/products/HomeGrid.vue'
 import GridHome from 'src/components/categories/GridHome.vue'
 import { useStoreContent } from 'src/stores/storeContent-store'
 import FormFields from 'src/components/newsletter/FormFields.vue'
+import WathsappButton from 'src/components/layout/WathsappButton.vue'
 import { useBannersContent } from 'src/composables/useBannerContent'
 import GridVehicles from 'src/components/categories/GridVehicles.vue'
 import BannerMotowork from 'src/components/banner/BannerMotowork.vue'

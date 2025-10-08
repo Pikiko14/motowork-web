@@ -1,17 +1,19 @@
 <template>
-  <section class="motowor-banner" :class="{ 'reduce': reduceBanner, 'about-us-banner': isAboutBanner, 'experience-banner': isExperienceBanner }">
+  <section class="motowor-banner"
+    :class="{ 'reduce': reduceBanner, 'about-us-banner': isAboutBanner, 'experience-banner': isExperienceBanner }">
     <figure>
-      <img class="motowor-banner__image"  v-if="!banner.path" :src="imgBanner.path || defaultImg" :alt="banner.name" :title="banner.name">
-      <img class="motowor-banner__image"  v-else :src="banner.path || defaultImg" :alt="bannerAlt" :title="bannerAlt">
+      <img class="motowor-banner__image" v-if="!banner.path" :src="imgBanner.path || defaultImg" :alt="banner.name"
+        :title="banner.name">
+      <img class="motowor-banner__image" v-else :src="banner.path || defaultImg" :alt="bannerAlt" :title="bannerAlt">
       <figcaption :class="{ 'no-overflow': noOverflow, 'justify-end': contentEnd }">
         <div class="container">
           <div class="row">
             <div class="col-12" v-if="$route.path === '/conocenos'">
               <img class="logo" src="/images/motowork-footer-logo.png" alt="Logo motowork">
             </div>
-           <div class="col-12" v-if="title">
+            <div class="col-12" v-if="title">
               <h1>{{ title }}</h1>
-           </div>
+            </div>
             <div class="col-12" v-if="bannerComplement">
               <p :class="{ 'ellipsis-3-lines': $q.screen.lt.md, 'ellipsis-5-lines': $q.screen.gt.sm }">
                 {{ bannerComplement }}
@@ -142,7 +144,8 @@ const imgBanner = computed(() => {
         font-size: 48px;
         font-style: normal;
         font-weight: 700;
-        line-height: 125%; /* 60px */
+        line-height: 125%;
+        /* 60px */
         text-transform: uppercase;
 
         @media(max-width: 767px) {
@@ -157,7 +160,8 @@ const imgBanner = computed(() => {
         font-size: 24px;
         font-style: normal;
         font-weight: 400;
-        line-height: 125%; /* 30px */
+        line-height: 125%;
+        /* 30px */
         margin-top: 24px;
         max-width: 70%;
 
@@ -180,7 +184,8 @@ const imgBanner = computed(() => {
         font-size: 16px;
         font-style: normal;
         font-weight: 700;
-        line-height: 125%; /* 20px */
+        line-height: 125%;
+        /* 20px */
         text-transform: uppercase;
       }
     }
@@ -210,7 +215,8 @@ const imgBanner = computed(() => {
 .no-overflow {
   background: transparent !important;
 
-  h1, p {
+  h1,
+  p {
     color: $primary !important;
   }
 }
@@ -228,7 +234,7 @@ const imgBanner = computed(() => {
     }
 
     img {
-      object-position: top;
+      object-position: center;
     }
 
     @media(max-width: 767px) {
@@ -244,7 +250,7 @@ const imgBanner = computed(() => {
 .experience-banner {
   figure {
     img {
-      object-position: bottom;
+      object-position: center;
     }
   }
 }

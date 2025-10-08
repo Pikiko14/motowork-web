@@ -12,29 +12,34 @@
     <!--end pagination data-->
 
     <!--grid items-->
-    <GridItems :type="query.type" :brands="brandsList.length > 0 ? brandsList : brands" :products="products" :showFilter="showFilter"
-      :categories="categoriesList.length > 0 ? categoriesList : categories" :pageCategory="page"
-      :totalPageCategory="totalPages" :total-page-brand="totalPagesBrand" :page-brand="pageBrands"
+    <GridItems :type="query.type"
+      :brands="brandsList.length > 0 ? brandsList.filter((el) => el.is_active) : brands.filter((el) => el.is_active)"
+      :products="products" :showFilter="showFilter"
+      :categories="categoriesList.length > 0 ? categoriesList.filter((el) => el.is_active) : categories.filter((el) => el.is_active)"
+      :pageCategory="page" :totalPageCategory="totalPages" :total-page-brand="totalPagesBrand" :page-brand="pageBrands"
       @handle-load-categories="loadMoreCategories" @do-filter-by-price="filterByPriceRange"
       @do-filter-by-power="filterByPowerRange" @handle-load-brands="loadMoreBrands" />
     <!--end grid items-->
 
     <!--Paginator-->
     <section class="motowork-item-page__paginator">
-      <q-pagination  :max-pages="6" boundary-links direction-links active-design="unelevated" flat active-color="secondary" unelevated
-        @update:model-value="doPagination" color="secondary" v-model="pageNumber" :max="totalPagesProduct" />
+      <q-pagination :max-pages="6" boundary-links direction-links active-design="unelevated" flat
+        active-color="secondary" unelevated @update:model-value="doPagination" color="secondary" v-model="pageNumber"
+        :max="totalPagesProduct" />
     </section>
     <!--End paginator-->
 
     <!--Marcas-->
     <!--pagination data-->
-    <section class="motowork-item-page__paginator-label" :class="{ 'q-pt-xl': $q.screen.gt.sm, 'q-pt-md': $q.screen.lt.md }">
+    <section class="motowork-item-page__paginator-label"
+      :class="{ 'q-pt-xl': $q.screen.gt.sm, 'q-pt-md': $q.screen.lt.md }">
       <h2>Conoce nuestras marcas de accesorios</h2>
     </section>
     <!--end pagination data-->
 
     <section class="motowork-item-page__all-brands">
-      <article v-for="(brand, idx) in allBrands" :key="idx" class="motowork-item-page__all-brands--item" @click="handleBrand(brand.name)">
+      <article v-for="(brand, idx) in allBrands" :key="idx" class="motowork-item-page__all-brands--item"
+        @click="handleBrand(brand.name)">
         <figure>
           <img :src="brand.icon">
         </figure>
@@ -125,7 +130,7 @@ const { getBrandsList, brands, pageBrands, totalPagesBrand, addOnePageBrands, ge
 
 // computed
 const allBrands = computed(() => {
-  return store.allBrands
+  return store.allBrands.filter((el) => el.is_active)
 })
 
 // methods

@@ -21,13 +21,16 @@
         disable aria-hidden="true" />
     </section>
 
-    <p class="motowork-item-data__description" v-if="product.description" v-html="product.description">
-    </p>
+    <q-scroll-area style="width: 100%; height: 360px">
+      <p class="motowork-item-data__description" v-if="product.description"
+        v-html="formattedDescription(product.description || 'Sin descripción')">
+      </p>
+    </q-scroll-area>
 
     <section class="motowork-item-data__variants" v-if="product.type === 'product'">
       <article class="motowork-item-data__variants--item" v-for="(variant, idx) in product.variants" :key="idx"
-        @click="selectedVariantForShopping(variant)" :class="{ active: selectedVariant._id === variant._id }" role="button"
-        :aria-label="'Seleccionar variante: ' + variant.attribute" tabindex="0">
+        @click="selectedVariantForShopping(variant)" :class="{ active: selectedVariant._id === variant._id }"
+        role="button" :aria-label="'Seleccionar variante: ' + variant.attribute" tabindex="0">
         <span>{{ variant.attribute }}</span>
         <p>{{ variant.description || 'Sin descripción.' }}</p>
       </article>
@@ -41,23 +44,29 @@
 
     <section v-if="product.type === 'vehicle'">
       <p class="payment-link">
-        Si deseas realizar el pago a tu motocicleta, puedes hacerlo a través de nuestro link de pago. Una vez realizado el pago, deberas enviar el comprobante de pago a nuestro correo <a class="mail-link" href="mailto:info@motowork.co">info@motowork.co</a> para que podamos procesar tu pago
+        Si deseas realizar el pago a tu motocicleta, puedes hacerlo a través de nuestro link de pago. Una vez realizado
+        el pago, deberas enviar el comprobante de pago a nuestro correo <a class="mail-link"
+          href="mailto:info@motowork.co">info@motowork.co</a> para que podamos procesar tu pago
         <q-btn type="a" flat dense label="Realizar pago" @click="openPaymentLink" color="secondary" />.
       </p>
     </section>
 
     <section class="motowork-item-data__action">
-      <q-btn :to="`/vehiculos/${product.name}/formulario?reference=${product._id}`" v-if="product.type === 'vehicle' && product.dive_test" square unelevated color="secondary" label="Prueba de manejo"
-        aria-label="Agendar prueba de manejo para el vehículo"></q-btn>
+      <q-btn :to="`/vehiculos/${product.name}/formulario?reference=${product._id}`"
+        v-if="product.type === 'vehicle' && product.dive_test" square unelevated color="secondary"
+        label="Prueba de manejo" aria-label="Agendar prueba de manejo para el vehículo"></q-btn>
 
       <div class="motowork-item-data__action--product" v-if="product.type === 'product'">
-        <q-btn :disable="product.variants.length > 0 && !selectedVariant._id || totalItemsLimit === 0" square unelevated color="secondary"
-          :label="$q.screen.gt.xs ? 'Agregar al carrito' : 'Agregar'" @click="handlerAddToCar" aria-label="Agregar este producto al carrito"></q-btn>
+        <q-btn :disable="product.variants.length > 0 && !selectedVariant._id || totalItemsLimit === 0" square unelevated
+          color="secondary" :label="$q.screen.gt.xs ? 'Agregar al carrito' : 'Agregar'" @click="handlerAddToCar"
+          aria-label="Agregar este producto al carrito"></q-btn>
 
         <div class="motowork-item-data__action--product__quantity">
-          <q-btn :disable="product.variants.length > 0 && !selectedVariant._id || totalItemsLimit === 0" @click="removeQuantity" icon="img:/images/back_arrow.png" unelevated dense square></q-btn>
+          <q-btn :disable="product.variants.length > 0 && !selectedVariant._id || totalItemsLimit === 0"
+            @click="removeQuantity" icon="img:/images/back_arrow.png" unelevated dense square></q-btn>
           <span>{{ quantity }}</span>
-          <q-btn :disable="product.variants.length > 0 && !selectedVariant._id || totalItemsLimit === 0" @click="addQuantity" unelevated dense icon="img:/images/arrow_next.png" square></q-btn>
+          <q-btn :disable="product.variants.length > 0 && !selectedVariant._id || totalItemsLimit === 0"
+            @click="addQuantity" unelevated dense icon="img:/images/arrow_next.png" square></q-btn>
         </div>
       </div>
     </section>
@@ -67,7 +76,9 @@
         :aria-selected="activeTab === 1 ? 'true' : 'false'" :aria-controls="'tab1'">
         Detalles
       </span>
-      <span  v-if="product.type === 'vehicle' && product.additionalInfo.length > 0 || product.type === 'product' && product.additionalInfo.length > 0" :class="{ active: activeTab === 2 }" @click="activateTab(2)" role="tab"
+      <span
+        v-if="product.type === 'vehicle' && product.additionalInfo.length > 0 || product.type === 'product' && product.additionalInfo.length > 0"
+        :class="{ active: activeTab === 2 }" @click="activateTab(2)" role="tab"
         :aria-selected="activeTab === 2 ? 'true' : 'false'" :aria-controls="'tab2'">
         Información adicional
       </span>
@@ -334,6 +345,11 @@ const selectedVariantForShopping = (variant) => {
 
 const openPaymentLink = () => {
   window.open('https://www.mipagoamigo.com/MPA_WebSite/ServicePayments/StartPayment?id=17017&searchedCategoryId=&searchedAgreementName=YAMAHA%20MOTOWORK', '_blank')
+}
+
+function formattedDescription(description) {
+  console.log(description)
+  return description.replace(/\n/g, '<br>');
 }
 
 // hook
@@ -738,7 +754,8 @@ onBeforeMount(() => {
         font-size: 16pt;
         font-style: normal;
         font-weight: 400;
-        line-height: 125%; /* 20px */
+        line-height: 125%;
+        /* 20px */
       }
 
       img {
