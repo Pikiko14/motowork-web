@@ -47,17 +47,21 @@
       <div class="motowork-newsletter" ref="newsletterSection">
         <div class="motowork-newsletter__item">
           <figure>
-            <img src="/images/newsletter-img.webp" alt="Newsletter imagen, utilizada por Motowork" title="Newsletter imagen, utilizada por Motowork" />
+            <img src="/images/newsletter-img.webp" alt="Newsletter imagen, utilizada por Motowork"
+              title="Newsletter imagen, utilizada por MOTOWORK" />
           </figure>
         </div>
         <div class="motowork-newsletter__item">
           <div class="motowork-newsletter__item--content">
-            <h2>Comunidad MOTOWORK</h2>
-            <h3>QUE ESPERAS PARA RODAR CON NOSOTROS</h3>
-            <p>Únete a nuestra comunidad y disfruta de las mejores rodadas y del mejor contenido para moteros aficionados.</p>
+            <h2>Atención Personalizada</h2>
+            <h3>Nos importa cada detalle de tu experiencia</h3>
+            <p>En Motowork te acompañamos en cada paso, nuestro equipo está listo para brindarte una atención cercana,
+              profesional y a tu medida.</p>
 
             <div class="motowork-newsletter__item--form">
-              <FormFields />
+              <q-btn @click="pbxModal = true" outline color="secondary" size="md" no-caps no-wrap square
+                label="Contáctanos" icon="phone"></q-btn>
+              <!--<FormFields />-->
             </div>
           </div>
         </div>
@@ -70,10 +74,11 @@
       <div class="instagram-feeds instagramFeed-section" ref="instagramFeed">
         <div class="instagram-feeds__item" v-for="(item, idx) in feeds" :key="idx">
           <figure>
-            <img draggable="false" :src="item.media_url" alt="Imagen de feed de instagram" title="Imagen de feed de instagram">
+            <img draggable="false" :src="item.media_url" alt="Imagen de feed de instagram"
+              title="Imagen de feed de instagram">
             <figcaption v-if="item.caption">
               <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
-                <circle cx="20" cy="20" r="20" fill="#ED1C24" fill-opacity="0.8"/>
+                <circle cx="20" cy="20" r="20" fill="#ED1C24" fill-opacity="0.8" />
               </svg>
               <h2>
                 @Motowork
@@ -85,6 +90,42 @@
       </div>
     </section>
     <!--End instagram feed-->
+
+    <!--Modal comunication-->
+    <q-dialog v-model="pbxModal">
+      <q-card class="pbx">
+        <q-card-section>
+          <h2 class="modal-title">Asesores de venta</h2>
+          <q-btn color="secondary" v-close-popup class="absolute-top-right" style="right: 10px; top: 10px" rounded flat
+            dense icon="close"></q-btn>
+        </q-card-section>
+        <q-card-section>
+          <q-list>
+            <q-item v-for="(asesor, index) in asesores" :key="index">
+              <q-item-section>
+                <q-item-label class="text-bold">{{ asesor.nombre }}</q-item-label>
+                <q-item-label caption>{{ asesor.area }}</q-item-label>
+              </q-item-section>
+              <q-item-section side class="d-flex">
+                <a :href="`tel:${asesor.celular}`" aria-label="Contactar con asesor">
+                  <q-icon color="green" name="phone_in_talk" title="Llanada teléfonica" size="22px" />
+                  <q-tooltip class="bg-green">
+                    Llamar asesor
+                  </q-tooltip>
+                </a>
+                <a :href="`tel:${asesor.celular}`" aria-label="Contactar con asesor">
+                  <q-icon color="green" name="mail" title="Llanada teléfonica" size="22px" />
+                  <q-tooltip class="bg-green">
+                    Enviar correo
+                  </q-tooltip>
+                </a>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </q-card-section>
+      </q-card>
+    </q-dialog>
+    <!--End modal comunication-->
   </q-page>
 </template>
 
@@ -102,6 +143,22 @@ import BannerMotowork from 'src/components/banner/BannerMotowork.vue'
 import { useInstangramContent } from 'src/composables/useInstagramContent'
 
 // references
+const asesores = [
+  { nombre: 'Juan Jose', area: 'Asesor venta de repuestos y accesorios', correo: 'comercial-repuestos1@motowork.com.co', celular: '3175052541' },
+  { nombre: 'Alejandro Osorio', area: 'Asesor venta de repuestos y accesorios', correo: 'auxiliar-repuestos@motowork.com.co', celular: '3188279037' },
+  { nombre: 'Daniel Ruiz', area: 'Asesor venta de repuestos y accesorios', correo: 'comercial-repuestos4@motowork.com.co', celular: '3173117333' },
+  { nombre: 'Euvaldo Camacho', area: 'Asesor venta de repuestos y accesorios', correo: 'e.camacho@motowork.com.co', celular: '3173711290' },
+  { nombre: 'David Mesa', area: 'Asesor venta de repuestos y accesorios', correo: 'comercial-repuestos3@motowork.com.co', celular: '3173642461' },
+  { nombre: 'Jose Cossio', area: 'Asesor venta de repuestos y accesorios', correo: 'comercial-repuestos2@motowork.com.co', celular: '3106133770' },
+  { nombre: 'Carlos Vasquez', area: 'Asesor de ventas motos', correo: 'ventasmotos3@motowork.com.co', celular: '3176432070' },
+  { nombre: 'Flor Velasquez', area: 'Asesora de ventas motos', correo: 'ventasmotos1@motowork.com.co', celular: '3016610615' },
+  { nombre: 'Katherine Montoya', area: 'Asesora de ventas motos', correo: 'ventasmotos2@motowork.com.co', celular: '3164743748' },
+  { nombre: 'Santiago Cardona', area: 'Asesor de ventas motos', correo: 'ventasmotos@motowork.com.co', celular: '3173712794' },
+  { nombre: 'Adriana Perez', area: 'Asesora de ventas redes', correo: 'marketing@motowork.com.co', celular: '3157240417' },
+  { nombre: 'Anderon Jimenez', area: 'Coordinadora de Servicio tecnico', correo: 'taller@motowork.co', celular: '3188279036' },
+  { nombre: 'Otros', area: 'Administracion', correo: 'administrador@motowork.co', celular: '3182576333' }
+]
+const pbxModal = ref(false)
 const router = useRouter()
 const store = useStoreContent()
 const instagramFeed = ref(null)
@@ -151,7 +208,7 @@ const metaData = {
     },
     ogTitle: {
       property: 'og:title',
-      template (ogTitle) {
+      template(ogTitle) {
         return `${ogTitle} - Blog y Experiencias`
       }
     },
@@ -346,7 +403,8 @@ onMounted(async () => {
           font-size: 16px;
           font-style: normal;
           font-weight: 400;
-          line-height: 125%; /* 20px */
+          line-height: 125%;
+          /* 20px */
         }
 
         p {
@@ -358,15 +416,15 @@ onMounted(async () => {
           font-size: 24px;
           font-style: normal;
           font-weight: 700;
-          line-height: 125%; /* 30px */
+          line-height: 125%;
+          /* 30px */
           text-transform: uppercase;
 
           @media(max-width: 991px) {
             font-size: 18px;
           }
 
-          @media(max-width: 767px) {
-          }
+          @media(max-width: 767px) {}
         }
 
         .q-btn {
