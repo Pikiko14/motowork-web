@@ -41,7 +41,7 @@
     <!--Categories accessories-->
     <section class="container-motowork">
       <div class="motowork-section-title">
-        <h2>Explora Moto Work</h2>
+        <h2>Explora Motowork</h2>
         <span>{{ page }}/{{ totalPages }}</span>
       </div>
 
@@ -84,7 +84,7 @@
       <div class="motowork-newsletter" ref="newsletterSection">
         <figure class="contactanos-image">
           <img @click="goToContact" class="cursor-pointer" src="/images/contactanos.webp"
-            alt="Contáctanos, imagen utilizada por Motowork" title="Contáctanos, imagen utilizada por Moto work" />
+            alt="Contáctanos, imagen utilizada por Motowork" title="Contáctanos, imagen utilizada por Motowork" />
           <!--<div class="contactanos-button">
             <q-btn class="contactanos-btn" @click="goToContact" unelevated>
               <q-icon name="phone" size="20px" />
@@ -104,7 +104,7 @@
           <h2>¿PORQUE ELEGIRNOS?</h2>
         </div>
         <div class="motowork-por-elegirnos__subtitle">
-          <h3>Precioes moto work</h3>
+          <h3>Motowork</h3>
         </div>
       </div>
       <!--End top section-->
@@ -273,15 +273,15 @@ const carouselSlide = ref(0)
 const carouselImages = [
   {
     src: '/images/horario-motowork-1.webp',
-    alt: 'Horario de atención Moto Work'
+    alt: 'Horario de atención Motowork'
   },
   {
     src: '/images/fachada.webp',
-    alt: 'Fachada de Moto Work'
+    alt: 'Fachada de Motowork'
   },
   {
     src: '/images/estafas1.webp',
-    alt: 'Alerta sobre estafas Moto Work'
+    alt: 'Alerta sobre estafas Motowork'
   }
 ]
 const carouselAutoplayInterval = ref(null)
@@ -429,14 +429,14 @@ const doAddProduct = () => {
 
 const goToContact = () => {
   const phoneNumber = '573183996249'
-  const message = encodeURIComponent('Hola Moto Work, me gustaría obtener más información')
+  const message = encodeURIComponent('Hola Motowork, me gustaría obtener más información')
   const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${message}`
   window.open(whatsappUrl, '_blank')
 }
 
 const metaData = {
   // sets document title
-  title: 'Moto Work',
+  title: 'Motowork',
   // optional; sets final title as "Index Page - My Website", useful for multiple level meta
   titleTemplate: title => `${title} - Web`,
 
@@ -478,7 +478,7 @@ const metaData = {
     },
     twitterTitle: {
       name: 'twitter:title',
-      content: 'Moto Work - Web'
+      content: 'Motowork - Web'
     },
     twitterDescription: {
       name: 'twitter:description',

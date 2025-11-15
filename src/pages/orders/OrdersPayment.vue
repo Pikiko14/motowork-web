@@ -30,10 +30,14 @@
 
           <!--order resume-->
           <OrderFinish v-if="orderCreatedData.order" :order="orderCreatedData.order" />
-          <q-btn target="_blank" v-if="orderCreatedData && orderCreatedData.order && orderCreatedData.order.payment_method === 'link_pago'" class="q-mt-md" unelevated outline color="secondary" no-caps size="md" type="a" :href="orderCreatedData?.preference">Ir a pagar la orden</q-btn>
+          <q-btn target="_blank"
+            v-if="orderCreatedData && orderCreatedData.order && orderCreatedData.order.payment_method === 'link_pago'"
+            class="q-mt-md" unelevated outline color="secondary" no-caps size="md" type="a"
+            :href="orderCreatedData?.preference">Ir a pagar la orden</q-btn>
           <!--End order resume-->
 
-          <div class="account-to-transfer q-mt-xl" v-if="orderCreatedData.order && orderCreatedData.order.payment_method === 'trasnferencia'">
+          <div class="account-to-transfer q-mt-xl"
+            v-if="orderCreatedData.order && orderCreatedData.order.payment_method === 'trasnferencia'">
             <p>
               <span class="text-bold text-primary">
                 Nota:
@@ -104,11 +108,15 @@
                 </span>
               </h2>
 
-              <p v-if="orderStatus !== 'approved' && orderStatus !== 'pending' && orderStatus !== 'in_process'" class="text-primary">
-                Lamentamos informarte que tu pedido ha sido rechazado. Desafortunadamente, no podemos procesar tu pedido en este momento. Aquí una lista de posibles razones
+              <p v-if="orderStatus !== 'approved' && orderStatus !== 'pending' && orderStatus !== 'in_process'"
+                class="text-primary">
+                Lamentamos informarte que tu pedido ha sido rechazado. Desafortunadamente, no podemos procesar tu pedido
+                en este momento. Aquí una lista de posibles razones
               </p>
               <p class="text-primary" v-else>
-                Tu pago a sido confirmado correctamente, procederemos a enviar tu pedido lo mas pronto posible. En caso de que tu pago quedara en estado pendiente, debemos esperar la confirmación de acreditación de los fondos para poderlo despachar.
+                Tu pago a sido confirmado correctamente, procederemos a enviar tu pedido lo mas pronto posible. En caso
+                de que tu pago quedara en estado pendiente, debemos esperar la confirmación de acreditación de los
+                fondos para poderlo despachar.
               </p>
 
               <q-list>
@@ -158,11 +166,16 @@
             </div>
           </div>
           <!--order resume-->
-          <OrderFinish v-if="orderToPay.payment_method === 'trasnferencia' || orderToPay.payment_method === 'link_pago'" :order="orderToPay" />
-          <q-btn target="_blank" v-if="orderCreatedData && orderCreatedData.order && orderCreatedData.order.payment_method === 'link_pago'" class="q-mt-md" unelevated outline color="secondary" no-caps size="md" type="a" :href="linkPayment">Ir a pagar la orden</q-btn>
+          <OrderFinish v-if="orderToPay.payment_method === 'trasnferencia' || orderToPay.payment_method === 'link_pago'"
+            :order="orderToPay" />
+          <q-btn target="_blank"
+            v-if="orderCreatedData && orderCreatedData.order && orderCreatedData.order.payment_method === 'link_pago'"
+            class="q-mt-md" unelevated outline color="secondary" no-caps size="md" type="a" :href="linkPayment">Ir a
+            pagar la orden</q-btn>
           <!--End order resume-->
 
-          <div class="account-to-transfer q-mt-xl" v-if="orderToPay._id && orderToPay.payment_method === 'trasnferencia'">
+          <div class="account-to-transfer q-mt-xl"
+            v-if="orderToPay._id && orderToPay.payment_method === 'trasnferencia'">
             <p>
               <span class="text-bold text-primary">
                 Nota:
@@ -330,7 +343,7 @@ const formatDate = (dateString) => {
 
 const openWhatsapp = () => {
   const phoneNumber = '573183996249'
-  const textMessage = `Hola Moto Work, la presente es para adjuntar el soporte de pago de la orden: ${paymentData.value._id || orderToPay.value._id} por un monto de: ${paymentData.value.total || orderToPay.value.total}`
+  const textMessage = `Hola Motowork, la presente es para adjuntar el soporte de pago de la orden: ${paymentData.value._id || orderToPay.value._id} por un monto de: ${paymentData.value.total || orderToPay.value.total}`
 
   const encodedMessage = encodeURIComponent(textMessage)
   const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodedMessage}`
@@ -405,6 +418,7 @@ p {
   figure {
     width: 150px;
     height: 150px;
+
     img {
       width: 100%;
       height: 100%;

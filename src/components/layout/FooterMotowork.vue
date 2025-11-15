@@ -40,16 +40,15 @@
             <a href="/terminos-y-condiciones" aria-label="Términos y condiciones" title="Términos y condiciones">
               Términos y condiciones
             </a>
-            <a href="/politicas-de-privacidad"
-              aria-label="Política de uso y privacidad" title="Política de uso y privacidad">
+            <a href="/politicas-de-privacidad" aria-label="Política de uso y privacidad"
+              title="Política de uso y privacidad">
               Políticas de uso y privacidad
             </a>
-            <a href="/politicas-de-datos"
-              aria-label="Política de tratamiento de datos" title="Política de tratamiento de datos">
+            <a href="/politicas-de-datos" aria-label="Política de tratamiento de datos"
+              title="Política de tratamiento de datos">
               Política de datos
             </a>
-            <a href="/conocenos"
-              aria-label="Sobre nosotros" title="Sobre nosotros">
+            <a href="/conocenos" aria-label="Sobre nosotros" title="Sobre nosotros">
               Sobre nosotros
             </a>
           </div>
@@ -68,7 +67,8 @@
               rel="noopener noreferrer" aria-label="Soporte por WhatsApp de Motowork" title="Soporte por WhatsApp">
               Soporte WhatsApp
             </a>
-            <a @click="openPbxModal" aria-label="Llamar a PBX (604) 444 97 27" title="Llamar a PBX" class="cursor-pointer">
+            <a @click="openPbxModal" aria-label="Llamar a PBX (604) 444 97 27" title="Llamar a PBX"
+              class="cursor-pointer">
               PBX (604)444 97 27
             </a>
             <a href="mailto:info@motowork.co" target="_blank" rel="noopener noreferrer"
@@ -110,7 +110,7 @@
     <!--Copy-->
     <div class="footer-copy">
       <p>
-        © Copyright - {{ currentYear }} Moto Work - Todos los derechos reservados.
+        © Copyright - {{ currentYear }} Motowork - Todos los derechos reservados.
       </p>
     </div>
     <!--End Copy-->

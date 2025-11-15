@@ -5,9 +5,7 @@
     <!--End breadcrumb-->
 
     <!--Banner-->
-    <BannerMotowork
-      :title="''"
-      :banner="storeBenner && storeBenner._id ? storeBenner : banner"
+    <BannerMotowork :title="''" :banner="storeBenner && storeBenner._id ? storeBenner : banner"
       :default-img="type === 'vehicle' ? '/images/xcsudrnoqdnhmmo48hqi.webp' : '/images/nyul4gipytza14oemvwg.webp'"
       :btnLabel="''" noOverflow :bannerComplement="''" />
     <!--End banner-->
@@ -49,7 +47,7 @@ const storeBenner = store.filterBanner(type === 'vehicle' ? 'vehicles' : 'acceso
 // metadata
 const metaData = {
   // sets document title
-  title: 'Moto Work',
+  title: 'Motowork',
   // optional; sets final title as "Index Page - My Website", useful for multiple level meta
   titleTemplate: title => `${title} - Listado de ${route.query.type === 'vehicle' ? 'Motocicletas' : 'Accesorios'}`,
 
@@ -69,7 +67,7 @@ const metaData = {
     },
     ogTitle: {
       property: 'og:title',
-      template (ogTitle) {
+      template(ogTitle) {
         return `${ogTitle} - Listado de ${route.query.type === 'vehicle' ? 'Motocicletas' : 'Accesorios'}`
       }
     },
@@ -91,7 +89,7 @@ const metaData = {
     },
     twitterTitle: {
       name: 'twitter:title',
-      content: 'Moto Work - Web'
+      content: 'Motowork - Web'
     },
     twitterDescription: {
       name: 'twitter:description',

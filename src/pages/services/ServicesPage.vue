@@ -7,7 +7,7 @@
     <!--Banner-->
     <BannerMotowork :title="'Servicio técnico.'" is-experience-banner default-img="/images/equipo-tecnico.webp"
       :btnLabel="''"
-      :bannerComplement="'En Moto Work, nos apasiona tu seguridad y tranquilidad en la vía. Por eso, te ofrecemos un Servicio Técnico de primera clase, con expertos altamente calificados.'" />
+      :bannerComplement="'En Motowork, nos apasiona tu seguridad y tranquilidad en la vía. Por eso, te ofrecemos un Servicio Técnico de primera clase, con expertos altamente calificados.'" />
     <!--End banner-->
 
     <!--Stepper-->
@@ -604,7 +604,7 @@ const handlerScheduleServices = async () => {
 
 const metaData = {
   // sets document title
-  title: 'Moto Work',
+  title: 'Motowork',
   // optional; sets final title as "Index Page - My Website", useful for multiple level meta
   titleTemplate: title => `${title} - Agenda de servicios`,
 

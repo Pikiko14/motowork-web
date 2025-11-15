@@ -49,8 +49,10 @@
     </h2>
     <img v-if="order.payment_method === 'mercadopago'" src="/images/mercado_pago.webp" alt="Icono de mercadopago"
       title="Mercadopago" />
-    <img v-if="order.payment_method === 'trasnferencia'" src="/images/transferencia_bancaria.webp" alt="Icono de transferencia bancaria" title="Transferencia bancaria">
-    <img v-if="order.payment_method === 'link_pago'" src="/images/enlace.webp" alt="Icono de link de pago" title="Link de pago">
+    <img v-if="order.payment_method === 'trasnferencia'" src="/images/transferencia_bancaria.webp"
+      alt="Icono de transferencia bancaria" title="Transferencia bancaria">
+    <img v-if="order.payment_method === 'link_pago'" src="/images/enlace.webp" alt="Icono de link de pago"
+      title="Link de pago">
     <h2 v-if="order.payment_method === 'link_pago'">
       Instrucciones de pago
     </h2>
@@ -93,7 +95,7 @@ const formatDate = (dateString) => {
 
 const openWhatsapp = () => {
   const phoneNumber = '573183996249'
-  const textMessage = `Hola Moto Work, la presente es para adjuntar el soporte de pago de la orden: ${props.order._id} por un monto de: ${props.order.total}`
+  const textMessage = `Hola Motowork, la presente es para adjuntar el soporte de pago de la orden: ${props.order._id} por un monto de: ${props.order.total}`
 
   const encodedMessage = encodeURIComponent(textMessage)
   const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodedMessage}`

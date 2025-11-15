@@ -1,37 +1,37 @@
 {
-  "name": "motowork-web",
-  "version": "0.0.2",
-  "description": "A Quasar Project",
-  "productName": "Moto Work | Web",
-  "author": "Marcos Hernandez <maalhequi95@gmail.com>",
-  "private": true,
-  "scripts": {
-    "test": "echo \"No test specified\" && exit 0",
-    "dev": "cross-env QENV=development quasar dev -m spa",
-    "build": "cross-env QENV=production quasar build -m spa",
-    "cert": "cross-env QENV=certification quasar dev -m spa"
-  },
-  "dependencies": {
-    "@quasar/extras": "^1.16.4",
-    "axios": "^1.2.1",
-    "cross-env": "^7.0.3",
-    "dotenv": "^16.4.7",
-    "emailjs-com": "^3.2.0",
-    "owl.carousel": "^2.3.4",
-    "pinia": "^2.0.11",
-    "quasar": "^2.8.0",
-    "vue": "^3.2.29",
-    "vue-router": "^4.0.12",
-    "vue3-zoomer": "^1.0.4"
-  },
-  "devDependencies": {
-    "@quasar/app-vite": "^1.4.3",
-    "autoprefixer": "^10.4.2",
-    "postcss": "^8.4.14"
-  },
-  "engines": {
-    "node": "^20 || ^18 || ^16",
-    "npm": ">= 6.13.4",
-    "yarn": ">= 1.21.1"
-  }
+    "name": "motowork-web",
+    "version": "0.0.2",
+    "description": "A Quasar Project",
+    "productName": "Motowork | Web",
+    "author": "Marcos Hernandez <maalhequi95@gmail.com>",
+    "private": true,
+    "scripts": {
+        "test": "echo \"No test specified\" && exit 0",
+        "dev": "cross-env QENV=development quasar dev -m spa",
+        "build": "cross-env QENV=production quasar build -m spa",
+        "cert": "cross-env QENV=certification quasar dev -m spa"
+    },
+    "dependencies": {
+        "@quasar/extras": "^1.16.4",
+        "axios": "^1.2.1",
+        "cross-env": "^7.0.3",
+        "dotenv": "^16.4.7",
+        "emailjs-com": "^3.2.0",
+        "owl.carousel": "^2.3.4",
+        "pinia": "^2.0.11",
+        "quasar": "^2.8.0",
+        "vue": "^3.2.29",
+        "vue-router": "^4.0.12",
+        "vue3-zoomer": "^1.0.4"
+    },
+    "devDependencies": {
+        "@quasar/app-vite": "^1.4.3",
+        "autoprefixer": "^10.4.2",
+        "postcss": "^8.4.14"
+    },
+    "engines": {
+        "node": "^20 || ^18 || ^16",
+        "npm": ">= 6.13.4",
+        "yarn": ">= 1.21.1"
+    }
 }

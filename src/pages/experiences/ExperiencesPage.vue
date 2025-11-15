@@ -19,7 +19,7 @@
           </h2>
           <div class="separator"></div>
           <span>
-            Blog moto work
+            Blog Motowork
           </span>
         </div>
         <!--End header history-->
@@ -47,14 +47,16 @@
       <div class="motowork-newsletter" ref="newsletterSection">
         <div class="motowork-newsletter__item">
           <figure>
-            <img src="/images/newsletter-img.webp" alt="Newsletter imagen, utilizada por Motowork" title="Newsletter imagen, utilizada por Motowork" />
+            <img src="/images/newsletter-img.webp" alt="Newsletter imagen, utilizada por Motowork"
+              title="Newsletter imagen, utilizada por Motowork" />
           </figure>
         </div>
         <div class="motowork-newsletter__item">
           <div class="motowork-newsletter__item--content">
-            <h2>Comunidad moto work</h2>
+            <h2>Comunidad Motowork</h2>
             <h3>QUE ESPERAS PARA RODAR CON NOSOTROS</h3>
-            <p>Únete a nuestra comunidad y disfruta de las mejores rodadas y del mejor contenido para moteros aficionados.</p>
+            <p>Únete a nuestra comunidad y disfruta de las mejores rodadas y del mejor contenido para moteros
+              aficionados.</p>
 
             <div class="motowork-newsletter__item--form">
               <FormFields />
@@ -70,10 +72,11 @@
       <div class="instagram-feeds instagramFeed-section" ref="instagramFeed">
         <div class="instagram-feeds__item" v-for="(item, idx) in feeds" :key="idx">
           <figure>
-            <img draggable="false" :src="item.media_url" alt="Imagen de feed de instagram" title="Imagen de feed de instagram">
+            <img draggable="false" :src="item.media_url" alt="Imagen de feed de instagram"
+              title="Imagen de feed de instagram">
             <figcaption v-if="item.caption">
               <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
-                <circle cx="20" cy="20" r="20" fill="#ED1C24" fill-opacity="0.8"/>
+                <circle cx="20" cy="20" r="20" fill="#ED1C24" fill-opacity="0.8" />
               </svg>
               <h2>
                 @Motowork
@@ -131,7 +134,7 @@ const showExperience = (experience) => {
 
 const metaData = {
   // sets document title
-  title: 'Moto Work',
+  title: 'Motowork',
   // optional; sets final title as "Index Page - My Website", useful for multiple level meta
   titleTemplate: title => `${title} - Experiencias y blog`,
 
@@ -151,7 +154,7 @@ const metaData = {
     },
     ogTitle: {
       property: 'og:title',
-      template (ogTitle) {
+      template(ogTitle) {
         return `${ogTitle} - Blog y Experiencias`
       }
     },
@@ -346,7 +349,8 @@ onMounted(async () => {
           font-size: 16px;
           font-style: normal;
           font-weight: 400;
-          line-height: 125%; /* 20px */
+          line-height: 125%;
+          /* 20px */
         }
 
         p {
@@ -358,15 +362,15 @@ onMounted(async () => {
           font-size: 24px;
           font-style: normal;
           font-weight: 700;
-          line-height: 125%; /* 30px */
+          line-height: 125%;
+          /* 30px */
           text-transform: uppercase;
 
           @media(max-width: 991px) {
             font-size: 18px;
           }
 
-          @media(max-width: 767px) {
-          }
+          @media(max-width: 767px) {}
         }
 
         .q-btn {
