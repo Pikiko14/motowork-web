@@ -5,11 +5,11 @@
       <!--icon sections-->
       <section class="motowork-navbar__left-section--icon" @click="$router.push({ path: '/' })">
         <figure>
-          <img class="motowork-navbar__left-section--icon__first" src="/images/yamaha_mobile.svg"
+          <img class="motowork-navbar__left-section icon_motowork" src="/images/logo.webp"
             alt="Logo de la marca Yamaha, utilizado en la landing de Motowork" loading="lazy" />
         </figure>
         <figure>
-          <img class="motowork-navbar__left-section--icon__second" src="/images/motowork_logo.webp"
+          <img class="motowork-navbar__left-section--icon__first hide-on-1300" src="/images/yamaha_mobile.svg"
             alt="Logo de la marca Yamaha, utilizado en la landing de Motowork" loading="lazy" />
         </figure>
       </section>
@@ -18,8 +18,10 @@
       <!--Link Section-->
       <section class="motowork-navbar__left-section--links">
         <ul>
-          <li @click="openHamburguerMenu('vehicle')"><q-btn flat class="text-uppercase">Motos</q-btn></li>
-          <li @click="openHamburguerMenu('product')"><q-btn flat class="text-uppercase">Accesorios</q-btn></li>
+          <li @mouseenter="handleMouseEnter('vehicle')" @mouseleave="handleMouseLeave"
+            @click="openHamburguerMenu('vehicle')"><q-btn flat class="text-uppercase">Motos</q-btn></li>
+          <li @mouseenter="handleMouseEnter('product')" @mouseleave="handleMouseLeave"
+            @click="openHamburguerMenu('product')"><q-btn flat class="text-uppercase">Accesorios</q-btn></li>
           <li><q-btn flat to="/servicio-tecnico" class="text-uppercase">Servicio técnico</q-btn></li>
           <li><q-btn flat to="/experiencias" class="text-uppercase">Experiencias</q-btn></li>
           <li><q-btn flat to="/conocenos" class="text-uppercase">Nosotros</q-btn></li>
@@ -47,9 +49,7 @@
         <div class="motowork-navbar__right-section--search-and-card__shopping-car"
           @click="$router.push({ name: 'shoppingCart' })">
           <figure>
-            <img class="motowork-navbar__right-section--search-and-card__shopping-car--icon"
-              src="/images/shopping_bag.webp" alt="Icono de la bolsa de compra, utilizado por motowork"
-              loading="lazy" />
+            <q-icon name="shopping_bag" size="18pt"></q-icon>
           </figure>
 
           <div class="motowork-navbar__right-section--search-and-card__shopping-car--count-items"
@@ -76,35 +76,32 @@
     <!--end right section-->
 
     <!--hamburger menu-->
-    <div class="motowork-navbar__hamgurger-menu" :class="{ 'motowork-navbar__hamgurger-menu--show': showMenu }">
+    <div class="motowork-navbar__hamgurger-menu" :class="{ 'motowork-navbar__hamgurger-menu--show': showMenu }"
+      @mouseenter="handleMenuMouseEnter" @mouseleave="handleMenuMouseLeave">
       <div class="row full-width">
         <div class="col-12 col-sm-3 mobile-full-width">
           <div class="menu-item">
             <q-list class="items-desktop">
-              <q-item v-if="itemToShow === 'vehicle'" class="q-pa-none" clickable v-ripple
-                to="/vehiculos?page=1&perPage=9&sortBy=createdAt&order=-1&type=vehicle&state=Nueva">
-                <q-item-section>
-                  <q-item-label>
-                    Motos nuevas
-                  </q-item-label>
-                </q-item-section>
-              </q-item>
-              <q-item v-if="itemToShow === 'vehicle'" class="q-pa-none" clickable v-ripple
-                to="/vehiculos?page=1&perPage=9&sortBy=createdAt&order=-1&type=vehicle&state=Usada">
-                <q-item-section>
-                  <q-item-label>
-                    Motos usadas
-                  </q-item-label>
-                </q-item-section>
-              </q-item>
-              <q-item v-if="itemToShow === 'product'" class="q-pa-none" clickable v-ripple
-                to="/productos?page=1&perPage=9&sortBy=createdAt&order=-1&type=product&state=Nueva">
-                <q-item-section>
-                  <q-item-label>
-                    Accesorios nuevos
-                  </q-item-label>
-                </q-item-section>
-              </q-item>
+              <template v-if="itemToShow === 'vehicle'">
+                <q-item v-for="(category, idx) in sortedCategoriesMenu" :key="idx" class="q-pa-none" clickable v-ripple
+                  @click="pushRoute(category.name)">
+                  <q-item-section>
+                    <q-item-label>
+                      {{ category.name }}
+                    </q-item-label>
+                  </q-item-section>
+                </q-item>
+              </template>
+              <template v-if="itemToShow === 'product'">
+                <q-item class="q-pa-none" clickable v-ripple
+                  to="/productos?page=1&perPage=9&sortBy=createdAt&order=-1&type=product&state=Nueva">
+                  <q-item-section>
+                    <q-item-label class="accessories-new-label">
+                      Accesorios nuevos
+                    </q-item-label>
+                  </q-item-section>
+                </q-item>
+              </template>
             </q-list>
 
             <ul class="items-mobile">
@@ -124,9 +121,7 @@
                 @click="$router.push({ name: 'shoppingCart' })">
                 <div class="icon-text">
                   <figure>
-                    <img class="motowork-navbar__right-section--search-and-card__shopping-car--icon"
-                      src="/images/shopping_bag.webp" alt="Icono de la bolsa de compra, utilizado por motowork"
-                      loading="lazy" />
+                    <q-icon name="shopping_bag" size="12pt"></q-icon>
                   </figure>
 
                   <span>
@@ -143,11 +138,39 @@
           </div>
         </div>
 
-        <div class="col-12 col-sm-9">
+        <div class="col-12 col-sm-9 categories-section">
           <div class="categories-and-all">
-            <!--categories list-->
-            <div class="categories-and-all__categories">
+            <!--vehicles list (solo para vehicle en desktop)-->
+            <div v-if="itemToShow === 'vehicle'" class="categories-and-all__categories categories-vehicles-desktop">
               <div class="categories-and-all__categories--grid full-width">
+                <figure v-for="(vehicle, idx) in vehiclesMenu" :key="idx" @click="goToVehicle(vehicle)">
+                  <q-img :src="getVehicleImage(vehicle)">
+                    <div class="absolute-bottom text-subtitle1 text-center caption">
+                      {{ vehicle.name }}
+                    </div>
+                  </q-img>
+                </figure>
+              </div>
+            </div>
+            <!--End vehicles list-->
+
+            <!--categories list (solo para vehicle en tablet 768-1200)-->
+            <div v-if="itemToShow === 'vehicle'" class="categories-and-all__categories categories-vehicles-tablet">
+              <div class="categories-and-all__categories--grid-categories full-width">
+                <figure v-for="(cat, idx) in categoriesMenu" :key="idx" @click="pushRoute(cat.name)">
+                  <q-img :src="cat.icon">
+                    <div class="absolute-bottom text-subtitle1 text-center caption">
+                      {{ cat.name }}
+                    </div>
+                  </q-img>
+                </figure>
+              </div>
+            </div>
+            <!--End categories list for vehicles tablet-->
+
+            <!--categories list (solo para product)-->
+            <div v-if="itemToShow === 'product'" class="categories-and-all__categories">
+              <div class="categories-and-all__categories--grid-categories full-width">
                 <figure v-for="(cat, idx) in categoriesMenu" :key="idx" @click="pushRoute(cat.name)">
                   <q-img :src="cat.icon">
                     <div class="absolute-bottom text-subtitle1 text-center caption">
@@ -204,7 +227,8 @@
               </q-item-section>
 
               <q-item-section side>
-                <q-btn :to="`/vehiculos/${item.name}?reference=${item._id}`" color="secondary" flat dense rounded icon="visibility">
+                <q-btn :to="`/vehiculos/${item.name}?reference=${item._id}`" color="secondary" flat dense rounded
+                  icon="visibility">
                   <q-tooltip class="bg-secondary">
                     Ver producto
                   </q-tooltip>
@@ -221,7 +245,7 @@
 <script setup>
 // imports
 import { useRouter } from 'vue-router'
-import { computed, ref, watch } from 'vue'
+import { computed, ref, watch, onBeforeUnmount } from 'vue'
 import { useOrdersStore } from 'src/stores/ordersStore'
 import { useProductsContent } from 'src/composables/useProductContent'
 import { useCategoriesContent } from 'src/composables/useCategoriesContent'
@@ -237,12 +261,28 @@ const searching = ref(false)
 const searchMenu = ref(false)
 const itemToShow = ref('vehicle')
 const ordersStore = useOrdersStore()
-const { searchProducts } = useProductsContent()
+const { searchProducts, getProducts } = useProductsContent()
 const { categoriesMenu, getMenuCategories } = useCategoriesContent()
+const menuTimeout = ref(null)
+const isHoveringMenu = ref(false)
+const vehiclesMenu = ref([])
+const selectedCategory = ref('ADVENTURE')
 
 // computed
 const itemsInCart = computed(() => {
   return ordersStore.countItemsInCart()
+})
+
+const sortedCategoriesMenu = computed(() => {
+  if (!categoriesMenu.value || categoriesMenu.value.length === 0) {
+    return []
+  }
+  // Ordenar alfabéticamente por nombre
+  return [...categoriesMenu.value].sort((a, b) => {
+    const nameA = (a.name || '').toLowerCase()
+    const nameB = (b.name || '').toLowerCase()
+    return nameA.localeCompare(nameB)
+  })
 })
 
 // watch
@@ -260,31 +300,171 @@ watch(
   }
 )
 
+// cleanup
+onBeforeUnmount(() => {
+  if (menuTimeout.value) {
+    clearTimeout(menuTimeout.value)
+  }
+})
+
 // methods
 const openHamburguerMenu = async (e) => {
-  if (showMenu.value && itemToShow.value === e) {
-    showMenu.value = false
-  } else {
-    showMenu.value = true
+  // Solo toggle en móvil (pantallas pequeñas)
+  if (window.innerWidth <= 1199) {
+    if (showMenu.value && itemToShow.value === e) {
+      showMenu.value = false
+    } else {
+      showMenu.value = true
+    }
+    // Cargar todas las categorías con perPage 30 tanto para vehicle como para product
+    const perPage = 30
+    const query = `?page=1&perPage=${perPage}&type=${e}`
+    await getMenuCategories(query)
+    itemToShow.value = e
+
+    // Si es vehicle, cargar las motos de ADVENTURE por defecto
+    if (e === 'vehicle') {
+      await loadVehiclesByCategory('ADVENTURE')
+    } else {
+      // Si es product, limpiar las motos
+      vehiclesMenu.value = []
+    }
   }
-  const query = `?page=1&perPage=3&type=${e}`
-  await getMenuCategories(query)
-  itemToShow.value = e
 }
 
-const pushRoute = (name) => {
+const handleMouseEnter = async (type) => {
+  // Solo funciona en desktop (pantallas grandes)
+  if (window.innerWidth > 1199) {
+    // Limpiar timeout anterior si existe
+    if (menuTimeout.value) {
+      clearTimeout(menuTimeout.value)
+      menuTimeout.value = null
+    }
+
+    // Si el menú ya está abierto con el mismo tipo, no hacer nada
+    if (showMenu.value && itemToShow.value === type) {
+      return
+    }
+
+    // Cargar todas las categorías con perPage 30 tanto para vehicle como para product
+    const perPage = 30
+    const query = `?page=1&perPage=${perPage}&type=${type}`
+    await getMenuCategories(query)
+    itemToShow.value = type
+
+    // Si es vehicle, cargar las motos de ADVENTURE por defecto
+    if (type === 'vehicle') {
+      await loadVehiclesByCategory('ADVENTURE')
+    } else {
+      // Si es product, limpiar las motos
+      vehiclesMenu.value = []
+    }
+
+    showMenu.value = true
+  }
+}
+
+const handleMouseLeave = () => {
+  // Solo funciona en desktop (pantallas grandes)
+  if (window.innerWidth > 1199) {
+    // Si el mouse está sobre el menú, no cerrar
+    if (isHoveringMenu.value) {
+      return
+    }
+
+    // Agregar un pequeño delay para evitar que se cierre al mover el mouse
+    menuTimeout.value = setTimeout(() => {
+      if (!isHoveringMenu.value) {
+        showMenu.value = false
+      }
+    }, 200)
+  }
+}
+
+const handleMenuMouseEnter = () => {
+  // Solo funciona en desktop (pantallas grandes)
+  if (window.innerWidth > 1199) {
+    isHoveringMenu.value = true
+    // Limpiar timeout si existe
+    if (menuTimeout.value) {
+      clearTimeout(menuTimeout.value)
+      menuTimeout.value = null
+    }
+  }
+}
+
+const handleMenuMouseLeave = () => {
+  // Solo funciona en desktop (pantallas grandes)
+  if (window.innerWidth > 1199) {
+    isHoveringMenu.value = false
+    // Cerrar el menú después de un pequeño delay
+    menuTimeout.value = setTimeout(() => {
+      showMenu.value = false
+    }, 200)
+  }
+}
+
+const pushRoute = async (name) => {
+  // Si es vehicle, no cerrar el menú, solo cargar las motos de la categoría seleccionada
+  if (itemToShow.value === 'vehicle') {
+    selectedCategory.value = name
+    await loadVehiclesByCategory(name)
+  } else {
+    // Si es product, cerrar el menú y navegar
+    showMenu.value = false
+    router.push({
+      path: '/productos',
+      query: {
+        page: 1,
+        perPage: 9,
+        sortBy: 'createdAt',
+        order: '-1',
+        type: 'product',
+        category: name
+      }
+    })
+  }
+}
+
+const loadVehiclesByCategory = async (categoryName) => {
+  try {
+    const query = `?page=1&perPage=9&sortBy=createdAt&order=-1&type=vehicle&category=${encodeURIComponent(categoryName)}`
+    await getProducts(query)
+    // Los productos se guardan en el store, necesitamos acceder a ellos
+    // Usaremos searchProducts que retorna los datos directamente
+    const response = await searchProducts(query)
+    if (response && response.brands) {
+      vehiclesMenu.value = response.brands
+    }
+  } catch (error) {
+    console.error('Error loading vehicles:', error)
+    vehiclesMenu.value = []
+  }
+}
+
+const goToVehicle = (vehicle) => {
   showMenu.value = false
   router.push({
-    path: `/${itemToShow.value === 'vehicle' ? 'vehiculos' : 'productos'}`,
+    path: `/vehiculos/${vehicle.name}`,
     query: {
-      page: 1,
-      perPage: 9,
-      sortBy: 'createdAt',
-      order: '-1',
-      type: itemToShow.value,
-      category: name
+      reference: vehicle._id
     }
   })
+}
+
+const getVehicleImage = (vehicle) => {
+  if (!vehicle.banner || !vehicle.banner.length) {
+    return ''
+  }
+  const mobileBanner = vehicle.banner.find((b) => b.type_banner === 'mobile')
+  if (mobileBanner) {
+    return mobileBanner.path
+  }
+  const desktopBanner = vehicle.banner.find((b) => b.type_banner === 'desktop')
+  if (desktopBanner) {
+    return desktopBanner.path
+  }
+  return vehicle.banner[0]?.path || ''
 }
 
 const openAllProducts = () => {
@@ -371,8 +551,8 @@ const getBannerUrl = (idx) => {
   padding: 12px 24px;
   align-items: center;
   gap: 16px;
-  border-bottom: 1px solid #ccc;
-  background-color: #fff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: black;
 
   &__left-section {
     display: flex;
@@ -440,7 +620,7 @@ const getBannerUrl = (idx) => {
 
           a,
           .q-btn {
-            color: #000;
+            color: #fff;
             font-family: Play;
             font-size: 12pt;
             font-style: normal;
@@ -567,7 +747,7 @@ const getBannerUrl = (idx) => {
         }
 
         @media(max-width: 767px) {
-          border-top: 0.75px solid #CCCBCB;
+          border-top: 0.75px solid rgba(255, 255, 255, 0.2);
           padding-left: 16px;
           padding-right: 16px;
           padding-top: 16px;
@@ -582,6 +762,31 @@ const getBannerUrl = (idx) => {
 
       &__search {
         width: 260px;
+
+        :deep(.q-field__control) {
+          color: #fff;
+        }
+
+        :deep(.q-field__native) {
+          color: #fff;
+        }
+
+        :deep(.q-field__inner) {
+          background-color: rgba(255, 255, 255, 0.1);
+          border-radius: 4px;
+        }
+
+        :deep(input) {
+          color: #fff;
+        }
+
+        :deep(input::placeholder) {
+          color: rgba(255, 255, 255, 0.7);
+        }
+
+        :deep(.q-field__bottom) {
+          color: rgba(255, 255, 255, 0.7);
+        }
 
         @media(max-width: 1399px) {
           width: 180px;
@@ -618,7 +823,7 @@ const getBannerUrl = (idx) => {
   @media(max-width: 1199px) {
     height: 54px;
     padding-right: 0px;
-    border-bottom: 0.7px solid #ccc;
+    border-bottom: 0.7px solid rgba(255, 255, 255, 0.2);
   }
 
   @media(max-width: 767px) {
@@ -629,6 +834,7 @@ const getBannerUrl = (idx) => {
   &__hamgurger-menu {
     display: none;
     height: 335px;
+    max-height: calc(100vh - 72px);
     position: absolute;
     background: #fff;
     max-width: 1600px;
@@ -637,8 +843,8 @@ const getBannerUrl = (idx) => {
     z-index: 99999 !important;
     transform: translate(-50%);
     top: 72px;
-    box-shadow: #000;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, .2);
+    overflow: hidden;
 
     &--show {
       display: flex;
@@ -651,6 +857,8 @@ const getBannerUrl = (idx) => {
       padding-left: 24px;
       padding-right: 24px;
       border-right: 1px solid #CCCBCB;
+      overflow-y: auto;
+      max-height: 100%;
 
       color: #000 !important;
       /* Desktop/Body/Description/Medium */
@@ -661,34 +869,141 @@ const getBannerUrl = (idx) => {
       line-height: 125%;
       /* 20px */
 
+      .q-list {
+        .q-item {
+          min-height: 32px;
+          padding: 6px 12px;
+
+          .q-item__label {
+            font-size: 12px !important;
+            font-weight: bold !important;
+            line-height: 1.4;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
+          }
+
+          .accessories-new-label {
+            font-size: 18px !important;
+            font-weight: bold !important;
+            line-height: 1.4;
+          }
+
+          @media(max-width: 1399px) {
+            min-height: 30px;
+            padding: 5px 10px;
+
+            .q-item__label {
+              font-size: 12px !important;
+            }
+
+            .accessories-new-label {
+              font-size: 16px !important;
+            }
+          }
+
+          @media(max-width: 1199px) {
+            min-height: 28px;
+            padding: 4px 8px;
+
+            .q-item__label {
+              font-size: 12px !important;
+            }
+
+            .accessories-new-label {
+              font-size: 14px !important;
+            }
+          }
+        }
+      }
+
       @media(max-width: 991px) {
         padding-left: 12px;
         padding-right: 12px;
       }
 
       @media(max-width: 767px) {
-        padding-left: 24px;
-        padding-right: 24px;
+        padding-left: 16px;
+        padding-right: 16px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        border-right: none;
+        border-bottom: 1px solid #CCCBCB;
       }
     }
 
     .categories-and-all {
       height: 100%;
+      overflow-y: auto;
 
       &__categories {
-        padding: 16px;
+        padding: 16px 16px 16px 8px;
         background: #F5F5F5;
+
+        @media(max-width: 1199px) {
+          padding: 12px 12px 12px 6px;
+        }
+
+        @media(max-width: 767px) {
+          padding: 12px;
+        }
 
         &--grid {
           display: flex;
           flex-direction: row;
           gap: 16px;
+          overflow-x: auto;
+          overflow-y: hidden;
+          scrollbar-width: thin;
+          scrollbar-color: #ccc #f5f5f5;
+          -webkit-overflow-scrolling: touch;
+
+          &::-webkit-scrollbar {
+            height: 8px;
+          }
+
+          &::-webkit-scrollbar-track {
+            background: #f5f5f5;
+          }
+
+          &::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 4px;
+          }
+
+          &::-webkit-scrollbar-thumb:hover {
+            background: #999;
+          }
+
+          @media(max-width: 1399px) {
+            gap: 12px;
+          }
+
+          @media(max-width: 1199px) {
+            gap: 10px;
+          }
+
+          @media(max-width: 991px) {
+            gap: 8px;
+          }
+
+          @media(max-width: 768px) {
+            gap: 8px;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+
+            &::-webkit-scrollbar {
+              display: none;
+            }
+          }
 
           figure {
             cursor: pointer;
             height: 250px;
-            width: 299px;
-            width: 100%;
+            width: 250px;
+            min-width: 250px;
+            flex-shrink: 0;
+            margin: 0;
 
             .q-img {
               width: 100%;
@@ -696,8 +1011,107 @@ const getBannerUrl = (idx) => {
               object-fit: cover;
             }
 
-            @media(max-width: 991px) {
+            @media(max-width: 1399px) {
+              height: 220px;
+              width: 220px;
+              min-width: 220px;
+            }
+
+            @media(max-width: 1199px) {
               height: 200px;
+              width: 200px;
+              min-width: 200px;
+            }
+
+            @media(max-width: 991px) {
+              height: 180px;
+              width: 180px;
+              min-width: 180px;
+            }
+
+            @media(max-width: 767px) {
+              height: 160px;
+              width: 160px;
+              min-width: 160px;
+            }
+          }
+        }
+
+        &--grid-categories {
+          display: flex;
+          flex-direction: row;
+          gap: 16px;
+          overflow-x: auto;
+          overflow-y: hidden;
+          scrollbar-width: thin;
+          scrollbar-color: #ccc #f5f5f5;
+          -webkit-overflow-scrolling: touch;
+
+          &::-webkit-scrollbar {
+            height: 8px;
+          }
+
+          &::-webkit-scrollbar-track {
+            background: #f5f5f5;
+          }
+
+          &::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 4px;
+          }
+
+          &::-webkit-scrollbar-thumb:hover {
+            background: #999;
+          }
+
+          @media(max-width: 768px) {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+
+            &::-webkit-scrollbar {
+              display: none;
+            }
+          }
+
+          figure {
+            cursor: pointer;
+            height: 250px;
+            width: 299px;
+            min-width: 299px;
+            flex-shrink: 0;
+            margin: 0;
+            overflow: hidden;
+            border-radius: 4px;
+
+            .q-img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              display: block;
+            }
+
+            @media(max-width: 1399px) {
+              height: 220px;
+              width: 260px;
+              min-width: 260px;
+            }
+
+            @media(max-width: 1199px) {
+              height: 200px;
+              width: 240px;
+              min-width: 240px;
+            }
+
+            @media(max-width: 991px) {
+              height: 180px;
+              width: 220px;
+              min-width: 220px;
+            }
+
+            @media(max-width: 767px) {
+              height: 160px;
+              width: 200px;
+              min-width: 200px;
             }
           }
         }
@@ -722,23 +1136,42 @@ const getBannerUrl = (idx) => {
           /* 15px */
           text-transform: uppercase;
         }
-      }
 
-      @media(max-width: 767px) {
-        display: none;
+        @media(max-width: 1199px) {
+          padding: 12px 16px;
+
+          span {
+            font-size: 10pt;
+          }
+        }
+
+        @media(max-width: 767px) {
+          display: none;
+        }
       }
     }
 
     @media(max-width: 1199px) {
       top: 54px;
+      max-height: calc(100vh - 54px);
+      height: auto;
+      min-height: 200px;
     }
 
     @media(max-width: 991px) {
-      height: 290px;
+      height: auto;
+      max-height: calc(100vh - 54px);
+      min-height: 250px;
     }
 
     @media(max-width: 767px) {
       height: auto;
+      max-height: calc(100vh - 54px);
+      min-height: 200px;
+      left: 0;
+      transform: none;
+      width: 100%;
+      max-width: 100%;
     }
   }
 
@@ -752,6 +1185,7 @@ const getBannerUrl = (idx) => {
     overflow: hidden;
     color: #fff;
     text-overflow: ellipsis;
+    padding: 8px;
 
     /* Desktop/Headings/H4 */
     font-family: Play;
@@ -762,12 +1196,24 @@ const getBannerUrl = (idx) => {
     /* 30px */
     text-transform: uppercase;
 
+    @media(max-width: 1399px) {
+      font-size: 18px;
+      padding: 6px;
+    }
+
     @media(max-width: 1199px) {
       font-size: 14pt;
+      padding: 5px;
     }
 
     @media(max-width: 991px) {
       font-size: 12pt;
+      padding: 4px;
+    }
+
+    @media(max-width: 767px) {
+      font-size: 10pt;
+      padding: 4px;
     }
   }
 }
@@ -822,6 +1268,37 @@ const getBannerUrl = (idx) => {
 
   @media(max-width: 767px) {
     display: flex;
+  }
+}
+
+.icon_motowork {
+  max-width: 140px;
+  margin-top: -10px;
+}
+
+.hide-on-1300 {
+  @media(max-width: 1300px) {
+    display: none;
+  }
+}
+
+.categories-section {
+  @media(max-width: 767px) {
+    display: none;
+  }
+}
+
+.categories-vehicles-desktop {
+  @media(max-width: 1199px) {
+    display: none;
+  }
+}
+
+.categories-vehicles-tablet {
+  display: none;
+
+  @media(min-width: 768px) and (max-width: 1199px) {
+    display: block;
   }
 }
 </style>
