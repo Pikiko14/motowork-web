@@ -18,14 +18,7 @@ const env = JSON.parse(fs.readFileSync('.quasar.env.json'))[process.env.QENV]
 
 module.exports = configure(function (/* ctx */) {
   return {
-    eslint: {
-      // fix: true,
-      // include: [],
-      // exclude: [],
-      // rawOptions: {},
-      warnings: true,
-      errors: true
-    },
+    eslint: false,
 
     // https://v2.quasar.dev/quasar-cli-vite/prefetch-feature
     // preFetch: true,

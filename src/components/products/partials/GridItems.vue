@@ -3,14 +3,15 @@
     <!--items grid-->
     <div class="motowork-item-page__grid--items">
       <!--item product-->
-      <article class="motowork-item-page__grid--items__product" v-for="(product, idx) in products" :key="idx" @click="handlerRouterPush(product)">
+      <article v-show="route.query.state !== 'Usada'" class="motowork-item-page__grid--items__product"
+        v-for="(product, idx) in products" :key="idx" @click="handlerRouterPush(product)">
         <figure>
           <img :src="getBannerUrl(idx)" :alt="`Imagen de la motocicleta ${product.name}`" title="product.name" />
           <div class="overflow">
-            <q-btn :to="`/vehiculos/${urlString(product.name)}?reference=${product._id}`" v-if="route.query.type !== 'product'"
-              square outline color="white" label="Ver vehículo"></q-btn>
-            <q-btn :to="`/productos/${urlString(product.name)}?reference=${product._id}`" v-else square outline color="white"
-            :label="$q.screen.gt.xs ? 'Agregar al carrito' : 'Agregar'"></q-btn>
+            <q-btn :to="`/vehiculos/${urlString(product.name)}?reference=${product._id}`"
+              v-if="route.query.type !== 'product'" square outline color="white" label="Ver vehículo"></q-btn>
+            <q-btn :to="`/productos/${urlString(product.name)}?reference=${product._id}`" v-else square outline
+              color="white" :label="$q.screen.gt.xs ? 'Agregar al carrito' : 'Agregar'"></q-btn>
           </div>
         </figure>
 
@@ -26,6 +27,17 @@
         </div>
       </article>
       <!--end item product-->
+
+      <!--Image for used vehicles-->
+      <div v-if="route.query.state === 'Usada' && route.query.type === 'vehicle'" class="used-vehicles-image">
+        <img src="/images/juanrestrepo.webp" alt="Motos usadas" />
+        <div class="whatsapp-contact" @click="openWhatsApp">
+          <q-icon name="fab fa-whatsapp" size="32px" class="whatsapp-icon" />
+          <p class="whatsapp-label">WHATSAPP</p>
+          <p class="phone-number">310 444 4555</p>
+        </div>
+      </div>
+      <!--end image for used vehicles-->
     </div>
     <!--end items grid-->
 
@@ -228,6 +240,13 @@ const handlerRouterPush = (product) => {
   })
 }
 
+const openWhatsApp = () => {
+  const phoneNumber = '573104444555'
+  const message = encodeURIComponent('Hola quisiera mas información sobre los vehiculos usados que tienes en tu inventario')
+  const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${message}`
+  window.open(whatsappUrl, '_blank')
+}
+
 // hook
 onBeforeMount(() => {
   if (route.query.filter) {
@@ -252,6 +271,59 @@ onBeforeMount(() => {
 
   &:hover {
     color: $secondary;
+  }
+}
+
+.used-vehicles-image {
+  width: 70%;
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+
+  .whatsapp-contact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  .whatsapp-icon {
+    color: #25D366;
+  }
+
+  .whatsapp-label {
+    text-align: center;
+    margin: 0;
+    font-size: 14pt;
+    font-weight: 700;
+    color: #000;
+    text-transform: uppercase;
+  }
+
+  .phone-number {
+    text-align: center;
+    margin: 0;
+    font-size: 16pt;
+    font-weight: 700;
+    color: #ED1C24;
+  }
+
+  @media(max-width: 767px) {
+    width: 100%;
   }
 }
 </style>

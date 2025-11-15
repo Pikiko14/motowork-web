@@ -183,14 +183,20 @@
             <!--End categories list-->
 
             <!--actuon link-->
-            <div class="categories-and-all__action-link" @click="openAllProducts">
-              <q-icon size="12pt" name="img:/images/explore.png"></q-icon>
-              <span v-if="itemToShow === 'vehicle'">
-                Explorar todas las motos yamaha
-              </span>
-              <span v-else>
-                Explorar todos las accesorios
-              </span>
+            <div class="categories-and-all__action-links">
+              <div class="categories-and-all__action-link" @click="openAllProducts">
+                <q-icon size="12pt" name="img:/images/explore.png"></q-icon>
+                <span v-if="itemToShow === 'vehicle'">
+                  Explorar todas las motos yamaha
+                </span>
+                <span v-else>
+                  Explorar todos las accesorios
+                </span>
+              </div>
+              <div v-if="itemToShow === 'vehicle'" class="categories-and-all__action-link"
+                @click="router.push({ path: '/vehiculos', query: { page: 1, perPage: 9, sortBy: 'createdAt', order: '-1', type: 'vehicle', state: 'Usada' } }); showMenu = false">
+                <span>Motos usadas</span>
+              </div>
             </div>
             <!--end action link-->
 
@@ -1117,13 +1123,27 @@ const getBannerUrl = (idx) => {
         }
       }
 
-      &__action-link {
+      &__action-links {
         border-top: 1px solid #CCCBCB;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 24px;
+
+        @media(max-width: 1199px) {
+          padding: 12px 16px;
+        }
+
+        @media(max-width: 767px) {
+          display: none;
+        }
+      }
+
+      &__action-link {
         display: flex;
         gap: 12px;
         align-items: center;
         cursor: pointer;
-        padding: 16px 24px;
 
         span {
           color: #000;
@@ -1138,15 +1158,9 @@ const getBannerUrl = (idx) => {
         }
 
         @media(max-width: 1199px) {
-          padding: 12px 16px;
-
           span {
             font-size: 10pt;
           }
-        }
-
-        @media(max-width: 767px) {
-          display: none;
         }
       }
     }

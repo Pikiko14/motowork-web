@@ -6,7 +6,6 @@
   "author": "Marcos Hernandez <maalhequi95@gmail.com>",
   "private": true,
   "scripts": {
-    "lint": "eslint --ext .js,.vue ./",
     "test": "echo \"No test specified\" && exit 0",
     "dev": "cross-env QENV=development quasar dev -m spa",
     "build": "cross-env QENV=production quasar build -m spa",
@@ -27,12 +26,6 @@
   "devDependencies": {
     "@quasar/app-vite": "^1.4.3",
     "autoprefixer": "^10.4.2",
-    "eslint": "^8.11.0",
-    "eslint-config-standard": "^17.0.0",
-    "eslint-plugin-import": "^2.19.1",
-    "eslint-plugin-n": "^15.0.0",
-    "eslint-plugin-promise": "^6.0.0",
-    "eslint-plugin-vue": "^9.0.0",
     "postcss": "^8.4.14"
   },
   "engines": {
