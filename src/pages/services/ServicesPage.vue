@@ -5,7 +5,7 @@
     <!--End breadcrumb-->
 
     <!--Banner-->
-    <BannerMotowork :title="'Servicio técnico.'" is-experience-banner default-img="/images/services_image.webp"
+    <BannerMotowork :title="'Servicio técnico.'" is-experience-banner default-img="/images/equipo-tecnico.webp"
       :btnLabel="''"
       :bannerComplement="'En Moto Work, nos apasiona tu seguridad y tranquilidad en la vía. Por eso, te ofrecemos un Servicio Técnico de primera clase, con expertos altamente calificados.'" />
     <!--End banner-->
@@ -46,7 +46,8 @@
             FECHA Y HORA
           </h2>
           <p>
-            La fecha y hora que selecciones asegura la recepción de tu motocicleta en el centro de servicio de Moto Work.
+            La fecha y hora que selecciones asegura la recepción de tu motocicleta en el centro de servicio de Moto
+            Work.
           </p>
 
           <q-date class="shadow-0 full-width" v-model="dateModel" minimal :options="datesAvailable" />
@@ -323,6 +324,29 @@
     </q-form>
     <!--End stepper content-->
 
+    <!--Combos Carousel-->
+    <section class="container-motowork bg-white">
+      <div class="combos-carousel-section">
+        <h2 class="combos-carousel-section__title">
+          Combos
+        </h2>
+        <div class="combos-carousel-container">
+          <q-btn round unelevated color="secondary" size="md" class="combos-carousel-arrow combos-carousel-arrow-left"
+            @click="scrollCombosCarousel('left')" icon="chevron_left" />
+          <div class="combos-carousel" ref="combosCarousel">
+            <div class="combos-carousel__items">
+              <div v-for="(combo, idx) in combosImages" :key="idx" class="combos-carousel__item">
+                <img :src="combo.src" :alt="combo.alt" class="combos-carousel__image" />
+              </div>
+            </div>
+          </div>
+          <q-btn round unelevated color="secondary" size="md" class="combos-carousel-arrow combos-carousel-arrow-right"
+            @click="scrollCombosCarousel('right')" icon="chevron_right" />
+        </div>
+      </div>
+    </section>
+    <!--End Combos Carousel-->
+
     <!--Complement text-->
     <section class="container-motowork bg-white">
       <div class="motowork-complement">
@@ -454,6 +478,37 @@ const {
   getCategories,
   categories
 } = useCategoriesContent()
+
+// Combos carousel
+const combosCarousel = ref(null)
+const combosImages = [
+  { src: '/images/1.webp', alt: 'Combo 1' },
+  { src: '/images/2.webp', alt: 'Combo 2' },
+  { src: '/images/3.webp', alt: 'Combo 3' },
+  { src: '/images/4.webp', alt: 'Combo 4' },
+  { src: '/images/5.webp', alt: 'Combo 5' },
+  { src: '/images/6.webp', alt: 'Combo 6' },
+  { src: '/images/7.webp', alt: 'Combo 7' },
+  { src: '/images/8.webp', alt: 'Combo 8' }
+]
+
+const scrollCombosCarousel = (direction) => {
+  if (!combosCarousel.value) return
+  const container = combosCarousel.value.querySelector('.combos-carousel__items')
+  if (!container) return
+
+  const itemWidth = container.querySelector('.combos-carousel__item')?.offsetWidth || 0
+  const gap = 16 // gap between items
+  const itemsToScroll = window.innerWidth <= 767 ? 1 : 2 // 2 items in desktop, 1 in mobile
+  const scrollAmount = (itemWidth + gap) * itemsToScroll
+
+  if (direction === 'left') {
+    container.scrollBy({ left: -scrollAmount, behavior: 'smooth' })
+  } else {
+    container.scrollBy({ left: scrollAmount, behavior: 'smooth' })
+  }
+}
+
 const options = [
   {
     label: 'Muy fácil',
@@ -569,7 +624,7 @@ const metaData = {
     },
     ogTitle: {
       property: 'og:title',
-      template (ogTitle) {
+      template(ogTitle) {
         return `${ogTitle} - Agenda de servicios`
       }
     },
@@ -1064,5 +1119,127 @@ getCategories('?page=1&perPage=30&type=vehicle')
 
 .relative {
   position: relative;
+}
+
+.combos-carousel-section {
+  padding: 18px 0 48px 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  &__title {
+    color: #000;
+    font-family: Play;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 125%;
+    text-transform: uppercase;
+    text-align: left;
+
+    @media (max-width: 767px) {
+      font-size: 18px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    padding: 2px 0 32px 0;
+    gap: 16px;
+  }
+}
+
+.combos-carousel-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 16px;
+}
+
+.combos-carousel {
+  flex: 1;
+  overflow: hidden;
+  width: 100%;
+
+  &__items {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: #ccc #f5f5f5;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x;
+
+    &::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #f5f5f5;
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #ccc;
+      border-radius: 4px;
+
+      &:hover {
+        background: #999;
+      }
+    }
+
+    @media (max-width: 767px) {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
+
+  &__item {
+    flex: 0 0 calc(50% - 8px);
+    min-width: calc(50% - 8px);
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media (max-width: 767px) {
+      flex: 0 0 calc(100% - 8px);
+      min-width: calc(100% - 8px);
+    }
+  }
+
+  &__image {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    display: block;
+  }
+}
+
+.combos-carousel-arrow {
+  position: relative;
+  z-index: 10;
+  background-color: #ED1C24 !important;
+  color: #fff !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+
+  &:hover {
+    background-color: rgba(237, 28, 36, 0.9) !important;
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  }
+
+  @media (max-width: 767px) {
+    display: none;
+  }
 }
 </style>

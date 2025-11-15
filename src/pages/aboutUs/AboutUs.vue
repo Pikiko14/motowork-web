@@ -5,8 +5,7 @@
     <!--End breadcrumb-->
 
     <!--Banner-->
-    <BannerMotowork :title="'Conócenos.'" default-img="/images/motowork_banner.jpg" :btnLabel="''"
-      :is-about-banner="true"
+    <BannerMotowork :title="'Conócenos.'" default-img="/images/fachada.webp" :btnLabel="''" :is-about-banner="true"
       :bannerComplement="'Somos empresa colombiana con más de 23 años de experiencia, especializada en la venta de motocicletas, repuestos, accesorios y servicios técnicos de la marca YAMAHA.'" />
     <!--End banner-->
 
@@ -90,7 +89,10 @@
           <div class="col-12 col-md-6" :class="{ 'q-pl-md': $q.screen.gt.sm, 'q-mt-lg': $q.screen.lt.md }">
             <h2>Visión</h2>
             <p class="q-mt-sm">
-              Ser la empresa líder en la distribución de motocicletas Yamaha, repuestos y accesorios en nuestra de las mejores marcas, ofreciendo un servicio técnico de excelencia que garantice la satisfacción y confianza de nuestros clientes. Nos enfocamos en la innovación, la calidad y la pasión por el motociclismo, brindando soluciones integrales que potencien la movilidad y el estilo de vida de nuestros clientes.
+              Ser la empresa líder en la distribución de motocicletas Yamaha, repuestos y accesorios en nuestra de las
+              mejores marcas, ofreciendo un servicio técnico de excelencia que garantice la satisfacción y confianza de
+              nuestros clientes. Nos enfocamos en la innovación, la calidad y la pasión por el motociclismo, brindando
+              soluciones integrales que potencien la movilidad y el estilo de vida de nuestros clientes.
             </p>
           </div>
         </div>
@@ -118,7 +120,7 @@
         <div class="our-team-section__body">
           <article class="our-team-section__body--item">
             <figure>
-              <img src="/images/equipo_02.webp" alt="Imagen del area 01" title="Imagen del area 01">
+              <img src="/images/equipo-tecnico.webp" alt="Imagen del area 01" title="Imagen del area 01">
               <div class="overflow"></div>
             </figure>
             <div class="our-team-section__body--item__content">
@@ -129,7 +131,7 @@
 
           <article class="our-team-section__body--item">
             <figure>
-              <img src="/images/equipo_01.webp" alt="Imagen del area 02" title="Imagen del area 02">
+              <img src="/images/repuestos.webp" alt="Imagen del area 02" title="Imagen del area 02">
               <div class="overflow"></div>
             </figure>
             <div class="our-team-section__body--item__content">
@@ -140,7 +142,18 @@
 
           <article class="our-team-section__body--item">
             <figure>
-              <img src="/images/area_ventas.webp" alt="Imagen del area 03" title="Imagen del area 03">
+              <img src="/images/ventas.webp" alt="Imagen del area 03" title="Imagen del area 03">
+              <div class="overflow"></div>
+            </figure>
+            <div class="our-team-section__body--item__content">
+              <h3>MOTO WORK</h3>
+              <p>Area de ventas</p>
+            </div>
+          </article>
+
+          <article class="our-team-section__body--item">
+            <figure>
+              <img src="/images/juanrestrepo.webp" alt="Imagen del area 03" title="Imagen del area 03">
               <div class="overflow"></div>
             </figure>
             <div class="our-team-section__body--item__content">
@@ -153,6 +166,31 @@
       </div>
     </section>
     <!--End team section-->
+
+    <section class="container-motowork bg-white">
+      <div class="history-section">
+        <!--header history-->
+        <div class="history-section__header">
+          <h2>
+            Ubicación
+          </h2>
+          <div class="separator"></div>
+          <span>
+            sobre nosotros
+          </span>
+        </div>
+        <!--End header history-->
+
+        <!--History body-->
+        <div class="row q-mt-lg history-section__vision">
+          <iframe data-v-68c8b772=""
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1983.2057448431199!2d-75.57723124425392!3d6.209332642929867!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e4429d504c5c7eb%3A0x9c0c7eb2c1a4ebb2!2sMotoWork!5e0!3m2!1ses!2sco!4v1759943186852!5m2!1ses!2sco"
+            width="100%" height="650" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            style="border: 0px;"></iframe>
+        </div>
+        <!--End history body-->
+      </div>
+    </section>
 
     <!--porque elegirnos-->
     <section class="container-motowork bg-gray-motowork wySelectus-section" ref="wySelectus">
@@ -284,7 +322,7 @@ const metaData = {
     },
     ogTitle: {
       property: 'og:title',
-      template (ogTitle) {
+      template(ogTitle) {
         return `${ogTitle} - Sobre nosotros`
       }
     },
@@ -591,23 +629,27 @@ onMounted(async () => {
     margin-top: 56px;
     gap: 16px;
     width: 100%;
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    @media(max-width: 1500px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
 
     &--item {
-      flex: 1;
       gap: 24px;
       display: flex;
       flex-direction: column;
 
       figure {
         width: 100%;
-        height: 360px;
         position: relative;
 
         img {
           width: 100%;
           height: 100%;
           object-fit: cover;
+          object-position: center;
         }
       }
 
@@ -657,7 +699,7 @@ onMounted(async () => {
     }
 
     @media(max-width: 767px) {
-      flex-direction: column;
+      grid-template-columns: 1fr;
       gap: 24px;
     }
   }

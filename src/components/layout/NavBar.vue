@@ -21,7 +21,7 @@
           <li @mouseenter="handleMouseEnter('vehicle')" @mouseleave="handleMouseLeave"
             @click="openHamburguerMenu('vehicle')"><q-btn flat class="text-uppercase">Motos</q-btn></li>
           <li @mouseenter="handleMouseEnter('product')" @mouseleave="handleMouseLeave"
-            @click="openHamburguerMenu('product')"><q-btn flat class="text-uppercase">Accesorios</q-btn></li>
+            @click="openHamburguerMenu('product')"><q-btn flat class="text-uppercase">Tienda</q-btn></li>
           <li><q-btn flat to="/servicio-tecnico" class="text-uppercase">Servicio técnico</q-btn></li>
           <li><q-btn flat to="/experiencias" class="text-uppercase">Experiencias</q-btn></li>
           <li><q-btn flat to="/conocenos" class="text-uppercase">Nosotros</q-btn></li>
@@ -97,7 +97,7 @@
                   to="/productos?page=1&perPage=9&sortBy=createdAt&order=-1&type=product&state=Nueva">
                   <q-item-section>
                     <q-item-label class="accessories-new-label">
-                      Accesorios nuevos
+                      Tienda
                     </q-item-label>
                   </q-item-section>
                 </q-item>
@@ -108,7 +108,7 @@
               <li><q-btn to="/vehiculos?page=1&perPage=9&sortBy=createdAt&order=-1&type=vehicle" flat
                   class="text-uppercase">Motos</q-btn></li>
               <li><q-btn to="/productos?page=1&perPage=9&sortBy=createdAt&order=-1&type=product&state=Nueva" flat
-                  class="text-uppercase">Accesorios</q-btn></li>
+                  class="text-uppercase">Tienda</q-btn></li>
               <li><q-btn flat to="/servicio-tecnico" class="text-uppercase text-left">Servicio técnico</q-btn></li>
               <li><q-btn flat to="/experiencias" class="text-uppercase">Experiencias</q-btn></li>
               <li><q-btn flat to="/conocenos" class="text-uppercase">Nosotros</q-btn></li>
@@ -142,14 +142,18 @@
           <div class="categories-and-all">
             <!--vehicles list (solo para vehicle en desktop)-->
             <div v-if="itemToShow === 'vehicle'" class="categories-and-all__categories categories-vehicles-desktop">
-              <div class="categories-and-all__categories--grid full-width">
-                <figure v-for="(vehicle, idx) in vehiclesMenu" :key="idx" @click="goToVehicle(vehicle)">
-                  <q-img :src="getVehicleImage(vehicle)">
-                    <div class="absolute-bottom text-subtitle1 text-center caption">
-                      {{ vehicle.name }}
-                    </div>
-                  </q-img>
-                </figure>
+              <div class="carousel-container">
+                <q-btn class="carousel-arrow carousel-arrow-left" @click="scrollCarousel('left')" round unelevated
+                  color="secondary" icon="chevron_left" size="md" />
+                <div ref="vehiclesCarousel" class="categories-and-all__categories--grid full-width">
+                  <figure v-for="(vehicle, idx) in vehiclesMenu" :key="idx" @click="goToVehicle(vehicle)">
+                    <q-img :src="getVehicleImage(vehicle)">
+                    </q-img>
+                    <figcaption>{{ vehicle.name }}</figcaption>
+                  </figure>
+                </div>
+                <q-btn class="carousel-arrow carousel-arrow-right" @click="scrollCarousel('right')" round unelevated
+                  color="secondary" icon="chevron_right" size="md" />
               </div>
             </div>
             <!--End vehicles list-->
@@ -170,14 +174,18 @@
 
             <!--categories list (solo para product)-->
             <div v-if="itemToShow === 'product'" class="categories-and-all__categories">
-              <div class="categories-and-all__categories--grid-categories full-width">
-                <figure v-for="(cat, idx) in categoriesMenu" :key="idx" @click="pushRoute(cat.name)">
-                  <q-img :src="cat.icon">
-                    <div class="absolute-bottom text-subtitle1 text-center caption">
-                      {{ cat.name }}
-                    </div>
-                  </q-img>
-                </figure>
+              <div class="carousel-container">
+                <q-btn class="carousel-arrow carousel-arrow-left" @click="scrollCarousel('left')" round unelevated
+                  color="secondary" icon="chevron_left" size="md" />
+                <div ref="productsCarousel" class="categories-and-all__categories--grid full-width">
+                  <figure v-for="(cat, idx) in categoriesMenu" :key="idx" @click="pushRoute(cat.name)">
+                    <q-img :src="cat.icon">
+                    </q-img>
+                    <figcaption>{{ cat.name }}</figcaption>
+                  </figure>
+                </div>
+                <q-btn class="carousel-arrow carousel-arrow-right" @click="scrollCarousel('right')" round unelevated
+                  color="secondary" icon="chevron_right" size="md" />
               </div>
             </div>
             <!--End categories list-->
@@ -190,7 +198,7 @@
                   Explorar todas las motos yamaha
                 </span>
                 <span v-else>
-                  Explorar todos las accesorios
+                  Explorar toda la tienda
                 </span>
               </div>
               <div v-if="itemToShow === 'vehicle'" class="categories-and-all__action-link"
@@ -273,6 +281,8 @@ const menuTimeout = ref(null)
 const isHoveringMenu = ref(false)
 const vehiclesMenu = ref([])
 const selectedCategory = ref('ADVENTURE')
+const vehiclesCarousel = ref(null)
+const productsCarousel = ref(null)
 
 // computed
 const itemsInCart = computed(() => {
@@ -459,18 +469,11 @@ const goToVehicle = (vehicle) => {
 }
 
 const getVehicleImage = (vehicle) => {
-  if (!vehicle.banner || !vehicle.banner.length) {
-    return ''
+  if (!vehicle.images || !vehicle.images.length) {
+    return '';
   }
-  const mobileBanner = vehicle.banner.find((b) => b.type_banner === 'mobile')
-  if (mobileBanner) {
-    return mobileBanner.path
-  }
-  const desktopBanner = vehicle.banner.find((b) => b.type_banner === 'desktop')
-  if (desktopBanner) {
-    return desktopBanner.path
-  }
-  return vehicle.banner[0]?.path || ''
+  const img = vehicle?.images[0]
+  return img?.path || ''
 }
 
 const openAllProducts = () => {
@@ -526,6 +529,20 @@ const getBannerUrl = (idx) => {
     }
   }
   return url
+}
+
+const scrollCarousel = (direction) => {
+  const carousel = itemToShow.value === 'vehicle' ? vehiclesCarousel.value : productsCarousel.value
+  if (!carousel) return
+  const scrollAmount = 300
+  const currentScroll = carousel.scrollLeft
+  const newScroll = direction === 'left'
+    ? currentScroll - scrollAmount
+    : currentScroll + scrollAmount
+  carousel.scrollTo({
+    left: newScroll,
+    behavior: 'smooth'
+  })
 }
 </script>
 
@@ -839,7 +856,7 @@ const getBannerUrl = (idx) => {
 
   &__hamgurger-menu {
     display: none;
-    height: 335px;
+    height: 385px;
     max-height: calc(100vh - 72px);
     position: absolute;
     background: #fff;
@@ -954,6 +971,39 @@ const getBannerUrl = (idx) => {
           padding: 12px;
         }
 
+        .carousel-container {
+          position: relative;
+          display: flex;
+          align-items: center;
+          width: 100%;
+
+          .carousel-arrow {
+            position: absolute;
+            z-index: 10;
+            background-color: #ED1C24;
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+
+            &:hover {
+              background-color: #c4161d;
+              transform: scale(1.1);
+            }
+
+            &.carousel-arrow-left {
+              left: 8px;
+            }
+
+            &.carousel-arrow-right {
+              right: 8px;
+            }
+
+            @media(max-width: 768px) {
+              display: none;
+            }
+          }
+        }
+
         &--grid {
           display: flex;
           flex-direction: row;
@@ -1005,40 +1055,86 @@ const getBannerUrl = (idx) => {
 
           figure {
             cursor: pointer;
-            height: 250px;
             width: 250px;
             min-width: 250px;
             flex-shrink: 0;
             margin: 0;
+            display: flex;
+            flex-direction: column;
 
             .q-img {
               width: 100%;
-              height: 100%;
-              object-fit: cover;
+              height: 250px;
+              background-color: #fff;
+
+              :deep(img) {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+              }
+            }
+
+            figcaption {
+              margin-top: 8px;
+              text-align: center;
+              color: #000;
+              font-family: Play;
+              font-size: 14pt;
+              font-weight: 700;
+              text-transform: uppercase;
+              line-height: 1.2;
             }
 
             @media(max-width: 1399px) {
-              height: 220px;
               width: 220px;
               min-width: 220px;
+
+              .q-img {
+                height: 220px;
+              }
+
+              figcaption {
+                font-size: 12pt;
+              }
             }
 
             @media(max-width: 1199px) {
-              height: 200px;
               width: 200px;
               min-width: 200px;
+
+              .q-img {
+                height: 200px;
+              }
+
+              figcaption {
+                font-size: 11pt;
+              }
             }
 
             @media(max-width: 991px) {
-              height: 180px;
               width: 180px;
               min-width: 180px;
+
+              .q-img {
+                height: 180px;
+              }
+
+              figcaption {
+                font-size: 10pt;
+              }
             }
 
             @media(max-width: 767px) {
-              height: 160px;
               width: 160px;
               min-width: 160px;
+
+              .q-img {
+                height: 160px;
+              }
+
+              figcaption {
+                font-size: 9pt;
+              }
             }
           }
         }

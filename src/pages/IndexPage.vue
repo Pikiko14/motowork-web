@@ -1,10 +1,42 @@
 <template>
   <q-page>
-    <!--Banner-->
-    <BannerMotowork :default-img="'/images/urfm8rjjfdonjh63f8xi.webp'" :title="'Moto work'"
-      :banner="storeBenner || banner" :btnLabel="'Adquiere tu moto'"
-      :bannerComplement="'Consigue la moto que mejor se acople a tus gustos, no esperes más y adquiere tu moto con nosotros.'" />
-    <!--End banner-->
+    <!--Alert Banner Estafas-->
+    <div v-if="showEstafasBanner" class="estafas-banner">
+      <div class="estafas-banner__container">
+        <img src="/images/estafas1.webp" alt="Alerta sobre estafas" class="estafas-banner__image" />
+        <q-btn class="estafas-banner__close" @click="closeEstafasBanner" flat dense round icon="close" color="white" />
+      </div>
+    </div>
+    <!--End Alert Banner Estafas-->
+
+    <!--Image Carousel-->
+    <section class="motowork-hero-carousel">
+      <div class="motowork-hero-carousel__container">
+        <q-carousel v-model="carouselSlide" infinite animated swipeable transition-prev="slide-right"
+          transition-next="slide-left" control-color="secondary" class="motowork-hero-carousel__carousel">
+          <q-carousel-slide v-for="(image, idx) in carouselImages" :key="idx" :name="idx"
+            class="motowork-hero-carousel__slide">
+            <img width="100%" :src="image.src" :alt="image.alt"
+              :class="['motowork-hero-carousel__image', { 'motowork-hero-carousel__image--cover': idx === 1 }]"
+              loading="eager" />
+          </q-carousel-slide>
+
+          <template v-slot:control>
+            <q-carousel-control position="left" :offset="[18, 18]"
+              class="motowork-hero-carousel__control motowork-hero-carousel__control--left">
+              <q-btn round unelevated color="secondary" icon="chevron_left" size="lg" @click="previousSlide"
+                class="motowork-hero-carousel__arrow" />
+            </q-carousel-control>
+            <q-carousel-control position="right" :offset="[18, 18]"
+              class="motowork-hero-carousel__control motowork-hero-carousel__control--right">
+              <q-btn round unelevated color="secondary" icon="chevron_right" size="lg" @click="nextSlide"
+                class="motowork-hero-carousel__arrow" />
+            </q-carousel-control>
+          </template>
+        </q-carousel>
+      </div>
+    </section>
+    <!--End Image Carousel-->
 
     <!--Categories accessories-->
     <section class="container-motowork">
@@ -192,7 +224,6 @@ import GridHome from 'src/components/categories/GridHome.vue'
 import { useStoreContent } from 'src/stores/storeContent-store'
 import { useBannersContent } from 'src/composables/useBannerContent'
 import GridVehicles from 'src/components/categories/GridVehicles.vue'
-import BannerMotowork from 'src/components/banner/BannerMotowork.vue'
 import { useProductsContent } from 'src/composables/useProductContent'
 import { computed, onBeforeMount, onMounted, onUnmounted, ref } from 'vue'
 import { useInstangramContent } from 'src/composables/useInstagramContent'
@@ -221,6 +252,60 @@ const newsletterSection = ref(null)
 
 const storeBenner = store.filterBanner('home')
 const instagramsFeeds = store.instagramsFeeds
+
+// Estafas banner
+const showEstafasBanner = ref(false)
+
+const checkEstafasBanner = () => {
+  const hasSeenBanner = localStorage.getItem('estafasBannerClosed')
+  if (!hasSeenBanner) {
+    showEstafasBanner.value = true
+  }
+}
+
+const closeEstafasBanner = () => {
+  showEstafasBanner.value = false
+  localStorage.setItem('estafasBannerClosed', 'true')
+}
+
+// Carousel
+const carouselSlide = ref(0)
+const carouselImages = [
+  {
+    src: '/images/horario-motowork-1.webp',
+    alt: 'Horario de atención Moto Work'
+  },
+  {
+    src: '/images/fachada.webp',
+    alt: 'Fachada de Moto Work'
+  },
+  {
+    src: '/images/estafas1.webp',
+    alt: 'Alerta sobre estafas Moto Work'
+  }
+]
+const carouselAutoplayInterval = ref(null)
+
+const previousSlide = () => {
+  carouselSlide.value = carouselSlide.value === 0 ? carouselImages.length - 1 : carouselSlide.value - 1
+}
+
+const nextSlide = () => {
+  carouselSlide.value = carouselSlide.value === carouselImages.length - 1 ? 0 : carouselSlide.value + 1
+}
+
+const startAutoplay = () => {
+  carouselAutoplayInterval.value = setInterval(() => {
+    nextSlide()
+  }, 5000) // Cambia cada 5 segundos
+}
+
+const stopAutoplay = () => {
+  if (carouselAutoplayInterval.value) {
+    clearInterval(carouselAutoplayInterval.value)
+    carouselAutoplayInterval.value = null
+  }
+}
 
 // State to track current resolution range
 const wySelectus = ref(null)
@@ -441,6 +526,12 @@ onBeforeMount(() => {
 })
 
 onMounted(async () => {
+  // Check if banner should be shown
+  checkEstafasBanner()
+
+  // Start carousel autoplay
+  startAutoplay()
+
   if (mostSells.value.length === 0) {
     await getMostSells()
   }
@@ -469,5 +560,121 @@ onMounted(async () => {
 onUnmounted(() => {
   // Clean up the resize event listener
   window.removeEventListener('resize', handleResize)
+  // Stop autoplay
+  stopAutoplay()
 })
 </script>
+
+<style scoped lang="scss">
+.motowork-hero-carousel {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__container {
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  &__carousel {
+    height: 600px;
+    background: #000;
+
+    @media (max-width: 1199px) {
+      height: 500px;
+    }
+
+    @media (max-width: 767px) {
+      height: 400px;
+    }
+
+    @media (max-width: 575px) {
+      height: 300px;
+    }
+  }
+
+  &__slide {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #000;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+
+    &--cover {
+      object-fit: cover;
+    }
+  }
+
+  &__control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+
+    &--left {
+      left: 24px;
+    }
+
+    &--right {
+      right: 24px;
+    }
+
+    @media (max-width: 767px) {
+      display: none;
+    }
+  }
+
+  &__arrow {
+    background-color: rgba(237, 28, 36, 0.9) !important;
+    color: #fff !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(8px);
+
+    &:hover {
+      background-color: rgba(237, 28, 36, 1) !important;
+      transform: scale(1.1);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    @media (max-width: 767px) {
+      width: 40px !important;
+      height: 40px !important;
+      min-width: 40px !important;
+    }
+  }
+
+  :deep(.q-carousel__slide) {
+    padding: 0;
+  }
+
+  :deep(.q-carousel__control) {
+    padding: 0;
+  }
+}
+
+.motowork-hero-carousel__image {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: fill;
+  object-position: center;
+  display: block;
+}
+</style>

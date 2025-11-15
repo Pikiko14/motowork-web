@@ -17,13 +17,13 @@
 
         <div class="motowork-item-page__grid--items__product--content">
           <h2>{{ product.name }}</h2>
-          <h3>ref: {{ product.model }}</h3>
-          <div class="motowork-item-page__grid--items__product--content__price">
+          <!--<h3>ref: {{ product.model }}</h3>-->
+          <!--<div class="motowork-item-page__grid--items__product--content__price">
             <span class="motowork-item-page__grid--items__product--content__price--label">Desde</span>
             <span class="motowork-item-page__grid--items__product--content__price--amount">
               {{ formatPrice(product.discount || product.price) }}
             </span>
-          </div>
+          </div>-->
         </div>
       </article>
       <!--end item product-->
@@ -169,7 +169,7 @@ const props = defineProps({
 // methods
 const getBannerUrl = (idx) => {
   const { images } = props.products[idx]
-  let url = ''
+  let url = 'https://thumbs.dreamstime.com/b/no-image-available-icon-flat-vector-no-image-available-icon-flat-vector-illustration-132482953.jpg?w=768 768w'
   const mobileImage = images.find((image) => image.type === 'mobile')
   if (mobileImage) {
     url = mobileImage.path

@@ -17,6 +17,7 @@
     "cross-env": "^7.0.3",
     "dotenv": "^16.4.7",
     "emailjs-com": "^3.2.0",
+    "owl.carousel": "^2.3.4",
     "pinia": "^2.0.11",
     "quasar": "^2.8.0",
     "vue": "^3.2.29",
