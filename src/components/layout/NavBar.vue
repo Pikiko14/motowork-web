@@ -519,6 +519,7 @@ const handlerSearchProducts = async (e) => {
 const getBannerUrl = (idx) => {
   const { banner } = itemsSearch.value[idx]
   let url = ''
+  console.log(banner)
   const mobileBanner = banner.find((banner) => banner.type_banner === 'mobile')
   if (mobileBanner) {
     url = mobileBanner.path

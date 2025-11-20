@@ -5,9 +5,8 @@
     <!--End breadcrumb-->
 
     <!--Banner-->
-    <BannerMotowork :title="'Servicio técnico.'" is-experience-banner default-img="/images/equipo-tecnico.webp"
-      :btnLabel="''"
-      :bannerComplement="'En Motowork, nos apasiona tu seguridad y tranquilidad en la vía. Por eso, te ofrecemos un Servicio Técnico de primera clase, con expertos altamente calificados.'" />
+    <BannerMotowork :title="''" is-experience-banner mobile-image="/images/servicios-mobile.webp"
+      default-img="/images/servicios.webp" :btnLabel="''" :bannerComplement="''" />
     <!--End banner-->
 
     <!--Stepper-->

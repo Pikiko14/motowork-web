@@ -1,143 +1,191 @@
-import { ref } from 'vue'
-import { api } from 'src/boot/axios'
-import { useStoreContent } from 'src/stores/storeContent-store'
+import { ref } from "vue";
+import { api } from "src/boot/axios";
+import { useStoreContent } from "src/stores/storeContent-store";
 
 export const useCategoriesContent = () => {
-  // references
-  const page = ref(1)
-  const totalPages = ref(0)
-  const path = 'categories'
-  const categories = ref([
-    {
-      _id: '67619118419ac8bb5a07e970',
-      name: 'URBANAS',
-      icon: 'https://res.cloudinary.com/dg14xloef/image/upload/v1734447388/categories/owdzgggpindzee1ecnlv.png',
-      is_active: true,
-      type: 'vehicle',
-      createdAt: '2024-12-17T14:56:24.213Z',
-      updatedAt: '2025-01-12T18:30:06.671Z',
-      count_news: 10,
-      count_used: 5,
-      id: '67619118419ac8bb5a07e970'
-    },
-    {
-      _id: '676190e2419ac8bb5a07e95e',
-      name: 'TODOTERRENO',
-      icon: 'https://res.cloudinary.com/dg14xloef/image/upload/v1734447334/categories/rnecmpkgiwkvj4vdeiby.png',
-      is_active: true,
-      type: 'vehicle',
-      createdAt: '2024-12-17T14:55:30.049Z',
-      updatedAt: '2024-12-17T14:55:31.496Z',
-      count_news: 10,
-      count_used: 5,
-      id: '676190e2419ac8bb5a07e95e'
-    },
-    {
-      _id: '67619092419ac8bb5a07e958',
-      name: 'SÚPER DEPORTIVAS',
-      icon: 'https://res.cloudinary.com/dg14xloef/image/upload/v1734447254/categories/sptaeusgivbcjzsnohrs.png',
-      is_active: true,
-      type: 'vehicle',
-      createdAt: '2024-12-17T14:54:10.607Z',
-      updatedAt: '2024-12-17T14:54:11.688Z',
-      count_news: 10,
-      count_used: 5,
-      id: '67619092419ac8bb5a07e958'
-    },
-    {
-      _id: '67619030419ac8bb5a07e952',
-      name: 'SPORT HERITAGE',
-      icon: 'https://res.cloudinary.com/dg14xloef/image/upload/v1734447156/categories/dcgk6jjvslrapskeg1te.jpg',
-      is_active: true,
-      type: 'vehicle',
-      createdAt: '2024-12-17T14:52:32.467Z',
-      updatedAt: '2024-12-17T14:52:34.503Z',
-      count_news: 10,
-      count_used: 5,
-      id: '67619030419ac8bb5a07e952'
-    },
-    {
-      _id: '67618ff0419ac8bb5a07e94c',
-      name: 'MOTOCROSS Y ENDURO',
-      icon: 'https://res.cloudinary.com/dg14xloef/image/upload/v1734447092/categories/osrmkldqw9k7tgpypsjo.png',
-      is_active: true,
-      type: 'vehicle',
-      createdAt: '2024-12-17T14:51:28.541Z',
-      updatedAt: '2024-12-17T14:51:30.177Z',
-      count_news: 10,
-      count_used: 5,
-      id: '67618ff0419ac8bb5a07e94c'
-    },
-    {
-      _id: '67618fac419ac8bb5a07e946',
-      name: 'DEPORTIVAS',
-      icon: 'https://res.cloudinary.com/dg14xloef/image/upload/v1734447025/categories/eccjc2bjckilhyv0gto9.png',
-      is_active: true,
-      type: 'vehicle',
-      createdAt: '2024-12-17T14:50:20.551Z',
-      updatedAt: '2024-12-17T14:50:23.345Z',
-      count_news: 10,
-      count_used: 5,
-      id: '67618fac419ac8bb5a07e946'
-    }
-  ])
-  const categoriesMenu = ref([])
-  const store = useStoreContent()
+    // references
+    const page = ref(1);
+    const totalPages = ref(0);
+    const path = "categories";
+    // Categorías ordenadas alfabéticamente
+    const sortedCategories = [{
+            _id: "67618e81419ac8bb5a07e934",
+            name: "ADVENTURE",
+            icon: "https://res.cloudinary.com/dg14xloef/image/upload/v1763240154/categories/flde7afk89rnr9axe6o8.png",
+            is_active: true,
+            type: "vehicle",
+            createdAt: "2024-12-17T14:45:21.251Z",
+            updatedAt: "2025-11-15T20:55:55.143Z",
+            count_news: 10,
+            count_used: 5,
+            id: "67618e81419ac8bb5a07e934",
+        },
+        {
+            _id: "67618ed8419ac8bb5a07e93a",
+            name: "AUTOMÁTICAS Y SEMIAUTOMÁTICAS",
+            icon: "https://res.cloudinary.com/dg14xloef/image/upload/v1763240165/categories/sbkl2eucm4i4aohvakl4.png",
+            is_active: true,
+            type: "vehicle",
+            createdAt: "2024-12-17T14:46:48.297Z",
+            updatedAt: "2025-11-15T20:56:06.427Z",
+            count_news: 10,
+            count_used: 5,
+            id: "67618ed8419ac8bb5a07e93a",
+        },
+        {
+            _id: "67618f35419ac8bb5a07e940",
+            name: "CUATRIMOTOS",
+            icon: "https://res.cloudinary.com/dg14xloef/image/upload/v1763240227/categories/e6zoldt9hb2ahy7nimya.png",
+            is_active: true,
+            type: "vehicle",
+            createdAt: "2024-12-17T14:48:21.962Z",
+            updatedAt: "2025-11-15T20:57:08.297Z",
+            count_news: 10,
+            count_used: 5,
+            id: "67618f35419ac8bb5a07e940",
+        },
+        {
+            _id: "67618fac419ac8bb5a07e946",
+            name: "DEPORTIVAS",
+            icon: "https://res.cloudinary.com/dg14xloef/image/upload/v1763555492/categories/b1d1jruw8eureeojoyuf.png",
+            is_active: true,
+            type: "vehicle",
+            createdAt: "2024-12-17T14:50:20.551Z",
+            updatedAt: "2025-11-20T22:04:35.906Z",
+            count_news: 10,
+            count_used: 5,
+            id: "67618fac419ac8bb5a07e946",
+        },
+        {
+            _id: "67618ff0419ac8bb5a07e94c",
+            name: "MOTOCROSS Y ENDURO",
+            icon: "https://res.cloudinary.com/dg14xloef/image/upload/v1763240376/categories/tpvqnhfggwrvrdvwwt6y.png",
+            is_active: true,
+            type: "vehicle",
+            createdAt: "2024-12-17T14:51:28.541Z",
+            updatedAt: "2025-11-15T20:59:37.260Z",
+            count_news: 10,
+            count_used: 5,
+            id: "67618ff0419ac8bb5a07e94c",
+        },
+        {
+            _id: "67619030419ac8bb5a07e952",
+            name: "SPORT HERITAGE",
+            icon: "https://res.cloudinary.com/dg14xloef/image/upload/v1763240385/categories/i2p6oioieqa4sohu3rdg.png",
+            is_active: true,
+            type: "vehicle",
+            createdAt: "2024-12-17T14:52:32.467Z",
+            updatedAt: "2025-11-15T20:59:45.622Z",
+            count_news: 10,
+            count_used: 5,
+            id: "67619030419ac8bb5a07e952",
+        },
+        {
+            _id: "67619092419ac8bb5a07e958",
+            name: "SÚPER DEPORTIVAS",
+            icon: "https://res.cloudinary.com/dg14xloef/image/upload/v1763240393/categories/ppuu98zzoycoy4qnmrdq.png",
+            is_active: true,
+            type: "vehicle",
+            createdAt: "2024-12-17T14:54:10.607Z",
+            updatedAt: "2025-11-15T20:59:53.847Z",
+            count_news: 10,
+            count_used: 5,
+            id: "67619092419ac8bb5a07e958",
+        },
+        {
+            _id: "676190e2419ac8bb5a07e95e",
+            name: "TODOTERRENO",
+            icon: "https://res.cloudinary.com/dg14xloef/image/upload/v1763555509/categories/co7tukpt4yeiy8i6f0au.png",
+            is_active: true,
+            type: "vehicle",
+            createdAt: "2024-12-17T14:55:30.049Z",
+            updatedAt: "2025-11-19T12:31:49.610Z",
+            count_news: 10,
+            count_used: 5,
+            id: "676190e2419ac8bb5a07e95e",
+        },
+        {
+            _id: "67619118419ac8bb5a07e970",
+            name: "URBANAS",
+            icon: "https://res.cloudinary.com/dg14xloef/image/upload/v1763555518/categories/lwzdgceotvuuttseht2a.png",
+            is_active: true,
+            type: "vehicle",
+            createdAt: "2024-12-17T14:56:24.213Z",
+            updatedAt: "2025-11-19T12:31:58.782Z",
+            count_news: 10,
+            count_used: 5,
+            id: "67619118419ac8bb5a07e970",
+        },
+    ];
 
-  // methods
-  const getMenuCategories = async (query) => {
-    try {
-      const { data } = await api.get(`${path}/list/from-web${query}`)
-      if (data.success) {
-        categoriesMenu.value = data.data.categories
-        totalPages.value = data.data.totalPages
-      }
-    } catch (error) {
-      throw new Error(error.message)
-    }
-  }
+    // Reordenar para que la primera categoría (ADVENTURE) quede en el medio
+    // Con 9 categorías, la posición media es la 5 (índice 4)
+    const firstCategory = sortedCategories[0];
+    const middleIndex = Math.floor(sortedCategories.length / 2);
+    const reorderedCategories = [
+        ...sortedCategories.slice(middleIndex + 1), // Categorías después del medio: [F, G, H, I]
+        firstCategory, // Primera categoría en el medio: [A]
+        ...sortedCategories.slice(1, middleIndex + 1), // Categorías antes del medio: [B, C, D, E]
+    ];
 
-  const removeOnePage = () => {
-    page.value--
-  }
+    const categories = ref(reorderedCategories);
+    const categoriesMenu = ref([]);
+    const store = useStoreContent();
 
-  const addOnePage = () => {
-    page.value++
-  }
-
-  const resetPage = () => {
-    page.value = 1
-  }
-
-  const getCategories = async (query, append = false) => {
-    try {
-      const { data } = await api.get(`${path}/list/from-web${query}`)
-      if (data.success) {
-        if (!append) {
-          categories.value = data.data.categories
-        } else {
-          categories.value.push(...data.data.categories)
-          if (page.value === totalPages.value) {
-            store.setCategories(categories.value)
-          }
+    // methods
+    const getMenuCategories = async(query) => {
+        try {
+            const { data } = await api.get(`${path}/list/from-web${query}`);
+            if (data.success) {
+                categoriesMenu.value = data.data.categories;
+                totalPages.value = data.data.totalPages;
+            }
+        } catch (error) {
+            throw new Error(error.message);
         }
+    };
 
-        totalPages.value = data.data.totalPages
-      }
-    } catch (error) {
-      throw new Error(error.message)
-    }
-  }
+    const removeOnePage = () => {
+        page.value--;
+    };
 
-  return {
-    page,
-    resetPage,
-    totalPages,
-    addOnePage,
-    categories,
-    removeOnePage,
-    getCategories,
-    categoriesMenu,
-    getMenuCategories
-  }
-}
+    const addOnePage = () => {
+        page.value++;
+    };
+
+    const resetPage = () => {
+        page.value = 1;
+    };
+
+    const getCategories = async(query, append = false) => {
+        try {
+            const { data } = await api.get(`${path}/list/from-web${query}`);
+            if (data.success) {
+                if (!append) {
+                    categories.value = data.data.categories;
+                } else {
+                    categories.value.push(...data.data.categories);
+                    if (page.value === totalPages.value) {
+                        store.setCategories(categories.value);
+                    }
+                }
+
+                totalPages.value = data.data.totalPages;
+            }
+        } catch (error) {
+            throw new Error(error.message);
+        }
+    };
+
+    return {
+        page,
+        resetPage,
+        totalPages,
+        addOnePage,
+        categories,
+        removeOnePage,
+        getCategories,
+        categoriesMenu,
+        getMenuCategories,
+    };
+};

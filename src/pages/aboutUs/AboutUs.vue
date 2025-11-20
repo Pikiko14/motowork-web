@@ -5,8 +5,8 @@
     <!--End breadcrumb-->
 
     <!--Banner-->
-    <BannerMotowork :title="'Conócenos.'" default-img="/images/fachada.webp" :btnLabel="''" :is-about-banner="true"
-      :bannerComplement="'Somos empresa colombiana con más de 23 años de experiencia, especializada en la venta de motocicletas, repuestos, accesorios y servicios técnicos de la marca YAMAHA.'" />
+    <BannerMotowork mobileImage="/images/2mobile.webp" :title="'.'" default-img="/images/fachada.webp" :btnLabel="''"
+      :is-about-banner="true" :bannerComplement="''" />
     <!--End banner-->
 
     <!--history section-->

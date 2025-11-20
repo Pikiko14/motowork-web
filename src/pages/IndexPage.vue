@@ -17,7 +17,7 @@
           <q-carousel-slide v-for="(image, idx) in carouselImages" :key="idx" :name="idx"
             class="motowork-hero-carousel__slide">
             <img width="100%" :src="image.src" :alt="image.alt"
-              :class="['motowork-hero-carousel__image', { 'motowork-hero-carousel__image--cover': idx === 1 }]"
+              :class="['motowork-hero-carousel__image', { 'motowork-hero-carousel__image--cover': windowWidth > 768 && idx === 1 }]"
               loading="eager" />
           </q-carousel-slide>
 
@@ -83,8 +83,11 @@
     <section class="container-motowork bg-gray-motowork">
       <div class="motowork-newsletter" ref="newsletterSection">
         <figure class="contactanos-image">
-          <img @click="goToContact" class="cursor-pointer" src="/images/contactanos.webp"
-            alt="Contáctanos, imagen utilizada por Motowork" title="Contáctanos, imagen utilizada por Motowork" />
+          <picture @click="goToContact" class="cursor-pointer">
+            <source media="(max-width: 767px)" srcset="/images/mobil-contacto.webp">
+            <img src="/images/contactanos.webp" alt="Contáctanos, imagen utilizada por Motowork"
+              title="Contáctanos, imagen utilizada por Motowork" />
+          </picture>
           <!--<div class="contactanos-button">
             <q-btn class="contactanos-btn" @click="goToContact" unelevated>
               <q-icon name="phone" size="20px" />
@@ -270,7 +273,9 @@ const closeEstafasBanner = () => {
 
 // Carousel
 const carouselSlide = ref(0)
-const carouselImages = [
+const windowWidth = ref(typeof window !== 'undefined' ? window.innerWidth : 1920)
+
+const carouselImagesDesktop = [
   {
     src: '/images/horario-motowork-1.webp',
     alt: 'Horario de atención Motowork'
@@ -280,18 +285,51 @@ const carouselImages = [
     alt: 'Fachada de Motowork'
   },
   {
-    src: '/images/estafas1.webp',
+    src: '/images/estafasbanner.webp',
     alt: 'Alerta sobre estafas Motowork'
   }
 ]
+
+const carouselImagesMobile = [
+  {
+    src: '/images/1mobile.webp',
+    alt: 'Imagen móvil 1 Motowork'
+  },
+  {
+    src: '/images/2mobile.webp',
+    alt: 'Imagen móvil 2 Motowork'
+  },
+  {
+    src: '/images/3mobile.webp',
+    alt: 'Imagen móvil 3 Motowork'
+  }
+]
+
+const carouselImages = computed(() => {
+  return windowWidth.value <= 768 ? carouselImagesMobile : carouselImagesDesktop
+})
+
 const carouselAutoplayInterval = ref(null)
 
 const previousSlide = () => {
-  carouselSlide.value = carouselSlide.value === 0 ? carouselImages.length - 1 : carouselSlide.value - 1
+  carouselSlide.value = carouselSlide.value === 0 ? carouselImages.value.length - 1 : carouselSlide.value - 1
 }
 
 const nextSlide = () => {
-  carouselSlide.value = carouselSlide.value === carouselImages.length - 1 ? 0 : carouselSlide.value + 1
+  carouselSlide.value = carouselSlide.value === carouselImages.value.length - 1 ? 0 : carouselSlide.value + 1
+}
+
+const handleCarouselResize = () => {
+  const newWidth = window.innerWidth
+  const wasMobile = windowWidth.value <= 768
+  const isMobile = newWidth <= 768
+
+  windowWidth.value = newWidth
+
+  // Reset slide when switching between mobile and desktop
+  if (wasMobile !== isMobile) {
+    carouselSlide.value = 0
+  }
 }
 
 const startAutoplay = () => {
@@ -328,13 +366,13 @@ const loadCategoriesAccesories = () => {
   let query = ''
 
   if (resolution > 991) {
-    query = `?page=${page.value}&perPage=4&type=product`
+    query = `?page=${page.value}&perPage=20&type=product`
     getMenuCategories(query)
   } else if (resolution > 767) {
-    query = `?page=${page.value}&perPage=3&type=product`
+    query = `?page=${page.value}&perPage=20&type=product`
     getMenuCategories(query)
   } else {
-    query = `?page=${page.value}&perPage=2&type=product`
+    query = `?page=${page.value}&perPage=20&type=product`
     getMenuCategories(query)
   }
 }
@@ -343,11 +381,14 @@ const handleResize = () => {
   const resolution = getResolutionWidth()
   let query = ''
 
+  // Update carousel window width
+  handleCarouselResize()
+
   if (resolution > 991) {
     if (currentResolutionRange.value !== 'desktop') {
       resetPage()
       currentResolutionRange.value = 'desktop'
-      query = `?page=${page.value}&perPage=4&type=product`
+      query = `?page=${page.value}&perPage=20&type=product`
       getMenuCategories(query)
       loadProduct()
     }
@@ -355,7 +396,7 @@ const handleResize = () => {
     if (currentResolutionRange.value !== 'tablet') {
       resetPage()
       currentResolutionRange.value = 'tablet'
-      query = `?page=${page.value}&perPage=3&type=product`
+      query = `?page=${page.value}&perPage=20&type=product`
       getMenuCategories(query)
       loadProduct()
     }
@@ -363,7 +404,7 @@ const handleResize = () => {
     if (currentResolutionRange.value !== 'mobile') {
       resetPage()
       currentResolutionRange.value = 'mobile'
-      query = `?page=${page.value}&perPage=2&type=product`
+      query = `?page=${page.value}&perPage=20&type=product`
       getMenuCategories(query)
       loadProduct()
     }
@@ -397,13 +438,13 @@ const loadProduct = () => {
   let query = ''
 
   if (resolution > 991) {
-    query = `?page=${pageProduct.value}&perPage=4&type=product`
+    query = `?page=${pageProduct.value}&perPage=20&type=product`
     getProducts(query)
   } else if (resolution > 767) {
-    query = `?page=${pageProduct.value}&perPage=4&type=product`
+    query = `?page=${pageProduct.value}&perPage=20&type=product`
     getProducts(query)
   } else {
-    query = `?page=${pageProduct.value}&perPage=4&type=product`
+    query = `?page=${pageProduct.value}&perPage=20&type=product`
     getProducts(query)
   }
 }
@@ -518,7 +559,7 @@ if (!storeBenner) {
   getBanner('?page=1&perPage=1&type=home')
 }
 handleResize()
-getCategories('?page=1&perPage=6&type=vehicle')
+getCategories('?page=1&perPage=20&type=vehicle')
 
 onBeforeMount(() => {
   // Add resize event listener
@@ -526,6 +567,9 @@ onBeforeMount(() => {
 })
 
 onMounted(async () => {
+  // Initialize carousel window width
+  windowWidth.value = window.innerWidth
+
   // Check if banner should be shown
   checkEstafasBanner()
 
@@ -567,7 +611,8 @@ onUnmounted(() => {
 
 <style scoped lang="scss">
 .motowork-hero-carousel {
-  width: 100%;
+  max-width: 1600px;
+  margin: 0px auto;
   position: relative;
   overflow: hidden;
   display: flex;
@@ -582,19 +627,20 @@ onUnmounted(() => {
   }
 
   &__carousel {
-    height: 600px;
+    height: auto;
+    max-height: 500px;
     background: #000;
 
     @media (max-width: 1199px) {
-      height: 500px;
+      max-height: 500px;
     }
 
     @media (max-width: 767px) {
-      height: 400px;
+      max-height: 400px;
     }
 
     @media (max-width: 575px) {
-      height: 300px;
+      max-height: 300px;
     }
   }
 
@@ -604,19 +650,22 @@ onUnmounted(() => {
     align-items: center;
     justify-content: center;
     background-color: #000;
+    height: auto;
   }
 
   &__image {
     width: 100%;
-    height: 100%;
-    max-width: 100%;
-    max-height: 100%;
+    height: auto;
+    max-height: 500px;
     object-fit: contain;
-    object-position: center;
     display: block;
 
-    &--cover {
-      object-fit: cover;
+    @media (max-width: 767px) {
+      max-height: 400px;
+    }
+
+    @media (max-width: 575px) {
+      max-height: 300px;
     }
   }
 
@@ -673,8 +722,5 @@ onUnmounted(() => {
   height: 100%;
   max-width: 100%;
   max-height: 100%;
-  object-fit: fill;
-  object-position: center;
-  display: block;
 }
 </style>

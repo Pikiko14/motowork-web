@@ -5,8 +5,8 @@
     <!--End breadcrumb-->
 
     <!--Banner-->
-    <BannerMotowork :title="'Experiencias.'" is-experience-banner default-img="/images/banner_experencies.webp"
-      :btnLabel="''" :bannerComplement="'Descubre los mejores eventos de dos ruedas en nuestro blog.'" />
+    <BannerMotowork mobileImage="/images/2mobile.webp" :title="'.'" is-experience-banner
+      default-img="/images/fachada.webp" :btnLabel="''" :bannerComplement="''" />
     <!--End banner-->
 
     <!--Title section-->
@@ -45,24 +45,19 @@
     <!--newsletter-->
     <section class="container-motowork bg-gray-motowork">
       <div class="motowork-newsletter" ref="newsletterSection">
-        <div class="motowork-newsletter__item">
-          <figure>
-            <img src="/images/newsletter-img.webp" alt="Newsletter imagen, utilizada por Motowork"
-              title="Newsletter imagen, utilizada por Motowork" />
-          </figure>
-        </div>
-        <div class="motowork-newsletter__item">
-          <div class="motowork-newsletter__item--content">
-            <h2>Comunidad Motowork</h2>
-            <h3>QUE ESPERAS PARA RODAR CON NOSOTROS</h3>
-            <p>Únete a nuestra comunidad y disfruta de las mejores rodadas y del mejor contenido para moteros
-              aficionados.</p>
-
-            <div class="motowork-newsletter__item--form">
-              <FormFields />
-            </div>
-          </div>
-        </div>
+        <figure class="contactanos-image">
+          <picture @click="goToContact" class="cursor-pointer">
+            <source media="(max-width: 767px)" srcset="/images/mobil-contacto.webp">
+            <img src="/images/contactanos.webp" alt="Contáctanos, imagen utilizada por Motowork"
+              title="Contáctanos, imagen utilizada por Motowork" />
+          </picture>
+          <!--<div class="contactanos-button">
+            <q-btn class="contactanos-btn" @click="goToContact" unelevated>
+              <q-icon name="phone" size="20px" />
+              <span>CONTÁCTANOS</span>
+            </q-btn>
+          </div>-->
+        </figure>
       </div>
     </section>
     <!--News letter-->
@@ -99,7 +94,6 @@ import { ref, onMounted, computed } from 'vue'
 import { formatDateIso } from 'src/utils/utils'
 import BreadCrumb from 'src/components/layout/BreadCrumb.vue'
 import { useStoreContent } from 'src/stores/storeContent-store'
-import FormFields from 'src/components/newsletter/FormFields.vue'
 import { useBlogsContent } from 'src/composables/useBlogsContent'
 import BannerMotowork from 'src/components/banner/BannerMotowork.vue'
 import { useInstangramContent } from 'src/composables/useInstagramContent'
@@ -129,6 +123,12 @@ const showExperience = (experience) => {
     query: {
       reference: experience._id
     }
+  })
+}
+
+const goToContact = () => {
+  router.push({
+    name: 'contact'
   })
 }
 

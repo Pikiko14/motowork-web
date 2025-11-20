@@ -70,7 +70,7 @@ onMounted(async () => {
             stagePadding: 0
           },
           768: {
-            items: 3,
+            items: 1.7,
             stagePadding: 80
           },
           1200: {
