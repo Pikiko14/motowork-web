@@ -472,7 +472,8 @@ const getVehicleImage = (vehicle) => {
   if (!vehicle.images || !vehicle.images.length) {
     return '';
   }
-  const img = vehicle?.images[0]
+  const defaultImage = vehicle.images.find((image) => image.default_image)
+  const img = defaultImage || vehicle?.images[0]
   return img?.path || ''
 }
 

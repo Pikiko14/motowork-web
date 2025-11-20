@@ -710,6 +710,16 @@ onUnmounted(() => {
 
   :deep(.q-carousel__slide) {
     padding: 0;
+    height: auto;
+    max-height: 500px;
+
+    @media (max-width: 767px) {
+      max-height: 400px;
+    }
+
+    @media (max-width: 575px) {
+      max-height: 300px;
+    }
   }
 
   :deep(.q-carousel__control) {
@@ -719,8 +729,21 @@ onUnmounted(() => {
 
 .motowork-hero-carousel__image {
   width: 100%;
-  height: 100%;
-  max-width: 100%;
-  max-height: 100%;
+  height: auto;
+  max-height: 500px;
+  object-fit: contain;
+
+  @media (max-width: 767px) {
+    max-height: 400px;
+  }
+
+  @media (max-width: 575px) {
+    max-height: 300px;
+  }
+
+  &--cover {
+    object-fit: cover;
+    height: 100%;
+  }
 }
 </style>

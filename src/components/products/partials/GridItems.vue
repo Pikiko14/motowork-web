@@ -179,6 +179,13 @@ const getBannerUrl = (idx) => {
       url = desktopImage.path
     }
   }
+
+  const defaultImage = images.find((image) => image.default_image)
+  console.log(defaultImage)
+  if (defaultImage) {
+    url = defaultImage.path
+  }
+
   return url
 }
 
