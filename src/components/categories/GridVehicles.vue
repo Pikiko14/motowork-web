@@ -12,7 +12,7 @@
             {{ cat.name }}
           </p>
           <q-btn :to="`/vehiculos?page=1&perPage=9&sortBy=createdAt&order=-1&type=vehicle&category=${cat.name}`" no-cap
-            square unelevated color="secondary" class="vehicles-carousel__button" label="CONOCELA AQUÍ" />
+            square unelevated color="secondary" class="vehicles-carousel__button" label="Ver Más" />
         </div>
       </div>
     </div>
